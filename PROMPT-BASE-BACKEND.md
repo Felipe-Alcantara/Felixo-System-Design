@@ -61,10 +61,12 @@ Antes de escrever qualquer código:
 
 ### 3. DESENVOLVIMENTO ITERATIVO
 Para cada funcionalidade:
-1. Implemente a versão básica primeiro
-2. Teste manualmente ou com testes unitários
-3. Refatore e melhore baseado nos resultados
+1. **Escreva os testes primeiro (TDD)** — defina o comportamento esperado antes de implementar
+2. Implemente o código mínimo para os testes passarem
+3. Refatore e melhore mantendo os testes verdes
 4. Documente o que foi feito
+
+> 💡 **Por que TDD?** Código escrito a partir de testes é mais moldavél e menos quebrável quando gerado por IA. Os testes funcionam como âncora — se a IA alucinar ou refatorar errado, os testes falham imediatamente e indicam o problema. Sempre que possível, comece pela suite de testes.
 
 ### 4. TESTES E QUALIDADE
 - Crie testes unitários para funções críticas

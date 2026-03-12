@@ -11,7 +11,7 @@
 
 **Repositório central de padrões de design, stack de tecnologias e prompts para IA — garantindo consistência em todos os meus projetos.**
 
-[🎨 Design System Frontend](#-design-system-frontend) • [🚀 Prompt Base Backend](#-prompt-base-backend) • [📖 Guia de README](#-guia-de-documentação-readme) • [🛠️ Stack](#%EF%B8%8F-minha-stack)
+[🎨 Design System Frontend](#-design-system-frontend) • [🚀 Prompt Base Backend](#-prompt-base-backend) • [🤖 IA.md](#-iamd--registro-de-contexto) • [📖 Guia de README](#-guia-de-documentação-readme) • [🛠️ Stack](#%EF%B8%8F-minha-stack)
 
 </div>
 
@@ -24,6 +24,7 @@
 - [📁 Estrutura do Repositório](#-estrutura-do-repositório)
 - [🎨 Design System Frontend](#-design-system-frontend)
 - [🚀 Prompt Base Backend](#-prompt-base-backend)
+- [🤖 IA.md — Registro de Contexto](#-iamd--registro-de-contexto)
 - [📖 Guia de Documentação README](#-guia-de-documentação-readme)
 - [📝 Licença](#-licença)
 - [👤 Autor](#-autor)
@@ -37,6 +38,7 @@ Este repositório serve como **base centralizada** para registrar e padronizar t
 - **🎨 Design System** — Identidade visual, componentes, paletas de cores e padrões de UI para o front-end
 - **🚀 Prompts para IA** — Prompts otimizados para usar com assistentes de IA no desenvolvimento back-end
 - **🛠️ Stack de Tecnologias** — Registro da stack preferida para priorizar em novos projetos
+- **🤖 Registro de Contexto para IA** — Template de anotações técnicas para manter contexto entre modelos de IA
 - **📖 Padrão de Documentação** — Guia de como documentar repositórios com READMEs consistentes
 
 O objetivo é ter um **ponto de referência único** para garantir consistência, qualidade e agilidade em todos os novos projetos.
@@ -84,6 +86,7 @@ Felixo System Design/
 │
 ├── DESIGN-SYSTEM-FRONTEND.md     # Design system para front-end
 ├── PROMPT-BASE-BACKEND.md        # Prompt base para desenvolvimento back-end
+├── IA.md                         # Registro de contexto para modelos de IA
 ├── GUIA_DOCUMENTACAO_README.md   # Padrão de documentação de READMEs
 ├── README.md                     # Este arquivo
 └── LICENSE
@@ -118,6 +121,19 @@ Prompt otimizado para iniciar projetos de **back-end** com assistentes de IA. In
 - Checklist de pré-entrega
 
 📖 [Ver Prompt Base Backend](PROMPT-BASE-BACKEND.md)
+
+---
+
+## 🤖 IA.md — Registro de Contexto
+
+Template de **caderno de anotações técnico para IAs**. Deve ser copiado para cada novo projeto e preenchido ao longo do desenvolvimento. Garante que:
+
+- Modelos de IA recuperem contexto sem reler todo o código
+- Decisões, stack, bugs e metas fiquem registrados em um único lugar
+- Trocas de modelo (ou novas conversas) não percam informações críticas
+- O conteúdo é técnico e específico — feito para IA, não para humanos
+
+📖 [Ver template IA.md](IA.md)
 
 ---
 
