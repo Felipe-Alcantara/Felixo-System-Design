@@ -26,6 +26,7 @@
 - [🚀 Prompt Base Backend](#-prompt-base-backend)
 - [🤖 IA.md — Registro de Contexto](#-iamd--registro-de-contexto)
 - [📖 Guia de Documentação README](#-guia-de-documentação-readme)
+- [🧰 Utils — Padrões Específicos](#-utils--padrões-específicos)
 - [📥 Como Usar em Outros Projetos](#-como-usar-em-outros-projetos)
 - [📝 Licença](#-licença)
 - [👤 Autor](#-autor)
@@ -41,6 +42,7 @@ Este repositório serve como **base centralizada** para registrar e padronizar t
 - **🛠️ Stack de Tecnologias** — Registro da stack preferida para priorizar em novos projetos
 - **🤖 Registro de Contexto para IA** — Template de anotações técnicas para manter contexto entre modelos de IA
 - **📖 Padrão de Documentação** — Guia de como documentar repositórios com READMEs consistentes
+- **🧰 Padrões Específicos (Utils)** — Implementações opcionais para casos de uso específicos (árvores hierárquicas, etc.)
 
 O objetivo é ter um **ponto de referência único** para garantir consistência, qualidade e agilidade em todos os novos projetos.
 
@@ -85,6 +87,8 @@ O objetivo é ter um **ponto de referência único** para garantir consistência
 ```
 Felixo System Design/
 │
+├── Utils/                        # Padrões específicos opcionais
+│   └── CATEGORY-TREE-EXPLORER.md # Guia de árvore hierárquica interativa
 ├── DESIGN-SYSTEM-FRONTEND.md     # Design system para front-end
 ├── PROMPT-BASE-BACKEND.md        # Prompt base para desenvolvimento back-end
 ├── IA.md                         # Registro de contexto para modelos de IA
@@ -148,6 +152,33 @@ Padrão de estrutura e escrita de `README.md` para todos os projetos. Define:
 - Checklist antes de publicar
 
 📖 [Ver Guia de Documentação](GUIA_DOCUMENTACAO_README.md)
+
+---
+
+## 🧰 Utils — Padrões Específicos
+
+Pasta com **implementações opcionais** para casos de uso específicos. Diferente dos padrões gerais (Design System, Prompts), estes são guias detalhados para funcionalidades concretas que podem ou não ser necessárias no seu projeto.
+
+### 🌳 Category Tree Explorer
+
+Guia completo de como construir uma **árvore hierárquica interativa** estilo file explorer do VS Code, usando React + Tailwind + Framer Motion.
+
+**Quando usar:**
+- Explorador de categorias/pastas
+- Menus hierárquicos
+- Estruturas organizacionais
+- Qualquer dado em árvore (parent-child)
+
+**O que contém:**
+- Modelo Django com self-referential FK
+- Serializer recursivo para API
+- Componente React recursivo
+- Animações e interações (expandir/recolher, seleção)
+- Sistema de indentação visual
+
+📖 [Ver guia completo](Utils/CATEGORY-TREE-EXPLORER.md)
+
+> 💡 **Nota**: Os arquivos em `Utils/` são **opcionais e específicos**. Use apenas se o seu projeto precisar daquela funcionalidade específica. Os padrões gerais (Design System, Prompts, IA.md) devem ser usados em todos os projetos.
 
 ---
 
