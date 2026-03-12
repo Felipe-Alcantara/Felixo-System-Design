@@ -26,6 +26,7 @@
 - [🚀 Prompt Base Backend](#-prompt-base-backend)
 - [🤖 IA.md — Registro de Contexto](#-iamd--registro-de-contexto)
 - [📖 Guia de Documentação README](#-guia-de-documentação-readme)
+- [📥 Como Usar em Outros Projetos](#-como-usar-em-outros-projetos)
 - [📝 Licença](#-licença)
 - [👤 Autor](#-autor)
 
@@ -147,6 +148,84 @@ Padrão de estrutura e escrita de `README.md` para todos os projetos. Define:
 - Checklist antes de publicar
 
 📖 [Ver Guia de Documentação](GUIA_DOCUMENTACAO_README.md)
+
+---
+
+## 📥 Como Usar em Outros Projetos
+
+Para copiar todos os arquivos deste repositório para dentro de qualquer projeto **sem vínculo com o repositório original**, use um dos métodos abaixo:
+
+### Opção 1: `npx degit` (Recomendado 🌟)
+
+Copia os arquivos direto do GitHub, sem `.git`, sem histórico — só os arquivos.
+
+```bash
+npx degit Felipe-Alcantara/Felixo-System-Design ./felixo-standards
+```
+
+- **Requisito**: Node.js instalado
+- **O que faz**: Baixa os arquivos do repositório e coloca na pasta `./felixo-standards`
+- **Vínculo com o git original?** Não — nenhum `.git` é criado
+
+---
+
+### Opção 2: `git clone` + remover `.git`
+
+Clona o repositório e depois remove a pasta `.git` para desvinculiar.
+
+**Linux / macOS / Git Bash:**
+```bash
+git clone --depth 1 https://github.com/Felipe-Alcantara/Felixo-System-Design.git ./felixo-standards && rm -rf ./felixo-standards/.git
+```
+
+**PowerShell (Windows):**
+```powershell
+git clone --depth 1 https://github.com/Felipe-Alcantara/Felixo-System-Design.git ./felixo-standards; Remove-Item -Recurse -Force ./felixo-standards/.git
+```
+
+**CMD (Windows):**
+```cmd
+git clone --depth 1 https://github.com/Felipe-Alcantara/Felixo-System-Design.git ./felixo-standards && rmdir /s /q ./felixo-standards/.git
+```
+
+- **Requisito**: Git instalado
+- **`--depth 1`**: Clona apenas o último commit (mais rápido)
+- **O que faz**: Clona e depois apaga o `.git`, deixando apenas os arquivos
+
+---
+
+### Opção 3: Download como ZIP
+
+Baixa e extrai o ZIP direto pelo terminal, sem precisar de git.
+
+**PowerShell (Windows):**
+```powershell
+Invoke-WebRequest -Uri "https://github.com/Felipe-Alcantara/Felixo-System-Design/archive/refs/heads/main.zip" -OutFile "felixo.zip"
+Expand-Archive "felixo.zip" -DestinationPath .
+Rename-Item "Felixo-System-Design-main" "felixo-standards"
+Remove-Item "felixo.zip"
+```
+
+**CMD (Windows):**
+```cmd
+curl -L https://github.com/Felipe-Alcantara/Felixo-System-Design/archive/refs/heads/main.zip -o felixo.zip
+tar -xf felixo.zip
+ren Felixo-System-Design-main felixo-standards
+del felixo.zip
+```
+
+**Linux / macOS:**
+```bash
+curl -L https://github.com/Felipe-Alcantara/Felixo-System-Design/archive/refs/heads/main.zip -o felixo.zip
+unzip felixo.zip && mv Felixo-System-Design-main felixo-standards && rm felixo.zip
+```
+
+- **Requisito**: Nenhum (ferramentas nativas do sistema)
+- **O que faz**: Baixa o ZIP do GitHub, extrai e renomeia a pasta
+
+---
+
+> 💡 **Dica**: Após copiar, os arquivos ficam independentes. Você pode editá-los, mover para outra pasta ou commitar junto com o seu projeto normalmente.
 
 ---
 
