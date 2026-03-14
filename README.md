@@ -216,7 +216,7 @@ git clone --depth 1 https://github.com/Felipe-Alcantara/Felixo-System-Design.git
 
 **CMD (Windows):**
 ```cmd
-git clone --depth 1 https://github.com/Felipe-Alcantara/Felixo-System-Design.git ./felixo-standards && rmdir /s /q ./felixo-standards/.git
+git clone --depth 1 https://github.com/Felipe-Alcantara/Felixo-System-Design.git felixo-standards && rmdir /s /q felixo-standards\.git
 ```
 
 - **Requisito**: Git instalado
