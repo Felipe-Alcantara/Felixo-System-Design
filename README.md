@@ -8,10 +8,11 @@
 ![C#](https://img.shields.io/badge/C%23-512BD4?style=for-the-badge&logo=csharp&logoColor=white)
 ![Django](https://img.shields.io/badge/Django-0C4B33?style=for-the-badge&logo=django&logoColor=white)
 ![License](https://img.shields.io/badge/License-MIT-green?style=for-the-badge)
+![Docs](https://img.shields.io/badge/Docs-Guide-2084FF?style=for-the-badge&logo=read-the-docs&logoColor=white)
 
 **Repositório central de padrões de design, stack de tecnologias e prompts para IA — garantindo consistência em todos os meus projetos.**
 
-[🎨 Design System Frontend](#-design-system-frontend) • [🚀 Prompt Base Backend](#-prompt-base-backend) • [🤖 IA.md](#-iamd--registro-de-contexto) • [📖 Guia de README](#-guia-de-documentação-readme) • [🛠️ Stack](#%EF%B8%8F-minha-stack)
+[🎨 Design System Frontend](#-design-system-frontend) • [🚀 Prompt Base Backend](#-prompt-base-backend) • [🤖 IA.md](#-iamd--registro-de-contexto) • [📖 Guia de README](#-guia-de-documentação-readme) • [🧰 Utils](#%EF%B8%8F-utils--padrões-específicos) • [🛠️ Stack](#%EF%B8%8F-minha-stack)
 
 </div>
 
@@ -88,7 +89,8 @@ O objetivo é ter um **ponto de referência único** para garantir consistência
 Felixo System Design/
 │
 ├── Utils/                        # Padrões específicos opcionais
-│   └── CATEGORY-TREE-EXPLORER.md # Guia de árvore hierárquica interativa
+│   ├── CATEGORY-TREE-EXPLORER.md # Guia de árvore hierárquica interativa
+│   └── HEATMAP-CALENDAR.md       # Guia de calendário com heatmap
 ├── DESIGN-SYSTEM-FRONTEND.md     # Design system para front-end
 ├── PROMPT-BASE-BACKEND.md        # Prompt base para desenvolvimento back-end
 ├── IA.md                         # Registro de contexto para modelos de IA
@@ -177,6 +179,14 @@ Guia completo de como construir uma **árvore hierárquica interativa** estilo f
 - Sistema de indentação visual
 
 📖 [Ver guia completo](Utils/CATEGORY-TREE-EXPLORER.md)
+
+### 📅 Heatmap Calendar
+
+Guia de como construir um **calendário com heatmap** (visualização por intensidade) usando React + Tailwind + bibliotecas de visualização.
+
+**Quando usar:** visualização de atividade por dia/semana/mês, dashboards de uso, análise temporal rápida.
+
+📖 [Ver guia completo](Utils/HEATMAP-CALENDAR.md)
 
 > 💡 **Nota**: Os arquivos em `Utils/` são **opcionais e específicos**. Use apenas se o seu projeto precisar daquela funcionalidade específica. Os padrões gerais (Design System, Prompts, IA.md) devem ser usados em todos os projetos.
 
