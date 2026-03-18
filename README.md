@@ -208,6 +208,11 @@ npx degit Felipe-Alcantara/Felixo-System-Design ./felixo-standards
 - **O que faz**: Baixa os arquivos do repositório e coloca na pasta `./felixo-standards`
 - **Vínculo com o git original?** Não — nenhum `.git` é criado
 
+**Para baixar apenas a pasta `Utils`:**
+```bash
+npx degit Felipe-Alcantara/Felixo-System-Design/Utils ./felixo-utils
+```
+
 ---
 
 ### Opção 2: `git clone` + remover `.git`
@@ -232,6 +237,30 @@ git clone --depth 1 https://github.com/Felipe-Alcantara/Felixo-System-Design.git
 - **Requisito**: Git instalado
 - **`--depth 1`**: Clona apenas o último commit (mais rápido)
 - **O que faz**: Clona e depois apaga o `.git`, deixando apenas os arquivos
+
+**Para baixar ou atualizar apenas a pasta `Utils`:**
+
+Se você precisa apenas dos guias da pasta `Utils` e quer mantê-los atualizados, o método mais eficiente é usar `sparse-checkout`.
+
+1.  **Crie a pasta e inicie o Git:**
+    ```bash
+    mkdir felixo-utils
+    cd felixo-utils
+    git init
+    git remote add -f origin https://github.com/Felipe-Alcantara/Felixo-System-Design.git
+    ```
+
+2.  **Configure o `sparse-checkout`:**
+    ```bash
+    git config core.sparseCheckout true
+    echo "Utils/" > .git/info/sparse-checkout
+    ```
+
+3.  **Puxe os arquivos:**
+    ```bash
+    git pull origin main
+    ```
+    Para atualizar no futuro, basta rodar `git pull origin main` dentro da pasta `felixo-utils`.
 
 ---
 
@@ -263,6 +292,10 @@ unzip felixo.zip && mv Felixo-System-Design-main felixo-standards && rm felixo.z
 
 - **Requisito**: Nenhum (ferramentas nativas do sistema)
 - **O que faz**: Baixa o ZIP do GitHub, extrai e renomeia a pasta
+
+**Para baixar apenas a pasta `Utils`:**
+
+Não é possível baixar um subdiretório específico via ZIP diretamente pelo link do GitHub. Use a **Opção 1 (`degit`)** ou **Opção 2 (`git clone`)** para obter apenas a pasta `Utils`.
 
 ---
 
