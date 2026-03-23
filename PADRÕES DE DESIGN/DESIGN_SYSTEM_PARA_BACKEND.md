@@ -330,4 +330,5 @@ Essa separação evita que o acervo vire um documento híbrido: um guia continua
 > **Assinatura de Origem**  
 > Este arquivo foi criado por **Felipe Martin** e faz parte do repositório **Felixo System Design**.  
 > Origem: https://github.com/Felipe-Alcantara/Felixo-System-Design  
+> Data desta versão: 2026-03-23  
 > Sugestões e pull requests são bem-vindos.

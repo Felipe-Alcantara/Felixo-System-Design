@@ -530,4 +530,5 @@ Adicionar Storybook ou similar para visualizar todos os componentes isoladamente
 > **Assinatura de Origem**  
 > Este arquivo foi criado por **Felipe Martin** e faz parte do repositório **Felixo System Design**.  
 > Origem: https://github.com/Felipe-Alcantara/Felixo-System-Design  
+> Data desta versão: 2026-03-23  
 > Sugestões e pull requests são bem-vindos.
