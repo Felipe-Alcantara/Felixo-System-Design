@@ -25,6 +25,8 @@ Ele complementa os demais arquivos assim:
 
 Nos guias técnicos deste acervo, modularização forte e separação clara de responsabilidades são tratadas como princípios estruturais centrais, especialmente no material de backend.
 
+Além dos padrões gerais, a pasta `Utils/` também concentra guias reaproveitáveis mais específicos, inclusive subsistemas de backend extraídos de projetos reais quando esse recorte técnico fizer sentido.
+
 Se o design system dita **como construir com consistência**, este arquivo registra **o que já foi decidido, testado e aprendido** durante a construção.
 
 ---

@@ -1,12 +1,18 @@
-# PADRÃO REUTILIZÁVEL DE BACKEND PARA GERAÇÃO E VALIDAÇÃO DE CPF
+# 🪪 GUIA-BACKEND-REUTILIZAVEL-PARA-CPF-COM-TESTES-E-DADOS-REAIS-DO-GERADOR-DE-CPF-VALIDO-EM-PYTHON.md
 
-> **Natureza do documento**: artefato independente, pensado para ser reutilizado fora deste repositório.
+> **O que é**: Um guia reutilizável para estruturar um backend pequeno, testável e seguro para **geração, validação e normalização de CPF**.
 >
-> **Base de origem**: derivado da implementação Python do projeto **Gerador de CPF Válido em Python**.
+> **De onde vem**: Este padrão foi extraído da implementação Python do projeto **Gerador de CPF Válido em Python**.
 >
-> **Contexto de origem**: a implementação-base é um projeto educacional em Python com geração aleatória, geração por região fiscal e validação algorítmica de CPF.
+> **Qual é o propósito dentro de `Utils/`**: Registrar essa lógica como um bloco backend reaproveitável do `Felixo System Design`, separando algoritmo, contratos, testes e guardrails de dados do produto original.
 >
-> **Objetivo**: transformar a lógica observada no projeto-base em um padrão de backend que possa ser reaproveitado em outros projetos, serviços, APIs, automações, sites e formulários.
+> **Quando usar**: APIs, formulários, scripts, automações, serviços internos ou fluxos de QA que precisem gerar, validar, sanitizar ou testar CPF com segurança.
+>
+> **Origem da implementação**: Os caminhos e módulos citados neste documento pertencem à estrutura do projeto original, fora deste repositório, e aparecem aqui apenas como rastreabilidade técnica.
+>
+> **Leitura correta deste documento**: Isto não é uma spec hipotética; é a consolidação de um backend lógico real que pode ser transportado para outros sistemas.
+
+Este documento não tenta explicar todo o projeto original. O foco aqui é isolar o padrão de backend para CPF como um artefato reutilizável, deixando claro o que pode ser reaproveitado, adaptado, testado e protegido em outros contextos.
 
 ---
 
@@ -14,13 +20,13 @@
 
 ### 1.1 Origem do Documento
 
-Este material foi extraído e consolidado a partir da implementação Python existente neste repositório. O conteúdo técnico veio principalmente dos seguintes arquivos da implementação-base:
+Este material foi extraído e consolidado a partir da implementação Python original do projeto **Gerador de CPF Válido em Python**, fora deste repositório. O conteúdo técnico veio principalmente dos seguintes arquivos na estrutura da implementação-base:
 
 - `Versão no terminal/Gerador de CPF.py`
 - `Versão no terminal/Gerador de CPF por Região.py`
 - `Versão no terminal/Validador de CPF.py`
 
-As referências a esses arquivos neste documento existem apenas para **rastreabilidade da origem**.
+As referências a esses arquivos neste documento existem apenas para **rastreabilidade da origem**. Elas não indicam que esses caminhos existam dentro do `Felixo System Design`.
 
 ### 1.2 Contexto de Origem
 
@@ -498,6 +504,8 @@ Por isso, ele pode ser reutilizado como base para:
 
 ---
 
-**Versão**: 1.1  
-**Última atualização**: 2026-03-23  
-**Escopo**: padrão de backend derivado da implementação Python original, reutilizável fora deste repositório
+> **Assinatura de Origem**  
+> Este arquivo foi criado por **Felipe Martin** e faz parte do repositório **Felixo System Design**.  
+> Origem: https://github.com/Felipe-Alcantara/Felixo-System-Design  
+> Data desta versão: 2026-03-23  
+> Sugestões e pull requests são bem-vindos.

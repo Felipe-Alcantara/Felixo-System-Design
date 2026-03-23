@@ -94,6 +94,7 @@ Felixo System Design/
 ├── Utils/                        # Guias reutilizáveis extraídos de projetos reais
 │   ├── GUIA-ARVORE-HIERARQUICA-REUTILIZAVEL-DO-FELIXO-TIME-TRACKER.md
 │   ├── GUIA-BACKGROUND-SISTEMA-VISUAL-REUTILIZAVEL-DA-CALCULADORA-PRO-WEB-BRYTHON.md
+│   ├── GUIA-BACKEND-REUTILIZAVEL-PARA-CPF-COM-TESTES-E-DADOS-REAIS-DO-GERADOR-DE-CPF-VALIDO-EM-PYTHON.md
 │   ├── GUIA-HEATMAP-DE-ATIVIDADE-REUTILIZAVEL-DO-READING-TRACKER.md
 │   └── GUIA-ONBOARDING-E-AJUDA-REUTILIZAVEL-DO-READING-TRACKER.md
 ├── IA.md                         # Contexto operacional e memória para IA
@@ -186,6 +187,14 @@ Este guia registra o padrão de **background visual em camadas** extraído da ve
 **Quando usar:** calculadoras, páginas educacionais, dashboards técnicos, experiências web com identidade visual forte e interfaces que precisem de profundidade visual sem atrapalhar a interação principal.
 
 📖 [Ver guia completo](Utils/GUIA-BACKGROUND-SISTEMA-VISUAL-REUTILIZAVEL-DA-CALCULADORA-PRO-WEB-BRYTHON.md)
+
+### 🪪 Backend Reutilizável para CPF com Testes e Dados Reais
+
+Este guia registra um padrão de **backend lógico para CPF** extraído do projeto **Gerador de CPF Válido em Python**. Ele organiza algoritmo, contratos, fluxo de validação, matriz de testes e guardrails para uso de dados reais, permitindo reaproveitar a solução em serviços, APIs, formulários e automações.
+
+**Quando usar:** geração sintética de CPF para testes, validação backend de documentos, normalização de entrada, formulários com CPF e fluxos que precisem tratar dados reais com mais cuidado.
+
+📖 [Ver guia completo](Utils/GUIA-BACKEND-REUTILIZAVEL-PARA-CPF-COM-TESTES-E-DADOS-REAIS-DO-GERADOR-DE-CPF-VALIDO-EM-PYTHON.md)
 
 ### 📅 Heatmap de Atividade Reutilizável do Reading Tracker
 
