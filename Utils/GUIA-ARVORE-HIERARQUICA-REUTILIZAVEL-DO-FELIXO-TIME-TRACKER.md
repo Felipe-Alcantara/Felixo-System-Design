@@ -1,8 +1,14 @@
-# 🌳 Category Tree Explorer — Guia de Construção e Reutilização
+# 🌳 GUIA-ARVORE-HIERARQUICA-REUTILIZAVEL-DO-FELIXO-TIME-TRACKER.md
 
-> Como construir uma árvore hierárquica interativa estilo **file explorer do VS Code** usando React, Tailwind CSS e Framer Motion.
+> **O que é**: Um guia reutilizável para construir uma **árvore hierárquica interativa** no estilo file explorer.
+>
+> **De onde vem**: Este padrão foi extraído do componente `CategoryTree` do projeto **Felixo Time Tracker**.
+>
+> **Qual é o propósito dentro de `Utils/`**: Registrar essa solução como um bloco reaproveitável do `Felixo System Design`, separando o padrão técnico do restante do produto original.
+>
+> **Quando usar**: Categorias, pastas, menus aninhados, estruturas organizacionais e qualquer dado em formato parent-child.
 
-Este documento explica a arquitetura e implementação do componente `CategoryTree` do Felixo Time Tracker — uma UI de exploração hierárquica que pode ser adaptada para qualquer projeto com dados em árvore (pastas, categorias, menus, organizações, etc).
+Este documento não tenta explicar o `Felixo Time Tracker` inteiro. O foco aqui é isolar a estratégia de modelagem, serialização e renderização recursiva que resolveu esse caso de uso e pode ser transportada para outros projetos.
 
 ---
 
@@ -563,3 +569,10 @@ function App() {
 6. **Auto-expansão**: `Map<id, parentId>` + walk up ao selecionar
 7. **Animação**: `AnimatePresence` + `motion.div` com height transition
 8. **UX**: Indentação por padding, ícones contextuais, hover-reveal, seta separada do select
+
+---
+
+> **Assinatura de Origem**  
+> Este arquivo foi criado por **Felipe Martin** e faz parte do repositório **Felixo System Design**.  
+> Origem: https://github.com/Felipe-Alcantara/Felixo-System-Design  
+> Sugestões e pull requests são bem-vindos.

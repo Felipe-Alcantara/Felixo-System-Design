@@ -10,9 +10,9 @@
 ![License](https://img.shields.io/badge/License-MIT-green?style=for-the-badge)
 ![Docs](https://img.shields.io/badge/Docs-Guide-2084FF?style=for-the-badge&logo=read-the-docs&logoColor=white)
 
-**Repositório central de padrões de design, stack de tecnologias e prompts para IA — garantindo consistência em todos os meus projetos.**
+**Repositório central de padrões de design, qualidade de sistema, prompts estruturados, documentação operacional e guias reutilizáveis para IA.**
 
-[🎨 Design System Frontend](#-design-system-frontend) • [🚀 Prompt Base Backend](#-prompt-base-backend) • [🤖 IA.md](#-iamd--registro-de-contexto) • [📖 Guia de README](#-guia-de-documentação-readme) • [🧰 Utils](#%EF%B8%8F-utils--padrões-específicos) • [🛠️ Stack](#%EF%B8%8F-minha-stack)
+[🧱 Padrões de Design](#-padrões-de-design) • [🤖 IA.md](#-iamd--contexto-operacional-para-ia) • [🧰 Utils](#%EF%B8%8F-utils--padrões-específicos) • [🛠️ Stack](#%EF%B8%8F-minha-stack)
 
 </div>
 
@@ -23,10 +23,8 @@
 - [📋 Sobre o Repositório](#-sobre-o-repositório)
 - [🛠️ Minha Stack](#%EF%B8%8F-minha-stack)
 - [📁 Estrutura do Repositório](#-estrutura-do-repositório)
-- [🎨 Design System Frontend](#-design-system-frontend)
-- [🚀 Prompt Base Backend](#-prompt-base-backend)
-- [🤖 IA.md — Registro de Contexto](#-iamd--registro-de-contexto)
-- [📖 Guia de Documentação README](#-guia-de-documentação-readme)
+- [🧱 Padrões de Design](#-padrões-de-design)
+- [🤖 IA.md — Contexto Operacional para IA](#-iamd--contexto-operacional-para-ia)
 - [🧰 Utils — Padrões Específicos](#-utils--padrões-específicos)
 - [📥 Como Usar em Outros Projetos](#-como-usar-em-outros-projetos)
 - [📝 Licença](#-licença)
@@ -38,12 +36,12 @@
 
 Este repositório serve como **base centralizada** para registrar e padronizar tudo que envolve meus projetos de desenvolvimento:
 
-- **🎨 Design System** — Identidade visual, componentes, paletas de cores e padrões de UI para o front-end
-- **🚀 Prompts para IA** — Prompts otimizados para usar com assistentes de IA no desenvolvimento back-end
+- **🧱 Padrões de Design** — Guias de frontend, backend e README para padronizar arquitetura, qualidade e documentação
+- **🚀 Prompts para IA** — Prompts estruturados para iniciar projetos e guiar execução com menos re-prompts
 - **🛠️ Stack de Tecnologias** — Registro da stack preferida para priorizar em novos projetos
-- **🤖 Registro de Contexto para IA** — Template de anotações técnicas para manter contexto entre modelos de IA
+- **🤖 Template de Contexto para IA** — Memória operacional padronizada para manter contexto entre modelos de IA ao longo do projeto
 - **📖 Padrão de Documentação** — Guia de como documentar repositórios com READMEs consistentes
-- **🧰 Padrões Específicos (Utils)** — Implementações opcionais para casos de uso específicos (árvores hierárquicas, etc.)
+- **🧰 Padrões Específicos (Utils)** — Guias reutilizáveis extraídos de implementações reais para casos de uso específicos
 
 O objetivo é ter um **ponto de referência único** para garantir consistência, qualidade e agilidade em todos os novos projetos.
 
@@ -88,82 +86,83 @@ O objetivo é ter um **ponto de referência único** para garantir consistência
 ```
 Felixo System Design/
 │
-├── Utils/                        # Padrões específicos opcionais
-│   ├── CATEGORY-TREE-EXPLORER.md # Guia de árvore hierárquica interativa
-│   └── HEATMAP-CALENDAR.md       # Guia de calendário com heatmap
-├── DESIGN-SYSTEM-FRONTEND.md     # Design system para front-end
-├── PROMPT-BASE-BACKEND.md        # Prompt base para desenvolvimento back-end
-├── IA.md                         # Registro de contexto para modelos de IA
-├── GUIA_DOCUMENTACAO_README.md   # Padrão de documentação de READMEs
+├── PADRÕES DE DESIGN/            # Guias centrais de frontend, backend, README e prompts
+│   ├── DESIGN_SYSTEM_PARA_FRONTEND.md
+│   ├── DESIGN_SYSTEM_PARA_BACKEND.md
+│   ├── PROMPT_BASE_PARA_BACKEND.md
+│   └── DESIGN_SYSTEM_PARA_README.md
+├── Utils/                        # Guias reutilizáveis extraídos de projetos reais
+│   ├── GUIA-ARVORE-HIERARQUICA-REUTILIZAVEL-DO-FELIXO-TIME-TRACKER.md
+│   ├── GUIA-BACKGROUND-SISTEMA-VISUAL-REUTILIZAVEL-DA-CALCULADORA-PRO-WEB-BRYTHON.md
+│   ├── GUIA-HEATMAP-DE-ATIVIDADE-REUTILIZAVEL-DO-READING-TRACKER.md
+│   └── GUIA-ONBOARDING-E-AJUDA-REUTILIZAVEL-DO-READING-TRACKER.md
+├── IA.md                         # Contexto operacional e memória para IA
 ├── README.md                     # Este arquivo
 └── LICENSE
 ```
 
 ---
 
-## 🎨 Design System Frontend
+## 🧱 Padrões de Design
 
-Guia completo de padronização visual para o front-end, extraído do portfólio **FelixoVerse**. Contém:
+A pasta `PADRÕES DE DESIGN/` concentra os artefatos principais do acervo. Ela separa o que é **padrão técnico de qualidade** do que é **prompt operacional para IA**, evitando documentos híbridos e facilitando reutilização.
 
-- Paleta de cores (primárias, gradientes, status, categorias)
-- Tipografia e hierarquia de tamanhos
-- Sistema de grid e breakpoints
-- Componentes reutilizáveis (Button, Card, Badge, Input, Modal)
-- Padrões de animação com Framer Motion
-- Efeitos visuais (glow, glassmorphism, gradientes)
+### 🎨 Design System para Frontend
 
-📖 [Ver Design System completo](DESIGN-SYSTEM-FRONTEND.md)
+Guia completo de padronização visual para front-end, extraído do **FelixoVerse**. Documenta paleta, tipografia, layout, componentes, animações e padrões de interface.
 
----
+📖 [Ver design system frontend](PADRÕES%20DE%20DESIGN/DESIGN_SYSTEM_PARA_FRONTEND.md)
 
-## 🚀 Prompt Base Backend
+### 🧱 Design System para Backend
 
-Prompt otimizado para iniciar projetos de **back-end** com assistentes de IA. Inclui:
+Guia de **qualidade de sistema backend**. Define princípios de arquitetura, escolha de stack, estrutura por camadas, padrões de API, persistência, testes, TDD, SQLite como padrão inicial, Open/Closed, documentação viva e checklist de qualidade.
 
-- Stack preferida já definida (Python/Django, TypeScript — C# só em último caso)
-- Diretrizes de planejamento e arquitetura
-- Fluxo de trabalho iterativo
-- Padrões de segurança e qualidade
-- Estrutura de pastas sugerida
-- Checklist de pré-entrega
+📖 [Ver design system backend](PADRÕES%20DE%20DESIGN/DESIGN_SYSTEM_PARA_BACKEND.md)
 
-📖 [Ver Prompt Base Backend](PROMPT-BASE-BACKEND.md)
+### 🚀 Prompt Base para Backend
 
----
+Guia técnico para o desenvolvedor montar prompts de backend mais completos logo na primeira interação. Inclui stacks recomendadas, decisões técnicas por cenário, campos para problemas atuais e futuras features, e exige que a IA siga o `DESIGN_SYSTEM_PARA_BACKEND.md` como contrato de qualidade.
 
-## 🤖 IA.md — Registro de Contexto
+📖 [Ver prompt base backend](PADRÕES%20DE%20DESIGN/PROMPT_BASE_PARA_BACKEND.md)
 
-Template de **caderno de anotações técnico para IAs**. Deve ser copiado para cada novo projeto e preenchido ao longo do desenvolvimento. Garante que:
+### 📖 Design System para README
 
-- Modelos de IA recuperem contexto sem reler todo o código
-- Decisões, stack, bugs e metas fiquem registrados em um único lugar
-- Trocas de modelo (ou novas conversas) não percam informações críticas
-- O conteúdo é técnico e específico — feito para IA, não para humanos
+Guia de padronização para `README.md`, usado como referência para manter documentação consistente entre projetos.
 
-📖 [Ver template IA.md](IA.md)
+📖 [Ver design system para README](PADRÕES%20DE%20DESIGN/DESIGN_SYSTEM_PARA_README.md)
 
 ---
 
-## 📖 Guia de Documentação README
+## 🤖 IA.md — Contexto Operacional para IA
 
-Padrão de estrutura e escrita de `README.md` para todos os projetos. Define:
+O arquivo `IA.md` funciona como **memória operacional viva do projeto**. Ele deve ser atualizado durante a execução assistida por IA para registrar:
 
-- Estrutura obrigatória de seções
-- Convenções de badges, emojis e formatação
-- Template rápido para novos projetos
-- Checklist antes de publicar
+- objetivo atual e milestones
+- decisões técnicas
+- stack e convenções
+- bugs e correções relevantes
+- testes importantes
+- contexto necessário para outra IA retomar o trabalho sem reler tudo
 
-📖 [Ver Guia de Documentação](GUIA_DOCUMENTACAO_README.md)
+Dentro deste repositório, ele serve como referência de como manter contexto acumulado entre sessões e modelos.
+
+📖 [Ver IA.md](IA.md)
 
 ---
 
 ## 🧰 Utils — Padrões Específicos
 
-Pasta com **implementações opcionais** para casos de uso específicos. Diferente dos padrões gerais (Design System, Prompts), estes são guias detalhados para funcionalidades concretas que podem ou não ser necessárias no seu projeto.
+Pasta com **guias reutilizáveis extraídos de projetos reais**. Diferente dos padrões gerais do repositório, os arquivos em `Utils/` isolam soluções concretas que nasceram em produtos específicos e foram documentadas aqui para reaproveitamento futuro.
 
-### 🌳 Category Tree Explorer
+Cada arquivo de `Utils/` responde a três perguntas:
 
-Guia completo de como construir uma **árvore hierárquica interativa** estilo file explorer do VS Code, usando React + Tailwind + Framer Motion.
+- Qual problema ele resolve
+- De qual projeto esse padrão foi extraído
+- Em que tipo de sistema vale a pena reutilizá-lo
+
+### 🌳 Árvore Hierárquica Reutilizável do Felixo Time Tracker
+
+Este guia documenta o padrão de **exploração hierárquica de categorias** extraído do **Felixo Time Tracker**. O foco é reaproveitar a combinação entre modelo em árvore no backend e componente recursivo no frontend para qualquer interface com navegação parent-child.
 
 **Quando usar:**
 - Explorador de categorias/pastas
@@ -178,46 +177,43 @@ Guia completo de como construir uma **árvore hierárquica interativa** estilo f
 - Animações e interações (expandir/recolher, seleção)
 - Sistema de indentação visual
 
-📖 [Ver guia completo](Utils/CATEGORY-TREE-EXPLORER.md)
+📖 [Ver guia completo](Utils/GUIA-ARVORE-HIERARQUICA-REUTILIZAVEL-DO-FELIXO-TIME-TRACKER.md)
 
-### 📅 Heatmap Calendar
+### 🌌 Background de Sistema Visual Reutilizável da Calculadora Pro Web (Brython)
 
-Guia de como construir um **calendário com heatmap** (visualização por intensidade) usando React + Tailwind + bibliotecas de visualização.
+Este guia registra o padrão de **background visual em camadas** extraído da versão web da **Calculadora Científica Pro**. O documento transforma a composição de gradiente, símbolos matemáticos animados, densidade visual e troca de tema em um subsistema reaproveitável para outras interfaces com apelo técnico ou temático.
+
+**Quando usar:** calculadoras, páginas educacionais, dashboards técnicos, experiências web com identidade visual forte e interfaces que precisem de profundidade visual sem atrapalhar a interação principal.
+
+📖 [Ver guia completo](Utils/GUIA-BACKGROUND-SISTEMA-VISUAL-REUTILIZAVEL-DA-CALCULADORA-PRO-WEB-BRYTHON.md)
+
+### 📅 Heatmap de Atividade Reutilizável do Reading Tracker
+
+Este guia isola o padrão de **calendário de atividade com intensidade visual** extraído do **Reading Tracker**. Ele serve como referência para qualquer produto que precise transformar eventos diários em uma leitura visual rápida de consistência, volume ou frequência.
 
 **Quando usar:** visualização de atividade por dia/semana/mês, dashboards de uso, análise temporal rápida.
 
-📖 [Ver guia completo](Utils/HEATMAP-CALENDAR.md)
+📖 [Ver guia completo](Utils/GUIA-HEATMAP-DE-ATIVIDADE-REUTILIZAVEL-DO-READING-TRACKER.md)
 
-> 💡 **Nota**: Os arquivos em `Utils/` são **opcionais e específicos**. Use apenas se o seu projeto precisar daquela funcionalidade específica. Os padrões gerais (Design System, Prompts, IA.md) devem ser usados em todos os projetos.
+### 🧭 Onboarding e Ajuda Reutilizáveis do Reading Tracker
+
+Este guia registra o padrão de **primeira experiência do usuário** extraído do **Reading Tracker**, combinando onboarding leve, destaque visual contextual e centro de ajuda permanente. O objetivo é reaproveitar a lógica de adoção e suporte sem precisar redesenhar esse fluxo do zero em cada produto.
+
+**Quando usar:** produtos com múltiplas funcionalidades, interfaces com curva inicial de aprendizado, dashboards e apps que precisam educar o usuário sem poluir a navegação.
+
+📖 [Ver guia completo](Utils/GUIA-ONBOARDING-E-AJUDA-REUTILIZAVEL-DO-READING-TRACKER.md)
+
+> 💡 **Nota**: Os arquivos em `Utils/` são **opcionais e específicos**. Use apenas se o seu projeto precisar daquela funcionalidade específica. Os padrões gerais da pasta `PADRÕES DE DESIGN/` e o `IA.md` devem acompanhar praticamente todos os projetos.
 
 ---
 
 ## 📥 Como Usar em Outros Projetos
 
-Para copiar todos os arquivos deste repositório para dentro de qualquer projeto **sem vínculo com o repositório original**, use um dos métodos abaixo:
+Use os métodos abaixo do mais usual para o mais específico.
 
-### Opção 1: `npx degit` (Recomendado 🌟)
+### 1. Clonar o repositório inteiro e remover `.git` (Recomendado)
 
-Copia os arquivos direto do GitHub, sem `.git`, sem histórico — só os arquivos.
-
-```bash
-npx degit Felipe-Alcantara/Felixo-System-Design ./felixo-standards
-```
-
-- **Requisito**: Node.js instalado
-- **O que faz**: Baixa os arquivos do repositório e coloca na pasta `./felixo-standards`
-- **Vínculo com o git original?** Não — nenhum `.git` é criado
-
-**Para baixar apenas a pasta `Utils`:**
-```bash
-npx degit Felipe-Alcantara/Felixo-System-Design/Utils ./felixo-utils
-```
-
----
-
-### Opção 2: `git clone` + remover `.git`
-
-Clona o repositório e depois remove a pasta `.git` para desvinculiar.
+Melhor opção quando você quer todos os arquivos, mas sem continuar ligado ao repositório original.
 
 **Linux / macOS / Git Bash:**
 ```bash
@@ -234,39 +230,15 @@ git clone --depth 1 https://github.com/Felipe-Alcantara/Felixo-System-Design.git
 git clone --depth 1 https://github.com/Felipe-Alcantara/Felixo-System-Design.git felixo-standards && rmdir /s /q felixo-standards\.git
 ```
 
-- **Requisito**: Git instalado
-- **`--depth 1`**: Clona apenas o último commit (mais rápido)
-- **O que faz**: Clona e depois apaga o `.git`, deixando apenas os arquivos
-
-**Para baixar ou atualizar apenas a pasta `Utils`:**
-
-Se você precisa apenas dos guias da pasta `Utils` e quer mantê-los atualizados, o método mais eficiente é usar `sparse-checkout`.
-
-1.  **Crie a pasta e inicie o Git:**
-    ```bash
-    mkdir felixo-utils
-    cd felixo-utils
-    git init
-    git remote add -f origin https://github.com/Felipe-Alcantara/Felixo-System-Design.git
-    ```
-
-2.  **Configure o `sparse-checkout`:**
-    ```bash
-    git config core.sparseCheckout true
-    echo "Utils/" > .git/info/sparse-checkout
-    ```
-
-3.  **Puxe os arquivos:**
-    ```bash
-    git pull origin main
-    ```
-    Para atualizar no futuro, basta rodar `git pull origin main` dentro da pasta `felixo-utils`.
+- **Use quando**: quer todos os arquivos como base independente para outro projeto
+- **Requisito**: Git
+- **Vínculo com o git original?** Não, após remover `.git`
 
 ---
 
-### Opção 3: Download como ZIP
+### 2. Baixar o repositório inteiro como ZIP
 
-Baixa e extrai o ZIP direto pelo terminal, sem precisar de git.
+Melhor opção quando você só quer os arquivos rapidamente, sem `git` e sem Node.js.
 
 **PowerShell (Windows):**
 ```powershell
@@ -290,12 +262,143 @@ curl -L https://github.com/Felipe-Alcantara/Felixo-System-Design/archive/refs/he
 unzip felixo.zip && mv Felixo-System-Design-main felixo-standards && rm felixo.zip
 ```
 
-- **Requisito**: Nenhum (ferramentas nativas do sistema)
-- **O que faz**: Baixa o ZIP do GitHub, extrai e renomeia a pasta
+- **Use quando**: quer o repositório inteiro da forma mais simples possível
+- **Vínculo com o git original?** Não
+- **Limitação**: não baixa subpastas isoladas
 
-**Para baixar apenas a pasta `Utils`:**
+---
 
-Não é possível baixar um subdiretório específico via ZIP diretamente pelo link do GitHub. Use a **Opção 1 (`degit`)** ou **Opção 2 (`git clone`)** para obter apenas a pasta `Utils`.
+### 3. Baixar o repositório inteiro com `npx degit`
+
+Melhor opção quando você quer o repositório inteiro sem `.git`, mas prefere fazer isso pelo terminal com Node.js.
+
+```bash
+npx degit Felipe-Alcantara/Felixo-System-Design ./felixo-standards
+```
+
+- **Use quando**: quer o repositório inteiro, sem histórico
+- **Requisito**: Node.js
+- **Vínculo com o git original?** Não
+
+---
+
+### 4. Clonar o repositório inteiro com `git`
+
+Melhor opção quando você quer manter vínculo com o repositório para atualizar depois.
+
+```bash
+git clone --depth 1 https://github.com/Felipe-Alcantara/Felixo-System-Design.git ./felixo-standards
+```
+
+- **Use quando**: quer o repositório inteiro e pretende atualizar com `git pull`
+- **Requisito**: Git
+- **Vínculo com o git original?** Sim
+
+---
+
+### 5. Baixar apenas a pasta `Utils` com `npx degit`
+
+Melhor opção quando você quer somente os guias reutilizáveis da pasta `Utils`, sem baixar o resto.
+
+```bash
+npx degit Felipe-Alcantara/Felixo-System-Design/Utils ./felixo-utils
+```
+
+- **Use quando**: precisa só dos padrões específicos extraídos de projetos reais
+- **Requisito**: Node.js
+- **Saída esperada**: o conteúdo de `Utils/` vai direto para a pasta de destino
+
+---
+
+### 6. Baixar apenas a pasta `PADRÕES DE DESIGN`
+
+Como essa pasta tem espaço e acentuação no nome, a opção mais confiável é usar `git sparse-checkout` ou clonar o repositório inteiro e copiar a pasta manualmente.
+
+**Se quiser manter atualização futura, prefira `sparse-checkout`:**
+
+```bash
+mkdir felixo-design-patterns
+cd felixo-design-patterns
+git init
+git remote add -f origin https://github.com/Felipe-Alcantara/Felixo-System-Design.git
+git sparse-checkout init --no-cone
+git sparse-checkout set "PADRÕES DE DESIGN"
+git pull origin main
+```
+
+- **Use quando**: quer apenas os padrões centrais de frontend, backend, README e prompts
+- **Requisito**: Git
+- **Vínculo com o git original?** Sim
+
+---
+
+### 7. Baixar apenas a pasta `Utils` com `git sparse-checkout`
+
+Melhor opção quando você quer só `Utils` e também quer poder atualizar essa pasta depois com `git pull`.
+
+```bash
+mkdir felixo-utils
+cd felixo-utils
+git init
+git remote add -f origin https://github.com/Felipe-Alcantara/Felixo-System-Design.git
+git sparse-checkout init --no-cone
+git sparse-checkout set Utils
+git pull origin main
+```
+
+- **Use quando**: quer só `Utils` e quer atualização futura
+- **Requisito**: Git
+- **Vínculo com o git original?** Sim
+
+---
+
+### 8. Clonar o repositório inteiro e copiar só a pasta desejada
+
+Fallback universal quando você quer uma pasta específica, mas prefere evitar sensibilidade de ferramenta por nome de pasta, shell ou encoding.
+
+```bash
+git clone --depth 1 https://github.com/Felipe-Alcantara/Felixo-System-Design.git ./felixo-standards
+```
+
+Depois, copie manualmente apenas uma destas pastas:
+
+- `./felixo-standards/Utils`
+- `./felixo-standards/PADRÕES DE DESIGN`
+
+- **Use quando**: quer a forma mais previsível para extrair uma pasta específica
+- **Requisito**: Git
+
+---
+
+### 9. Baixar o ZIP do repositório inteiro e extrair só a pasta desejada
+
+Fallback sem `git` para quando você quer apenas uma pasta, mas aceita baixar o repositório inteiro primeiro.
+
+Fluxo:
+
+1. Baixe o ZIP do repositório inteiro
+2. Extraia
+3. Copie apenas:
+   - `Utils/`
+   - `PADRÕES DE DESIGN/`
+
+- **Use quando**: quer evitar `git`, mas precisa de uma pasta específica
+- **Limitação**: baixa tudo, mesmo se você só usar uma pasta
+
+---
+
+### Escolha Rápida por Cenário
+
+| Cenário | Melhor opção |
+|--------|--------------|
+| Quero o caso mais usual para reaproveitar tudo | `git clone` + remover `.git` |
+| Quero tudo da forma mais simples | ZIP |
+| Quero tudo sem `.git` via terminal | `npx degit` |
+| Quero tudo e depois atualizar | `git clone` |
+| Quero só `Utils` sem `git` | `npx degit` em `Utils` |
+| Quero só `Utils` com atualização futura | `git sparse-checkout` |
+| Quero só `PADRÕES DE DESIGN` | `git sparse-checkout` ou clone completo + copiar |
+| Quero uma opção universal e previsível | clone completo + copiar a pasta |
 
 ---
 
@@ -315,3 +418,10 @@ Este projeto está sob a licença MIT — veja o arquivo `LICENSE`.
 ---
 
 ⭐ Se este repositório foi útil, considere dar uma estrela no GitHub!
+
+---
+
+> **Assinatura de Origem**  
+> Este arquivo foi criado por **Felipe Martin** e faz parte do repositório **Felixo System Design**.  
+> Origem: https://github.com/Felipe-Alcantara/Felixo-System-Design  
+> Sugestões e pull requests são bem-vindos.

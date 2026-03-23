@@ -1,6 +1,14 @@
-# Documentação da Experiência do Usuário e Onboarding
+# 🧭 GUIA-ONBOARDING-E-AJUDA-REUTILIZAVEL-DO-READING-TRACKER.md
 
-Este documento detalha a implementação da experiência de onboarding e do sistema de ajuda no Reading Tracker, e como esses conceitos podem ser padronizados para outros projetos.
+> **O que é**: Um guia reutilizável para estruturar **onboarding de primeira visita** e um **centro de ajuda permanente** dentro da interface.
+>
+> **De onde vem**: Este padrão foi extraído do fluxo composto por `OnboardingTooltip` e `HelpModal` no projeto **Reading Tracker**.
+>
+> **Qual é o propósito dentro de `Utils/`**: Transformar essa solução de UX em uma referência reaproveitável no `Felixo System Design`, para que futuras aplicações não precisem redesenhar do zero a camada de educação do usuário.
+>
+> **Quando usar**: Produtos com curva de aprendizado inicial, interfaces com múltiplas ações, dashboards, painéis administrativos e apps em que o usuário precise ser guiado sem atrito.
+
+Este documento não é uma documentação geral do `Reading Tracker`. O objetivo aqui é separar o padrão de onboarding e ajuda da aplicação original, deixando claro o que pode ser reutilizado em outros contextos.
 
 ## Visão Geral
 
@@ -93,3 +101,10 @@ const helpContent = [
 ## Conclusão
 
 A combinação de um onboarding não intrusivo e um sistema de ajuda abrangente cria uma experiência de usuário positiva, reduz a curva de aprendizado e aumenta o engajamento. Ao padronizar esses componentes, é possível acelerar o desenvolvimento de novas aplicações, mantendo um alto padrão de qualidade na interface e na experiência do usuário.
+
+---
+
+> **Assinatura de Origem**  
+> Este arquivo foi criado por **Felipe Martin** e faz parte do repositório **Felixo System Design**.  
+> Origem: https://github.com/Felipe-Alcantara/Felixo-System-Design  
+> Sugestões e pull requests são bem-vindos.

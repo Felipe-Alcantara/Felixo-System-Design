@@ -441,3 +441,10 @@ Nome — [@github](url)
 **Versão**: 1.0  
 **Baseado em**: README.md do projeto Cifra de César em Python  
 **Última Atualização**: 2026
+
+---
+
+> **Assinatura de Origem**  
+> Este arquivo foi criado por **Felipe Martin** e faz parte do repositório **Felixo System Design**.  
+> Origem: https://github.com/Felipe-Alcantara/Felixo-System-Design  
+> Sugestões e pull requests são bem-vindos.

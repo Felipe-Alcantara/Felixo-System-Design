@@ -1,8 +1,14 @@
-# 📅 Heatmap Calendar — Guia de Construção e Reutilização
+# 📅 GUIA-HEATMAP-DE-ATIVIDADE-REUTILIZAVEL-DO-READING-TRACKER.md
 
-> Como construir um **calendário de consistência estilo GitHub** usando React, Tailwind CSS e date-fns para visualizar atividades diárias com intensidade de cor.
+> **O que é**: Um guia reutilizável para construir um **calendário de atividade com heatmap**, no estilo de consistência visual popularizado pelo GitHub.
+>
+> **De onde vem**: Este padrão foi extraído do componente `HeatmapView` do projeto **Reading Tracker**.
+>
+> **Qual é o propósito dentro de `Utils/`**: Preservar esse padrão como referência pronta para reaproveitamento no `Felixo System Design`, sem depender do contexto completo do produto original.
+>
+> **Quando usar**: Hábitos, leitura, exercícios, commits, uso de plataforma, vendas ou qualquer métrica diária que faça sentido como intensidade visual ao longo do tempo.
 
-Este documento explica a arquitetura e implementação do componente `HeatmapView` do Reading Tracker — uma visualização de calendário mensal que pode ser adaptada para qualquer projeto que precise mostrar atividade/progresso ao longo do tempo (commits, exercícios, hábitos, vendas, etc).
+Este documento isola a lógica de agregação diária, cálculo de intensidade e renderização do calendário. A ideia não é documentar o `Reading Tracker` inteiro, e sim capturar o padrão técnico que pode ser levado para outros produtos.
 
 ---
 
@@ -732,3 +738,10 @@ Garanta que o texto sobre as células tenha contraste mínimo de 4.5:1:
 8. **Legenda**: Mostre escala de cores no rodapé
 9. **Performance**: Use `useMemo` para agregação e `Map` para lookup O(1)
 10. **Responsividade**: `grid-cols-7` + `gap-3` + `aspect-square` para layout consistente
+
+---
+
+> **Assinatura de Origem**  
+> Este arquivo foi criado por **Felipe Martin** e faz parte do repositório **Felixo System Design**.  
+> Origem: https://github.com/Felipe-Alcantara/Felixo-System-Design  
+> Sugestões e pull requests são bem-vindos.

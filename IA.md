@@ -1,14 +1,35 @@
-# 🤖 IA.MD — Registro de Contexto para Modelos de IA
+# 🤖 TEMPLATE-CONTEXTO-IA-PARA-PROJETOS.md
 
-> **Propósito**: Este arquivo é um **caderno de anotações técnico para IAs**. Ele existe para que qualquer modelo de IA (ou troca de modelo durante o desenvolvimento) consiga recuperar o contexto do projeto sem precisar reler todo o código ou histórico de conversas.
+> **O que é**: Este arquivo é o **template padrão de contexto operacional para projetos desenvolvidos com apoio de IA**.
 >
-> **Público-alvo**: Exclusivamente modelos de IA. O conteúdo pode (e deve) ser técnico, direto e específico — não precisa ser legível para humanos.
+> **De onde ele vem**: Ele nasce do repositório **Felixo System Design**, junto com outros artefatos-base como o `DESIGN-SYSTEM-FRONTEND.md`, o `PROMPT-BASE-BACKEND.md` e o `GUIA_DOCUMENTACAO_README.md`. Enquanto esses arquivos padronizam visual, execução e documentação, este template padroniza a **memória técnica do projeto** para uso por modelos de IA.
 >
-> **Regra fundamental**: Todo contexto relevante deve estar **neste único arquivo**. Não espalhe informações em vários lugares. A IA deve conseguir ler apenas este arquivo e entender o estado atual do projeto.
+> **Qual é o propósito**: Servir como um **ponto único de recuperação de contexto**. Ao copiar este arquivo para um projeto real, a IA consegue entender objetivo, stack, decisões, bugs, testes e integrações sem depender de reler todo o código ou o histórico completo da conversa.
+>
+> **Como ele deve ser usado**: Neste repositório, ele funciona como **template mestre**. Em outros projetos, deve ser copiado e preenchido continuamente durante o desenvolvimento.
+>
+> **Público-alvo**: Principalmente modelos de IA e fluxos de trabalho assistidos por IA. O conteúdo pode ser técnico, direto e específico.
+>
+> **Regra fundamental**: Todo contexto relevante deve estar **neste único arquivo**. Não espalhe informações críticas em vários lugares se a intenção for permitir retomada rápida por outra IA ou por uma nova sessão.
+
+## 📌 CONTEXTO DENTRO DO FELIXO SYSTEM DESIGN
+
+Este repositório não guarda apenas padrões visuais. Ele centraliza os artefatos que eu reutilizo para iniciar e manter projetos consistentes do começo ao fim. Dentro desse conjunto, este arquivo ocupa o papel de **memória persistente da execução técnica**.
+
+Ele complementa os demais arquivos assim:
+
+- `DESIGN-SYSTEM-FRONTEND.md` define padrões visuais e de interface
+- `PROMPT-BASE-BACKEND.md` define a forma de pedir implementação e arquitetura para IA
+- `GUIA_DOCUMENTACAO_README.md` define como documentar o projeto para humanos
+- `TEMPLATE-CONTEXTO-IA-PARA-PROJETOS.md` define como preservar o contexto acumulado do projeto para IA
+
+Se o design system dita **como construir com consistência**, este arquivo registra **o que já foi decidido, testado e aprendido** durante a construção.
 
 ---
 
-## 📋 INSTRUÇÕES PARA A IA
+## 📋 COMO A IA DEVE USAR ESTE TEMPLATE
+
+Quando este template for copiado para um projeto real, a IA responsável deve tratá-lo como a fonte principal de contexto acumulado do projeto.
 
 ### Quando registrar
 
@@ -198,3 +219,10 @@ _Preencher quando necessário._
 -->
 
 _Preencher durante debug complexo ou decisões que envolvam múltiplos caminhos._
+
+---
+
+> **Assinatura de Origem**  
+> Este arquivo foi criado por **Felipe Martin** e faz parte do repositório **Felixo System Design**.  
+> Origem: https://github.com/Felipe-Alcantara/Felixo-System-Design  
+> Sugestões e pull requests são bem-vindos.
