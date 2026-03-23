@@ -115,7 +115,7 @@ Guia completo de padronização visual para front-end, extraído do **FelixoVers
 
 ### 🧱 Design System para Backend
 
-Guia de **qualidade de sistema backend**. Define princípios de arquitetura, escolha de stack, estrutura por camadas, padrões de API, persistência, testes, TDD, SQLite como padrão inicial, Open/Closed, documentação viva e checklist de qualidade.
+Guia de **qualidade de sistema backend**. Define princípios de arquitetura, escolha de stack, modularização forte, separação de responsabilidades, estrutura por camadas, padrões de API, persistência, testes, TDD, SQLite como padrão inicial, Open/Closed, documentação viva e checklist de qualidade.
 
 📖 [Ver design system backend](PADRÕES%20DE%20DESIGN/DESIGN_SYSTEM_PARA_BACKEND.md)
 

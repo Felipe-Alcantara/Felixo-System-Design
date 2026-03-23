@@ -16,6 +16,7 @@ Use este arquivo para responder perguntas como:
 
 - A arquitetura está simples e coerente?
 - As responsabilidades estão bem separadas?
+- A modularização está protegendo o sistema contra acoplamento e crescimento desordenado?
 - A API tem contrato estável e previsível?
 - O projeto está testável, observável e seguro?
 - As decisões técnicas estão facilitando manutenção futura?
@@ -32,12 +33,16 @@ Se a necessidade for **instruir uma IA sobre como trabalhar**, isso pertence ao 
 - Não introduza abstrações, filas, microserviços ou camadas extras sem uma necessidade clara.
 - O sistema deve ser fácil de entender por leitura direta do código.
 
-### 2.2 Separação explícita de responsabilidades
+### 2.2 Modularização e separação explícita de responsabilidades
 
+- Modularização forte é essencial. O sistema deve ser dividido em partes pequenas, coesas e com fronteiras fáceis de entender.
+- Separação de responsabilidades também é essencial. Cada camada, módulo, classe ou função deve ter um papel claro e limitado.
 - Entrada e saída HTTP ficam na camada de API.
 - Regras de negócio ficam fora de controllers/views.
 - Acesso a banco e integrações externas não devem poluir a camada de domínio.
 - Configuração, infraestrutura e lógica de aplicação devem ter fronteiras claras.
+- Sempre que um arquivo, classe ou função começar a acumular decisões demais, isso deve ser tratado como sinal de refatoração.
+- O objetivo é impedir módulos "faz-tudo" que concentram regra de negócio, acesso a dados, formatação, integração e controle de fluxo no mesmo lugar.
 
 ### 2.3 Contratos previsíveis
 
@@ -129,6 +134,13 @@ backend/
 | **Domain** | Regras centrais, invariantes, linguagem do negócio | Dependência direta de controller/view |
 | **Repositories** | Consulta e persistência estruturada | Regra de apresentação |
 | **Integrations** | Cliente de terceiros, webhooks, email, storage, filas | Regra de negócio principal |
+
+Regras práticas de modulação:
+
+- Se um módulo muda por muitos motivos diferentes, ele está com responsabilidade demais.
+- Se uma classe orquestra HTTP, banco, regra de negócio e integração ao mesmo tempo, ela está errada.
+- Se a evolução de uma feature exige editar o mesmo núcleo toda vez, faltam fronteiras melhores ou pontos de extensão mais claros.
+- Modularizar bem não é espalhar código sem critério; é organizar o sistema para que cada parte tenha uma responsabilidade compreensível, testável e substituível.
 
 ---
 
@@ -303,8 +315,10 @@ Antes de considerar um backend pronto para seguir:
 
 - [ ] A stack escolhida faz sentido para o problema
 - [ ] A arquitetura está modular e com fronteiras claras
+- [ ] Cada módulo, camada, classe e função tem responsabilidade clara e limitada
 - [ ] Controllers/views estão finos
 - [ ] Regras de negócio estão centralizadas
+- [ ] Não existem módulos "faz-tudo" concentrando responsabilidades demais
 - [ ] O código favorece extensão com mínimo de modificação no núcleo
 - [ ] Variações previsíveis de comportamento foram modeladas por composição, não por acoplamento crescente
 - [ ] Banco, índices e migrações estão sob controle

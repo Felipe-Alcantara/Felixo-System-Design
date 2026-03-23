@@ -23,6 +23,8 @@ Ele complementa os demais arquivos assim:
 - `GUIA_DOCUMENTACAO_README.md` define como documentar o projeto para humanos
 - `TEMPLATE-CONTEXTO-IA-PARA-PROJETOS.md` define como preservar o contexto acumulado do projeto para IA
 
+Nos guias técnicos deste acervo, modularização forte e separação clara de responsabilidades são tratadas como princípios estruturais centrais, especialmente no material de backend.
+
 Se o design system dita **como construir com consistência**, este arquivo registra **o que já foi decidido, testado e aprendido** durante a construção.
 
 ---
