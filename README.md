@@ -96,7 +96,8 @@ Felixo System Design/
 │   ├── GUIA-BACKGROUND-SISTEMA-VISUAL-REUTILIZAVEL-DA-CALCULADORA-PRO-WEB-BRYTHON.md
 │   ├── GUIA-BACKEND-REUTILIZAVEL-PARA-CPF-COM-TESTES-E-DADOS-REAIS-DO-GERADOR-DE-CPF-VALIDO-EM-PYTHON.md
 │   ├── GUIA-HEATMAP-DE-ATIVIDADE-REUTILIZAVEL-DO-READING-TRACKER.md
-│   └── GUIA-ONBOARDING-E-AJUDA-REUTILIZAVEL-DO-READING-TRACKER.md
+│   ├── GUIA-ONBOARDING-E-AJUDA-REUTILIZAVEL-DO-READING-TRACKER.md
+│   └── GUIA-SISTEMAS-DE-CRIPTOGRAFIA-REUTILIZAVEIS-DA-CIFRA-DE-CESAR-EM-PYTHON.md
 ├── IA.md                         # Contexto operacional e memória para IA
 ├── README.md                     # Este arquivo
 └── LICENSE
@@ -211,6 +212,14 @@ Este guia registra o padrão de **primeira experiência do usuário** extraído 
 **Quando usar:** produtos com múltiplas funcionalidades, interfaces com curva inicial de aprendizado, dashboards e apps que precisam educar o usuário sem poluir a navegação.
 
 📖 [Ver guia completo](Utils/GUIA-ONBOARDING-E-AJUDA-REUTILIZAVEL-DO-READING-TRACKER.md)
+
+### 🔐 Sistemas de Criptografia Reutilizáveis da Cifra de César em Python
+
+Este guia consolida os sistemas reutilizáveis da **Cifra de César em Python**, cobrindo **cifra tradicional**, **cifra numérica**, **normalização de acentos** e **interface web integrada com Brython** como blocos reaproveitáveis.
+
+**Quando usar:** apps educacionais de criptografia, playgrounds web, utilitários de encode/decode e ferramentas de transformação textual.
+
+📖 [Ver guia completo](Utils/GUIA-SISTEMAS-DE-CRIPTOGRAFIA-REUTILIZAVEIS-DA-CIFRA-DE-CESAR-EM-PYTHON.md)
 
 > 💡 **Nota**: Os arquivos em `Utils/` são **opcionais e específicos**. Use apenas se o seu projeto precisar daquela funcionalidade específica. Os padrões gerais da pasta `PADRÕES DE DESIGN/` e o `IA.md` devem acompanhar praticamente todos os projetos.
 
