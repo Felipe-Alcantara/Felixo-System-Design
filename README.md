@@ -238,28 +238,53 @@ Este guia consolida os sistemas reutilizáveis da **Cifra de César em Python**,
 
 Use os métodos abaixo do mais usual para o mais específico.
 
-### 1. Clonar o repositório inteiro e remover `.git` (Recomendado)
+### 1. Sincronizar `felixo-standards` com a versão mais recente (Recomendado)
 
-Melhor opção quando você quer todos os arquivos, mas sem continuar ligado ao repositório original.
+Melhor opção quando você quer manter uma pasta local sem vínculo com o git original e poder rodar o comando quantas vezes quiser para atualizar.
 
 **Linux / macOS / Git Bash:**
 ```bash
-git clone --depth 1 https://github.com/Felipe-Alcantara/Felixo-System-Design.git ./felixo-standards && rm -rf ./felixo-standards/.git
+tmp_dir="$(mktemp -d)" && git clone --depth 1 https://github.com/Felipe-Alcantara/Felixo-System-Design.git "$tmp_dir/repo" && rm -rf "$tmp_dir/repo/.git" && mkdir -p ./felixo-standards && rsync -a --delete "$tmp_dir/repo/" ./felixo-standards/ && rm -rf "$tmp_dir"
 ```
 
 **PowerShell (Windows):**
 ```powershell
-git clone --depth 1 https://github.com/Felipe-Alcantara/Felixo-System-Design.git ./felixo-standards; Remove-Item -Recurse -Force ./felixo-standards/.git
+$tmpDir = Join-Path $env:TEMP ("felixo-standards-" + [guid]::NewGuid())
+git clone --depth 1 https://github.com/Felipe-Alcantara/Felixo-System-Design.git $tmpDir
+Remove-Item -Recurse -Force (Join-Path $tmpDir ".git")
+New-Item -ItemType Directory -Force -Path "./felixo-standards" | Out-Null
+robocopy $tmpDir "./felixo-standards" /MIR | Out-Null
+Remove-Item -Recurse -Force $tmpDir
 ```
 
 **CMD (Windows):**
 ```cmd
-git clone --depth 1 https://github.com/Felipe-Alcantara/Felixo-System-Design.git felixo-standards && rmdir /s /q felixo-standards\.git
+set TMP_DIR=%TEMP%\felixo-standards-%RANDOM% && git clone --depth 1 https://github.com/Felipe-Alcantara/Felixo-System-Design.git %TMP_DIR% && rmdir /s /q %TMP_DIR%\.git && if not exist felixo-standards mkdir felixo-standards && robocopy %TMP_DIR% felixo-standards /MIR >nul && rmdir /s /q %TMP_DIR%
 ```
 
-- **Use quando**: quer todos os arquivos como base independente para outro projeto
+- **Use quando**: quer todos os arquivos como base independente para outro projeto, com atualização simples depois
 - **Requisito**: Git
-- **Vínculo com o git original?** Não, após remover `.git`
+- **Vínculo com o git original?** Não
+
+#### Atalho global `felixo` (Bash/Zsh)
+
+Se você quiser um comando global para sincronizar em qualquer pasta:
+
+```bash
+felixo() {
+  local dest="./felixo-standards"
+  local repo_url="https://github.com/Felipe-Alcantara/Felixo-System-Design.git"
+  local tmp_dir
+  tmp_dir="$(mktemp -d)" || return 1
+  git clone --depth 1 "$repo_url" "$tmp_dir/repo" || { rm -rf "$tmp_dir"; return 1; }
+  rm -rf "$tmp_dir/repo/.git"
+  mkdir -p "$dest"
+  rsync -a --delete "$tmp_dir/repo/" "$dest/"
+  rm -rf "$tmp_dir"
+}
+```
+
+Esse comando sempre sincroniza a pasta com a versão mais recente do repositório (adiciona novos arquivos, atualiza alterados e remove os que não existem mais no remoto).
 
 ---
 
@@ -418,7 +443,7 @@ Fluxo:
 
 | Cenário | Melhor opção |
 |--------|--------------|
-| Quero o caso mais usual para reaproveitar tudo | `git clone` + remover `.git` |
+| Quero o caso mais usual para reaproveitar tudo | sincronização sem `.git` (método 1 / atalho `felixo`) |
 | Quero tudo da forma mais simples | ZIP |
 | Quero tudo sem `.git` via terminal | `npx degit` |
 | Quero tudo e depois atualizar | `git clone` |
