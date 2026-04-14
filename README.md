@@ -96,6 +96,7 @@ Felixo System Design/
 │   ├── GUIA-BACKGROUND-SISTEMA-VISUAL-REUTILIZAVEL-DA-CALCULADORA-PRO-WEB-BRYTHON.md
 │   ├── GUIA-BACKEND-REUTILIZAVEL-PARA-CPF-COM-TESTES-E-DADOS-REAIS-DO-GERADOR-DE-CPF-VALIDO-EM-PYTHON.md
 │   ├── GUIA-HEATMAP-DE-ATIVIDADE-REUTILIZAVEL-DO-READING-TRACKER.md
+│   ├── GUIA-INTEGRACAO-REUTILIZAVEL-COM-API-DO-GITHUB-PARA-COLETA-DE-REPOSITORIOS-PUBLICOS-E-PRIVADOS.md
 │   ├── GUIA-ONBOARDING-E-AJUDA-REUTILIZAVEL-DO-READING-TRACKER.md
 │   └── GUIA-SISTEMAS-DE-CRIPTOGRAFIA-REUTILIZAVEIS-DA-CIFRA-DE-CESAR-EM-PYTHON.md
 ├── IA.md                         # Contexto operacional e memória para IA
@@ -204,6 +205,14 @@ Este guia isola o padrão de **calendário de atividade com intensidade visual**
 **Quando usar:** visualização de atividade por dia/semana/mês, dashboards de uso, análise temporal rápida.
 
 📖 [Ver guia completo](Utils/GUIA-HEATMAP-DE-ATIVIDADE-REUTILIZAVEL-DO-READING-TRACKER.md)
+
+### 🐙 Integração Reutilizável com API do GitHub (Repositórios Públicos e Privados)
+
+Este guia registra o padrão de **coleta robusta de repositórios no GitHub** extraído do **Git-Hub-Repositories**, incluindo autenticação por token, paginação, deduplicação, regra de privados, retry com backoff e tratamento de rate limit para uso em diferentes tipos de sistema.
+
+**Quando usar:** importadores de portfólio, dashboards de projetos, sincronizadores, ETLs de inventário técnico e qualquer integração que precise buscar dados de repositórios públicos e privados com segurança operacional.
+
+📖 [Ver guia completo](Utils/GUIA-INTEGRACAO-REUTILIZAVEL-COM-API-DO-GITHUB-PARA-COLETA-DE-REPOSITORIOS-PUBLICOS-E-PRIVADOS.md)
 
 ### 🧭 Onboarding e Ajuda Reutilizáveis do Reading Tracker
 
