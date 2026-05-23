@@ -2,7 +2,7 @@
 
 > **O que é**: Este arquivo é o **template padrão de contexto operacional para projetos desenvolvidos com apoio de IA**.
 >
-> **De onde ele vem**: Ele nasce do repositório **Felixo System Design**, junto com outros artefatos-base como o `DESIGN-SYSTEM-FRONTEND.md`, o `PROMPT-BASE-BACKEND.md` e o `GUIA_DOCUMENTACAO_README.md`. Enquanto esses arquivos padronizam visual, execução e documentação, este template padroniza a **memória técnica do projeto** para uso por modelos de IA.
+> **De onde ele vem**: Ele nasce do repositório **Felixo System Design**, junto com outros artefatos-base como o `DESIGN_SYSTEM_FRONTEND.md`, o `PROMPT_BASE_BACKEND.md` e o `DESIGN_SYSTEM_README.md`. Enquanto esses arquivos padronizam visual, execução e documentação, este template padroniza a **memória técnica do projeto** para uso por modelos de IA.
 >
 > **Qual é o propósito**: Servir como um **ponto único de recuperação de contexto**. Ao copiar este arquivo para um projeto real, a IA consegue entender objetivo, stack, decisões, bugs, testes e integrações sem depender de reler todo o código ou o histórico completo da conversa.
 >
@@ -18,14 +18,16 @@ Este repositório não guarda apenas padrões visuais. Ele centraliza os artefat
 
 Ele complementa os demais arquivos assim:
 
-- `DESIGN-SYSTEM-FRONTEND.md` define padrões visuais e de interface
-- `PROMPT-BASE-BACKEND.md` define a forma de pedir implementação e arquitetura para IA
-- `GUIA_DOCUMENTACAO_README.md` define como documentar o projeto para humanos
-- `TEMPLATE-CONTEXTO-IA-PARA-PROJETOS.md` define como preservar o contexto acumulado do projeto para IA
+- `DESIGN_SYSTEM_FRONTEND.md` define padrões visuais e de interface
+- `DESIGN_SYSTEM_BACKEND.md` define padrões de qualidade e arquitetura backend
+- `PROMPT_BASE_BACKEND.md` define a forma de pedir implementação e arquitetura para IA
+- `PROMPT_BASE_FRONTEND.md` define a forma de pedir interface e componentes para IA
+- `DESIGN_SYSTEM_README.md` define como documentar o projeto para humanos
+- `IA.md` (este arquivo) define como preservar o contexto acumulado do projeto para IA
 
 Nos guias técnicos deste acervo, modularização forte e separação clara de responsabilidades são tratadas como princípios estruturais centrais, especialmente no material de backend.
 
-Além dos padrões gerais, a pasta `Utils/` também concentra guias reaproveitáveis mais específicos, inclusive subsistemas de backend extraídos de projetos reais quando esse recorte técnico fizer sentido.
+Além dos padrões gerais, a pasta `guias/` também concentra guias reaproveitáveis mais específicos, organizados em `frontend/`, `backend/` e `integracao/`, extraídos de projetos reais quando esse recorte técnico fizer sentido.
 
 Se o design system dita **como construir com consistência**, este arquivo registra **o que já foi decidido, testado e aprendido** durante a construção.
 

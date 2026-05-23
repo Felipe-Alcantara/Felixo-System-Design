@@ -4,7 +4,7 @@
 >
 > **Uso correto**: Ele não existe para gerar um prompt genérico do zero. Ele existe para ajudar você a descrever a interface, os componentes e as decisões visuais com clareza técnica, reduzindo re-prompts, ambiguidades e retrabalho.
 >
-> **Regra central**: Todo prompt montado a partir deste arquivo deve mandar a IA seguir [`DESIGN_SYSTEM_PARA_FRONTEND.md`](DESIGN_SYSTEM_PARA_FRONTEND.md) como **referência de qualidade visual e estrutural**. A IA não deve inventar o padrão de frontend do zero se o acervo já define princípios, componentes e filosofia de construção. Quando o projeto tiver identidade visual própria, adapte as escolhas visuais (cores, fonte, efeitos) mas mantenha os princípios estruturais.
+> **Regra central**: Todo prompt montado a partir deste arquivo deve mandar a IA seguir [`DESIGN_SYSTEM_FRONTEND.md`](DESIGN_SYSTEM_FRONTEND.md) como **referência de qualidade visual e estrutural**. A IA não deve inventar o padrão de frontend do zero se o acervo já define princípios, componentes e filosofia de construção. Quando o projeto tiver identidade visual própria, adapte as escolhas visuais (cores, fonte, efeitos) mas mantenha os princípios estruturais.
 
 ---
 
@@ -189,13 +189,13 @@ Copie, preencha e adapte:
 ```markdown
 Você é um engenheiro frontend sênior.
 
-Antes de propor componentes ou escrever código, leia e siga o arquivo `DESIGN_SYSTEM_PARA_FRONTEND.md` como referência de qualidade visual e estrutural.
+Antes de propor componentes ou escrever código, leia e siga o arquivo `DESIGN_SYSTEM_FRONTEND.md` como referência de qualidade visual e estrutural.
 
 Não invente o padrão visual do zero se o arquivo já definir princípios, componentes, organização de pastas, nomenclatura e padrões de interação.
 
 Se o projeto tiver identidade visual própria (cores, fonte, efeitos diferentes do FelixoVerse), adapte as escolhas visuais mas mantenha os princípios estruturais do design system.
 
-Se houver qualquer desvio em relação ao `DESIGN_SYSTEM_PARA_FRONTEND.md`, justifique tecnicamente.
+Se houver qualquer desvio em relação ao `DESIGN_SYSTEM_FRONTEND.md`, justifique tecnicamente.
 
 # 1. IDENTIFICAÇÃO DO PROJETO
 - Nome do projeto:
@@ -321,7 +321,7 @@ Se houver qualquer desvio em relação ao `DESIGN_SYSTEM_PARA_FRONTEND.md`, just
 # 16. FORMA DE TRABALHAR
 Antes de implementar:
 - analise o design e os requisitos visuais por completo
-- use o `DESIGN_SYSTEM_PARA_FRONTEND.md` como base de qualidade
+- use o `DESIGN_SYSTEM_FRONTEND.md` como base de qualidade
 - proponha arquitetura de componentes, estrutura de pastas e dependências
 - destaque dúvidas, riscos e trade-offs visuais
 - não assuma pontos ambíguos sem sinalizar
@@ -426,7 +426,7 @@ Quando quiser algo mais direto, use:
 ```markdown
 Você é um engenheiro frontend sênior.
 
-Siga `DESIGN_SYSTEM_PARA_FRONTEND.md` como referência de qualidade visual e estrutural. Se o projeto tiver identidade visual própria, adapte as cores e efeitos mas mantenha os princípios.
+Siga `DESIGN_SYSTEM_FRONTEND.md` como referência de qualidade visual e estrutural. Se o projeto tiver identidade visual própria, adapte as cores e efeitos mas mantenha os princípios.
 
 # PROJETO
 - Nome:
@@ -489,7 +489,7 @@ Coloque aqui o que orienta **como a IA deve trabalhar**:
 
 ## 9. O QUE NÃO PERTENCE AO PROMPT
 
-Não replique no prompt um acervo inteiro de padrões visuais. Isso já pertence ao `DESIGN_SYSTEM_PARA_FRONTEND.md`, como:
+Não replique no prompt um acervo inteiro de padrões visuais. Isso já pertence ao `DESIGN_SYSTEM_FRONTEND.md`, como:
 
 - paleta de cores
 - tipografia e hierarquia de texto

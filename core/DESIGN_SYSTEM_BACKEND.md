@@ -6,7 +6,7 @@
 >
 > **Objetivo**: Servir como referência quando o projeto já existe ou está sendo implementado, ajudando a avaliar se a solução está consistente, segura e fácil de manter.
 >
-> **Não é**: Este arquivo não é um prompt operacional para IA. O prompt foi separado em `PROMPT_BASE_PARA_BACKEND.md`.
+> **Não é**: Este arquivo não é um prompt operacional para IA. O prompt foi separado em `PROMPT_BASE_BACKEND.md`.
 
 ---
 
@@ -334,7 +334,7 @@ Antes de considerar um backend pronto para seguir:
 ## 12. COMO USAR JUNTO COM O PROMPT
 
 - Use `DESIGN_SYSTEM_PARA_BACKEND.md` para definir **o padrão de qualidade do sistema**
-- Use `PROMPT_BASE_PARA_BACKEND.md` para definir **como a IA deve trabalhar durante o projeto**
+- Use `PROMPT_BASE_BACKEND.md` para definir **como a IA deve trabalhar durante o projeto**
 - Em fluxos com IA, trate a atualização contínua de `README.md` e `IA.md` como parte da própria implementação
 
 Essa separação evita que o acervo vire um documento híbrido: um guia continua útil como referência técnica de longo prazo, e o outro continua útil como instrução operacional para novas conversas.

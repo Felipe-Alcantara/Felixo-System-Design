@@ -4,7 +4,7 @@
 >
 > **Uso correto**: Ele não existe para gerar um prompt genérico do zero. Ele existe para ajudar você a descrever o sistema com decisões técnicas claras, reduzindo re-prompts, ambiguidades e retrabalho.
 >
-> **Regra central**: Todo prompt montado a partir deste arquivo deve mandar a IA seguir [`DESIGN_SYSTEM_PARA_BACKEND.md`](DESIGN_SYSTEM_PARA_BACKEND.md) como **contrato de qualidade**. A IA não deve inventar o padrão de backend do zero se o acervo já define princípios, qualidade e filosofia de construção.
+> **Regra central**: Todo prompt montado a partir deste arquivo deve mandar a IA seguir [`DESIGN_SYSTEM_BACKEND.md`](DESIGN_SYSTEM_BACKEND.md) como **contrato de qualidade**. A IA não deve inventar o padrão de backend do zero se o acervo já define princípios, qualidade e filosofia de construção.
 
 ---
 
@@ -208,11 +208,11 @@ Copie, preencha e adapte:
 ```markdown
 Você é um engenheiro backend sênior.
 
-Antes de propor arquitetura ou escrever código, leia e siga o arquivo `DESIGN_SYSTEM_PARA_BACKEND.md` como padrão obrigatório de qualidade.
+Antes de propor arquitetura ou escrever código, leia e siga o arquivo `DESIGN_SYSTEM_BACKEND.md` como padrão obrigatório de qualidade.
 
 Não invente o padrão técnico do zero se o arquivo já definir princípios, filosofia de construção, separação de camadas, testes, Open/Closed, documentação viva e critérios de manutenção.
 
-Se houver qualquer desvio em relação ao `DESIGN_SYSTEM_PARA_BACKEND.md`, justifique tecnicamente.
+Se houver qualquer desvio em relação ao `DESIGN_SYSTEM_BACKEND.md`, justifique tecnicamente.
 
 # 1. IDENTIFICAÇÃO DO PROJETO
 - Nome do projeto:
@@ -341,7 +341,7 @@ Se houver qualquer desvio em relação ao `DESIGN_SYSTEM_PARA_BACKEND.md`, justi
 # 16. FORMA DE TRABALHAR
 Antes de implementar:
 - analise o problema por completo
-- use o `DESIGN_SYSTEM_PARA_BACKEND.md` como base de qualidade
+- use o `DESIGN_SYSTEM_BACKEND.md` como base de qualidade
 - proponha arquitetura, estrutura de pastas e dependências
 - destaque dúvidas, riscos e trade-offs
 - identifique pontos de extensão para evitar modificações recorrentes no núcleo
@@ -453,7 +453,7 @@ Quando quiser algo mais direto, use:
 ```markdown
 Você é um engenheiro backend sênior.
 
-Siga `DESIGN_SYSTEM_PARA_BACKEND.md` como padrão obrigatório de qualidade. Não proponha um backend ignorando esse arquivo.
+Siga `DESIGN_SYSTEM_BACKEND.md` como padrão obrigatório de qualidade. Não proponha um backend ignorando esse arquivo.
 
 # PROJETO
 - Nome:
@@ -512,7 +512,7 @@ Coloque aqui o que orienta **como a IA deve trabalhar**:
 
 ## 9. O QUE NÃO PERTENCE AO PROMPT
 
-Não replique no prompt um acervo inteiro de padrões estruturais. Isso já pertence ao `DESIGN_SYSTEM_PARA_BACKEND.md`, como:
+Não replique no prompt um acervo inteiro de padrões estruturais. Isso já pertence ao `DESIGN_SYSTEM_BACKEND.md`, como:
 
 - princípios de arquitetura
 - qualidade de API
