@@ -4,7 +4,7 @@
 >
 > **De onde vem**: Este padrão foi extraído do componente `HeatmapView` do projeto **Reading Tracker**.
 >
-> **Qual é o propósito dentro de `Utils/`**: Preservar esse padrão como referência pronta para reaproveitamento no `Felixo System Design`, sem depender do contexto completo do produto original.
+> **Qual é o propósito dentro de `guias/`**: Preservar esse padrão como referência pronta para reaproveitamento no `Felixo System Design`, sem depender do contexto completo do produto original.
 >
 > **Quando usar**: Hábitos, leitura, exercícios, commits, uso de plataforma, vendas ou qualquer métrica diária que faça sentido como intensidade visual ao longo do tempo.
 

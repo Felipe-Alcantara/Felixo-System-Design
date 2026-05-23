@@ -4,7 +4,7 @@
 >
 > **De onde vem**: Este padrão foi extraído do componente `MaterialTree` do projeto **Felipe Sala Board**.
 >
-> **Qual é o propósito dentro de `Utils/`**: Registrar essa solução como um bloco reaproveitável do `Felixo System Design`, separando o padrão técnico do restante do produto original.
+> **Qual é o propósito dentro de `guias/`**: Registrar essa solução como um bloco reaproveitável do `Felixo System Design`, separando o padrão técnico do restante do produto original.
 >
 > **Quando usar**: Bibliotecas de materiais didáticos, exploradores de documentos, repositórios de arquivos organizados por pasta, listas de leitura com progresso e qualquer interface com navegação hierárquica que precise rastrear o que o usuário já acessou.
 

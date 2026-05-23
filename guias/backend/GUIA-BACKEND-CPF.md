@@ -4,7 +4,7 @@
 >
 > **De onde vem**: Este padrão foi extraído da implementação Python do projeto **Gerador de CPF Válido em Python**.
 >
-> **Qual é o propósito dentro de `Utils/`**: Registrar essa lógica como um bloco backend reaproveitável do `Felixo System Design`, separando algoritmo, contratos, testes e guardrails de dados do produto original.
+> **Qual é o propósito dentro de `guias/`**: Registrar essa lógica como um bloco backend reaproveitável do `Felixo System Design`, separando algoritmo, contratos, testes e guardrails de dados do produto original.
 >
 > **Quando usar**: APIs, formulários, scripts, automações, serviços internos ou fluxos de QA que precisem gerar, validar, sanitizar ou testar CPF com segurança.
 >

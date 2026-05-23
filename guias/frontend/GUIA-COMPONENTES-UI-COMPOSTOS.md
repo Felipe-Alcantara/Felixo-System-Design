@@ -4,7 +4,7 @@
 >
 > **De onde vem**: Este padrão foi extraído da pasta `src/components/ui/` do projeto **Felipe Sala Board**.
 >
-> **Qual é o propósito dentro de `Utils/`**: Registrar essa solução como um bloco reaproveitável do `Felixo System Design`, separando o padrão técnico do restante do produto original.
+> **Qual é o propósito dentro de `guias/`**: Registrar essa solução como um bloco reaproveitável do `Felixo System Design`, separando o padrão técnico do restante do produto original.
 >
 > **Quando usar**: Qualquer projeto React + Tailwind que precise de componentes base consistentes sem instalar bibliotecas pesadas como shadcn/ui, Radix ou Material UI. Ideal para projetos escolares, MVPs e protótipos rápidos.
 

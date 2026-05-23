@@ -4,7 +4,7 @@
 >
 > **De onde vem**: Este padrão foi extraído dos componentes `scheduleAlert.ts` e `Schedule.tsx` do projeto **Felipe Sala Board**.
 >
-> **Qual é o propósito dentro de `Utils/`**: Registrar essa solução como um bloco reaproveitável do `Felixo System Design`, separando o padrão técnico do restante do produto original.
+> **Qual é o propósito dentro de `guias/`**: Registrar essa solução como um bloco reaproveitável do `Felixo System Design`, separando o padrão técnico do restante do produto original.
 >
 > **Quando usar**: Painéis acadêmicos, portais de turma, apps de agenda escolar, dashboards de professor e qualquer sistema que precise exibir uma grade semanal com alertas contextuais.
 

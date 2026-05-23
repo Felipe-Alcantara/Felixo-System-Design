@@ -4,7 +4,7 @@
 >
 > **De onde vem**: Este padrão foi extraído do componente `BackgroundParticles.tsx` e do CSS global `index.css` do projeto **Felipe Sala Board**.
 >
-> **Qual é o propósito dentro de `Utils/`**: Registrar essa solução como um bloco reaproveitável do `Felixo System Design`, separando o padrão técnico do restante do produto original.
+> **Qual é o propósito dentro de `guias/`**: Registrar essa solução como um bloco reaproveitável do `Felixo System Design`, separando o padrão técnico do restante do produto original.
 >
 > **Quando usar**: Páginas de landing, portfólios, dashboards com identidade visual forte, telas de login, pages de loading e qualquer interface dark-theme que precise de profundidade visual e efeitos de glow sem atrapalhar a interação principal.
 

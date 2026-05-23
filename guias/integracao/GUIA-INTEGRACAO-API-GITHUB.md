@@ -4,7 +4,7 @@
 >
 > **De onde vem**: Este padrão foi extraído do fluxo de importação do projeto **Git-Hub-Repositories**, principalmente de `src/utils/github.js`, `src/components/ImportProfileModal.jsx` e `src/components/GitHubTokenModal.jsx`.
 >
-> **Qual é o propósito dentro de `Utils/`**: Preservar esse subsistema como bloco reaproveitável no `Felixo System Design`, para uso em dashboards, ETLs, sincronizadores e qualquer produto que precise buscar dados de repositórios no GitHub.
+> **Qual é o propósito dentro de `guias/`**: Preservar esse subsistema como bloco reaproveitável no `Felixo System Design`, para uso em dashboards, ETLs, sincronizadores e qualquer produto que precise buscar dados de repositórios no GitHub.
 >
 > **Quando usar**: Importação de portfólio, catálogos de projetos, inventário de repositórios, backup de metadados, painéis analíticos, automações de curadoria e sincronização contínua.
 

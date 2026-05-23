@@ -4,7 +4,7 @@
 >
 > **De onde vem**: Este padrão foi extraído do fluxo composto por `OnboardingTooltip` e `HelpModal` no projeto **Reading Tracker**.
 >
-> **Qual é o propósito dentro de `Utils/`**: Transformar essa solução de UX em uma referência reaproveitável no `Felixo System Design`, para que futuras aplicações não precisem redesenhar do zero a camada de educação do usuário.
+> **Qual é o propósito dentro de `guias/`**: Transformar essa solução de UX em uma referência reaproveitável no `Felixo System Design`, para que futuras aplicações não precisem redesenhar do zero a camada de educação do usuário.
 >
 > **Quando usar**: Produtos com curva de aprendizado inicial, interfaces com múltiplas ações, dashboards, painéis administrativos e apps em que o usuário precise ser guiado sem atrito.
 

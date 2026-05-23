@@ -4,7 +4,7 @@
 >
 > **De onde vem**: Este padrão foi extraído da versão web da **Calculadora Científica Pro**, construída com **Brython**.
 >
-> **Qual é o propósito dentro de `Utils/`**: Registrar esse subsistema visual como referência reaproveitável do `Felixo System Design`, separando a mecânica de ambientação visual do restante da aplicação original.
+> **Qual é o propósito dentro de `guias/`**: Registrar esse subsistema visual como referência reaproveitável do `Felixo System Design`, separando a mecânica de ambientação visual do restante da aplicação original.
 >
 > **Quando usar**: Calculadoras, dashboards, landing pages técnicas, apps educacionais ou qualquer interface que precise de um fundo temático vivo sem comprometer legibilidade e usabilidade.
 >

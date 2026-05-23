@@ -4,7 +4,7 @@
 >
 > **De onde vem**: Este padrão foi extraído do componente `Calendar` na página `GestaoPage` do projeto **Felipe Sala Board**.
 >
-> **Qual é o propósito dentro de `Utils/`**: Registrar essa solução como um bloco reaproveitável do `Felixo System Design`, separando o padrão técnico do restante do produto original.
+> **Qual é o propósito dentro de `guias/`**: Registrar essa solução como um bloco reaproveitável do `Felixo System Design`, separando o padrão técnico do restante do produto original.
 >
 > **Quando usar**: Dashboards acadêmicos, calendários de entregas, agendas de projeto, painéis de gestão de eventos e qualquer interface que precise exibir eventos organizados por mês com interação do usuário.
 

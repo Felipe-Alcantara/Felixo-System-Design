@@ -4,7 +4,7 @@
 >
 > **De onde vem**: Este padrão foi extraído do projeto **Cifra de César em Python**.
 >
-> **Qual é o propósito dentro de `Utils/`**: Registrar os subsistemas técnicos reaproveitáveis do projeto como blocos prontos para uso em outros produtos educacionais, ferramentas de codificação e interfaces web leves.
+> **Qual é o propósito dentro de `guias/`**: Registrar os subsistemas técnicos reaproveitáveis do projeto como blocos prontos para uso em outros produtos educacionais, ferramentas de codificação e interfaces web leves.
 >
 > **Quando usar**: Apps de aprendizado de criptografia, mini-backends de transformação de texto, exercícios de segurança básica, demos web com Python no navegador e ferramentas de encode/decode para uso interno.
 >
