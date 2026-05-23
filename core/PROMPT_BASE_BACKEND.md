@@ -4,7 +4,7 @@
 >
 > **Uso correto**: Ele não existe para gerar um prompt genérico do zero. Ele existe para ajudar você a descrever o sistema com decisões técnicas claras, reduzindo re-prompts, ambiguidades e retrabalho.
 >
-> **Regra central**: Todo prompt montado a partir deste arquivo deve mandar a IA seguir [`DESIGN_SYSTEM_PARA_BACKEND.md`](i:\Programação\GitHub\Projetos\Felixo%20System%20Design\PADRÕES%20DE%20DESIGN\DESIGN_SYSTEM_PARA_BACKEND.md#L1) como **contrato de qualidade**. A IA não deve inventar o padrão de backend do zero se o acervo já define princípios, qualidade e filosofia de construção.
+> **Regra central**: Todo prompt montado a partir deste arquivo deve mandar a IA seguir [`DESIGN_SYSTEM_PARA_BACKEND.md`](DESIGN_SYSTEM_PARA_BACKEND.md) como **contrato de qualidade**. A IA não deve inventar o padrão de backend do zero se o acervo já define princípios, qualidade e filosofia de construção.
 
 ---
 

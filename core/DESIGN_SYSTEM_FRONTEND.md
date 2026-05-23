@@ -10,6 +10,38 @@
 
 ---
 
+## NOTA: O QUE É UNIVERSAL vs. O QUE É ESPECÍFICO DO FELIXOVERSE
+
+Este design system foi extraído do FelixoVerse e mistura **princípios estruturais universais** com **escolhas de identidade visual específicas daquele projeto**. Ao reutilizar este documento em outros projetos, use esta distinção:
+
+### Princípios universais (aplicar em qualquer projeto)
+
+- **Arquitetura de componentes**: compound components (Card com Header/Content/Footer), variantes por prop, composição
+- **Organização de pastas**: `components/ui/`, `components/layout/`, `sections/`, `utils/`
+- **Nomenclatura**: `kebab-case.jsx` para arquivos, prefixo de projeto para classes CSS customizadas
+- **Sistema de layout**: container com max-width, grid responsivo (1→2→3 colunas), breakpoints mobile-first
+- **Hierarquia de z-index**: fundo → conteúdo → navbar → modais
+- **Padrões de interação**: hover states, transições suaves, feedback visual, scroll behavior
+- **Espaçamentos**: consistência de padding/gap em seções, cards, botões e inputs
+- **Responsividade**: mobile-first, breakpoints em `sm`, `md`, `lg`
+- **Componentes base**: Button (variantes + tamanhos), Card, Badge, Input, Modal
+
+### Específico do FelixoVerse (adaptar ou substituir por projeto)
+
+- **Paleta de cores**: Felixo Purple (`#C084FC`, `#A855F7`), fundo Zinc/Black, tema exclusivamente escuro
+- **Tipografia**: Space Grotesk como fonte principal
+- **Sistema de glow**: efeito de respiração (breathing glow) em cards, textos, inputs e bordas
+- **Partículas de fundo**: BackgroundParticles com 35 partículas roxas flutuantes
+- **Órbitas de luz**: dots orbitais ao redor da foto de perfil
+- **Ciclo de cores tech**: animação de 25s percorrendo cores de tecnologias
+- **Shimmer effect**: brilho passando por botões no hover
+- **Cores de categoria**: Web (azul), Code (verde), Music (rosa), etc.
+- **Prefixo `felixo-*`**: classes CSS customizadas como `felixo-card-glow`, `felixo-glow-intensity-*`
+
+**Regra prática**: se o seu projeto tem identidade visual própria, substitua a seção 1 (Identidade Visual), a seção 5 (Background) e a seção 6 (Sistema de Glow) pelas escolhas do seu projeto. Mantenha as seções 2 (Layout), 3 (Componentes), 4 (Interação), 7 (Padrões Técnicos) e 8 (Melhorias) como referência estrutural.
+
+---
+
 ## 1. IDENTIDADE VISUAL
 
 ### 1.1 Paleta de Cores

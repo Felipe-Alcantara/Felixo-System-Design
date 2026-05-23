@@ -89,6 +89,7 @@ Felixo System Design/
 ├── PADRÕES DE DESIGN/            # Guias centrais de frontend, backend, README e prompts
 │   ├── DESIGN_SYSTEM_PARA_FRONTEND.md
 │   ├── DESIGN_SYSTEM_PARA_BACKEND.md
+│   ├── PROMPT_BASE_PARA_FRONTEND.md
 │   ├── PROMPT_BASE_PARA_BACKEND.md
 │   └── DESIGN_SYSTEM_PARA_README.md
 ├── Utils/                        # Guias reutilizáveis extraídos de projetos reais
@@ -132,6 +133,12 @@ Guia de **qualidade de sistema backend**. Define princípios de arquitetura, esc
 Guia técnico para o desenvolvedor montar prompts de backend mais completos logo na primeira interação. Inclui stacks recomendadas, decisões técnicas por cenário, campos para problemas atuais e futuras features, e exige que a IA siga o `DESIGN_SYSTEM_PARA_BACKEND.md` como contrato de qualidade.
 
 📖 [Ver prompt base backend](PADRÕES%20DE%20DESIGN/PROMPT_BASE_PARA_BACKEND.md)
+
+### 🎨 Prompt Base para Frontend
+
+Guia técnico para o desenvolvedor montar prompts de frontend mais completos logo na primeira interação. Inclui stacks recomendadas, decisões visuais por cenário, campos para componentes, identidade visual, responsividade e animações, e exige que a IA siga o `DESIGN_SYSTEM_PARA_FRONTEND.md` como referência de qualidade. Inclui orientação para separar princípios universais de escolhas específicas do FelixoVerse.
+
+📖 [Ver prompt base frontend](PADRÕES%20DE%20DESIGN/PROMPT_BASE_PARA_FRONTEND.md)
 
 ### 📖 Design System para README
 
