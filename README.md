@@ -1,4 +1,4 @@
-# 🎨 Felixo System Design
+# Felixo System Design
 
 <div align="center">
 
@@ -10,289 +10,285 @@
 ![License](https://img.shields.io/badge/License-MIT-green?style=for-the-badge)
 ![Docs](https://img.shields.io/badge/Docs-Guide-2084FF?style=for-the-badge&logo=read-the-docs&logoColor=white)
 
-**Repositório central de padrões de design, qualidade de sistema, prompts estruturados, documentação operacional e guias reutilizáveis para IA.**
+**Repositorio central de padroes de design, qualidade de sistema, prompts estruturados, documentacao operacional e guias reutilizaveis para IA.**
 
-[🧱 Padrões de Design](#-padrões-de-design) • [🤖 IA.md](#-iamd--contexto-operacional-para-ia) • [🧰 Utils](#%EF%B8%8F-utils--padrões-específicos) • [🛠️ Stack](#%EF%B8%8F-minha-stack)
+[Core (Obrigatorio)](#-core--padroes-obrigatorios) | [Guias (Opcional)](#-guias--padroes-especificos) | [Stack](#%EF%B8%8F-minha-stack) | [Como Usar](#-como-usar-em-outros-projetos)
 
 </div>
 
 ---
 
-## 📋 Índice
+## Indice
 
-- [📋 Sobre o Repositório](#-sobre-o-repositório)
-- [🛠️ Minha Stack](#%EF%B8%8F-minha-stack)
-- [📁 Estrutura do Repositório](#-estrutura-do-repositório)
-- [🧱 Padrões de Design](#-padrões-de-design)
-- [🤖 IA.md — Contexto Operacional para IA](#-iamd--contexto-operacional-para-ia)
-- [🧰 Utils — Padrões Específicos](#-utils--padrões-específicos)
-- [📥 Como Usar em Outros Projetos](#-como-usar-em-outros-projetos)
-- [📝 Licença](#-licença)
-- [👤 Autor](#-autor)
-
----
-
-## 📋 Sobre o Repositório
-
-Este repositório serve como **base centralizada** para registrar e padronizar tudo que envolve meus projetos de desenvolvimento:
-
-- **🧱 Padrões de Design** — Guias de frontend, backend e README para padronizar arquitetura, qualidade e documentação
-- **🚀 Prompts para IA** — Prompts estruturados para iniciar projetos e guiar execução com menos re-prompts
-- **🛠️ Stack de Tecnologias** — Registro da stack preferida para priorizar em novos projetos
-- **🤖 Template de Contexto para IA** — Memória operacional padronizada para manter contexto entre modelos de IA ao longo do projeto
-- **📖 Padrão de Documentação** — Guia de como documentar repositórios com READMEs consistentes
-- **🧰 Padrões Específicos (Utils)** — Guias reutilizáveis extraídos de implementações reais para casos de uso específicos
-
-O objetivo é ter um **ponto de referência único** para garantir consistência, qualidade e agilidade em todos os novos projetos.
+- [Sobre o Repositorio](#-sobre-o-repositorio)
+- [Minha Stack](#%EF%B8%8F-minha-stack)
+- [Estrutura do Repositorio](#-estrutura-do-repositorio)
+- [Core — Padroes Obrigatorios](#-core--padroes-obrigatorios)
+- [Guias — Padroes Especificos](#-guias--padroes-especificos)
+- [Como Usar em Outros Projetos](#-como-usar-em-outros-projetos)
+- [Licenca](#-licenca)
+- [Autor](#-autor)
 
 ---
 
-## 🛠️ Minha Stack
+## Sobre o Repositorio
+
+Este repositorio serve como **base centralizada** para registrar e padronizar tudo que envolve meus projetos de desenvolvimento. Ele e organizado em duas camadas:
+
+### `core/` — Obrigatorio
+
+Padroes de qualidade que devem acompanhar **todo projeto**:
+
+- **Design Systems** — Contratos de qualidade para frontend, backend e documentacao
+- **Prompt Bases** — Guias para montar prompts de IA completos na primeira interacao
+- **Template de Contexto IA** — Memoria operacional padronizada para continuidade entre sessoes
+
+### `guias/` — Opcional
+
+Guias reutilizaveis extraidos de **projetos reais**, organizados por dominio. Use apenas quando o projeto precisar daquela funcionalidade especifica.
+
+---
+
+## Minha Stack
 
 ### Linguagens
 
 | Tecnologia | Uso |
 |------------|-----|
-| **HTML5** | Estrutura e marcação web |
-| **CSS3** | Estilização e layout |
-| **JavaScript** | Lógica client-side e scripts |
-| **TypeScript** | Tipagem forte, projetos escaláveis |
+| **HTML5** | Estrutura e marcacao web |
+| **CSS3** | Estilizacao e layout |
+| **JavaScript** | Logica client-side e scripts |
+| **TypeScript** | Tipagem forte, projetos escalaveis |
 | **C#** | Back-end robusto, APIs .NET |
-| **Python** | Back-end, automações, scripts |
+| **Python** | Back-end, automacoes, scripts |
 
 ### Frameworks & Bibliotecas
 
 | Tecnologia | Uso |
 |------------|-----|
-| **React** | Interfaces de usuário reativas |
-| **Tailwind CSS** | Estilização utilitária |
-| **Bootstrap** | Prototipagem rápida, admin panels |
+| **React** | Interfaces de usuario reativas |
+| **Tailwind CSS** | Estilizacao utilitaria |
+| **Bootstrap** | Prototipagem rapida, admin panels |
 | **Django** | Back-end Python, APIs REST |
-| **Vite** | Build tool e dev server rápido |
+| **Vite** | Build tool e dev server rapido |
 
 ### Ferramentas & Infraestrutura
 
 | Ferramenta | Uso |
 |------------|-----|
-| **Git** | Controle de versão |
-| **GitHub** | Repositórios, CI/CD, colaboração |
+| **Git** | Controle de versao |
+| **GitHub** | Repositorios, CI/CD, colaboracao |
 | **VS Code** | IDE principal |
 | **Windows** | Sistema operacional de desenvolvimento |
 
 ---
 
-## 📁 Estrutura do Repositório
+## Estrutura do Repositorio
 
 ```
-Felixo System Design/
+Felixo-System-Design/
 │
-├── PADRÕES DE DESIGN/            # Guias centrais de frontend, backend, README e prompts
-│   ├── DESIGN_SYSTEM_PARA_FRONTEND.md
-│   ├── DESIGN_SYSTEM_PARA_BACKEND.md
-│   ├── PROMPT_BASE_PARA_FRONTEND.md
-│   ├── PROMPT_BASE_PARA_BACKEND.md
-│   └── DESIGN_SYSTEM_PARA_README.md
-├── Utils/                        # Guias reutilizáveis extraídos de projetos reais
-│   ├── GUIA-ARVORE-HIERARQUICA-REUTILIZAVEL-DO-FELIXO-TIME-TRACKER.md
-│   ├── GUIA-ARVORE-DE-MATERIAIS-COM-DUAL-VIEW-E-TRACKING-REUTILIZAVEL-DO-FELIPE-SALA-BOARD.md
-│   ├── GUIA-BACKGROUND-SISTEMA-VISUAL-REUTILIZAVEL-DA-CALCULADORA-PRO-WEB-BRYTHON.md
-│   ├── GUIA-BACKEND-REUTILIZAVEL-PARA-CPF-COM-TESTES-E-DADOS-REAIS-DO-GERADOR-DE-CPF-VALIDO-EM-PYTHON.md
-│   ├── GUIA-CALENDARIO-ACADEMICO-COM-UTILITARIOS-DE-DATA-REUTILIZAVEL-DO-FELIPE-SALA-BOARD.md
-│   ├── GUIA-COMPONENTES-UI-COMPOSTOS-REUTILIZAVEIS-DO-FELIPE-SALA-BOARD.md
-│   ├── GUIA-HEATMAP-DE-ATIVIDADE-REUTILIZAVEL-DO-READING-TRACKER.md
-│   ├── GUIA-INTEGRACAO-REUTILIZAVEL-COM-API-DO-GITHUB-PARA-COLETA-DE-REPOSITORIOS-PUBLICOS-E-PRIVADOS.md
-│   ├── GUIA-ONBOARDING-E-AJUDA-REUTILIZAVEL-DO-READING-TRACKER.md
-│   ├── GUIA-PARTICULAS-E-SISTEMA-DE-GLOW-REUTILIZAVEIS-DO-FELIPE-SALA-BOARD.md
-│   ├── GUIA-SISTEMA-DE-ALERTA-E-GRADE-DE-HORARIOS-REUTILIZAVEL-DO-FELIPE-SALA-BOARD.md
-│   └── GUIA-SISTEMAS-DE-CRIPTOGRAFIA-REUTILIZAVEIS-DA-CIFRA-DE-CESAR-EM-PYTHON.md
-├── IA.md                         # Contexto operacional e memória para IA
-├── README.md                     # Este arquivo
+├── core/                                    # OBRIGATORIO — usar em todo projeto
+│   ├── IA.md                                # Template de contexto operacional para IA
+│   ├── DESIGN_SYSTEM_FRONTEND.md            # Padroes de qualidade frontend
+│   ├── DESIGN_SYSTEM_BACKEND.md             # Padroes de qualidade backend
+│   ├── DESIGN_SYSTEM_README.md              # Padroes de documentacao README
+│   ├── PROMPT_BASE_FRONTEND.md              # Prompt guiado para frontend
+│   └── PROMPT_BASE_BACKEND.md               # Prompt guiado para backend
+│
+├── guias/                                   # OPCIONAL — usar quando relevante
+│   ├── frontend/                            # UI, visual, UX, dados
+│   │   ├── GUIA-COMPONENTES-UI-COMPOSTOS.md
+│   │   ├── GUIA-PARTICULAS-E-GLOW.md
+│   │   ├── GUIA-BACKGROUND-VISUAL.md
+│   │   ├── GUIA-HEATMAP-DE-ATIVIDADE.md
+│   │   ├── GUIA-ONBOARDING-E-AJUDA.md
+│   │   ├── GUIA-ARVORE-HIERARQUICA.md
+│   │   ├── GUIA-ARVORE-DE-MATERIAIS-DUAL-VIEW.md
+│   │   ├── GUIA-CALENDARIO-ACADEMICO.md
+│   │   └── GUIA-SISTEMA-DE-ALERTA-E-GRADE.md
+│   ├── backend/                             # Logica pura Python/Django
+│   │   ├── GUIA-BACKEND-CPF.md
+│   │   └── GUIA-CRIPTOGRAFIA-CIFRA-DE-CESAR.md
+│   └── integracao/                          # Integracoes externas
+│       └── GUIA-INTEGRACAO-API-GITHUB.md
+│
+├── README.md
 └── LICENSE
 ```
 
 ---
 
-## 🧱 Padrões de Design
+## Core — Padroes Obrigatorios
 
-A pasta `PADRÕES DE DESIGN/` concentra os artefatos principais do acervo. Ela separa o que é **padrão técnico de qualidade** do que é **prompt operacional para IA**, evitando documentos híbridos e facilitando reutilização.
+A pasta `core/` concentra os artefatos que devem acompanhar **todo projeto**. Ela separa padroes tecnicos de qualidade, prompts operacionais para IA e template de memoria operacional.
 
-### 🎨 Design System para Frontend
+### Design System Frontend
 
-Guia completo de padronização visual para front-end, extraído do **FelixoVerse**. Documenta paleta, tipografia, layout, componentes, animações e padrões de interface.
+Guia completo de padronizacao visual para front-end, extraido do **FelixoVerse**. Documenta paleta, tipografia, layout, componentes, animacoes e padroes de interface. Inclui separacao explicita entre principios universais e escolhas especificas do FelixoVerse.
 
-📖 [Ver design system frontend](PADRÕES%20DE%20DESIGN/DESIGN_SYSTEM_PARA_FRONTEND.md)
+[Ver design system frontend](core/DESIGN_SYSTEM_FRONTEND.md)
 
-### 🧱 Design System para Backend
+### Design System Backend
 
-Guia de **qualidade de sistema backend**. Define princípios de arquitetura, escolha de stack, modularização forte, separação de responsabilidades, estrutura por camadas, padrões de API, persistência, testes, TDD, SQLite como padrão inicial, Open/Closed, documentação viva e checklist de qualidade.
+Guia de **qualidade de sistema backend**. Define principios de arquitetura, escolha de stack, modularizacao forte, separacao de responsabilidades, estrutura por camadas, padroes de API, persistencia, testes, TDD, SQLite como padrao inicial, Open/Closed, documentacao viva e checklist de qualidade.
 
-📖 [Ver design system backend](PADRÕES%20DE%20DESIGN/DESIGN_SYSTEM_PARA_BACKEND.md)
+[Ver design system backend](core/DESIGN_SYSTEM_BACKEND.md)
 
-### 🚀 Prompt Base para Backend
+### Design System README
 
-Guia técnico para o desenvolvedor montar prompts de backend mais completos logo na primeira interação. Inclui stacks recomendadas, decisões técnicas por cenário, campos para problemas atuais e futuras features, e exige que a IA siga o `DESIGN_SYSTEM_PARA_BACKEND.md` como contrato de qualidade.
+Guia de padronizacao para `README.md`, usado como referencia para manter documentacao consistente entre projetos.
 
-📖 [Ver prompt base backend](PADRÕES%20DE%20DESIGN/PROMPT_BASE_PARA_BACKEND.md)
+[Ver design system README](core/DESIGN_SYSTEM_README.md)
 
-### 🎨 Prompt Base para Frontend
+### Prompt Base Backend
 
-Guia técnico para o desenvolvedor montar prompts de frontend mais completos logo na primeira interação. Inclui stacks recomendadas, decisões visuais por cenário, campos para componentes, identidade visual, responsividade e animações, e exige que a IA siga o `DESIGN_SYSTEM_PARA_FRONTEND.md` como referência de qualidade. Inclui orientação para separar princípios universais de escolhas específicas do FelixoVerse.
+Guia tecnico para montar prompts de backend completos na primeira interacao. Inclui stacks recomendadas, decisoes tecnicas por cenario e exige que a IA siga o `DESIGN_SYSTEM_BACKEND.md` como contrato de qualidade.
 
-📖 [Ver prompt base frontend](PADRÕES%20DE%20DESIGN/PROMPT_BASE_PARA_FRONTEND.md)
+[Ver prompt base backend](core/PROMPT_BASE_BACKEND.md)
 
-### 📖 Design System para README
+### Prompt Base Frontend
 
-Guia de padronização para `README.md`, usado como referência para manter documentação consistente entre projetos.
+Guia tecnico para montar prompts de frontend completos na primeira interacao. Inclui stacks recomendadas, decisoes visuais por cenario, campos para componentes, identidade visual, responsividade e animacoes.
 
-📖 [Ver design system para README](PADRÕES%20DE%20DESIGN/DESIGN_SYSTEM_PARA_README.md)
+[Ver prompt base frontend](core/PROMPT_BASE_FRONTEND.md)
 
----
+### IA.md — Template de Contexto Operacional
 
-## 🤖 IA.md — Contexto Operacional para IA
-
-O arquivo `IA.md` funciona como **memória operacional viva do projeto**. Ele deve ser atualizado durante a execução assistida por IA para registrar:
+Template padrao de **memoria operacional** para projetos com IA. Deve ser copiado e preenchido continuamente durante o desenvolvimento para registrar:
 
 - objetivo atual e milestones
-- decisões técnicas
-- stack e convenções
-- bugs e correções relevantes
+- decisoes tecnicas
+- stack e convencoes
+- bugs e correcoes relevantes
 - testes importantes
-- contexto necessário para outra IA retomar o trabalho sem reler tudo
+- contexto necessario para outra IA retomar o trabalho sem reler tudo
 
-Dentro deste repositório, ele serve como referência de como manter contexto acumulado entre sessões e modelos.
-
-📖 [Ver IA.md](IA.md)
+[Ver IA.md](core/IA.md)
 
 ---
 
-## 🧰 Utils — Padrões Específicos
+## Guias — Padroes Especificos
 
-Pasta com **guias reutilizáveis extraídos de projetos reais**. Diferente dos padrões gerais do repositório, os arquivos em `Utils/` isolam soluções concretas que nasceram em produtos específicos e foram documentadas aqui para reaproveitamento futuro.
+A pasta `guias/` contem **guias reutilizaveis extraidos de projetos reais**, organizados por dominio. Diferente do `core/`, estes arquivos sao **opcionais** — use apenas quando o projeto precisar daquela funcionalidade.
 
-Cada arquivo de `Utils/` responde a três perguntas:
+Cada guia responde a tres perguntas:
 
 - Qual problema ele resolve
-- De qual projeto esse padrão foi extraído
-- Em que tipo de sistema vale a pena reutilizá-lo
+- De qual projeto o padrao foi extraido
+- Em que tipo de sistema vale reutiliza-lo
 
-### 🌳 Árvore Hierárquica Reutilizável do Felixo Time Tracker
+### Frontend
 
-Este guia documenta o padrão de **exploração hierárquica de categorias** extraído do **Felixo Time Tracker**. O foco é reaproveitar a combinação entre modelo em árvore no backend e componente recursivo no frontend para qualquer interface com navegação parent-child.
+#### Arvore Hierarquica
 
-**Quando usar:**
-- Explorador de categorias/pastas
-- Menus hierárquicos
-- Estruturas organizacionais
-- Qualquer dado em árvore (parent-child)
+Padrao de **exploracao hierarquica de categorias** com modelo Django (self-referential FK), serializer recursivo e componente React recursivo com animacoes.
 
-**O que contém:**
-- Modelo Django com self-referential FK
-- Serializer recursivo para API
-- Componente React recursivo
-- Animações e interações (expandir/recolher, seleção)
-- Sistema de indentação visual
+**Quando usar:** explorador de categorias/pastas, menus hierarquicos, qualquer dado em arvore parent-child.
 
-📖 [Ver guia completo](Utils/GUIA-ARVORE-HIERARQUICA-REUTILIZAVEL-DO-FELIXO-TIME-TRACKER.md)
+[Ver guia](guias/frontend/GUIA-ARVORE-HIERARQUICA.md)
 
-### 🌌 Background de Sistema Visual Reutilizável da Calculadora Pro Web (Brython)
+#### Background Visual
 
-Este guia registra o padrão de **background visual em camadas** extraído da versão web da **Calculadora Científica Pro**. O documento transforma a composição de gradiente, símbolos matemáticos animados, densidade visual e troca de tema em um subsistema reaproveitável para outras interfaces com apelo técnico ou temático.
+Padrao de **background visual em camadas** com gradiente, simbolos animados e troca de tema. Extraido da Calculadora Pro Web (Brython).
 
-**Quando usar:** calculadoras, páginas educacionais, dashboards técnicos, experiências web com identidade visual forte e interfaces que precisem de profundidade visual sem atrapalhar a interação principal.
+**Quando usar:** calculadoras, paginas educacionais, dashboards tecnicos, interfaces com profundidade visual.
 
-📖 [Ver guia completo](Utils/GUIA-BACKGROUND-SISTEMA-VISUAL-REUTILIZAVEL-DA-CALCULADORA-PRO-WEB-BRYTHON.md)
+[Ver guia](guias/frontend/GUIA-BACKGROUND-VISUAL.md)
 
-### 🪪 Backend Reutilizável para CPF com Testes e Dados Reais
+#### Heatmap de Atividade
 
-Este guia registra um padrão de **backend lógico para CPF** extraído do projeto **Gerador de CPF Válido em Python**. Ele organiza algoritmo, contratos, fluxo de validação, matriz de testes e guardrails para uso de dados reais, permitindo reaproveitar a solução em serviços, APIs, formulários e automações.
+Padrao de **calendario de atividade com intensidade visual** no estilo GitHub. Extraido do Reading Tracker.
 
-**Quando usar:** geração sintética de CPF para testes, validação backend de documentos, normalização de entrada, formulários com CPF e fluxos que precisem tratar dados reais com mais cuidado.
+**Quando usar:** visualizacao de atividade por dia/semana/mes, dashboards de uso, analise temporal.
 
-📖 [Ver guia completo](Utils/GUIA-BACKEND-REUTILIZAVEL-PARA-CPF-COM-TESTES-E-DADOS-REAIS-DO-GERADOR-DE-CPF-VALIDO-EM-PYTHON.md)
+[Ver guia](guias/frontend/GUIA-HEATMAP-DE-ATIVIDADE.md)
 
-### 📅 Heatmap de Atividade Reutilizável do Reading Tracker
+#### Onboarding e Ajuda
 
-Este guia isola o padrão de **calendário de atividade com intensidade visual** extraído do **Reading Tracker**. Ele serve como referência para qualquer produto que precise transformar eventos diários em uma leitura visual rápida de consistência, volume ou frequência.
+Padrao de **primeira experiencia do usuario** com onboarding leve, destaque contextual e centro de ajuda permanente. Extraido do Reading Tracker.
 
-**Quando usar:** visualização de atividade por dia/semana/mês, dashboards de uso, análise temporal rápida.
+**Quando usar:** produtos com multiplas funcionalidades, interfaces com curva de aprendizado, dashboards.
 
-📖 [Ver guia completo](Utils/GUIA-HEATMAP-DE-ATIVIDADE-REUTILIZAVEL-DO-READING-TRACKER.md)
+[Ver guia](guias/frontend/GUIA-ONBOARDING-E-AJUDA.md)
 
-### 🐙 Integração Reutilizável com API do GitHub (Repositórios Públicos e Privados)
+#### Componentes UI Compostos
 
-Este guia registra o padrão de **coleta robusta de repositórios no GitHub** extraído do **Git-Hub-Repositories**, incluindo autenticação por token, paginação, deduplicação, regra de privados, retry com backoff e tratamento de rate limit para uso em diferentes tipos de sistema.
+Kit de **componentes UI compostos** com Card (compound component), Button (4 variantes x 3 tamanhos), Badge e utilitario de classnames. TypeScript + Tailwind, zero dependencias.
 
-**Quando usar:** importadores de portfólio, dashboards de projetos, sincronizadores, ETLs de inventário técnico e qualquer integração que precise buscar dados de repositórios públicos e privados com segurança operacional.
+**Quando usar:** qualquer projeto React + Tailwind que precise de componentes base consistentes.
 
-📖 [Ver guia completo](Utils/GUIA-INTEGRACAO-REUTILIZAVEL-COM-API-DO-GITHUB-PARA-COLETA-DE-REPOSITORIOS-PUBLICOS-E-PRIVADOS.md)
+[Ver guia](guias/frontend/GUIA-COMPONENTES-UI-COMPOSTOS.md)
 
-### 🧭 Onboarding e Ajuda Reutilizáveis do Reading Tracker
+#### Particulas e Sistema de Glow
 
-Este guia registra o padrão de **primeira experiência do usuário** extraído do **Reading Tracker**, combinando onboarding leve, destaque visual contextual e centro de ajuda permanente. O objetivo é reaproveitar a lógica de adoção e suporte sem precisar redesenhar esse fluxo do zero em cada produto.
+**Background de particulas flutuantes** com Framer Motion e **sistema completo de glow CSS** com 5 niveis de intensidade controlados por CSS variable.
 
-**Quando usar:** produtos com múltiplas funcionalidades, interfaces com curva inicial de aprendizado, dashboards e apps que precisam educar o usuário sem poluir a navegação.
+**Quando usar:** landing pages, portfolios, dashboards dark-theme, interfaces com efeitos de glow.
 
-📖 [Ver guia completo](Utils/GUIA-ONBOARDING-E-AJUDA-REUTILIZAVEL-DO-READING-TRACKER.md)
+[Ver guia](guias/frontend/GUIA-PARTICULAS-E-GLOW.md)
 
-### 🔐 Sistemas de Criptografia Reutilizáveis da Cifra de César em Python
+#### Arvore de Materiais Dual-View
 
-Este guia consolida os sistemas reutilizáveis da **Cifra de César em Python**, cobrindo **cifra tradicional**, **cifra numérica**, **normalização de acentos** e **interface web integrada com Brython** como blocos reaproveitáveis.
+**Arvore de materiais com dois modos de visualizacao** (simples e dinamico), tracking de itens vistos via localStorage e contagem de progresso por pasta.
 
-**Quando usar:** apps educacionais de criptografia, playgrounds web, utilitários de encode/decode e ferramentas de transformação textual.
+**Quando usar:** bibliotecas de materiais, exploradores de documentos, listas de leitura com progresso.
 
-📖 [Ver guia completo](Utils/GUIA-SISTEMAS-DE-CRIPTOGRAFIA-REUTILIZAVEIS-DA-CIFRA-DE-CESAR-EM-PYTHON.md)
+[Ver guia](guias/frontend/GUIA-ARVORE-DE-MATERIAIS-DUAL-VIEW.md)
 
-### 📅 Calendário Acadêmico com Utilitários de Data do Felipe Sala Board
+#### Calendario Academico
 
-Este guia documenta o padrão de **calendário mensal interativo** extraído do **Felipe Sala Board**. Inclui grade de dias, agrupamento de eventos por data, status do usuário por evento e uma biblioteca de 11 funções de data sem dependências externas.
+**Calendario mensal interativo** com grade de dias, agrupamento de eventos por data, status do usuario e 11 funcoes de data sem dependencias externas.
 
-**Quando usar:** dashboards acadêmicos, calendários de entregas, agendas de projeto e painéis de gestão de eventos com interação do usuário.
+**Quando usar:** dashboards academicos, calendarios de entregas, agendas de projeto.
 
-📖 [Ver guia completo](Utils/GUIA-CALENDARIO-ACADEMICO-COM-UTILITARIOS-DE-DATA-REUTILIZAVEL-DO-FELIPE-SALA-BOARD.md)
+[Ver guia](guias/frontend/GUIA-CALENDARIO-ACADEMICO.md)
 
-### ⏰ Sistema de Alerta e Grade de Horários do Felipe Sala Board
+#### Sistema de Alerta e Grade de Horarios
 
-Este guia documenta o **sistema de alerta automático de próxima aula** extraído do **Felipe Sala Board**. Inclui parser de células no formato `"Matéria | Professor | Sala"`, algoritmo de busca da próxima aula, cores por sala e tabela semanal com coluna sticky.
+**Sistema de alerta automatico de proxima aula** com parser de grade, cores por sala e tabela semanal com coluna sticky.
 
-**Quando usar:** painéis acadêmicos, portais de turma, apps de agenda escolar e dashboards com grade semanal de horários.
+**Quando usar:** paineis academicos, portais de turma, apps de agenda escolar.
 
-📖 [Ver guia completo](Utils/GUIA-SISTEMA-DE-ALERTA-E-GRADE-DE-HORARIOS-REUTILIZAVEL-DO-FELIPE-SALA-BOARD.md)
+[Ver guia](guias/frontend/GUIA-SISTEMA-DE-ALERTA-E-GRADE.md)
 
-### 🌲 Árvore de Materiais com Dual-View e Tracking do Felipe Sala Board
+### Backend
 
-Este guia documenta a **árvore de materiais com dois modos de visualização** extraída do **Felipe Sala Board**. Inclui modo simples (sem animação) e dinâmico (Framer Motion), tracking de itens vistos via localStorage e contagem de progresso por pasta.
+#### Backend CPF
 
-**Quando usar:** bibliotecas de materiais didáticos, exploradores de documentos, repositórios de arquivos organizados por pasta e listas de leitura com progresso.
+Padrao de **backend logico para CPF** com algoritmo, contratos, fluxo de validacao, matriz de testes e guardrails para dados reais.
 
-📖 [Ver guia completo](Utils/GUIA-ARVORE-DE-MATERIAIS-COM-DUAL-VIEW-E-TRACKING-REUTILIZAVEL-DO-FELIPE-SALA-BOARD.md)
+**Quando usar:** geracao sintetica de CPF para testes, validacao backend, normalizacao de entrada, formularios.
 
-### 🧩 Componentes UI Compostos do Felipe Sala Board
+[Ver guia](guias/backend/GUIA-BACKEND-CPF.md)
 
-Este guia documenta o **kit de componentes UI compostos** extraído do **Felipe Sala Board**. Inclui Card (compound component com 6 subcomponentes), Button (4 variantes × 3 tamanhos), Badge e utilitário de classnames — tudo em TypeScript, Tailwind CSS e zero dependências.
+#### Criptografia Cifra de Cesar
 
-**Quando usar:** qualquer projeto React + Tailwind que precise de componentes base consistentes sem instalar bibliotecas de UI pesadas.
+Sistemas reutilizaveis da **Cifra de Cesar em Python**: cifra tradicional, cifra numerica, normalizacao de acentos e interface web com Brython.
 
-📖 [Ver guia completo](Utils/GUIA-COMPONENTES-UI-COMPOSTOS-REUTILIZAVEIS-DO-FELIPE-SALA-BOARD.md)
+**Quando usar:** apps educacionais de criptografia, playgrounds web, utilitarios de encode/decode.
 
-### ✨ Partículas e Sistema de Glow do Felipe Sala Board
+[Ver guia](guias/backend/GUIA-CRIPTOGRAFIA-CIFRA-DE-CESAR.md)
 
-Este guia documenta o **background de partículas flutuantes** e o **sistema completo de glow CSS** extraídos do **Felipe Sala Board**. Inclui partículas animadas com Framer Motion, glow de cards/texto/inputs com 5 níveis de intensidade controlados por CSS variable.
+### Integracao
 
-**Quando usar:** landing pages, portfólios, dashboards dark-theme e qualquer interface que precise de profundidade visual e efeitos de glow.
+#### Integracao API GitHub
 
-📖 [Ver guia completo](Utils/GUIA-PARTICULAS-E-SISTEMA-DE-GLOW-REUTILIZAVEIS-DO-FELIPE-SALA-BOARD.md)
+Padrao de **coleta robusta de repositorios no GitHub** com autenticacao por token, paginacao, deduplicacao, retry com backoff e tratamento de rate limit.
 
-> 💡 **Nota**: Os arquivos em `Utils/` são **opcionais e específicos**. Use apenas se o seu projeto precisar daquela funcionalidade específica. Os padrões gerais da pasta `PADRÕES DE DESIGN/` e o `IA.md` devem acompanhar praticamente todos os projetos.
+**Quando usar:** importadores de portfolio, dashboards de projetos, sincronizadores, ETLs de inventario tecnico.
+
+[Ver guia](guias/integracao/GUIA-INTEGRACAO-API-GITHUB.md)
 
 ---
 
-## 📥 Como Usar em Outros Projetos
+## Como Usar em Outros Projetos
 
-Use os métodos abaixo do mais usual para o mais específico.
+Use os metodos abaixo do mais usual para o mais especifico.
 
-### 1. Sincronizar `felixo-standards` com a versão mais recente (Recomendado)
+### 1. Sincronizar `felixo-standards` com a versao mais recente (Recomendado)
 
-Melhor opção quando você quer manter uma pasta local sem vínculo com o git original e poder rodar o comando quantas vezes quiser para atualizar.
+Melhor opcao quando voce quer manter uma pasta local sem vinculo com o git original e poder rodar o comando quantas vezes quiser para atualizar.
 
 **Linux / macOS / Git Bash:**
 ```bash
@@ -314,13 +310,11 @@ Remove-Item -Recurse -Force $tmpDir
 set TMP_DIR=%TEMP%\felixo-standards-%RANDOM% && git clone --depth 1 https://github.com/Felipe-Alcantara/Felixo-System-Design.git %TMP_DIR% && rmdir /s /q %TMP_DIR%\.git && if not exist felixo-standards mkdir felixo-standards && robocopy %TMP_DIR% felixo-standards /MIR >nul && rmdir /s /q %TMP_DIR%
 ```
 
-- **Use quando**: quer todos os arquivos como base independente para outro projeto, com atualização simples depois
+- **Use quando**: quer todos os arquivos como base independente, com atualizacao simples depois
 - **Requisito**: Git
-- **Vínculo com o git original?** Não
+- **Vinculo com o git original?** Nao
 
 #### Atalho global `felixo` (Bash/Zsh)
-
-Se você quiser um comando global para sincronizar em qualquer pasta:
 
 ```bash
 felixo() {
@@ -336,13 +330,9 @@ felixo() {
 }
 ```
 
-Esse comando sempre sincroniza a pasta com a versão mais recente do repositório (adiciona novos arquivos, atualiza alterados e remove os que não existem mais no remoto).
-
 ---
 
-### 2. Baixar o repositório inteiro como ZIP
-
-Melhor opção quando você só quer os arquivos rapidamente, sem `git` e sem Node.js.
+### 2. Baixar o repositorio inteiro como ZIP
 
 **PowerShell (Windows):**
 ```powershell
@@ -366,167 +356,101 @@ curl -L https://github.com/Felipe-Alcantara/Felixo-System-Design/archive/refs/he
 unzip felixo.zip && mv Felixo-System-Design-main felixo-standards && rm felixo.zip
 ```
 
-- **Use quando**: quer o repositório inteiro da forma mais simples possível
-- **Vínculo com o git original?** Não
-- **Limitação**: não baixa subpastas isoladas
-
 ---
 
-### 3. Baixar o repositório inteiro com `npx degit`
-
-Melhor opção quando você quer o repositório inteiro sem `.git`, mas prefere fazer isso pelo terminal com Node.js.
+### 3. Baixar com `npx degit`
 
 ```bash
 npx degit Felipe-Alcantara/Felixo-System-Design ./felixo-standards
 ```
 
-- **Use quando**: quer o repositório inteiro, sem histórico
-- **Requisito**: Node.js
-- **Vínculo com o git original?** Não
-
 ---
 
-### 4. Clonar o repositório inteiro com `git`
-
-Melhor opção quando você quer manter vínculo com o repositório para atualizar depois.
+### 4. Clonar com `git`
 
 ```bash
 git clone --depth 1 https://github.com/Felipe-Alcantara/Felixo-System-Design.git ./felixo-standards
 ```
 
-- **Use quando**: quer o repositório inteiro e pretende atualizar com `git pull`
-- **Requisito**: Git
-- **Vínculo com o git original?** Sim
-
 ---
 
-### 5. Baixar apenas a pasta `Utils` com `npx degit`
-
-Melhor opção quando você quer somente os guias reutilizáveis da pasta `Utils`, sem baixar o resto.
+### 5. Baixar apenas `guias/` com `npx degit`
 
 ```bash
-npx degit Felipe-Alcantara/Felixo-System-Design/Utils ./felixo-utils
+npx degit Felipe-Alcantara/Felixo-System-Design/guias ./felixo-guias
 ```
 
-- **Use quando**: precisa só dos padrões específicos extraídos de projetos reais
-- **Requisito**: Node.js
-- **Saída esperada**: o conteúdo de `Utils/` vai direto para a pasta de destino
-
 ---
 
-### 6. Baixar apenas a pasta `PADRÕES DE DESIGN`
-
-Como essa pasta tem espaço e acentuação no nome, a opção mais confiável é usar `git sparse-checkout` ou clonar o repositório inteiro e copiar a pasta manualmente.
-
-**Se quiser manter atualização futura, prefira `sparse-checkout`:**
+### 6. Baixar apenas `core/` com `git sparse-checkout`
 
 ```bash
-mkdir felixo-design-patterns
-cd felixo-design-patterns
+mkdir felixo-core
+cd felixo-core
 git init
 git remote add -f origin https://github.com/Felipe-Alcantara/Felixo-System-Design.git
 git sparse-checkout init --no-cone
-git sparse-checkout set "PADRÕES DE DESIGN"
+git sparse-checkout set core
 git pull origin main
 ```
 
-- **Use quando**: quer apenas os padrões centrais de frontend, backend, README e prompts
-- **Requisito**: Git
-- **Vínculo com o git original?** Sim
-
 ---
 
-### 7. Baixar apenas a pasta `Utils` com `git sparse-checkout`
-
-Melhor opção quando você quer só `Utils` e também quer poder atualizar essa pasta depois com `git pull`.
+### 7. Baixar apenas `guias/` com `git sparse-checkout`
 
 ```bash
-mkdir felixo-utils
-cd felixo-utils
+mkdir felixo-guias
+cd felixo-guias
 git init
 git remote add -f origin https://github.com/Felipe-Alcantara/Felixo-System-Design.git
 git sparse-checkout init --no-cone
-git sparse-checkout set Utils
+git sparse-checkout set guias
 git pull origin main
 ```
 
-- **Use quando**: quer só `Utils` e quer atualização futura
-- **Requisito**: Git
-- **Vínculo com o git original?** Sim
-
 ---
 
-### 8. Clonar o repositório inteiro e copiar só a pasta desejada
-
-Fallback universal quando você quer uma pasta específica, mas prefere evitar sensibilidade de ferramenta por nome de pasta, shell ou encoding.
+### 8. Clonar tudo e copiar so a pasta desejada
 
 ```bash
 git clone --depth 1 https://github.com/Felipe-Alcantara/Felixo-System-Design.git ./felixo-standards
 ```
 
-Depois, copie manualmente apenas uma destas pastas:
+Depois, copie manualmente:
 
-- `./felixo-standards/Utils`
-- `./felixo-standards/PADRÕES DE DESIGN`
-
-- **Use quando**: quer a forma mais previsível para extrair uma pasta específica
-- **Requisito**: Git
+- `./felixo-standards/core`
+- `./felixo-standards/guias`
 
 ---
 
-### 9. Baixar o ZIP do repositório inteiro e extrair só a pasta desejada
+### Escolha Rapida por Cenario
 
-Fallback sem `git` para quando você quer apenas uma pasta, mas aceita baixar o repositório inteiro primeiro.
-
-Fluxo:
-
-1. Baixe o ZIP do repositório inteiro
-2. Extraia
-3. Copie apenas:
-   - `Utils/`
-   - `PADRÕES DE DESIGN/`
-
-- **Use quando**: quer evitar `git`, mas precisa de uma pasta específica
-- **Limitação**: baixa tudo, mesmo se você só usar uma pasta
-
----
-
-### Escolha Rápida por Cenário
-
-| Cenário | Melhor opção |
-|--------|--------------|
-| Quero o caso mais usual para reaproveitar tudo | sincronização sem `.git` (método 1 / atalho `felixo`) |
+| Cenario | Melhor opcao |
+|---------|--------------|
+| Quero tudo com atualizacao simples | sincronizacao sem `.git` (metodo 1 / atalho `felixo`) |
 | Quero tudo da forma mais simples | ZIP |
 | Quero tudo sem `.git` via terminal | `npx degit` |
 | Quero tudo e depois atualizar | `git clone` |
-| Quero só `Utils` sem `git` | `npx degit` em `Utils` |
-| Quero só `Utils` com atualização futura | `git sparse-checkout` |
-| Quero só `PADRÕES DE DESIGN` | `git sparse-checkout` ou clone completo + copiar |
-| Quero uma opção universal e previsível | clone completo + copiar a pasta |
+| Quero so `guias/` sem `git` | `npx degit` em `guias` |
+| Quero so `guias/` com atualizacao futura | `git sparse-checkout` |
+| Quero so `core/` com atualizacao futura | `git sparse-checkout` |
+| Quero uma opcao universal | clone completo + copiar a pasta |
 
 ---
 
-> 💡 **Dica**: Após copiar, os arquivos ficam independentes. Você pode editá-los, mover para outra pasta ou commitar junto com o seu projeto normalmente.
+## Licenca
 
----
+Este projeto esta sob a licenca MIT — veja o arquivo `LICENSE`.
 
-## 📝 Licença
-
-Este projeto está sob a licença MIT — veja o arquivo `LICENSE`.
-
-## 👤 Autor
+## Autor
 
 **Felipe Martin**
 - GitHub: [@Felipe-Alcantara](https://github.com/Felipe-Alcantara)
 
 ---
 
-⭐ Se este repositório foi útil, considere dar uma estrela no GitHub!
-
----
-
 > **Assinatura de Origem**  
-> Este arquivo foi criado por **Felipe Martin** e faz parte do repositório **Felixo System Design**.  
+> Este arquivo foi criado por **Felipe Martin** e faz parte do repositorio **Felixo System Design**.  
 > Origem: https://github.com/Felipe-Alcantara/Felixo-System-Design  
-> Data desta versão: 2026-03-23  
-> Sugestões e pull requests são bem-vindos.
+> Data desta versao: 2026-05-23  
+> Sugestoes e pull requests sao bem-vindos.
