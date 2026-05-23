@@ -93,11 +93,16 @@ Felixo System Design/
 │   └── DESIGN_SYSTEM_PARA_README.md
 ├── Utils/                        # Guias reutilizáveis extraídos de projetos reais
 │   ├── GUIA-ARVORE-HIERARQUICA-REUTILIZAVEL-DO-FELIXO-TIME-TRACKER.md
+│   ├── GUIA-ARVORE-DE-MATERIAIS-COM-DUAL-VIEW-E-TRACKING-REUTILIZAVEL-DO-FELIPE-SALA-BOARD.md
 │   ├── GUIA-BACKGROUND-SISTEMA-VISUAL-REUTILIZAVEL-DA-CALCULADORA-PRO-WEB-BRYTHON.md
 │   ├── GUIA-BACKEND-REUTILIZAVEL-PARA-CPF-COM-TESTES-E-DADOS-REAIS-DO-GERADOR-DE-CPF-VALIDO-EM-PYTHON.md
+│   ├── GUIA-CALENDARIO-ACADEMICO-COM-UTILITARIOS-DE-DATA-REUTILIZAVEL-DO-FELIPE-SALA-BOARD.md
+│   ├── GUIA-COMPONENTES-UI-COMPOSTOS-REUTILIZAVEIS-DO-FELIPE-SALA-BOARD.md
 │   ├── GUIA-HEATMAP-DE-ATIVIDADE-REUTILIZAVEL-DO-READING-TRACKER.md
 │   ├── GUIA-INTEGRACAO-REUTILIZAVEL-COM-API-DO-GITHUB-PARA-COLETA-DE-REPOSITORIOS-PUBLICOS-E-PRIVADOS.md
 │   ├── GUIA-ONBOARDING-E-AJUDA-REUTILIZAVEL-DO-READING-TRACKER.md
+│   ├── GUIA-PARTICULAS-E-SISTEMA-DE-GLOW-REUTILIZAVEIS-DO-FELIPE-SALA-BOARD.md
+│   ├── GUIA-SISTEMA-DE-ALERTA-E-GRADE-DE-HORARIOS-REUTILIZAVEL-DO-FELIPE-SALA-BOARD.md
 │   └── GUIA-SISTEMAS-DE-CRIPTOGRAFIA-REUTILIZAVEIS-DA-CIFRA-DE-CESAR-EM-PYTHON.md
 ├── IA.md                         # Contexto operacional e memória para IA
 ├── README.md                     # Este arquivo
@@ -229,6 +234,46 @@ Este guia consolida os sistemas reutilizáveis da **Cifra de César em Python**,
 **Quando usar:** apps educacionais de criptografia, playgrounds web, utilitários de encode/decode e ferramentas de transformação textual.
 
 📖 [Ver guia completo](Utils/GUIA-SISTEMAS-DE-CRIPTOGRAFIA-REUTILIZAVEIS-DA-CIFRA-DE-CESAR-EM-PYTHON.md)
+
+### 📅 Calendário Acadêmico com Utilitários de Data do Felipe Sala Board
+
+Este guia documenta o padrão de **calendário mensal interativo** extraído do **Felipe Sala Board**. Inclui grade de dias, agrupamento de eventos por data, status do usuário por evento e uma biblioteca de 11 funções de data sem dependências externas.
+
+**Quando usar:** dashboards acadêmicos, calendários de entregas, agendas de projeto e painéis de gestão de eventos com interação do usuário.
+
+📖 [Ver guia completo](Utils/GUIA-CALENDARIO-ACADEMICO-COM-UTILITARIOS-DE-DATA-REUTILIZAVEL-DO-FELIPE-SALA-BOARD.md)
+
+### ⏰ Sistema de Alerta e Grade de Horários do Felipe Sala Board
+
+Este guia documenta o **sistema de alerta automático de próxima aula** extraído do **Felipe Sala Board**. Inclui parser de células no formato `"Matéria | Professor | Sala"`, algoritmo de busca da próxima aula, cores por sala e tabela semanal com coluna sticky.
+
+**Quando usar:** painéis acadêmicos, portais de turma, apps de agenda escolar e dashboards com grade semanal de horários.
+
+📖 [Ver guia completo](Utils/GUIA-SISTEMA-DE-ALERTA-E-GRADE-DE-HORARIOS-REUTILIZAVEL-DO-FELIPE-SALA-BOARD.md)
+
+### 🌲 Árvore de Materiais com Dual-View e Tracking do Felipe Sala Board
+
+Este guia documenta a **árvore de materiais com dois modos de visualização** extraída do **Felipe Sala Board**. Inclui modo simples (sem animação) e dinâmico (Framer Motion), tracking de itens vistos via localStorage e contagem de progresso por pasta.
+
+**Quando usar:** bibliotecas de materiais didáticos, exploradores de documentos, repositórios de arquivos organizados por pasta e listas de leitura com progresso.
+
+📖 [Ver guia completo](Utils/GUIA-ARVORE-DE-MATERIAIS-COM-DUAL-VIEW-E-TRACKING-REUTILIZAVEL-DO-FELIPE-SALA-BOARD.md)
+
+### 🧩 Componentes UI Compostos do Felipe Sala Board
+
+Este guia documenta o **kit de componentes UI compostos** extraído do **Felipe Sala Board**. Inclui Card (compound component com 6 subcomponentes), Button (4 variantes × 3 tamanhos), Badge e utilitário de classnames — tudo em TypeScript, Tailwind CSS e zero dependências.
+
+**Quando usar:** qualquer projeto React + Tailwind que precise de componentes base consistentes sem instalar bibliotecas de UI pesadas.
+
+📖 [Ver guia completo](Utils/GUIA-COMPONENTES-UI-COMPOSTOS-REUTILIZAVEIS-DO-FELIPE-SALA-BOARD.md)
+
+### ✨ Partículas e Sistema de Glow do Felipe Sala Board
+
+Este guia documenta o **background de partículas flutuantes** e o **sistema completo de glow CSS** extraídos do **Felipe Sala Board**. Inclui partículas animadas com Framer Motion, glow de cards/texto/inputs com 5 níveis de intensidade controlados por CSS variable.
+
+**Quando usar:** landing pages, portfólios, dashboards dark-theme e qualquer interface que precise de profundidade visual e efeitos de glow.
+
+📖 [Ver guia completo](Utils/GUIA-PARTICULAS-E-SISTEMA-DE-GLOW-REUTILIZAVEIS-DO-FELIPE-SALA-BOARD.md)
 
 > 💡 **Nota**: Os arquivos em `Utils/` são **opcionais e específicos**. Use apenas se o seu projeto precisar daquela funcionalidade específica. Os padrões gerais da pasta `PADRÕES DE DESIGN/` e o `IA.md` devem acompanhar praticamente todos os projetos.
 
