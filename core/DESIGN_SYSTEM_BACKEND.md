@@ -333,7 +333,7 @@ Antes de considerar um backend pronto para seguir:
 
 ## 12. COMO USAR JUNTO COM O PROMPT
 
-- Use `DESIGN_SYSTEM_PARA_BACKEND.md` para definir **o padrão de qualidade do sistema**
+- Use `DESIGN_SYSTEM_BACKEND.md` para definir **o padrão de qualidade do sistema**
 - Use `PROMPT_BASE_BACKEND.md` para definir **como a IA deve trabalhar durante o projeto**
 - Em fluxos com IA, trate a atualização contínua de `README.md` e `IA.md` como parte da própria implementação
 
