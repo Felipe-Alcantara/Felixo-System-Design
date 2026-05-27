@@ -41,6 +41,7 @@ Padroes de qualidade que devem acompanhar **todo projeto**:
 
 - **Design Systems** — Contratos de qualidade para frontend, backend e documentacao
 - **Prompt Bases** — Guias para montar prompts de IA completos na primeira interacao
+- **Guia Minimo de Qualidade** — Regras curtas e obrigatorias para preservar qualidade de software
 - **Template de Contexto IA** — Memoria operacional padronizada para continuidade entre sessoes
 
 ### `guias/` — Opcional
@@ -93,6 +94,7 @@ Felixo-System-Design/
 │   ├── DESIGN_SYSTEM_FRONTEND.md            # Padroes de qualidade frontend
 │   ├── DESIGN_SYSTEM_BACKEND.md             # Padroes de qualidade backend
 │   ├── DESIGN_SYSTEM_README.md              # Padroes de documentacao README
+│   ├── GUIA_MINIMO_QUALIDADE.md             # Regras minimas obrigatorias de qualidade
 │   ├── PROMPT_BASE_FRONTEND.md              # Prompt guiado para frontend
 │   └── PROMPT_BASE_BACKEND.md               # Prompt guiado para backend
 │
@@ -111,7 +113,8 @@ Felixo-System-Design/
 │   │   ├── GUIA-BACKEND-CPF.md
 │   │   └── GUIA-CRIPTOGRAFIA-CIFRA-DE-CESAR.md
 │   └── integracao/                          # Integracoes externas
-│       └── GUIA-INTEGRACAO-API-GITHUB.md
+│       ├── GUIA-INTEGRACAO-API-GITHUB.md
+│       └── GUIA-SCRAPING-MULTIFORMATO.md
 │
 ├── README.md
 └── LICENSE
@@ -140,6 +143,12 @@ Guia de **qualidade de sistema backend**. Define principios de arquitetura, esco
 Guia de padronizacao para `README.md`, usado como referencia para manter documentacao consistente entre projetos.
 
 [Ver design system README](core/DESIGN_SYSTEM_README.md)
+
+### Guia Minimo de Qualidade
+
+Contrato curto e obrigatorio para preservar qualidade de software em qualquer projeto. Resume os padroes essenciais de arquitetura, seguranca, testes, documentacao e criterio de pronto antes de consultar os documentos longos.
+
+[Ver guia minimo de qualidade](core/GUIA_MINIMO_QUALIDADE.md)
 
 ### Prompt Base Backend
 
@@ -279,6 +288,14 @@ Padrao de **coleta robusta de repositorios no GitHub** com autenticacao por toke
 **Quando usar:** importadores de portfolio, dashboards de projetos, sincronizadores, ETLs de inventario tecnico.
 
 [Ver guia](guias/integracao/GUIA-INTEGRACAO-API-GITHUB.md)
+
+#### Scraping Multiformato
+
+Padrao de **scraping multiformato** com Playwright, parsers offline, JSON embutido, captura manual assistida, persistencia idempotente, URL publica segura, testes e guardrails operacionais.
+
+**Quando usar:** coletores, catalogos, ETLs, comparadores, importadores e pipelines que precisam transformar paginas heterogeneas em dados estruturados auditaveis.
+
+[Ver guia](guias/integracao/GUIA-SCRAPING-MULTIFORMATO.md)
 
 ---
 
@@ -452,5 +469,5 @@ Este projeto esta sob a licenca MIT — veja o arquivo `LICENSE`.
 > **Assinatura de Origem**  
 > Este arquivo foi criado por **Felipe Martin** e faz parte do repositorio **Felixo System Design**.  
 > Origem: https://github.com/Felipe-Alcantara/Felixo-System-Design  
-> Data desta versao: 2026-05-23  
+> Data desta versao: 2026-05-27
 > Sugestoes e pull requests sao bem-vindos.

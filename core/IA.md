@@ -50,16 +50,16 @@ Você **DEVE** atualizar este arquivo sempre que:
 7. **Convenção for estabelecida** — naming, estrutura de pastas, padrão de commit
 8. **Integração externa for configurada** — APIs, serviços, credenciais (sem expor secrets)
 9. **Milestone for atingida** — feature completa, release, deploy
-10. **Chain of thought relevante** — registre o raciocínio por trás de decisões complexas, passos de debug e caminhos explorados
+10. **Resumo de decisão relevante** — registre contexto, alternativas consideradas, conclusão e validação de decisões complexas
 
-### Por que registrar chain of thought?
+### Por que registrar resumo de decisão?
 
-Modelos de IA podem **alucinar ou se confundir** durante raciocínios longos. Registrar o passo-a-passo do pensamento permite:
+Modelos de IA podem **alucinar ou se confundir** durante decisões longas. Registrar um resumo técnico e auditável permite:
 
 - **Identificar onde o erro começou** — se o resultado final estiver errado, dá pra rastrear qual passo do raciocínio divergiu
 - **Evitar loops** — se a IA já tentou um caminho e falhou, o registro impede que tente de novo
-- **Retomar com outro modelo** — um modelo diferente consegue ler o raciocínio anterior e continuar de onde parou
-- **Auditar alucinações** — comparação entre o raciocínio registrado e o código gerado revela inconsistências
+- **Retomar com outro modelo** — um modelo diferente consegue ler a decisão anterior e continuar de onde parou
+- **Auditar alucinações** — comparação entre a decisão registrada e o código gerado revela inconsistências
 
 ### Como registrar
 
@@ -197,31 +197,30 @@ _Preencher quando necessário._
 
 ---
 
-## 🧠 CHAIN OF THOUGHT
+## 🧠 RESUMOS DE DECISÃO
 
 <!-- 
-  Registre aqui o raciocínio detalhado em decisões complexas, debug difícil
-  ou qualquer situação onde o passo-a-passo do pensamento importa.
-  Isso serve para rastrear alucinações e erros de lógica.
+  Registre aqui um resumo técnico de decisões complexas, debug difícil
+  ou qualquer situação onde contexto, alternativas e conclusão importem.
+  Não registre chain of thought interno bruto; registre apenas informação útil,
+  verificável e retomável por outra pessoa ou IA.
   
   Formato:
   [YYYY-MM-DD] CONTEXTO: <o que estava tentando fazer>
-  PENSAMENTO: <passo 1 do raciocínio>
-  PENSAMENTO: <passo 2>
-  RESULTADO: <o que aconteceu / conclusão>
+  ALTERNATIVAS: <caminhos considerados>
+  DECISÃO: <caminho escolhido e motivo>
+  VALIDAÇÃO: <teste, verificação ou evidência>
   
   Exemplo:
   [2026-03-13] CONTEXTO: Endpoint /api/users retornando 500 em produção.
-  PENSAMENTO: Logs mostram `KeyError: 'email'` em serializer.py L32.
-  PENSAMENTO: O campo `email` existe no model. Verifiquei — o request body do frontend envia `user_email` ao invés de `email`.
-  PENSAMENTO: Duas opções: renomear no frontend ou aceitar ambos no serializer. Optei por aceitar ambos via `source='email'`.
-  RESULTADO: Fix aplicado. Manter compat retroativa — frontend será atualizado depois.
+  ALTERNATIVAS: Renomear no frontend ou aceitar `email` e `user_email` no serializer.
+  DECISÃO: Aceitar ambos temporariamente para manter compatibilidade.
+  VALIDAÇÃO: Teste de login com os dois formatos passou.
   
   [2026-03-14] CONTEXTO: Tentando implementar cache com Redis para /api/reports.
-  PENSAMENTO: Primeiro tentei django-cacheops — configurei mas não funcionou com queries complexas (aggregations).
-  PENSAMENTO: Tentei cache manual com redis-py direto — funcionou mas código ficou verbose.
-  PENSAMENTO: Voltei para django cache framework com backend Redis — mais simples, cobre o caso.
-  RESULTADO: Usando `django.core.cache` com `django-redis`. Cache de 5min em endpoints pesados.
+  ALTERNATIVAS: django-cacheops, redis-py direto ou Django cache framework.
+  DECISÃO: Usar `django.core.cache` com `django-redis`, por simplicidade e cobertura suficiente.
+  VALIDAÇÃO: Endpoint pesado respondeu com cache de 5min sem alterar contrato da API.
 -->
 
 _Preencher durante debug complexo ou decisões que envolvam múltiplos caminhos._
