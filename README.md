@@ -80,6 +80,7 @@ Guias reutilizaveis extraidos de **projetos reais**, organizados por dominio. Us
 | **Git** | Controle de versao |
 | **GitHub** | Repositorios, CI/CD, colaboracao |
 | **VS Code** | IDE principal |
+| **Railway** | Plataforma padrao para deploy de backend online (PaaS) |
 | **Windows** | Sistema operacional de desenvolvimento |
 
 ---
@@ -114,7 +115,8 @@ Felixo-System-Design/
 │   │   └── GUIA-CRIPTOGRAFIA-CIFRA-DE-CESAR.md
 │   └── integracao/                          # Integracoes externas
 │       ├── GUIA-INTEGRACAO-API-GITHUB.md
-│       └── GUIA-SCRAPING-MULTIFORMATO.md
+│       ├── GUIA-SCRAPING-MULTIFORMATO.md
+│       └── GUIA-DEPLOY-RAILWAY.md
 │
 ├── README.md
 └── LICENSE
@@ -296,6 +298,14 @@ Padrao de **scraping multiformato** com Playwright, parsers offline, JSON embuti
 **Quando usar:** coletores, catalogos, ETLs, comparadores, importadores e pipelines que precisam transformar paginas heterogeneas em dados estruturados auditaveis.
 
 [Ver guia](guias/integracao/GUIA-SCRAPING-MULTIFORMATO.md)
+
+#### Deploy Railway (backend padrao online)
+
+**Servico padrao para colocar backend online**. Railway (PaaS) faz build, deploy, banco gerenciado, variaveis de ambiente, dominio HTTPS e logs sem gerenciar servidor — **mais do que suficiente para a maioria das aplicacoes**. Inclui fluxo completo de CLI, conceitos, deploy por Git ou `railway up`, bancos e checklist.
+
+**Quando usar:** APIs REST, back-ends de apps, workers, bots, scrapers agendados e qualquer servico que precise ficar online com URL publica e HTTPS.
+
+[Ver guia](guias/integracao/GUIA-DEPLOY-RAILWAY.md)
 
 ---
 
