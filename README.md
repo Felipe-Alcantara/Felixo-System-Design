@@ -42,6 +42,7 @@ Padroes de qualidade que devem acompanhar **todo projeto**:
 - **Design Systems** — Contratos de qualidade para frontend, backend e documentacao
 - **Prompt Bases** — Guias para montar prompts de IA completos na primeira interacao
 - **Guia Minimo de Qualidade** — Regras curtas e obrigatorias para preservar qualidade de software
+- **Start App Script** — Script Python obrigatorio que instala, inicia/reinicia e abre cada app web
 - **Template de Contexto IA** — Memoria operacional padronizada para continuidade entre sessoes
 
 ### `guias/` — Opcional
@@ -96,6 +97,7 @@ Felixo-System-Design/
 │   ├── DESIGN_SYSTEM_BACKEND.md             # Padroes de qualidade backend
 │   ├── DESIGN_SYSTEM_README.md              # Padroes de documentacao README
 │   ├── GUIA_MINIMO_QUALIDADE.md             # Regras minimas obrigatorias de qualidade
+│   ├── GUIA-START-APP-SCRIPT.md             # Script de start obrigatorio (instala/inicia/abre)
 │   ├── PROMPT_BASE_FRONTEND.md              # Prompt guiado para frontend
 │   └── PROMPT_BASE_BACKEND.md               # Prompt guiado para backend
 │
@@ -151,6 +153,12 @@ Guia de padronizacao para `README.md`, usado como referencia para manter documen
 Contrato curto e obrigatorio para preservar qualidade de software em qualquer projeto. Resume os padroes essenciais de arquitetura, seguranca, testes, documentacao e criterio de pronto antes de consultar os documentos longos.
 
 [Ver guia minimo de qualidade](core/GUIA_MINIMO_QUALIDADE.md)
+
+### Start App Script (obrigatorio por app web)
+
+Contrato obrigatorio: **toda aplicacao web** deve ter um `start_app.py` na raiz que **instala dependencias, inicia/reinicia o app e abre o navegador com um unico comando** (`python start_app.py`). Facilita quem automatiza processos de servidor local e quem nao tem facilidade com terminal. Inclui template Python cross-platform pronto, ajuste por stack (Django, FastAPI, Flask, Vite) e checklist.
+
+[Ver guia do start app script](core/GUIA-START-APP-SCRIPT.md)
 
 ### Prompt Base Backend
 
@@ -304,6 +312,8 @@ Padrao de **scraping multiformato** com Playwright, parsers offline, JSON embuti
 **Servico padrao para colocar backend online**. Railway (PaaS) faz build, deploy, banco gerenciado, variaveis de ambiente, dominio HTTPS e logs sem gerenciar servidor — **mais do que suficiente para a maioria das aplicacoes**. Inclui fluxo completo de CLI, conceitos, deploy por Git ou `railway up`, bancos e checklist.
 
 **Quando usar:** APIs REST, back-ends de apps, workers, bots, scrapers agendados e qualquer servico que precise ficar online com URL publica e HTTPS.
+
+> **Aviso:** o login/autorizacao do Railway falha com frequencia. O guia instrui o agente a **parar e enviar o passo a passo manual ao usuario** (terminal ou interface) apos erros repetidos de conexao, em vez de insistir.
 
 [Ver guia](guias/integracao/GUIA-DEPLOY-RAILWAY.md)
 
@@ -479,5 +489,5 @@ Este projeto esta sob a licenca MIT — veja o arquivo `LICENSE`.
 > **Assinatura de Origem**  
 > Este arquivo foi criado por **Felipe Martin** e faz parte do repositorio **Felixo System Design**.  
 > Origem: https://github.com/Felipe-Alcantara/Felixo-System-Design  
-> Data desta versao: 2026-05-27
+> Data desta versao: 2026-06-04
 > Sugestoes e pull requests sao bem-vindos.

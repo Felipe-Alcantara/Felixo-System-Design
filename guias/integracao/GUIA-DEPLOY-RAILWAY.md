@@ -61,6 +61,56 @@ railway login              # abre o navegador para autenticar
 railway whoami             # confirma o usuario logado
 ```
 
+### ⚠️ AVISO IMPORTANTE: login e autorizacao do Railway falham com frequencia
+
+O Railway foi lancado cedo para sair na frente com quem **delega a configuracao para a IA** ("vibe coding"), mas **varias funcoes de login e autorizacao nao parecem bem validadas**. Na pratica, o agente costuma enfrentar **erros repetidos de login, token e autorizacao** — e, em muitos casos, **o agente simplesmente nao consegue conectar mesmo com o usuario fazendo login manualmente**.
+
+> **Regra para o agente/IA:** se voce estiver tendo **erros repetidos de login/autorizacao** ou **dificuldade de se conectar ao Railway** (`railway login`, `railway whoami`, `railway link`, `railway up` falhando por auth), **nao insista em loop**. Pare e **envie ao usuario o passo a passo** de como fazer manualmente — no **terminal** ou pela **interface web** — porque muitas vezes a conexao so funciona com o usuario operando diretamente.
+
+**Sinais de que e hora de escalar para o usuario:**
+
+- `railway login` abre o navegador mas o CLI nao confirma a sessao (`Unauthorized` / `Not logged in`).
+- `railway whoami` continua dizendo que nao ha usuario logado apos um login aparentemente bem-sucedido.
+- Erros `401`/`403`, token invalido/expirado, ou `railway link`/`railway up` recusando por autorizacao.
+- O mesmo comando de auth falha **2 ou mais vezes** sem mudanca util de mensagem.
+
+**Passo a passo para enviar ao usuario quando a conexao falhar:**
+
+*Opcao A — Terminal (login interativo no navegador):*
+
+```bash
+railway logout            # limpa qualquer sessao quebrada
+railway login             # abra o link no SEU navegador e autorize manualmente
+railway whoami            # confirme que aparece o seu usuario
+```
+
+*Opcao B — Terminal (login por token, quando o navegador nao fecha o ciclo):*
+
+1. Acesse o dashboard: https://railway.com/account/tokens
+2. Crie um **Account Token** (ou **Project Token** para um project especifico).
+3. Exporte o token e rode os comandos:
+
+```bash
+# Linux/macOS
+export RAILWAY_TOKEN="seu_token_aqui"
+railway whoami            # ou: railway status / railway up
+```
+
+```powershell
+# Windows (PowerShell)
+$env:RAILWAY_TOKEN="seu_token_aqui"
+railway whoami
+```
+
+*Opcao C — Interface web (quando o CLI nao coopera de jeito nenhum):*
+
+1. Entre em https://railway.com e faca login pela conta normalmente.
+2. **New Project → Deploy from GitHub repo** e selecione o repositorio.
+3. Configure variaveis em **Variables**, gere o dominio em **Settings → Networking → Generate Domain**.
+4. O deploy on push passa a funcionar pela interface, sem depender do CLI travado.
+
+> Em resumo: **o agente nao deve ficar preso tentando autenticar.** Apos falhas repetidas, a acao correta e **devolver o controle ao usuario com instrucoes claras** (terminal ou interface) em vez de gastar tentativas que provavelmente nao vao conectar.
+
 ---
 
 ## 2. Fluxo padrao: subir um backend do zero
@@ -205,6 +255,7 @@ port = int(os.environ.get("PORT", 8000))
 - [ ] Producao com **deploy por repo Git**; `railway up` so para casos manuais.
 - [ ] Usando o **deploy on push nativo** do Railway; sem GitHub Actions redundante so para deployar (Actions reservado a testes/lint/validacao pre-merge).
 - [ ] `production` e `staging` como ambientes separados quando houver risco.
+- [ ] Em caso de **erro repetido de login/autorizacao**, o agente **parou e enviou ao usuario** o passo a passo manual (terminal ou interface) em vez de insistir.
 
 ---
 

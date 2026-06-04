@@ -18,6 +18,7 @@ Quando houver duvida, siga os documentos completos:
 - Frontend: [`DESIGN_SYSTEM_FRONTEND.md`](DESIGN_SYSTEM_FRONTEND.md)
 - README: [`DESIGN_SYSTEM_README.md`](DESIGN_SYSTEM_README.md)
 - Contexto operacional: [`IA.md`](IA.md)
+- Script de start: [`GUIA-START-APP-SCRIPT.md`](GUIA-START-APP-SCRIPT.md)
 
 ---
 
@@ -59,7 +60,12 @@ Quando houver duvida, siga os documentos completos:
    - Prefira entregas coesas, com escopo claro.
    - Nao misture refatoracao ampla com feature sem necessidade.
 
-10. **Finalizar com criterio de pronto**
+10. **Entregar script de start em toda aplicacao web**
+    - Toda aplicacao web deve ter um `start_app.py` na raiz que instala dependencias, inicia/reinicia o app e abre o navegador com **um unico comando** (`python start_app.py`).
+    - Cross-platform, com mensagens de erro claras, para facilitar quem automatiza servidor local e quem nao tem facilidade com terminal.
+    - Detalhes e template em [`GUIA-START-APP-SCRIPT.md`](GUIA-START-APP-SCRIPT.md).
+
+11. **Finalizar com criterio de pronto**
     - Codigo/guia revisado.
     - Links internos validos.
     - Testes ou verificacoes executados.
@@ -74,6 +80,7 @@ Quando houver duvida, siga os documentos completos:
 - [ ] Nao ha segredo, dado sensivel ou URL privada exposta.
 - [ ] Contratos afetados foram preservados ou documentados.
 - [ ] Testes/verificacoes relevantes foram executados ou justificados.
+- [ ] Toda aplicacao web tem `start_app.py` (instala + inicia/reinicia + abre o navegador) funcionando.
 - [ ] README, `IA.md` ou guia afetado foram atualizados quando necessario.
 - [ ] O proximo mantenedor consegue entender a decisao sem reler toda a conversa.
 
