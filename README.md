@@ -120,8 +120,15 @@ Felixo-System-Design/
 │       ├── GUIA-SCRAPING-MULTIFORMATO.md
 │       └── GUIA-DEPLOY-RAILWAY.md
 │
+├── componets-database/                      # SUBMODULO — banco de componentes UI
+│   ├── scraper/                             # Coletor de componentes (10 fontes)
+│   ├── site/                                # Biblioteca visual (Flask + React/Vite)
+│   └── start_app.py                         # Setup + coleta com um comando
+│
+├── CONTRIBUTING.md
 ├── README.md
-└── LICENSE
+├── LICENSE
+└── .gitmodules
 ```
 
 ---
@@ -406,8 +413,13 @@ npx degit Felipe-Alcantara/Felixo-System-Design ./felixo-standards
 ### 4. Clonar com `git`
 
 ```bash
-git clone --depth 1 https://github.com/Felipe-Alcantara/Felixo-System-Design.git ./felixo-standards
+git clone --depth 1 --recurse-submodules https://github.com/Felipe-Alcantara/Felixo-System-Design.git ./felixo-standards
 ```
+
+> Se ja clonou sem `--recurse-submodules`, rode dentro do repositorio:
+> ```bash
+> git submodule update --init --recursive
+> ```
 
 ---
 
@@ -450,7 +462,7 @@ git pull origin main
 ### 8. Clonar tudo e copiar so a pasta desejada
 
 ```bash
-git clone --depth 1 https://github.com/Felipe-Alcantara/Felixo-System-Design.git ./felixo-standards
+git clone --depth 1 --recurse-submodules https://github.com/Felipe-Alcantara/Felixo-System-Design.git ./felixo-standards
 ```
 
 Depois, copie manualmente:
@@ -467,11 +479,11 @@ Depois, copie manualmente:
 | Quero tudo com atualizacao simples | sincronizacao sem `.git` (metodo 1 / atalho `felixo`) |
 | Quero tudo da forma mais simples | ZIP |
 | Quero tudo sem `.git` via terminal | `npx degit` |
-| Quero tudo e depois atualizar | `git clone` |
+| Quero tudo e depois atualizar | `git clone --recurse-submodules` |
 | Quero so `guias/` sem `git` | `npx degit` em `guias` |
 | Quero so `guias/` com atualizacao futura | `git sparse-checkout` |
 | Quero so `core/` com atualizacao futura | `git sparse-checkout` |
-| Quero uma opcao universal | clone completo + copiar a pasta |
+| Quero uma opcao universal | clone completo (`--recurse-submodules`) + copiar a pasta |
 
 ---
 
@@ -489,5 +501,5 @@ Este projeto esta sob a licenca MIT — veja o arquivo `LICENSE`.
 > **Assinatura de Origem**  
 > Este arquivo foi criado por **Felipe Martin** e faz parte do repositorio **Felixo System Design**.  
 > Origem: https://github.com/Felipe-Alcantara/Felixo-System-Design  
-> Data desta versao: 2026-06-04
+> Data desta versao: 2026-06-07
 > Sugestoes e pull requests sao bem-vindos.
