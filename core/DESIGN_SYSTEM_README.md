@@ -367,6 +367,22 @@ Contribuições são bem-vindas! Sinta-se à vontade para:
 - **Técnico quando necessário** — não simplificar demais para devs
 - **Acessível para iniciantes** — sempre ter um "Para Iniciantes"
 
+### 3.5 Linguagem para Projetos Open Source
+
+A maioria dos projetos que usam o Felixo System Design é **open source**. Documentação e mensagens de log são lidas por um público amplo: pessoas que chegam de fora, novos contribuidores e leitores em geral — não só o time interno. Por isso:
+
+- **Escreva para qualquer leitor** — use linguagem geral e acessível que qualquer pessoa consiga ler, evitando jargão interno ou contexto que só o autor conhece.
+- **Sem valores hardcoded** — nada de caminhos, tokens, nomes de usuário, IDs ou URLs privadas chumbados no texto ou nos exemplos. Use placeholders genéricos.
+- **Enquadre o trabalho futuro como convite à contribuição** — em vez de soar como uma lista de tarefas interna, abra espaço para quem quiser ajudar.
+
+| ❌ Evite (tom interno) | ✅ Prefira (tom open source) |
+|------------------------|------------------------------|
+| "Features futuras para implementar" | "Melhorias que o projeto poderia expandir" |
+| "TODO: ainda falta fazer" | "Ideias para quem quiser contribuir" |
+| "Coisas que preciso terminar" | "Próximos passos abertos à comunidade" |
+
+Vale o mesmo para **mensagens de log**: escreva logs claros e neutros, que ajudem qualquer pessoa a entender o que aconteceu, sem expor segredos nem depender de contexto privado.
+
 ---
 
 ## 4. CHECKLIST ANTES DE PUBLICAR

@@ -55,6 +55,8 @@ Quando houver duvida, siga os documentos completos:
 8. **Documentar estado relevante**
    - README explica uso, setup e decisao importante.
    - `IA.md` registra contexto operacional, decisoes, bugs relevantes, testes e proximos passos.
+   - Como a maioria dos projetos e open source, escreva documentacao e logs com linguagem geral e acessivel, sem valores hardcoded e sem depender de contexto privado.
+   - Enquadre trabalho futuro como convite a contribuicao: prefira "ideias para quem quiser contribuir" ou "melhorias que o projeto poderia expandir" em vez de "features futuras para implementar". Detalhes em [`DESIGN_SYSTEM_README.md`](DESIGN_SYSTEM_README.md), secao 3.5.
 
 9. **Fazer mudanca pequena e rastreavel**
    - Prefira entregas coesas, com escopo claro.
@@ -80,6 +82,7 @@ Quando houver duvida, siga os documentos completos:
 - [ ] Nao ha segredo, dado sensivel ou URL privada exposta.
 - [ ] Contratos afetados foram preservados ou documentados.
 - [ ] Testes/verificacoes relevantes foram executados ou justificados.
+- [ ] Documentacao e logs usam linguagem geral/open source, sem valores hardcoded, e enquadram trabalho futuro como convite a contribuicao.
 - [ ] Toda aplicacao web tem `start_app.py` (instala + inicia/reinicia + abre o navegador) funcionando.
 - [ ] README, `IA.md` ou guia afetado foram atualizados quando necessario.
 - [ ] O proximo mantenedor consegue entender a decisao sem reler toda a conversa.
