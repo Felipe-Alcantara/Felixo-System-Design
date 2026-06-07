@@ -1,0 +1,3 @@
+[submodule "componets-database"]
+	path = componets-database
+	url = https://github.com/Felipe-Alcantara/componets-database.git
