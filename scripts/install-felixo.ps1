@@ -1,12 +1,19 @@
 <#
 .SYNOPSIS
-  Instalador do comando global "felixo" para PowerShell (Windows, Linux, macOS).
+  Instalador do comando global "felixo".
+
+  >>> PARA QUAL TERMINAL <<<
+    Shell:    PowerShell (Windows PowerShell 5.1+ ou PowerShell 7+)
+    Sistemas: Windows, Linux, macOS
+    Use os outros instaladores se o seu terminal for:
+      - Bash ou Zsh (Linux, macOS, Git Bash, WSL) -> install-felixo.sh
+      - CMD (Prompt classico do Windows)          -> install-felixo.cmd
 
 .DESCRIPTION
   Adiciona a funcao "felixo" ao seu $PROFILE do PowerShell. Depois de instalado,
   digite "felixo" em qualquer sessao para baixar a versao mais recente do
-  repositorio Felixo System Design (apenas core/ e guias/) dentro da pasta atual.
-  Use "felixo -WithSubmodules" para incluir o submodulo componets-database.
+  repositorio Felixo System Design — tudo, MENOS o submodulo componets-database.
+  Use "felixo -WithSubmodules" (ou "-s") para incluir o banco de componentes.
 
 .PARAMETER Uninstall
   Remove a funcao "felixo" do $PROFILE.

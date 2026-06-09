@@ -1,9 +1,18 @@
 @echo off
 setlocal EnableDelayedExpansion
 rem ============================================================================
-rem  felixo.cmd - baixa o repositorio Felixo System Design na pasta atual.
-rem  Por padrao baixa tudo, MENOS o submodulo componets-database.
-rem  Use "felixo --with-submodules" (ou "felixo -s") para incluir o submodulo.
+rem  felixo.cmd - o COMANDO "felixo" para o CMD (Prompt de Comando do Windows).
+rem
+rem  ATENCAO: este NAO e o instalador. Quem registra o comando e
+rem  install-felixo.cmd, que copia este arquivo para o PATH. Normalmente voce
+rem  nao roda felixo.cmd diretamente.
+rem
+rem  Baixa o repositorio Felixo System Design na pasta atual. Por padrao baixa
+rem  tudo, MENOS o submodulo componets-database. Use "felixo --with-submodules"
+rem  (ou "felixo -s") para incluir o banco de componentes.
+rem
+rem  Para qual terminal: CMD (Windows). Em Bash/Zsh use install-felixo.sh; em
+rem  PowerShell use install-felixo.ps1.
 rem  Requisitos: git no PATH (Windows 10+ para cores ANSI).
 rem ============================================================================
 

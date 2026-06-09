@@ -1,12 +1,19 @@
 #!/usr/bin/env bash
 #
-# Instalador do comando global "felixo" (Bash / Zsh).
+# Instalador do comando global "felixo".
 #
-# Cobre Linux, macOS, Git Bash e WSL. Depois de instalado, digite "felixo" em
-# qualquer terminal para baixar a versao mais recente do repositorio Felixo
-# System Design (apenas core/ e guias/) dentro da pasta atual. Use
-# "felixo --with-submodules" (ou "felixo -s") para incluir o submodulo
-# componets-database.
+# >>> PARA QUAL TERMINAL <<<
+#   Shell:    Bash ou Zsh
+#   Sistemas: Linux, macOS, Git Bash (Windows), WSL (Windows)
+#   Use os outros instaladores se o seu terminal for:
+#     - PowerShell (qualquer SO) -> install-felixo.ps1
+#     - CMD (Prompt classico do Windows) -> install-felixo.cmd
+#
+# O que faz: injeta a funcao "felixo" no seu .bashrc (ou .zshrc). Depois de
+# instalado, digite "felixo" em qualquer pasta para baixar a versao mais recente
+# do repositorio Felixo System Design — tudo, MENOS o submodulo
+# componets-database. Use "felixo --with-submodules" (ou "felixo -s") para
+# incluir tambem o banco de componentes.
 #
 # Uso:
 #   ./install-felixo.sh              instala (ou atualiza) o comando
@@ -35,7 +42,7 @@ warn() { printf '%s[felixo-install ⚠]%s %s\n' "$C_WARN" "$C_RESET" "$*" >&2; }
 err()  { printf '%s[felixo-install ✗]%s %s\n' "$C_ERR"  "$C_RESET" "$*" >&2; }
 
 print_help() {
-  sed -n '2,21p' "$0" | sed 's/^# \{0,1\}//'
+  sed -n '2,23p' "$0" | sed 's/^# \{0,1\}//'
 }
 
 # Descobre o arquivo de configuracao do shell do usuario.

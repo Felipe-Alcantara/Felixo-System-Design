@@ -111,6 +111,16 @@ set TMP_DIR=%TEMP%\felixo-standards-%RANDOM% && git clone --depth 1 --recurse-su
 
 Em vez de copiar a funcao na mao, use os instaladores em [`scripts/`](scripts/). Eles registram o comando `felixo` no seu terminal com **logs coloridos, barra de loading e avisos de erro**. Depois de instalado, rode `felixo` em qualquer pasta para baixar a versao mais recente — **tudo, menos o submodulo** `componets-database`. Use `felixo --with-submodules` (ou `-s`) para incluir tambem o banco de componentes.
 
+**Qual script usar para o seu terminal:**
+
+| Seu terminal | Sistemas | Script |
+|--------------|----------|--------|
+| **Bash** ou **Zsh** | Linux, macOS, Git Bash (Windows), WSL (Windows) | [`scripts/install-felixo.sh`](scripts/install-felixo.sh) |
+| **PowerShell** (5.1+ / 7+) | Windows, Linux, macOS | [`scripts/install-felixo.ps1`](scripts/install-felixo.ps1) |
+| **CMD** (Prompt classico) | Windows | [`scripts/install-felixo.cmd`](scripts/install-felixo.cmd) |
+
+> [`scripts/felixo.cmd`](scripts/felixo.cmd) **nao e um instalador** — e o proprio comando `felixo` do CMD, registrado pelo `install-felixo.cmd`. Voce nao roda ele diretamente.
+
 **Bash / Zsh** (Linux, macOS, Git Bash, WSL):
 ```bash
 git clone --depth 1 https://github.com/Felipe-Alcantara/Felixo-System-Design.git /tmp/felixo-setup
@@ -354,10 +364,10 @@ Felixo-System-Design/
 │   └── start_app.py                         # Setup + coleta com um comando
 │
 ├── scripts/                                 # Instaladores do comando global "felixo"
-│   ├── install-felixo.sh                    # Bash/Zsh (Linux, macOS, Git Bash, WSL)
-│   ├── install-felixo.ps1                   # PowerShell (Windows/Linux/macOS)
-│   ├── install-felixo.cmd                   # CMD (Windows classico)
-│   └── felixo.cmd                           # Comando felixo usado pelo instalador CMD
+│   ├── install-felixo.sh                    # Instalador p/ Bash e Zsh (Linux, macOS, Git Bash, WSL)
+│   ├── install-felixo.ps1                   # Instalador p/ PowerShell (Windows, Linux, macOS)
+│   ├── install-felixo.cmd                   # Instalador p/ CMD (Prompt classico do Windows)
+│   └── felixo.cmd                           # Comando felixo do CMD (registrado pelo install-felixo.cmd)
 │
 ├── CONTRIBUTING.md
 ├── README.md

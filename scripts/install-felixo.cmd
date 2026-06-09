@@ -1,9 +1,17 @@
 @echo off
 setlocal EnableDelayedExpansion
 rem ============================================================================
-rem  install-felixo.cmd - registra o comando "felixo" no CMD (Windows).
-rem  Copia felixo.cmd para %LOCALAPPDATA%\felixo e adiciona a pasta ao PATH
-rem  do usuario. Depois, abra um novo terminal e use "felixo".
+rem  install-felixo.cmd - registra o comando "felixo" no CMD.
+rem
+rem  >>> PARA QUAL TERMINAL <<<
+rem    Shell:    CMD (Prompt de Comando classico)
+rem    Sistemas: Windows
+rem    Use os outros instaladores se o seu terminal for:
+rem      - Bash ou Zsh (Linux, macOS, Git Bash, WSL) -> install-felixo.sh
+rem      - PowerShell (qualquer SO)                  -> install-felixo.ps1
+rem
+rem  O que faz: copia felixo.cmd para %LOCALAPPDATA%\felixo e adiciona a pasta
+rem  ao PATH do usuario. Depois, abra um novo terminal e use "felixo".
 rem
 rem  Uso:
 rem    install-felixo.cmd              instala
