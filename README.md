@@ -58,18 +58,18 @@ Use os metodos abaixo do mais usual para o mais especifico.
 > **Sobre o submodulo `componets-database/`**
 > Este repositorio inclui o submodulo `componets-database/` (banco de componentes UI). Ele **so e necessario** se voce quiser o banco de componentes — para os padroes `core/` e `guias/` ele e dispensavel. Por isso cada metodo abaixo traz duas variantes: **sem o submodulo** (mais leve) e **com o submodulo** (completo). ZIP e `npx degit` nunca trazem submodulos — para o banco de componentes, use uma das variantes `git`.
 
-### 1. Sincronizar `felixo-standards` com a versao mais recente (Recomendado)
+### 1. Sincronizar `Padrão de qualidade - Felixo System Design` com a versao mais recente (Recomendado)
 
 Melhor opcao quando voce quer manter uma pasta local sem vinculo com o git original e poder rodar o comando quantas vezes quiser para atualizar.
 
 **Linux / macOS / Git Bash (sem submodulo):**
 ```bash
-tmp_dir="$(mktemp -d)" && git clone --depth 1 https://github.com/Felipe-Alcantara/Felixo-System-Design.git "$tmp_dir/repo" && rm -rf "$tmp_dir/repo/.git" && mkdir -p ./felixo-standards && rsync -a --delete "$tmp_dir/repo/" ./felixo-standards/ && rm -rf "$tmp_dir"
+tmp_dir="$(mktemp -d)" && git clone --depth 1 https://github.com/Felipe-Alcantara/Felixo-System-Design.git "$tmp_dir/repo" && rm -rf "$tmp_dir/repo/.git" && mkdir -p "./Padrão de qualidade - Felixo System Design" && rsync -a --delete "$tmp_dir/repo/" "./Padrão de qualidade - Felixo System Design/" && rm -rf "$tmp_dir"
 ```
 
 **Linux / macOS / Git Bash (com submodulo):**
 ```bash
-tmp_dir="$(mktemp -d)" && git clone --depth 1 --recurse-submodules https://github.com/Felipe-Alcantara/Felixo-System-Design.git "$tmp_dir/repo" && find "$tmp_dir/repo" -name .git -prune -exec rm -rf {} + && mkdir -p ./felixo-standards && rsync -a --delete "$tmp_dir/repo/" ./felixo-standards/ && rm -rf "$tmp_dir"
+tmp_dir="$(mktemp -d)" && git clone --depth 1 --recurse-submodules https://github.com/Felipe-Alcantara/Felixo-System-Design.git "$tmp_dir/repo" && find "$tmp_dir/repo" -name .git -prune -exec rm -rf {} + && mkdir -p "./Padrão de qualidade - Felixo System Design" && rsync -a --delete "$tmp_dir/repo/" "./Padrão de qualidade - Felixo System Design/" && rm -rf "$tmp_dir"
 ```
 
 **PowerShell (Windows) — sem submodulo:**
@@ -77,8 +77,8 @@ tmp_dir="$(mktemp -d)" && git clone --depth 1 --recurse-submodules https://githu
 $tmpDir = Join-Path $env:TEMP ("felixo-standards-" + [guid]::NewGuid())
 git clone --depth 1 https://github.com/Felipe-Alcantara/Felixo-System-Design.git $tmpDir
 Remove-Item -Recurse -Force (Join-Path $tmpDir ".git")
-New-Item -ItemType Directory -Force -Path "./felixo-standards" | Out-Null
-robocopy $tmpDir "./felixo-standards" /MIR | Out-Null
+New-Item -ItemType Directory -Force -Path "./Padrão de qualidade - Felixo System Design" | Out-Null
+robocopy $tmpDir "./Padrão de qualidade - Felixo System Design" /MIR | Out-Null
 Remove-Item -Recurse -Force $tmpDir
 ```
 
@@ -87,44 +87,58 @@ Remove-Item -Recurse -Force $tmpDir
 $tmpDir = Join-Path $env:TEMP ("felixo-standards-" + [guid]::NewGuid())
 git clone --depth 1 --recurse-submodules https://github.com/Felipe-Alcantara/Felixo-System-Design.git $tmpDir
 Get-ChildItem $tmpDir -Recurse -Force -Filter ".git" | Remove-Item -Recurse -Force
-New-Item -ItemType Directory -Force -Path "./felixo-standards" | Out-Null
-robocopy $tmpDir "./felixo-standards" /MIR | Out-Null
+New-Item -ItemType Directory -Force -Path "./Padrão de qualidade - Felixo System Design" | Out-Null
+robocopy $tmpDir "./Padrão de qualidade - Felixo System Design" /MIR | Out-Null
 Remove-Item -Recurse -Force $tmpDir
 ```
 
 **CMD (Windows) — sem submodulo:**
 ```cmd
-set TMP_DIR=%TEMP%\felixo-standards-%RANDOM% && git clone --depth 1 https://github.com/Felipe-Alcantara/Felixo-System-Design.git %TMP_DIR% && rmdir /s /q %TMP_DIR%\.git && if not exist felixo-standards mkdir felixo-standards && robocopy %TMP_DIR% felixo-standards /MIR >nul && rmdir /s /q %TMP_DIR%
+set TMP_DIR=%TEMP%\felixo-standards-%RANDOM% && git clone --depth 1 https://github.com/Felipe-Alcantara/Felixo-System-Design.git %TMP_DIR% && rmdir /s /q %TMP_DIR%\.git && if not exist "Padrão de qualidade - Felixo System Design" mkdir "Padrão de qualidade - Felixo System Design" && robocopy %TMP_DIR% "Padrão de qualidade - Felixo System Design" /MIR >nul && rmdir /s /q %TMP_DIR%
 ```
 
 **CMD (Windows) — com submodulo:**
 ```cmd
-set TMP_DIR=%TEMP%\felixo-standards-%RANDOM% && git clone --depth 1 --recurse-submodules https://github.com/Felipe-Alcantara/Felixo-System-Design.git %TMP_DIR% && for /d /r %TMP_DIR% %G in (.git) do @if exist "%G" rmdir /s /q "%G" && if not exist felixo-standards mkdir felixo-standards && robocopy %TMP_DIR% felixo-standards /MIR >nul && rmdir /s /q %TMP_DIR%
+set TMP_DIR=%TEMP%\felixo-standards-%RANDOM% && git clone --depth 1 --recurse-submodules https://github.com/Felipe-Alcantara/Felixo-System-Design.git %TMP_DIR% && for /d /r %TMP_DIR% %G in (.git) do @if exist "%G" rmdir /s /q "%G" && if not exist "Padrão de qualidade - Felixo System Design" mkdir "Padrão de qualidade - Felixo System Design" && robocopy %TMP_DIR% "Padrão de qualidade - Felixo System Design" /MIR >nul && rmdir /s /q %TMP_DIR%
 ```
 
 - **Use quando**: quer todos os arquivos como base independente, com atualizacao simples depois
 - **Requisito**: Git
 - **Vinculo com o git original?** Nao
 
-#### Atalho global `felixo` (Bash/Zsh)
+#### Comando global `felixo` (instalador multiplataforma)
 
-A funcao aceita `--with-submodules` (ou `-s`) para incluir o banco de componentes; sem a flag, traz apenas `core/` e `guias/`.
+Em vez de copiar a funcao na mao, use os instaladores em [`scripts/`](scripts/). Eles registram o comando `felixo` no seu terminal com **logs coloridos, barra de loading e avisos de erro**. Depois de instalado, rode `felixo` em qualquer pasta para baixar a versao mais recente — **tudo, menos o submodulo** `componets-database`. Use `felixo --with-submodules` (ou `-s`) para incluir tambem o banco de componentes.
+
+**Bash / Zsh** (Linux, macOS, Git Bash, WSL):
+```bash
+git clone --depth 1 https://github.com/Felipe-Alcantara/Felixo-System-Design.git /tmp/felixo-setup
+bash /tmp/felixo-setup/scripts/install-felixo.sh
+# desinstalar: bash /tmp/felixo-setup/scripts/install-felixo.sh --uninstall
+```
+
+**PowerShell** (Windows / Linux / macOS):
+```powershell
+git clone --depth 1 https://github.com/Felipe-Alcantara/Felixo-System-Design.git $env:TEMP\felixo-setup
+& "$env:TEMP\felixo-setup\scripts\install-felixo.ps1"
+# desinstalar: & "$env:TEMP\felixo-setup\scripts\install-felixo.ps1" -Uninstall
+```
+
+**CMD** (Windows classico):
+```cmd
+git clone --depth 1 https://github.com/Felipe-Alcantara/Felixo-System-Design.git "%TEMP%\felixo-setup"
+"%TEMP%\felixo-setup\scripts\install-felixo.cmd"
+:: desinstalar: "%TEMP%\felixo-setup\scripts\install-felixo.cmd" --uninstall
+```
+
+Depois de instalar, **abra um novo terminal** e use:
 
 ```bash
-felixo() {
-  local dest="./felixo-standards"
-  local repo_url="https://github.com/Felipe-Alcantara/Felixo-System-Design.git"
-  local clone_args=(--depth 1)
-  [[ "$1" == "--with-submodules" || "$1" == "-s" ]] && clone_args+=(--recurse-submodules)
-  local tmp_dir
-  tmp_dir="$(mktemp -d)" || return 1
-  git clone "${clone_args[@]}" "$repo_url" "$tmp_dir/repo" || { rm -rf "$tmp_dir"; return 1; }
-  find "$tmp_dir/repo" -name .git -prune -exec rm -rf {} +
-  mkdir -p "$dest"
-  rsync -a --delete "$tmp_dir/repo/" "$dest/"
-  rm -rf "$tmp_dir"
-}
+felixo                   # baixa tudo, menos o submodulo componets-database
+felixo --with-submodules # inclui o banco de componentes
 ```
+
+Os instaladores sao **idempotentes**: rodar de novo apenas atualiza a definicao do comando, sem duplicar.
 
 ---
 
@@ -136,7 +150,7 @@ felixo() {
 ```powershell
 Invoke-WebRequest -Uri "https://github.com/Felipe-Alcantara/Felixo-System-Design/archive/refs/heads/main.zip" -OutFile "felixo.zip"
 Expand-Archive "felixo.zip" -DestinationPath .
-Rename-Item "Felixo-System-Design-main" "felixo-standards"
+Rename-Item "Felixo-System-Design-main" "Padrão de qualidade - Felixo System Design"
 Remove-Item "felixo.zip"
 ```
 
@@ -144,14 +158,14 @@ Remove-Item "felixo.zip"
 ```cmd
 curl -L https://github.com/Felipe-Alcantara/Felixo-System-Design/archive/refs/heads/main.zip -o felixo.zip
 tar -xf felixo.zip
-ren Felixo-System-Design-main felixo-standards
+ren Felixo-System-Design-main "Padrão de qualidade - Felixo System Design"
 del felixo.zip
 ```
 
 **Linux / macOS:**
 ```bash
 curl -L https://github.com/Felipe-Alcantara/Felixo-System-Design/archive/refs/heads/main.zip -o felixo.zip
-unzip felixo.zip && mv Felixo-System-Design-main felixo-standards && rm felixo.zip
+unzip felixo.zip && mv Felixo-System-Design-main "Padrão de qualidade - Felixo System Design" && rm felixo.zip
 ```
 
 ---
@@ -161,7 +175,7 @@ unzip felixo.zip && mv Felixo-System-Design-main felixo-standards && rm felixo.z
 > **Submodulo:** `degit` **nao** baixa submodulos. O comando abaixo traz `core/` e `guias/`, mas `componets-database/` vem vazia. Para o banco de componentes, use o metodo 1 (com submodulo) ou o metodo 4.
 
 ```bash
-npx degit Felipe-Alcantara/Felixo-System-Design ./felixo-standards
+npx degit Felipe-Alcantara/Felixo-System-Design "./Padrão de qualidade - Felixo System Design"
 ```
 
 ---
@@ -170,12 +184,12 @@ npx degit Felipe-Alcantara/Felixo-System-Design ./felixo-standards
 
 **Sem submodulo** (apenas `core/` e `guias/`):
 ```bash
-git clone --depth 1 https://github.com/Felipe-Alcantara/Felixo-System-Design.git ./felixo-standards
+git clone --depth 1 https://github.com/Felipe-Alcantara/Felixo-System-Design.git "./Padrão de qualidade - Felixo System Design"
 ```
 
 **Com submodulo** (inclui `componets-database/`):
 ```bash
-git clone --depth 1 --recurse-submodules https://github.com/Felipe-Alcantara/Felixo-System-Design.git ./felixo-standards
+git clone --depth 1 --recurse-submodules https://github.com/Felipe-Alcantara/Felixo-System-Design.git "./Padrão de qualidade - Felixo System Design"
 ```
 
 > Se ja clonou sem `--recurse-submodules` e quiser o submodulo depois, rode dentro do repositorio:
@@ -232,19 +246,19 @@ git pull origin main
 
 **Sem submodulo:**
 ```bash
-git clone --depth 1 https://github.com/Felipe-Alcantara/Felixo-System-Design.git ./felixo-standards
+git clone --depth 1 https://github.com/Felipe-Alcantara/Felixo-System-Design.git "./Padrão de qualidade - Felixo System Design"
 ```
 
 **Com submodulo** (inclui `componets-database/`):
 ```bash
-git clone --depth 1 --recurse-submodules https://github.com/Felipe-Alcantara/Felixo-System-Design.git ./felixo-standards
+git clone --depth 1 --recurse-submodules https://github.com/Felipe-Alcantara/Felixo-System-Design.git "./Padrão de qualidade - Felixo System Design"
 ```
 
 Depois, copie manualmente a pasta desejada:
 
-- `./felixo-standards/core`
-- `./felixo-standards/guias`
-- `./felixo-standards/componets-database` (se clonou com submodulo)
+- `./Padrão de qualidade - Felixo System Design/core`
+- `./Padrão de qualidade - Felixo System Design/guias`
+- `./Padrão de qualidade - Felixo System Design/componets-database` (se clonou com submodulo)
 
 ---
 
@@ -337,6 +351,12 @@ Felixo-System-Design/
 │   ├── scraper/                             # Coletor de componentes (10 fontes)
 │   ├── site/                                # Biblioteca visual (Flask + React/Vite)
 │   └── start_app.py                         # Setup + coleta com um comando
+│
+├── scripts/                                 # Instaladores do comando global "felixo"
+│   ├── install-felixo.sh                    # Bash/Zsh (Linux, macOS, Git Bash, WSL)
+│   ├── install-felixo.ps1                   # PowerShell (Windows/Linux/macOS)
+│   ├── install-felixo.cmd                   # CMD (Windows classico)
+│   └── felixo.cmd                           # Comando felixo usado pelo instalador CMD
 │
 ├── CONTRIBUTING.md
 ├── README.md
