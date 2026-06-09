@@ -7,6 +7,12 @@ rem  ATENCAO: este NAO e o instalador. Quem registra o comando e
 rem  install-felixo.cmd, que copia este arquivo para o PATH. Normalmente voce
 rem  nao roda felixo.cmd diretamente.
 rem
+rem  >>> POR QUE O CMD TEM DOIS ARQUIVOS <<<
+rem    No Bash/Zsh e PowerShell o instalador escreve a funcao "felixo" dentro do
+rem    arquivo de config (.bashrc / $PROFILE), entao basta um arquivo. No CMD um
+rem    comando precisa ser um arquivo proprio numa pasta do PATH -- por isso ha
+rem    install-felixo.cmd (instalador) e felixo.cmd (o comando, este arquivo).
+rem
 rem  Baixa o repositorio Felixo System Design na pasta atual. Por padrao baixa
 rem  tudo, MENOS o submodulo componets-database. Use "felixo --with-submodules"
 rem  (ou "felixo -s") para incluir o banco de componentes.

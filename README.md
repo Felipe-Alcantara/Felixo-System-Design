@@ -119,7 +119,12 @@ Em vez de copiar a funcao na mao, use os instaladores em [`scripts/`](scripts/).
 | **PowerShell** (5.1+ / 7+) | Windows, Linux, macOS | [`scripts/install-felixo.ps1`](scripts/install-felixo.ps1) |
 | **CMD** (Prompt classico) | Windows | [`scripts/install-felixo.cmd`](scripts/install-felixo.cmd) |
 
-> [`scripts/felixo.cmd`](scripts/felixo.cmd) **nao e um instalador** — e o proprio comando `felixo` do CMD, registrado pelo `install-felixo.cmd`. Voce nao roda ele diretamente.
+> **Por que o CMD tem dois arquivos?** No Bash e no PowerShell o instalador
+> *escreve a funcao `felixo` dentro do arquivo de config* (`.bashrc` / `$PROFILE`),
+> entao um unico arquivo basta. No CMD nao existe esse mecanismo: um "comando"
+> precisa ser um arquivo proprio numa pasta do PATH. Por isso o CMD tem dois:
+> - [`scripts/install-felixo.cmd`](scripts/install-felixo.cmd) — o **instalador** (voce roda uma vez). Copia o `felixo.cmd` para `%LOCALAPPDATA%\felixo` e adiciona ao PATH.
+> - [`scripts/felixo.cmd`](scripts/felixo.cmd) — o **comando `felixo`** em si (faz o clone/copia). **Nao e instalador e voce nao roda ele diretamente** — quem o executa e o `felixo` que voce digita depois de instalar.
 
 **Bash / Zsh** (Linux, macOS, Git Bash, WSL):
 ```bash

@@ -13,6 +13,14 @@ rem
 rem  O que faz: copia felixo.cmd para %LOCALAPPDATA%\felixo e adiciona a pasta
 rem  ao PATH do usuario. Depois, abra um novo terminal e use "felixo".
 rem
+rem  >>> O CMD USA DOIS ARQUIVOS <<<
+rem    install-felixo.cmd (este) -> o INSTALADOR; voce roda uma vez.
+rem    felixo.cmd                -> o COMANDO "felixo" em si, que este instalador
+rem                                 copia para o PATH. Voce nao roda direto.
+rem    (No Bash/Zsh e PowerShell o instalador escreve a funcao dentro do arquivo
+rem     de config, entao basta um arquivo. No CMD, um comando precisa ser um
+rem     arquivo proprio no PATH -- por isso sao dois.)
+rem
 rem  Uso:
 rem    install-felixo.cmd              instala
 rem    install-felixo.cmd --uninstall  remove
