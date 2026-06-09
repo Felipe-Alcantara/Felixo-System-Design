@@ -8,60 +8,84 @@
 ![C#](https://img.shields.io/badge/C%23-512BD4?style=for-the-badge&logo=csharp&logoColor=white)
 ![Django](https://img.shields.io/badge/Django-0C4B33?style=for-the-badge&logo=django&logoColor=white)
 ![License](https://img.shields.io/badge/License-MIT-green?style=for-the-badge)
-![Docs](https://img.shields.io/badge/Docs-Guide-2084FF?style=for-the-badge&logo=read-the-docs&logoColor=white)
 
-**Repositorio central de padroes de design, qualidade de sistema, prompts estruturados, documentacao operacional e guias reutilizaveis para IA.**
+**Repositorio central de padroes de design, qualidade de sistema, prompts estruturados e guias reutilizaveis para desenvolvimento com IA.**
 
-[Core (Obrigatorio)](#-core--padroes-obrigatorios) | [Guias (Opcional)](#-guias--padroes-especificos) | [Stack](#%EF%B8%8F-minha-stack) | [Como Usar](#-como-usar-em-outros-projetos)
+[Mapa do conteudo](#mapa-do-conteudo) · [Como usar](#como-usar-em-outros-projetos) · [Estrutura](#estrutura-do-repositorio) · [Stack](#stack)
 
 </div>
 
 ---
 
-## Indice
+## O que e isto
 
-- [Sobre o Repositorio](#-sobre-o-repositorio)
-- [Como Usar em Outros Projetos](#-como-usar-em-outros-projetos)
-- [Minha Stack](#%EF%B8%8F-minha-stack)
-- [Estrutura do Repositorio](#-estrutura-do-repositorio)
-- [Core — Padroes Obrigatorios](#-core--padroes-obrigatorios)
-- [Guias — Padroes Especificos](#-guias--padroes-especificos)
-- [Para Agentes de IA](#-para-agentes-de-ia)
-- [Licenca](#-licenca)
-- [Autor](#-autor)
+Uma **base centralizada** para padronizar tudo que envolve meus projetos. Organizado em duas camadas + extras:
 
----
-
-## Sobre o Repositorio
-
-Este repositorio serve como **base centralizada** para registrar e padronizar tudo que envolve meus projetos de desenvolvimento. Ele e organizado em duas camadas:
-
-### `core/` — Obrigatorio
-
-Padroes de qualidade que devem acompanhar **todo projeto**:
-
-- **Design Systems** — Contratos de qualidade para frontend, backend e documentacao
-- **Prompt Bases** — Guias para montar prompts de IA completos na primeira interacao
-- **Guia Minimo de Qualidade** — Regras curtas e obrigatorias para preservar qualidade de software
-- **Start App Script** — Script Python obrigatorio que instala, inicia/reinicia e abre cada app web
-- **Template de Contexto IA** — Memoria operacional padronizada para continuidade entre sessoes
-
-### `guias/` — Opcional
-
-Guias reutilizaveis extraidos de **projetos reais**, organizados por dominio. Use apenas quando o projeto precisar daquela funcionalidade especifica.
+| Camada | O que e | Quando usar |
+|--------|---------|-------------|
+| **`core/`** | Padroes de qualidade obrigatorios (design systems, prompts base, qualidade minima, contexto de IA) | Em **todo** projeto |
+| **`guias/`** | Guias reutilizaveis extraidos de projetos reais, por dominio | Apenas quando o projeto precisar daquela funcionalidade |
+| **`componets-database/`** | Submodulo com banco de componentes UI (scraper + biblioteca visual) | Opcional — so se quiser o banco de componentes |
+| **`scripts/`** | Instaladores do comando global `felixo` (baixa/atualiza este repo) | Para sincronizar os padroes em outros projetos |
 
 ---
 
-## Como Usar em Outros Projetos
+## Mapa do conteudo
 
-Use os metodos abaixo do mais usual para o mais especifico.
+### `core/` — padroes obrigatorios
+
+| Arquivo | O que e |
+|---------|---------|
+| [DESIGN_SYSTEM_FRONTEND.md](core/DESIGN_SYSTEM_FRONTEND.md) | Padronizacao visual de front-end: paleta, tipografia, layout, componentes, animacoes. Separa principios universais das escolhas do FelixoVerse. |
+| [DESIGN_SYSTEM_BACKEND.md](core/DESIGN_SYSTEM_BACKEND.md) | Qualidade de backend: arquitetura, modularizacao, camadas, API, persistencia, testes/TDD, Open/Closed e checklist. |
+| [DESIGN_SYSTEM_README.md](core/DESIGN_SYSTEM_README.md) | Padrao de `README.md` para manter documentacao consistente entre projetos. |
+| [GUIA_MINIMO_QUALIDADE.md](core/GUIA_MINIMO_QUALIDADE.md) | Contrato curto e obrigatorio: arquitetura, seguranca, testes, docs e criterio de "pronto". |
+| [GUIA-START-APP-SCRIPT.md](core/GUIA-START-APP-SCRIPT.md) | Contrato do `start_app.py`: instala deps, inicia/reinicia e abre o navegador com `python start_app.py`. Template cross-platform por stack. |
+| [PROMPT_BASE_FRONTEND.md](core/PROMPT_BASE_FRONTEND.md) | Guia para montar prompts de frontend completos na primeira interacao (stacks, decisoes visuais, componentes, identidade). |
+| [PROMPT_BASE_BACKEND.md](core/PROMPT_BASE_BACKEND.md) | Guia para montar prompts de backend completos (stacks recomendadas, decisoes por cenario, exige seguir o design system backend). |
+| [IA.md](core/IA.md) | Template de memoria operacional para continuidade entre sessoes: objetivo, decisoes, stack, bugs, testes e contexto. |
+
+### `guias/frontend/`
+
+| Guia | O que resolve · Quando usar |
+|------|------------------------------|
+| [Arvore hierarquica](guias/frontend/GUIA-ARVORE-HIERARQUICA.md) | Exploracao hierarquica de categorias (FK self-referential + serializer recursivo + componente React). **Use em:** menus/pastas, dados parent-child. |
+| [Background visual](guias/frontend/GUIA-BACKGROUND-VISUAL.md) | Background em camadas com gradiente, simbolos animados e troca de tema. **Use em:** calculadoras, paginas educacionais, dashboards. |
+| [Heatmap de atividade](guias/frontend/GUIA-HEATMAP-DE-ATIVIDADE.md) | Calendario de atividade estilo GitHub. **Use em:** dashboards de uso, analise temporal. |
+| [Onboarding e ajuda](guias/frontend/GUIA-ONBOARDING-E-AJUDA.md) | Onboarding leve, destaque contextual e centro de ajuda. **Use em:** produtos com curva de aprendizado. |
+| [Componentes UI compostos](guias/frontend/GUIA-COMPONENTES-UI-COMPOSTOS.md) | Kit base (Card compound, Button, Badge, classnames) em TS + Tailwind, zero deps. **Use em:** qualquer projeto React + Tailwind. |
+| [Particulas e glow](guias/frontend/GUIA-PARTICULAS-E-GLOW.md) | Particulas flutuantes (Framer Motion) + sistema de glow CSS com 5 niveis. **Use em:** landing pages, portfolios, dark theme. |
+| [Arvore de materiais dual-view](guias/frontend/GUIA-ARVORE-DE-MATERIAIS-DUAL-VIEW.md) | Arvore com 2 modos, tracking via localStorage e progresso por pasta. **Use em:** bibliotecas de materiais, listas de leitura. |
+| [Calendario academico](guias/frontend/GUIA-CALENDARIO-ACADEMICO.md) | Calendario mensal interativo com eventos e 11 funcoes de data sem deps. **Use em:** dashboards academicos, agendas. |
+| [Sistema de alerta e grade](guias/frontend/GUIA-SISTEMA-DE-ALERTA-E-GRADE.md) | Alerta de proxima aula, parser de grade e tabela semanal sticky. **Use em:** paineis academicos, portais de turma. |
+
+### `guias/backend/`
+
+| Guia | O que resolve · Quando usar |
+|------|------------------------------|
+| [Backend CPF](guias/backend/GUIA-BACKEND-CPF.md) | Algoritmo, contratos, validacao e guardrails para CPF. **Use em:** geracao sintetica para testes, validacao, formularios. |
+| [Cifra de Cesar](guias/backend/GUIA-CRIPTOGRAFIA-CIFRA-DE-CESAR.md) | Cifra tradicional/numerica, normalizacao de acentos e UI Brython. **Use em:** apps educacionais de cripto, playgrounds. |
+
+### `guias/integracao/`
+
+| Guia | O que resolve · Quando usar |
+|------|------------------------------|
+| [API GitHub](guias/integracao/GUIA-INTEGRACAO-API-GITHUB.md) | Coleta de repos com token, paginacao, dedup, retry e rate limit. **Use em:** importadores de portfolio, sincronizadores, ETLs. |
+| [Scraping multiformato](guias/integracao/GUIA-SCRAPING-MULTIFORMATO.md) | Playwright, parsers offline, captura assistida e persistencia idempotente. **Use em:** coletores, catalogos, comparadores. |
+| [Deploy Railway](guias/integracao/GUIA-DEPLOY-RAILWAY.md) | Backend online (PaaS): build, deploy, banco, env, HTTPS e logs. **Use em:** APIs, workers, bots, scrapers agendados. ⚠️ login do Railway falha com frequencia — o guia manda parar e enviar passo a passo manual. |
+
+---
+
+## Como usar em outros projetos
+
+Metodos do mais usual para o mais especifico.
 
 > **Sobre o submodulo `componets-database/`**
-> Este repositorio inclui o submodulo `componets-database/` (banco de componentes UI). Ele **so e necessario** se voce quiser o banco de componentes — para os padroes `core/` e `guias/` ele e dispensavel. Por isso cada metodo abaixo traz duas variantes: **sem o submodulo** (mais leve) e **com o submodulo** (completo). ZIP e `npx degit` nunca trazem submodulos — para o banco de componentes, use uma das variantes `git`.
+> So e necessario se voce quiser o banco de componentes UI — para `core/` e `guias/` ele e dispensavel. Por isso cada metodo traz duas variantes: **sem o submodulo** (mais leve) e **com o submodulo** (completo). ZIP e `npx degit` **nunca** trazem submodulos — para o banco de componentes use uma das variantes `git`.
 
-### 1. Sincronizar `Padrão de qualidade - Felixo System Design` com a versao mais recente (Recomendado)
+### 1. Sincronizar com a versao mais recente (recomendado)
 
-Melhor opcao quando voce quer manter uma pasta local sem vinculo com o git original e poder rodar o comando quantas vezes quiser para atualizar.
+Melhor opcao para manter uma pasta local sem vinculo com o git original, rodando o comando quantas vezes quiser para atualizar.
 
 **Linux / macOS / Git Bash (sem submodulo):**
 ```bash
@@ -103,44 +127,38 @@ set TMP_DIR=%TEMP%\felixo-standards-%RANDOM% && git clone --depth 1 https://gith
 set TMP_DIR=%TEMP%\felixo-standards-%RANDOM% && git clone --depth 1 --recurse-submodules https://github.com/Felipe-Alcantara/Felixo-System-Design.git %TMP_DIR% && for /d /r %TMP_DIR% %G in (.git) do @if exist "%G" rmdir /s /q "%G" && if not exist "Padrão de qualidade - Felixo System Design" mkdir "Padrão de qualidade - Felixo System Design" && robocopy %TMP_DIR% "Padrão de qualidade - Felixo System Design" /MIR >nul && rmdir /s /q %TMP_DIR%
 ```
 
-- **Use quando**: quer todos os arquivos como base independente, com atualizacao simples depois
-- **Requisito**: Git
-- **Vinculo com o git original?** Nao
+- **Use quando:** quer todos os arquivos como base independente, com atualizacao simples depois
+- **Requisito:** Git · **Vinculo com o git original?** Nao
 
 #### Comando global `felixo` (instalador multiplataforma)
 
-Em vez de copiar a funcao na mao, use os instaladores em [`scripts/`](scripts/). Eles registram o comando `felixo` no seu terminal com **logs coloridos, barra de loading e avisos de erro**. Depois de instalado, rode `felixo` em qualquer pasta para baixar a versao mais recente — **tudo, menos o submodulo** `componets-database`. Use `felixo --with-submodules` (ou `-s`) para incluir tambem o banco de componentes.
-
-**Qual script usar para o seu terminal:**
+Em vez de copiar a funcao na mao, use os instaladores em [`scripts/`](scripts/). Eles registram o comando `felixo` no seu terminal com **logs coloridos, barra de loading e avisos de erro**. Depois de instalado, rode `felixo` em qualquer pasta para baixar a versao mais recente — **tudo, menos o submodulo**. Use `felixo --with-submodules` (ou `-s`) para incluir o banco de componentes.
 
 | Seu terminal | Sistemas | Script |
 |--------------|----------|--------|
-| **Bash** ou **Zsh** | Linux, macOS, Git Bash (Windows), WSL (Windows) | [`scripts/bash-zsh/install-felixo-bash-zsh.sh`](scripts/bash-zsh/install-felixo-bash-zsh.sh) |
+| **Bash** ou **Zsh** | Linux, macOS, Git Bash, WSL | [`scripts/bash-zsh/install-felixo-bash-zsh.sh`](scripts/bash-zsh/install-felixo-bash-zsh.sh) |
 | **PowerShell** (5.1+ / 7+) | Windows, Linux, macOS | [`scripts/powershell/install-felixo-powershell.ps1`](scripts/powershell/install-felixo-powershell.ps1) |
 | **CMD** (Prompt classico) | Windows | [`scripts/cmd/install-felixo-cmd.cmd`](scripts/cmd/install-felixo-cmd.cmd) |
 
-> **Por que o CMD tem dois arquivos?** No Bash e no PowerShell o instalador
-> *escreve a funcao `felixo` dentro do arquivo de config* (`.bashrc` / `$PROFILE`),
-> entao um unico arquivo basta. No CMD nao existe esse mecanismo: um "comando"
-> precisa ser um arquivo proprio numa pasta do PATH. Por isso a pasta `cmd/` tem dois:
-> - [`scripts/cmd/install-felixo-cmd.cmd`](scripts/cmd/install-felixo-cmd.cmd) — o **instalador** (voce roda uma vez). Copia o `felixo-command.cmd` para `%LOCALAPPDATA%\felixo` (como `felixo.cmd`) e adiciona ao PATH.
-> - [`scripts/cmd/felixo-command.cmd`](scripts/cmd/felixo-command.cmd) — o **comando `felixo`** em si (faz o clone/copia). **Nao e instalador e voce nao roda ele diretamente** — quem o executa e o `felixo` que voce digita depois de instalar.
+> **Por que o CMD tem dois arquivos?** No Bash e PowerShell o instalador *escreve a funcao `felixo` no arquivo de config* (`.bashrc` / `$PROFILE`), entao um unico arquivo basta. No CMD um "comando" precisa ser um arquivo proprio numa pasta do PATH, por isso a pasta `cmd/` tem dois:
+> - [`install-felixo-cmd.cmd`](scripts/cmd/install-felixo-cmd.cmd) — o **instalador** (roda uma vez): copia o comando para `%LOCALAPPDATA%\felixo` e adiciona ao PATH.
+> - [`felixo-command.cmd`](scripts/cmd/felixo-command.cmd) — o **comando `felixo`** em si. **Nao e instalador e voce nao roda direto** — quem o executa e o `felixo` que voce digita depois de instalar.
 
-**Bash / Zsh** (Linux, macOS, Git Bash, WSL):
+**Bash / Zsh:**
 ```bash
 git clone --depth 1 https://github.com/Felipe-Alcantara/Felixo-System-Design.git /tmp/felixo-setup
 bash /tmp/felixo-setup/scripts/bash-zsh/install-felixo-bash-zsh.sh
 # desinstalar: bash /tmp/felixo-setup/scripts/bash-zsh/install-felixo-bash-zsh.sh --uninstall
 ```
 
-**PowerShell** (Windows / Linux / macOS):
+**PowerShell:**
 ```powershell
 git clone --depth 1 https://github.com/Felipe-Alcantara/Felixo-System-Design.git $env:TEMP\felixo-setup
 & "$env:TEMP\felixo-setup\scripts\powershell\install-felixo-powershell.ps1"
 # desinstalar: & "$env:TEMP\felixo-setup\scripts\powershell\install-felixo-powershell.ps1" -Uninstall
 ```
 
-**CMD** (Windows classico):
+**CMD:**
 ```cmd
 git clone --depth 1 https://github.com/Felipe-Alcantara/Felixo-System-Design.git "%TEMP%\felixo-setup"
 "%TEMP%\felixo-setup\scripts\cmd\install-felixo-cmd.cmd"
@@ -148,21 +166,18 @@ git clone --depth 1 https://github.com/Felipe-Alcantara/Felixo-System-Design.git
 ```
 
 Depois de instalar, **abra um novo terminal** e use:
-
 ```bash
 felixo                   # baixa tudo, menos o submodulo componets-database
 felixo --with-submodules # inclui o banco de componentes
 ```
 
-Ao terminar, o `felixo` mostra um **resumo do que mudou** — arquivos **novos**, **atualizados** e **removidos** (com a contagem e a lista completa, em cores). Assim voce ve exatamente o que foi sincronizado.
-
-Os instaladores sao **idempotentes**: rodar de novo apenas atualiza a definicao do comando, sem duplicar.
+Ao terminar, o `felixo` mostra um **resumo do que mudou** — arquivos novos, atualizados e removidos (contagem + lista, em cores). Os instaladores sao **idempotentes**: rodar de novo apenas atualiza a definicao do comando.
 
 ---
 
 ### 2. Baixar o repositorio inteiro como ZIP
 
-> **Submodulo:** o ZIP do GitHub **nunca** inclui o submodulo `componets-database/` (limitacao da plataforma). Se precisar do banco de componentes, use o metodo 1 (com submodulo) ou o metodo 4.
+> **Submodulo:** o ZIP do GitHub **nunca** inclui `componets-database/`. Para o banco de componentes use o metodo 1 (com submodulo) ou o metodo 4.
 
 **PowerShell (Windows):**
 ```powershell
@@ -190,7 +205,7 @@ unzip felixo.zip && mv Felixo-System-Design-main "Padrão de qualidade - Felixo 
 
 ### 3. Baixar com `npx degit`
 
-> **Submodulo:** `degit` **nao** baixa submodulos. O comando abaixo traz `core/` e `guias/`, mas `componets-database/` vem vazia. Para o banco de componentes, use o metodo 1 (com submodulo) ou o metodo 4.
+> **Submodulo:** `degit` **nao** baixa submodulos. Traz `core/` e `guias/`, mas `componets-database/` vem vazia.
 
 ```bash
 npx degit Felipe-Alcantara/Felixo-System-Design "./Padrão de qualidade - Felixo System Design"
@@ -210,7 +225,7 @@ git clone --depth 1 https://github.com/Felipe-Alcantara/Felixo-System-Design.git
 git clone --depth 1 --recurse-submodules https://github.com/Felipe-Alcantara/Felixo-System-Design.git "./Padrão de qualidade - Felixo System Design"
 ```
 
-> Se ja clonou sem `--recurse-submodules` e quiser o submodulo depois, rode dentro do repositorio:
+> Se ja clonou sem `--recurse-submodules`, rode dentro do repositorio:
 > ```bash
 > git submodule update --init --recursive
 > ```
@@ -219,8 +234,6 @@ git clone --depth 1 --recurse-submodules https://github.com/Felipe-Alcantara/Fel
 
 ### 5. Baixar apenas `guias/` com `npx degit`
 
-> **Submodulo:** nao se aplica — `componets-database/` fica fora de `guias/`.
-
 ```bash
 npx degit Felipe-Alcantara/Felixo-System-Design/guias ./felixo-guias
 ```
@@ -228,9 +241,6 @@ npx degit Felipe-Alcantara/Felixo-System-Design/guias ./felixo-guias
 ---
 
 ### 6. Baixar apenas `core/` com `git sparse-checkout`
-
-> **Submodulo:** nao se aplica — `componets-database/` fica fora de `core/`.
-
 
 ```bash
 mkdir felixo-core
@@ -245,8 +255,6 @@ git pull origin main
 ---
 
 ### 7. Baixar apenas `guias/` com `git sparse-checkout`
-
-> **Submodulo:** nao se aplica — `componets-database/` fica fora de `guias/`.
 
 ```bash
 mkdir felixo-guias
@@ -272,112 +280,53 @@ git clone --depth 1 https://github.com/Felipe-Alcantara/Felixo-System-Design.git
 git clone --depth 1 --recurse-submodules https://github.com/Felipe-Alcantara/Felixo-System-Design.git "./Padrão de qualidade - Felixo System Design"
 ```
 
-Depois, copie manualmente a pasta desejada:
-
-- `./Padrão de qualidade - Felixo System Design/core`
-- `./Padrão de qualidade - Felixo System Design/guias`
-- `./Padrão de qualidade - Felixo System Design/componets-database` (se clonou com submodulo)
+Depois, copie manualmente a pasta desejada (`core`, `guias` ou `componets-database`).
 
 ---
 
-### Escolha Rapida por Cenario
+### Escolha rapida por cenario
 
 | Cenario | Melhor opcao | Traz o submodulo? |
 |---------|--------------|-------------------|
-| Quero `core/` + `guias/` com atualizacao simples | sincronizacao sem `.git`, variante **sem submodulo** (metodo 1 / `felixo`) | Nao |
-| Quero tudo, incluindo o banco de componentes | sincronizacao **com submodulo** (metodo 1 / `felixo -s`) | Sim |
-| Quero tudo da forma mais simples | ZIP | Nao (ZIP nao suporta) |
-| Quero tudo sem `.git` via terminal | `npx degit` | Nao (degit nao suporta) |
-| Quero tudo e depois atualizar via git | `git clone` (com ou sem `--recurse-submodules`) | Depende da flag |
-| Quero so `guias/` sem `git` | `npx degit` em `guias` | N/A |
-| Quero so `guias/` com atualizacao futura | `git sparse-checkout` | N/A |
-| Quero so `core/` com atualizacao futura | `git sparse-checkout` | N/A |
-| Quero uma opcao universal | clone completo (`--recurse-submodules`) + copiar a pasta | Sim |
+| `core/` + `guias/` com atualizacao simples | metodo 1 sem submodulo (`felixo`) | Nao |
+| Tudo, incluindo o banco de componentes | metodo 1 com submodulo (`felixo -s`) | Sim |
+| Tudo da forma mais simples | ZIP | Nao (ZIP nao suporta) |
+| Tudo sem `.git` via terminal | `npx degit` | Nao (degit nao suporta) |
+| Tudo e depois atualizar via git | `git clone` (com/sem `--recurse-submodules`) | Depende da flag |
+| So `guias/` sem `git` | `npx degit` em `guias` | N/A |
+| So `guias/` ou `core/` com atualizacao futura | `git sparse-checkout` | N/A |
+| Opcao universal | clone completo (`--recurse-submodules`) + copiar a pasta | Sim |
 
 ---
 
-## Minha Stack
-
-### Linguagens
-
-| Tecnologia | Uso |
-|------------|-----|
-| **HTML5** | Estrutura e marcacao web |
-| **CSS3** | Estilizacao e layout |
-| **JavaScript** | Logica client-side e scripts |
-| **TypeScript** | Tipagem forte, projetos escalaveis |
-| **C#** | Back-end robusto, APIs .NET |
-| **Python** | Back-end, automacoes, scripts |
-
-### Frameworks & Bibliotecas
-
-| Tecnologia | Uso |
-|------------|-----|
-| **React** | Interfaces de usuario reativas |
-| **Tailwind CSS** | Estilizacao utilitaria |
-| **Bootstrap** | Prototipagem rapida, admin panels |
-| **Django** | Back-end Python, APIs REST |
-| **Vite** | Build tool e dev server rapido |
-
-### Ferramentas & Infraestrutura
-
-| Ferramenta | Uso |
-|------------|-----|
-| **Git** | Controle de versao |
-| **GitHub** | Repositorios, CI/CD, colaboracao |
-| **VS Code** | IDE principal |
-| **Railway** | Plataforma padrao para deploy de backend online (PaaS) |
-| **Windows** | Sistema operacional de desenvolvimento |
-
----
-
-## Estrutura do Repositorio
+## Estrutura do repositorio
 
 ```
 Felixo-System-Design/
+├── core/                                  # OBRIGATORIO — usar em todo projeto
+│   ├── IA.md                              # Template de contexto operacional para IA
+│   ├── DESIGN_SYSTEM_FRONTEND.md          # Padroes de qualidade frontend
+│   ├── DESIGN_SYSTEM_BACKEND.md           # Padroes de qualidade backend
+│   ├── DESIGN_SYSTEM_README.md            # Padroes de documentacao README
+│   ├── GUIA_MINIMO_QUALIDADE.md           # Regras minimas obrigatorias de qualidade
+│   ├── GUIA-START-APP-SCRIPT.md           # Contrato do start_app.py (instala/inicia/abre)
+│   ├── PROMPT_BASE_FRONTEND.md            # Prompt guiado para frontend
+│   └── PROMPT_BASE_BACKEND.md             # Prompt guiado para backend
 │
-├── core/                                    # OBRIGATORIO — usar em todo projeto
-│   ├── IA.md                                # Template de contexto operacional para IA
-│   ├── DESIGN_SYSTEM_FRONTEND.md            # Padroes de qualidade frontend
-│   ├── DESIGN_SYSTEM_BACKEND.md             # Padroes de qualidade backend
-│   ├── DESIGN_SYSTEM_README.md              # Padroes de documentacao README
-│   ├── GUIA_MINIMO_QUALIDADE.md             # Regras minimas obrigatorias de qualidade
-│   ├── GUIA-START-APP-SCRIPT.md             # Script de start obrigatorio (instala/inicia/abre)
-│   ├── PROMPT_BASE_FRONTEND.md              # Prompt guiado para frontend
-│   └── PROMPT_BASE_BACKEND.md               # Prompt guiado para backend
+├── guias/                                 # OPCIONAL — usar quando relevante
+│   ├── frontend/                          # UI, visual, UX, dados (9 guias)
+│   ├── backend/                           # Logica pura Python/Django (2 guias)
+│   └── integracao/                        # Integracoes externas (3 guias)
 │
-├── guias/                                   # OPCIONAL — usar quando relevante
-│   ├── frontend/                            # UI, visual, UX, dados
-│   │   ├── GUIA-COMPONENTES-UI-COMPOSTOS.md
-│   │   ├── GUIA-PARTICULAS-E-GLOW.md
-│   │   ├── GUIA-BACKGROUND-VISUAL.md
-│   │   ├── GUIA-HEATMAP-DE-ATIVIDADE.md
-│   │   ├── GUIA-ONBOARDING-E-AJUDA.md
-│   │   ├── GUIA-ARVORE-HIERARQUICA.md
-│   │   ├── GUIA-ARVORE-DE-MATERIAIS-DUAL-VIEW.md
-│   │   ├── GUIA-CALENDARIO-ACADEMICO.md
-│   │   └── GUIA-SISTEMA-DE-ALERTA-E-GRADE.md
-│   ├── backend/                             # Logica pura Python/Django
-│   │   ├── GUIA-BACKEND-CPF.md
-│   │   └── GUIA-CRIPTOGRAFIA-CIFRA-DE-CESAR.md
-│   └── integracao/                          # Integracoes externas
-│       ├── GUIA-INTEGRACAO-API-GITHUB.md
-│       ├── GUIA-SCRAPING-MULTIFORMATO.md
-│       └── GUIA-DEPLOY-RAILWAY.md
+├── componets-database/                    # SUBMODULO — banco de componentes UI
+│   ├── scraper/                           # Coletor de componentes
+│   ├── site/                              # Biblioteca visual (Flask + React/Vite)
+│   └── start_app.py                       # Setup + coleta com um comando
 │
-├── componets-database/                      # SUBMODULO — banco de componentes UI
-│   ├── scraper/                             # Coletor de componentes (10 fontes)
-│   ├── site/                                # Biblioteca visual (Flask + React/Vite)
-│   └── start_app.py                         # Setup + coleta com um comando
-│
-├── scripts/                                 # Instaladores do comando global "felixo"
-│   ├── bash-zsh/
-│   │   └── install-felixo-bash-zsh.sh       # Instalador p/ Bash e Zsh (Linux, macOS, Git Bash, WSL)
-│   ├── powershell/
-│   │   └── install-felixo-powershell.ps1    # Instalador p/ PowerShell (Windows, Linux, macOS)
-│   └── cmd/                                  # CMD (Prompt classico do Windows)
-│       ├── install-felixo-cmd.cmd           # Instalador (roda uma vez)
-│       └── felixo-command.cmd               # Comando felixo em si (instalado como felixo.cmd)
+├── scripts/                               # Instaladores do comando global "felixo"
+│   ├── bash-zsh/                          # Bash e Zsh (Linux, macOS, Git Bash, WSL)
+│   ├── powershell/                        # PowerShell (Windows, Linux, macOS)
+│   └── cmd/                               # CMD: instalador + comando felixo
 │
 ├── CONTRIBUTING.md
 ├── README.md
@@ -387,235 +336,33 @@ Felixo-System-Design/
 
 ---
 
-## Core — Padroes Obrigatorios
+## Stack
 
-A pasta `core/` concentra os artefatos que devem acompanhar **todo projeto**. Ela separa padroes tecnicos de qualidade, prompts operacionais para IA e template de memoria operacional.
-
-### Design System Frontend
-
-Guia completo de padronizacao visual para front-end, extraido do **FelixoVerse**. Documenta paleta, tipografia, layout, componentes, animacoes e padroes de interface. Inclui separacao explicita entre principios universais e escolhas especificas do FelixoVerse.
-
-[Ver design system frontend](core/DESIGN_SYSTEM_FRONTEND.md)
-
-### Design System Backend
-
-Guia de **qualidade de sistema backend**. Define principios de arquitetura, escolha de stack, modularizacao forte, separacao de responsabilidades, estrutura por camadas, padroes de API, persistencia, testes, TDD, SQLite como padrao inicial, Open/Closed, documentacao viva e checklist de qualidade.
-
-[Ver design system backend](core/DESIGN_SYSTEM_BACKEND.md)
-
-### Design System README
-
-Guia de padronizacao para `README.md`, usado como referencia para manter documentacao consistente entre projetos.
-
-[Ver design system README](core/DESIGN_SYSTEM_README.md)
-
-### Guia Minimo de Qualidade
-
-Contrato curto e obrigatorio para preservar qualidade de software em qualquer projeto. Resume os padroes essenciais de arquitetura, seguranca, testes, documentacao e criterio de pronto antes de consultar os documentos longos.
-
-[Ver guia minimo de qualidade](core/GUIA_MINIMO_QUALIDADE.md)
-
-### Start App Script (obrigatorio por app web)
-
-Contrato obrigatorio: **toda aplicacao web** deve ter um `start_app.py` na raiz que **instala dependencias, inicia/reinicia o app e abre o navegador com um unico comando** (`python start_app.py`). Facilita quem automatiza processos de servidor local e quem nao tem facilidade com terminal. Inclui template Python cross-platform pronto, ajuste por stack (Django, FastAPI, Flask, Vite) e checklist.
-
-[Ver guia do start app script](core/GUIA-START-APP-SCRIPT.md)
-
-### Prompt Base Backend
-
-Guia tecnico para montar prompts de backend completos na primeira interacao. Inclui stacks recomendadas, decisoes tecnicas por cenario e exige que a IA siga o `DESIGN_SYSTEM_BACKEND.md` como contrato de qualidade.
-
-[Ver prompt base backend](core/PROMPT_BASE_BACKEND.md)
-
-### Prompt Base Frontend
-
-Guia tecnico para montar prompts de frontend completos na primeira interacao. Inclui stacks recomendadas, decisoes visuais por cenario, campos para componentes, identidade visual, responsividade e animacoes.
-
-[Ver prompt base frontend](core/PROMPT_BASE_FRONTEND.md)
-
-### IA.md — Template de Contexto Operacional
-
-Template padrao de **memoria operacional** para projetos com IA. Deve ser copiado e preenchido continuamente durante o desenvolvimento para registrar:
-
-- objetivo atual e milestones
-- decisoes tecnicas
-- stack e convencoes
-- bugs e correcoes relevantes
-- testes importantes
-- contexto necessario para outra IA retomar o trabalho sem reler tudo
-
-[Ver IA.md](core/IA.md)
+**Linguagens:** HTML5 · CSS3 · JavaScript · TypeScript · C# · Python
+**Frameworks & libs:** React · Tailwind CSS · Bootstrap · Django · Vite
+**Ferramentas:** Git · GitHub · VS Code · Railway (deploy PaaS padrao) · Windows
 
 ---
 
-## Guias — Padroes Especificos
+## Para agentes de IA
 
-A pasta `guias/` contem **guias reutilizaveis extraidos de projetos reais**, organizados por dominio. Diferente do `core/`, estes arquivos sao **opcionais** — use apenas quando o projeto precisar daquela funcionalidade.
+Instrucoes para agentes que trabalham **diretamente neste repositorio** (nao via fork). Para contribuicoes externas, siga o fluxo de fork + Pull Request em [`CONTRIBUTING.md`](CONTRIBUTING.md).
 
-Cada guia responde a tres perguntas:
-
-- Qual problema ele resolve
-- De qual projeto o padrao foi extraido
-- Em que tipo de sistema vale reutiliza-lo
-
-### Frontend
-
-#### Arvore Hierarquica
-
-Padrao de **exploracao hierarquica de categorias** com modelo Django (self-referential FK), serializer recursivo e componente React recursivo com animacoes.
-
-**Quando usar:** explorador de categorias/pastas, menus hierarquicos, qualquer dado em arvore parent-child.
-
-[Ver guia](guias/frontend/GUIA-ARVORE-HIERARQUICA.md)
-
-#### Background Visual
-
-Padrao de **background visual em camadas** com gradiente, simbolos animados e troca de tema. Extraido da Calculadora Pro Web (Brython).
-
-**Quando usar:** calculadoras, paginas educacionais, dashboards tecnicos, interfaces com profundidade visual.
-
-[Ver guia](guias/frontend/GUIA-BACKGROUND-VISUAL.md)
-
-#### Heatmap de Atividade
-
-Padrao de **calendario de atividade com intensidade visual** no estilo GitHub. Extraido do Reading Tracker.
-
-**Quando usar:** visualizacao de atividade por dia/semana/mes, dashboards de uso, analise temporal.
-
-[Ver guia](guias/frontend/GUIA-HEATMAP-DE-ATIVIDADE.md)
-
-#### Onboarding e Ajuda
-
-Padrao de **primeira experiencia do usuario** com onboarding leve, destaque contextual e centro de ajuda permanente. Extraido do Reading Tracker.
-
-**Quando usar:** produtos com multiplas funcionalidades, interfaces com curva de aprendizado, dashboards.
-
-[Ver guia](guias/frontend/GUIA-ONBOARDING-E-AJUDA.md)
-
-#### Componentes UI Compostos
-
-Kit de **componentes UI compostos** com Card (compound component), Button (4 variantes x 3 tamanhos), Badge e utilitario de classnames. TypeScript + Tailwind, zero dependencias.
-
-**Quando usar:** qualquer projeto React + Tailwind que precise de componentes base consistentes.
-
-[Ver guia](guias/frontend/GUIA-COMPONENTES-UI-COMPOSTOS.md)
-
-#### Particulas e Sistema de Glow
-
-**Background de particulas flutuantes** com Framer Motion e **sistema completo de glow CSS** com 5 niveis de intensidade controlados por CSS variable.
-
-**Quando usar:** landing pages, portfolios, dashboards dark-theme, interfaces com efeitos de glow.
-
-[Ver guia](guias/frontend/GUIA-PARTICULAS-E-GLOW.md)
-
-#### Arvore de Materiais Dual-View
-
-**Arvore de materiais com dois modos de visualizacao** (simples e dinamico), tracking de itens vistos via localStorage e contagem de progresso por pasta.
-
-**Quando usar:** bibliotecas de materiais, exploradores de documentos, listas de leitura com progresso.
-
-[Ver guia](guias/frontend/GUIA-ARVORE-DE-MATERIAIS-DUAL-VIEW.md)
-
-#### Calendario Academico
-
-**Calendario mensal interativo** com grade de dias, agrupamento de eventos por data, status do usuario e 11 funcoes de data sem dependencias externas.
-
-**Quando usar:** dashboards academicos, calendarios de entregas, agendas de projeto.
-
-[Ver guia](guias/frontend/GUIA-CALENDARIO-ACADEMICO.md)
-
-#### Sistema de Alerta e Grade de Horarios
-
-**Sistema de alerta automatico de proxima aula** com parser de grade, cores por sala e tabela semanal com coluna sticky.
-
-**Quando usar:** paineis academicos, portais de turma, apps de agenda escolar.
-
-[Ver guia](guias/frontend/GUIA-SISTEMA-DE-ALERTA-E-GRADE.md)
-
-### Backend
-
-#### Backend CPF
-
-Padrao de **backend logico para CPF** com algoritmo, contratos, fluxo de validacao, matriz de testes e guardrails para dados reais.
-
-**Quando usar:** geracao sintetica de CPF para testes, validacao backend, normalizacao de entrada, formularios.
-
-[Ver guia](guias/backend/GUIA-BACKEND-CPF.md)
-
-#### Criptografia Cifra de Cesar
-
-Sistemas reutilizaveis da **Cifra de Cesar em Python**: cifra tradicional, cifra numerica, normalizacao de acentos e interface web com Brython.
-
-**Quando usar:** apps educacionais de criptografia, playgrounds web, utilitarios de encode/decode.
-
-[Ver guia](guias/backend/GUIA-CRIPTOGRAFIA-CIFRA-DE-CESAR.md)
-
-### Integracao
-
-#### Integracao API GitHub
-
-Padrao de **coleta robusta de repositorios no GitHub** com autenticacao por token, paginacao, deduplicacao, retry com backoff e tratamento de rate limit.
-
-**Quando usar:** importadores de portfolio, dashboards de projetos, sincronizadores, ETLs de inventario tecnico.
-
-[Ver guia](guias/integracao/GUIA-INTEGRACAO-API-GITHUB.md)
-
-#### Scraping Multiformato
-
-Padrao de **scraping multiformato** com Playwright, parsers offline, JSON embutido, captura manual assistida, persistencia idempotente, URL publica segura, testes e guardrails operacionais.
-
-**Quando usar:** coletores, catalogos, ETLs, comparadores, importadores e pipelines que precisam transformar paginas heterogeneas em dados estruturados auditaveis.
-
-[Ver guia](guias/integracao/GUIA-SCRAPING-MULTIFORMATO.md)
-
-#### Deploy Railway (backend padrao online)
-
-**Servico padrao para colocar backend online**. Railway (PaaS) faz build, deploy, banco gerenciado, variaveis de ambiente, dominio HTTPS e logs sem gerenciar servidor — **mais do que suficiente para a maioria das aplicacoes**. Inclui fluxo completo de CLI, conceitos, deploy por Git ou `railway up`, bancos e checklist.
-
-**Quando usar:** APIs REST, back-ends de apps, workers, bots, scrapers agendados e qualquer servico que precise ficar online com URL publica e HTTPS.
-
-> **Aviso:** o login/autorizacao do Railway falha com frequencia. O guia instrui o agente a **parar e enviar o passo a passo manual ao usuario** (terminal ou interface) apos erros repetidos de conexao, em vez de insistir.
-
-[Ver guia](guias/integracao/GUIA-DEPLOY-RAILWAY.md)
+- **Git:** trabalhe direto no `main` por padrao. So crie branch para **feature grande**, **refatoracao significativa** ou algo de **alto risco**. Evite abrir branch para cada pequena mudanca.
+- **Commits:** sempre commite apos uma adicao concluida; commits pequenos e bem descritivos.
+- **Documentacao:** mantenha viva durante os commits — ao mudar comportamento, estrutura ou comandos, atualize no mesmo passo o `README.md`, os guias e o `IA.md` afetados. Se um modulo nao couber no README/guias, crie uma pasta [`docs/`](docs/).
 
 ---
 
-## Para Agentes de IA
+## Licenca e autor
 
-Instrucoes para agentes que trabalham **diretamente neste repositorio** (nao via fork). Para contribuicoes externas, siga o fluxo de fork + Pull Request descrito em [`CONTRIBUTING.md`](CONTRIBUTING.md).
+Licenca **MIT** — veja [`LICENSE`](LICENSE).
 
-### Git e branches
-
-- **Trabalhe direto no `main` por padrao.** Nao crie branches desnecessarias.
-- **So crie uma branch nova quando** a mudanca for uma **feature grande**, uma **refatoracao** significativa ou algo de **alto risco** (que altera comportamento e precisa ser testado, ou pode quebrar algo existente).
-- Fora esses casos (correcoes simples, docs, ajustes pequenos, refactors seguros), **commite no `main`** sem criar branch.
-- Evite o vicio de abrir uma branch nova para cada implementacao — varios agentes tendem a criar branches demais; nao siga esse padrao aqui.
-
-### Commits
-
-- **Sempre commite apos uma adicao concluida.** Nao acumule varias mudancas soltas sem commitar.
-- Faca **commits pequenos, porem bem descritivos** — cada commit com escopo claro e mensagem que explica o que mudou e por que.
-
-### Documentacao
-
-- **Mantenha a documentacao atualizada e viva durante os commits.** Ao mudar comportamento, estrutura ou comandos, atualize no mesmo passo o `README.md`, os guias e o `IA.md` afetados — documentacao desatualizada conta como trabalho incompleto.
-- **Se o projeto precisar**, crie uma pasta [`docs/`](docs/) para documentar modulos especificos. Use-a quando a documentacao de um modulo nao couber naturalmente no `README.md` ou nos guias existentes.
+**Felipe Martin** · GitHub: [@Felipe-Alcantara](https://github.com/Felipe-Alcantara)
 
 ---
 
-## Licenca
-
-Este projeto esta sob a licenca MIT — veja o arquivo `LICENSE`.
-
-## Autor
-
-**Felipe Martin**
-- GitHub: [@Felipe-Alcantara](https://github.com/Felipe-Alcantara)
-
----
-
-> **Assinatura de Origem**  
-> Este arquivo foi criado por **Felipe Martin** e faz parte do repositorio **Felixo System Design**.  
-> Origem: https://github.com/Felipe-Alcantara/Felixo-System-Design  
-> Data desta versao: 2026-06-07
+> **Assinatura de Origem**
+> Criado por **Felipe Martin**, parte do repositorio **Felixo System Design**.
+> Origem: https://github.com/Felipe-Alcantara/Felixo-System-Design
 > Sugestoes e pull requests sao bem-vindos.
