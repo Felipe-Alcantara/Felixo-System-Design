@@ -1,24 +1,26 @@
 @echo off
 setlocal EnableDelayedExpansion
 rem ============================================================================
-rem  felixo.cmd - o COMANDO "felixo" para o CMD (Prompt de Comando do Windows).
+rem  felixo-command.cmd - o COMANDO "felixo" para o CMD (Prompt de Comando).
 rem
 rem  ATENCAO: este NAO e o instalador. Quem registra o comando e
-rem  install-felixo.cmd, que copia este arquivo para o PATH. Normalmente voce
-rem  nao roda felixo.cmd diretamente.
+rem  install-felixo-cmd.cmd, que copia este arquivo para o PATH (como
+rem  felixo.cmd). Normalmente voce nao roda este arquivo diretamente.
 rem
 rem  >>> POR QUE O CMD TEM DOIS ARQUIVOS <<<
 rem    No Bash/Zsh e PowerShell o instalador escreve a funcao "felixo" dentro do
 rem    arquivo de config (.bashrc / $PROFILE), entao basta um arquivo. No CMD um
 rem    comando precisa ser um arquivo proprio numa pasta do PATH -- por isso ha
-rem    install-felixo.cmd (instalador) e felixo.cmd (o comando, este arquivo).
+rem    install-felixo-cmd.cmd (instalador) e felixo-command.cmd (o comando, este
+rem    arquivo, instalado como felixo.cmd).
 rem
 rem  Baixa o repositorio Felixo System Design na pasta atual. Por padrao baixa
 rem  tudo, MENOS o submodulo componets-database. Use "felixo --with-submodules"
 rem  (ou "felixo -s") para incluir o banco de componentes.
 rem
-rem  Para qual terminal: CMD (Windows). Em Bash/Zsh use install-felixo.sh; em
-rem  PowerShell use install-felixo.ps1.
+rem  Para qual terminal: CMD (Windows). Em Bash/Zsh use
+rem  bash-zsh/install-felixo-bash-zsh.sh; em PowerShell use
+rem  powershell/install-felixo-powershell.ps1.
 rem  Requisitos: git no PATH (Windows 10+ para cores ANSI).
 rem ============================================================================
 

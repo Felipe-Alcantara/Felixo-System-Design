@@ -6,8 +6,8 @@
 #   Shell:    Bash ou Zsh
 #   Sistemas: Linux, macOS, Git Bash (Windows), WSL (Windows)
 #   Use os outros instaladores se o seu terminal for:
-#     - PowerShell (qualquer SO) -> install-felixo.ps1
-#     - CMD (Prompt classico do Windows) -> install-felixo.cmd
+#     - PowerShell (qualquer SO) -> powershell/install-felixo-powershell.ps1
+#     - CMD (Prompt classico do Windows) -> cmd/install-felixo-cmd.cmd
 #
 # O que faz: injeta a funcao "felixo" no seu .bashrc (ou .zshrc). Depois de
 # instalado, digite "felixo" em qualquer pasta para baixar a versao mais recente
@@ -16,9 +16,9 @@
 # incluir tambem o banco de componentes.
 #
 # Uso:
-#   ./install-felixo.sh              instala (ou atualiza) o comando
-#   ./install-felixo.sh --uninstall  remove o comando
-#   ./install-felixo.sh --help       mostra esta ajuda
+#   ./install-felixo-bash-zsh.sh              instala (ou atualiza) o comando
+#   ./install-felixo-bash-zsh.sh --uninstall  remove o comando
+#   ./install-felixo-bash-zsh.sh --help       mostra esta ajuda
 #
 # Requisitos: bash ou zsh, git e rsync.
 

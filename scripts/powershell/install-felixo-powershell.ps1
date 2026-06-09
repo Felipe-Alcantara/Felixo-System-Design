@@ -6,8 +6,8 @@
     Shell:    PowerShell (Windows PowerShell 5.1+ ou PowerShell 7+)
     Sistemas: Windows, Linux, macOS
     Use os outros instaladores se o seu terminal for:
-      - Bash ou Zsh (Linux, macOS, Git Bash, WSL) -> install-felixo.sh
-      - CMD (Prompt classico do Windows)          -> install-felixo.cmd
+      - Bash ou Zsh (Linux, macOS, Git Bash, WSL) -> bash-zsh/install-felixo-bash-zsh.sh
+      - CMD (Prompt classico do Windows)          -> cmd/install-felixo-cmd.cmd
 
 .DESCRIPTION
   Adiciona a funcao "felixo" ao seu $PROFILE do PowerShell. Depois de instalado,
@@ -19,8 +19,8 @@
   Remove a funcao "felixo" do $PROFILE.
 
 .EXAMPLE
-  .\install-felixo.ps1
-  .\install-felixo.ps1 -Uninstall
+  .\install-felixo-powershell.ps1
+  .\install-felixo-powershell.ps1 -Uninstall
 
 .NOTES
   Requisitos: PowerShell 5.1+ e git no PATH.

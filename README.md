@@ -115,36 +115,36 @@ Em vez de copiar a funcao na mao, use os instaladores em [`scripts/`](scripts/).
 
 | Seu terminal | Sistemas | Script |
 |--------------|----------|--------|
-| **Bash** ou **Zsh** | Linux, macOS, Git Bash (Windows), WSL (Windows) | [`scripts/install-felixo.sh`](scripts/install-felixo.sh) |
-| **PowerShell** (5.1+ / 7+) | Windows, Linux, macOS | [`scripts/install-felixo.ps1`](scripts/install-felixo.ps1) |
-| **CMD** (Prompt classico) | Windows | [`scripts/install-felixo.cmd`](scripts/install-felixo.cmd) |
+| **Bash** ou **Zsh** | Linux, macOS, Git Bash (Windows), WSL (Windows) | [`scripts/bash-zsh/install-felixo-bash-zsh.sh`](scripts/bash-zsh/install-felixo-bash-zsh.sh) |
+| **PowerShell** (5.1+ / 7+) | Windows, Linux, macOS | [`scripts/powershell/install-felixo-powershell.ps1`](scripts/powershell/install-felixo-powershell.ps1) |
+| **CMD** (Prompt classico) | Windows | [`scripts/cmd/install-felixo-cmd.cmd`](scripts/cmd/install-felixo-cmd.cmd) |
 
 > **Por que o CMD tem dois arquivos?** No Bash e no PowerShell o instalador
 > *escreve a funcao `felixo` dentro do arquivo de config* (`.bashrc` / `$PROFILE`),
 > entao um unico arquivo basta. No CMD nao existe esse mecanismo: um "comando"
-> precisa ser um arquivo proprio numa pasta do PATH. Por isso o CMD tem dois:
-> - [`scripts/install-felixo.cmd`](scripts/install-felixo.cmd) — o **instalador** (voce roda uma vez). Copia o `felixo.cmd` para `%LOCALAPPDATA%\felixo` e adiciona ao PATH.
-> - [`scripts/felixo.cmd`](scripts/felixo.cmd) — o **comando `felixo`** em si (faz o clone/copia). **Nao e instalador e voce nao roda ele diretamente** — quem o executa e o `felixo` que voce digita depois de instalar.
+> precisa ser um arquivo proprio numa pasta do PATH. Por isso a pasta `cmd/` tem dois:
+> - [`scripts/cmd/install-felixo-cmd.cmd`](scripts/cmd/install-felixo-cmd.cmd) — o **instalador** (voce roda uma vez). Copia o `felixo-command.cmd` para `%LOCALAPPDATA%\felixo` (como `felixo.cmd`) e adiciona ao PATH.
+> - [`scripts/cmd/felixo-command.cmd`](scripts/cmd/felixo-command.cmd) — o **comando `felixo`** em si (faz o clone/copia). **Nao e instalador e voce nao roda ele diretamente** — quem o executa e o `felixo` que voce digita depois de instalar.
 
 **Bash / Zsh** (Linux, macOS, Git Bash, WSL):
 ```bash
 git clone --depth 1 https://github.com/Felipe-Alcantara/Felixo-System-Design.git /tmp/felixo-setup
-bash /tmp/felixo-setup/scripts/install-felixo.sh
-# desinstalar: bash /tmp/felixo-setup/scripts/install-felixo.sh --uninstall
+bash /tmp/felixo-setup/scripts/bash-zsh/install-felixo-bash-zsh.sh
+# desinstalar: bash /tmp/felixo-setup/scripts/bash-zsh/install-felixo-bash-zsh.sh --uninstall
 ```
 
 **PowerShell** (Windows / Linux / macOS):
 ```powershell
 git clone --depth 1 https://github.com/Felipe-Alcantara/Felixo-System-Design.git $env:TEMP\felixo-setup
-& "$env:TEMP\felixo-setup\scripts\install-felixo.ps1"
-# desinstalar: & "$env:TEMP\felixo-setup\scripts\install-felixo.ps1" -Uninstall
+& "$env:TEMP\felixo-setup\scripts\powershell\install-felixo-powershell.ps1"
+# desinstalar: & "$env:TEMP\felixo-setup\scripts\powershell\install-felixo-powershell.ps1" -Uninstall
 ```
 
 **CMD** (Windows classico):
 ```cmd
 git clone --depth 1 https://github.com/Felipe-Alcantara/Felixo-System-Design.git "%TEMP%\felixo-setup"
-"%TEMP%\felixo-setup\scripts\install-felixo.cmd"
-:: desinstalar: "%TEMP%\felixo-setup\scripts\install-felixo.cmd" --uninstall
+"%TEMP%\felixo-setup\scripts\cmd\install-felixo-cmd.cmd"
+:: desinstalar: "%TEMP%\felixo-setup\scripts\cmd\install-felixo-cmd.cmd" --uninstall
 ```
 
 Depois de instalar, **abra um novo terminal** e use:
@@ -369,10 +369,13 @@ Felixo-System-Design/
 │   └── start_app.py                         # Setup + coleta com um comando
 │
 ├── scripts/                                 # Instaladores do comando global "felixo"
-│   ├── install-felixo.sh                    # Instalador p/ Bash e Zsh (Linux, macOS, Git Bash, WSL)
-│   ├── install-felixo.ps1                   # Instalador p/ PowerShell (Windows, Linux, macOS)
-│   ├── install-felixo.cmd                   # Instalador p/ CMD (Prompt classico do Windows)
-│   └── felixo.cmd                           # Comando felixo do CMD (registrado pelo install-felixo.cmd)
+│   ├── bash-zsh/
+│   │   └── install-felixo-bash-zsh.sh       # Instalador p/ Bash e Zsh (Linux, macOS, Git Bash, WSL)
+│   ├── powershell/
+│   │   └── install-felixo-powershell.ps1    # Instalador p/ PowerShell (Windows, Linux, macOS)
+│   └── cmd/                                  # CMD (Prompt classico do Windows)
+│       ├── install-felixo-cmd.cmd           # Instalador (roda uma vez)
+│       └── felixo-command.cmd               # Comando felixo em si (instalado como felixo.cmd)
 │
 ├── CONTRIBUTING.md
 ├── README.md

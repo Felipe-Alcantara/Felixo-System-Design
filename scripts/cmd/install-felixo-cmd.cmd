@@ -1,32 +1,34 @@
 @echo off
 setlocal EnableDelayedExpansion
 rem ============================================================================
-rem  install-felixo.cmd - registra o comando "felixo" no CMD.
+rem  install-felixo-cmd.cmd - registra o comando "felixo" no CMD.
 rem
 rem  >>> PARA QUAL TERMINAL <<<
 rem    Shell:    CMD (Prompt de Comando classico)
 rem    Sistemas: Windows
 rem    Use os outros instaladores se o seu terminal for:
-rem      - Bash ou Zsh (Linux, macOS, Git Bash, WSL) -> install-felixo.sh
-rem      - PowerShell (qualquer SO)                  -> install-felixo.ps1
+rem      - Bash ou Zsh (Linux, macOS, Git Bash, WSL) -> bash-zsh/install-felixo-bash-zsh.sh
+rem      - PowerShell (qualquer SO)                  -> powershell/install-felixo-powershell.ps1
 rem
-rem  O que faz: copia felixo.cmd para %LOCALAPPDATA%\felixo e adiciona a pasta
-rem  ao PATH do usuario. Depois, abra um novo terminal e use "felixo".
+rem  O que faz: copia felixo-command.cmd (ao lado deste arquivo) para
+rem  %LOCALAPPDATA%\felixo como "felixo.cmd" e adiciona a pasta ao PATH do
+rem  usuario. Depois, abra um novo terminal e use "felixo".
 rem
 rem  >>> O CMD USA DOIS ARQUIVOS <<<
-rem    install-felixo.cmd (este) -> o INSTALADOR; voce roda uma vez.
-rem    felixo.cmd                -> o COMANDO "felixo" em si, que este instalador
-rem                                 copia para o PATH. Voce nao roda direto.
+rem    install-felixo-cmd.cmd (este) -> o INSTALADOR; voce roda uma vez.
+rem    felixo-command.cmd            -> o COMANDO "felixo" em si, que este
+rem                                     instalador copia para o PATH (como
+rem                                     felixo.cmd). Voce nao roda direto.
 rem    (No Bash/Zsh e PowerShell o instalador escreve a funcao dentro do arquivo
 rem     de config, entao basta um arquivo. No CMD, um comando precisa ser um
 rem     arquivo proprio no PATH -- por isso sao dois.)
 rem
 rem  Uso:
-rem    install-felixo.cmd              instala
-rem    install-felixo.cmd --uninstall  remove
+rem    install-felixo-cmd.cmd              instala
+rem    install-felixo-cmd.cmd --uninstall  remove
 rem ============================================================================
 
-set "SRC=%~dp0felixo.cmd"
+set "SRC=%~dp0felixo-command.cmd"
 set "TARGET_DIR=%LOCALAPPDATA%\felixo"
 set "TARGET=%TARGET_DIR%\felixo.cmd"
 
@@ -34,7 +36,7 @@ if /I "%~1"=="--uninstall" goto :uninstall
 if /I "%~1"=="-u" goto :uninstall
 
 if not exist "%SRC%" (
-  echo [felixo-install X] Nao encontrei felixo.cmd ao lado deste instalador.
+  echo [felixo-install X] Nao encontrei felixo-command.cmd ao lado deste instalador.
   exit /b 1
 )
 
