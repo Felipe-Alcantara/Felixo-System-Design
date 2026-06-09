@@ -26,6 +26,7 @@
 - [Estrutura do Repositorio](#-estrutura-do-repositorio)
 - [Core — Padroes Obrigatorios](#-core--padroes-obrigatorios)
 - [Guias — Padroes Especificos](#-guias--padroes-especificos)
+- [Para Agentes de IA](#-para-agentes-de-ia)
 - [Licenca](#-licenca)
 - [Autor](#-autor)
 
@@ -556,6 +557,21 @@ Padrao de **scraping multiformato** com Playwright, parsers offline, JSON embuti
 > **Aviso:** o login/autorizacao do Railway falha com frequencia. O guia instrui o agente a **parar e enviar o passo a passo manual ao usuario** (terminal ou interface) apos erros repetidos de conexao, em vez de insistir.
 
 [Ver guia](guias/integracao/GUIA-DEPLOY-RAILWAY.md)
+
+---
+
+## Para Agentes de IA
+
+Instrucoes para agentes que trabalham **diretamente neste repositorio** (nao via fork). Para contribuicoes externas, siga o fluxo de fork + Pull Request descrito em [`CONTRIBUTING.md`](CONTRIBUTING.md).
+
+### Git e branches
+
+- **Trabalhe direto no `main` por padrao.** Nao crie branches desnecessarias.
+- **So crie uma branch nova quando** a mudanca for:
+  - uma **feature nova** que altera comportamento e **precisa ser testada** antes de entrar no `main`, ou
+  - algo de **alto risco** (pode quebrar algo existente).
+- Fora esses casos (correcoes simples, docs, ajustes pequenos, refactors seguros), **commite no `main`** sem criar branch.
+- Evite o vicio de abrir uma branch nova para cada implementacao — varios agentes tendem a criar branches demais; nao siga esse padrao aqui.
 
 ---
 
