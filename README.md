@@ -587,11 +587,19 @@ Instrucoes para agentes que trabalham **diretamente neste repositorio** (nao via
 ### Git e branches
 
 - **Trabalhe direto no `main` por padrao.** Nao crie branches desnecessarias.
-- **So crie uma branch nova quando** a mudanca for:
-  - uma **feature nova** que altera comportamento e **precisa ser testada** antes de entrar no `main`, ou
-  - algo de **alto risco** (pode quebrar algo existente).
+- **So crie uma branch nova quando** a mudanca for uma **feature grande**, uma **refatoracao** significativa ou algo de **alto risco** (que altera comportamento e precisa ser testado, ou pode quebrar algo existente).
 - Fora esses casos (correcoes simples, docs, ajustes pequenos, refactors seguros), **commite no `main`** sem criar branch.
 - Evite o vicio de abrir uma branch nova para cada implementacao — varios agentes tendem a criar branches demais; nao siga esse padrao aqui.
+
+### Commits
+
+- **Sempre commite apos uma adicao concluida.** Nao acumule varias mudancas soltas sem commitar.
+- Faca **commits pequenos, porem bem descritivos** — cada commit com escopo claro e mensagem que explica o que mudou e por que.
+
+### Documentacao
+
+- **Mantenha a documentacao atualizada e viva durante os commits.** Ao mudar comportamento, estrutura ou comandos, atualize no mesmo passo o `README.md`, os guias e o `IA.md` afetados — documentacao desatualizada conta como trabalho incompleto.
+- **Se o projeto precisar**, crie uma pasta [`docs/`](docs/) para documentar modulos especificos. Use-a quando a documentacao de um modulo nao couber naturalmente no `README.md` ou nos guias existentes.
 
 ---
 
