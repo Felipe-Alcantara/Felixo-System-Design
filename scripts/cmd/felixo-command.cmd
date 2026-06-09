@@ -78,6 +78,25 @@ if "%WITH_SUB%"=="0" (
 )
 
 if not exist "%DEST_NAME%" mkdir "%DEST_NAME%"
+
+rem --- previa: lista (sem alterar nada) o que vai mudar ---
+echo %C_INFO%[felixo]%C_RESET% Mudancas a aplicar:
+robocopy "%REPO_TMP%" "%DEST_NAME%" /MIR /L /FP /NS /NC /NDL /NJH /NJS /NP > "%TMP_DIR%\changes.txt" 2>nul
+rem  Robocopy marca arquivos a remover com "*EXTRA"; os demais sao novos/alterados.
+findstr /C:"*EXTRA" "%TMP_DIR%\changes.txt" >nul 2>nul && (
+  echo %C_ERR%[felixo]   --- removidos ^(*EXTRA^) ---%C_RESET%
+  for /f "tokens=1,*" %%A in ('findstr /C:"*EXTRA" "%TMP_DIR%\changes.txt"') do echo %C_ERR%   - %%B%C_RESET%
+)
+echo %C_OK%[felixo]   --- novos / atualizados ---%C_RESET%
+for /f "usebackq delims=" %%L in ("%TMP_DIR%\changes.txt") do (
+  echo %%L | findstr /C:"*EXTRA" >nul 2>nul || (
+    set "LINE=%%L"
+    rem ignora linhas vazias
+    if defined LINE echo %C_OK%   + !LINE!%C_RESET%
+    set "LINE="
+  )
+)
+
 echo %C_INFO%[felixo]%C_RESET% Aplicando arquivos...
 robocopy "%REPO_TMP%" "%DEST_NAME%" /MIR /NFL /NDL /NJH /NJS /NP >nul
 if %ERRORLEVEL% GEQ 8 (

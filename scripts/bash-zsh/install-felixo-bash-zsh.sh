@@ -165,16 +165,28 @@ felixo() {
   fi
 
   if [ -s "\$changes_file" ]; then
-    local _cc
-    _cc="\$(wc -l < "\$changes_file" | tr -d ' ')"
-    _fok "Atualizado para \${source_sha} com \${_cc} mudanca(s):"
-    sed "s/^/\${_d}  /; s/\\\$/\${_r}/" "\$changes_file"
+    # Classifica as mudancas do rsync em novo / atualizado / removido.
+    local _n_novo _n_upd _n_del _total
+    _n_novo="\$(grep -c '^>f+++++++++ ' "\$changes_file" 2>/dev/null)"; _n_novo=\${_n_novo:-0}
+    _n_del="\$(grep -c '^\\*deleting'   "\$changes_file" 2>/dev/null)"; _n_del=\${_n_del:-0}
+    _n_upd="\$(grep -cE '^[>c]f'         "\$changes_file" 2>/dev/null)"; _n_upd=\${_n_upd:-0}
+    _n_upd=\$(( _n_upd - _n_novo ))
+    [ "\$_n_upd" -lt 0 ] && _n_upd=0
+    _total=\$(( _n_novo + _n_upd + _n_del ))
+
+    _fok "Atualizado para \${source_sha}: \${_total} mudanca(s) -> \${_o}+\${_n_novo} novo(s)\${_r}, \${_w}~\${_n_upd} atualizado(s)\${_r}, \${_e}-\${_n_del} removido(s)\${_r}"
+    # Lista completa, com rotulos coloridos por tipo.
+    awk -v o="\$_o" -v w="\$_w" -v e="\$_e" -v r="\$_r" '
+      /^\\*deleting/   { p=\$0; sub(/^\\*deleting[[:space:]]+/,"",p); printf "  %s- removido:  %s %s\\n", e, r, p; next }
+      /^>f\\+{9} /     { p=\$0; sub(/^>f\\+{9} /,"",p);              printf "  %s+ novo:      %s %s\\n", o, r, p; next }
+      /^[>c]f/         { p=\$0; sub(/^[^ ]+ /,"",p);                printf "  %s~ atualizado:%s %s\\n", w, r, p; next }
+    ' "\$changes_file"
   else
     _fok "Ja estava atualizado em \${source_sha}. Nenhuma mudanca."
   fi
 
   rm -f "\$changes_file"; rm -rf "\$tmp_dir"
-  _fok "Concluido."
+  _fok "Concluido em \${dest}"
 }
 $BLOCK_END
 BLOCK
@@ -214,7 +226,7 @@ install() {
   log "Pasta de destino: ${C_DIM}${DEST_NAME}${C_RESET}"
   log "Abra um novo terminal ou rode: ${C_DIM}source \"$rc_file\"${C_RESET}"
   log "Depois, em qualquer pasta:"
-  log "  ${C_DIM}felixo${C_RESET}                   -> baixa core/ e guias/"
+  log "  ${C_DIM}felixo${C_RESET}                   -> baixa tudo, menos o submodulo"
   log "  ${C_DIM}felixo --with-submodules${C_RESET} -> inclui o banco de componentes"
 }
 

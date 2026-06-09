@@ -154,6 +154,8 @@ felixo                   # baixa tudo, menos o submodulo componets-database
 felixo --with-submodules # inclui o banco de componentes
 ```
 
+Ao terminar, o `felixo` mostra um **resumo do que mudou** — arquivos **novos**, **atualizados** e **removidos** (com a contagem e a lista completa, em cores). Assim voce ve exatamente o que foi sincronizado.
+
 Os instaladores sao **idempotentes**: rodar de novo apenas atualiza a definicao do comando, sem duplicar.
 
 ---

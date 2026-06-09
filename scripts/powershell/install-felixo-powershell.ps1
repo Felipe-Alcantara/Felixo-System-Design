@@ -114,15 +114,52 @@ function felixo {
         New-Item -ItemType Directory -Force -Path `$dest | Out-Null
 
         _flog 'Aplicando arquivos...'
+
+        # Classifica as mudancas (novo / atualizado / removido) comparando o
+        # destino atual com a nova versao ANTES de aplicar.
+        function _relmap(`$root) {
+            `$map = @{}
+            if (Test-Path `$root) {
+                Get-ChildItem -Path `$root -Recurse -File -Force | ForEach-Object {
+                    `$rel = `$_.FullName.Substring(`$root.Length).TrimStart('\','/')
+                    `$map[`$rel] = (Get-FileHash -Path `$_.FullName -Algorithm MD5).Hash
+                }
+            }
+            `$map
+        }
+        `$srcMap = _relmap `$repoTmp
+        `$dstMap = _relmap `$dest
+        `$novo = @(); `$upd = @(); `$del = @()
+        foreach (`$k in `$srcMap.Keys) {
+            if (-not `$dstMap.ContainsKey(`$k)) { `$novo += `$k }
+            elseif (`$dstMap[`$k] -ne `$srcMap[`$k]) { `$upd += `$k }
+        }
+        foreach (`$k in `$dstMap.Keys) { if (-not `$srcMap.ContainsKey(`$k)) { `$del += `$k } }
+
+        # Aplica os arquivos (espelhando o destino).
         if (Get-Command robocopy -ErrorAction SilentlyContinue) {
             `$null = robocopy `$repoTmp `$dest /MIR /NFL /NDL /NJH /NJS /NP
             if (`$LASTEXITCODE -ge 8) { _ferr 'Falha ao sincronizar os arquivos (robocopy).'; return }
         } else {
+            Get-ChildItem -Path `$dest -Force | Remove-Item -Recurse -Force
             Copy-Item -Path (Join-Path `$repoTmp '*') -Destination `$dest -Recurse -Force
         }
 
-        _fok "Atualizado para `$sha em: `$dest"
-        _fok 'Concluido.'
+        `$total = `$novo.Count + `$upd.Count + `$del.Count
+        if (`$total -gt 0) {
+            Write-Host ("[felixo OK] Atualizado para `$sha`: `$total mudanca(s) -> ") -NoNewline -ForegroundColor Green
+            Write-Host ("+`$(`$novo.Count) novo(s)") -NoNewline -ForegroundColor Green
+            Write-Host ', ' -NoNewline
+            Write-Host ("~`$(`$upd.Count) atualizado(s)") -NoNewline -ForegroundColor Yellow
+            Write-Host ', ' -NoNewline
+            Write-Host ("-`$(`$del.Count) removido(s)") -ForegroundColor Red
+            foreach (`$f in `$novo) { Write-Host ('  + novo:       ' + `$f) -ForegroundColor Green }
+            foreach (`$f in `$upd)  { Write-Host ('  ~ atualizado: ' + `$f) -ForegroundColor Yellow }
+            foreach (`$f in `$del)  { Write-Host ('  - removido:   ' + `$f) -ForegroundColor Red }
+        } else {
+            _fok "Ja estava atualizado em `$sha. Nenhuma mudanca."
+        }
+        _fok "Concluido em `$dest"
     }
     catch {
         _ferr "Erro inesperado: `$(`$_.Exception.Message)"
