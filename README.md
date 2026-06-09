@@ -21,11 +21,11 @@
 ## Indice
 
 - [Sobre o Repositorio](#-sobre-o-repositorio)
+- [Como Usar em Outros Projetos](#-como-usar-em-outros-projetos)
 - [Minha Stack](#%EF%B8%8F-minha-stack)
 - [Estrutura do Repositorio](#-estrutura-do-repositorio)
 - [Core — Padroes Obrigatorios](#-core--padroes-obrigatorios)
 - [Guias — Padroes Especificos](#-guias--padroes-especificos)
-- [Como Usar em Outros Projetos](#-como-usar-em-outros-projetos)
 - [Licenca](#-licenca)
 - [Autor](#-autor)
 
@@ -48,6 +48,219 @@ Padroes de qualidade que devem acompanhar **todo projeto**:
 ### `guias/` — Opcional
 
 Guias reutilizaveis extraidos de **projetos reais**, organizados por dominio. Use apenas quando o projeto precisar daquela funcionalidade especifica.
+
+---
+
+## Como Usar em Outros Projetos
+
+Use os metodos abaixo do mais usual para o mais especifico.
+
+> **Sobre o submodulo `componets-database/`**
+> Este repositorio inclui o submodulo `componets-database/` (banco de componentes UI). Ele **so e necessario** se voce quiser o banco de componentes — para os padroes `core/` e `guias/` ele e dispensavel. Por isso cada metodo abaixo traz duas variantes: **sem o submodulo** (mais leve) e **com o submodulo** (completo). ZIP e `npx degit` nunca trazem submodulos — para o banco de componentes, use uma das variantes `git`.
+
+### 1. Sincronizar `felixo-standards` com a versao mais recente (Recomendado)
+
+Melhor opcao quando voce quer manter uma pasta local sem vinculo com o git original e poder rodar o comando quantas vezes quiser para atualizar.
+
+**Linux / macOS / Git Bash (sem submodulo):**
+```bash
+tmp_dir="$(mktemp -d)" && git clone --depth 1 https://github.com/Felipe-Alcantara/Felixo-System-Design.git "$tmp_dir/repo" && rm -rf "$tmp_dir/repo/.git" && mkdir -p ./felixo-standards && rsync -a --delete "$tmp_dir/repo/" ./felixo-standards/ && rm -rf "$tmp_dir"
+```
+
+**Linux / macOS / Git Bash (com submodulo):**
+```bash
+tmp_dir="$(mktemp -d)" && git clone --depth 1 --recurse-submodules https://github.com/Felipe-Alcantara/Felixo-System-Design.git "$tmp_dir/repo" && find "$tmp_dir/repo" -name .git -prune -exec rm -rf {} + && mkdir -p ./felixo-standards && rsync -a --delete "$tmp_dir/repo/" ./felixo-standards/ && rm -rf "$tmp_dir"
+```
+
+**PowerShell (Windows) — sem submodulo:**
+```powershell
+$tmpDir = Join-Path $env:TEMP ("felixo-standards-" + [guid]::NewGuid())
+git clone --depth 1 https://github.com/Felipe-Alcantara/Felixo-System-Design.git $tmpDir
+Remove-Item -Recurse -Force (Join-Path $tmpDir ".git")
+New-Item -ItemType Directory -Force -Path "./felixo-standards" | Out-Null
+robocopy $tmpDir "./felixo-standards" /MIR | Out-Null
+Remove-Item -Recurse -Force $tmpDir
+```
+
+**PowerShell (Windows) — com submodulo:**
+```powershell
+$tmpDir = Join-Path $env:TEMP ("felixo-standards-" + [guid]::NewGuid())
+git clone --depth 1 --recurse-submodules https://github.com/Felipe-Alcantara/Felixo-System-Design.git $tmpDir
+Get-ChildItem $tmpDir -Recurse -Force -Filter ".git" | Remove-Item -Recurse -Force
+New-Item -ItemType Directory -Force -Path "./felixo-standards" | Out-Null
+robocopy $tmpDir "./felixo-standards" /MIR | Out-Null
+Remove-Item -Recurse -Force $tmpDir
+```
+
+**CMD (Windows) — sem submodulo:**
+```cmd
+set TMP_DIR=%TEMP%\felixo-standards-%RANDOM% && git clone --depth 1 https://github.com/Felipe-Alcantara/Felixo-System-Design.git %TMP_DIR% && rmdir /s /q %TMP_DIR%\.git && if not exist felixo-standards mkdir felixo-standards && robocopy %TMP_DIR% felixo-standards /MIR >nul && rmdir /s /q %TMP_DIR%
+```
+
+**CMD (Windows) — com submodulo:**
+```cmd
+set TMP_DIR=%TEMP%\felixo-standards-%RANDOM% && git clone --depth 1 --recurse-submodules https://github.com/Felipe-Alcantara/Felixo-System-Design.git %TMP_DIR% && for /d /r %TMP_DIR% %G in (.git) do @if exist "%G" rmdir /s /q "%G" && if not exist felixo-standards mkdir felixo-standards && robocopy %TMP_DIR% felixo-standards /MIR >nul && rmdir /s /q %TMP_DIR%
+```
+
+- **Use quando**: quer todos os arquivos como base independente, com atualizacao simples depois
+- **Requisito**: Git
+- **Vinculo com o git original?** Nao
+
+#### Atalho global `felixo` (Bash/Zsh)
+
+A funcao aceita `--with-submodules` (ou `-s`) para incluir o banco de componentes; sem a flag, traz apenas `core/` e `guias/`.
+
+```bash
+felixo() {
+  local dest="./felixo-standards"
+  local repo_url="https://github.com/Felipe-Alcantara/Felixo-System-Design.git"
+  local clone_args=(--depth 1)
+  [[ "$1" == "--with-submodules" || "$1" == "-s" ]] && clone_args+=(--recurse-submodules)
+  local tmp_dir
+  tmp_dir="$(mktemp -d)" || return 1
+  git clone "${clone_args[@]}" "$repo_url" "$tmp_dir/repo" || { rm -rf "$tmp_dir"; return 1; }
+  find "$tmp_dir/repo" -name .git -prune -exec rm -rf {} +
+  mkdir -p "$dest"
+  rsync -a --delete "$tmp_dir/repo/" "$dest/"
+  rm -rf "$tmp_dir"
+}
+```
+
+---
+
+### 2. Baixar o repositorio inteiro como ZIP
+
+> **Submodulo:** o ZIP do GitHub **nunca** inclui o submodulo `componets-database/` (limitacao da plataforma). Se precisar do banco de componentes, use o metodo 1 (com submodulo) ou o metodo 4.
+
+**PowerShell (Windows):**
+```powershell
+Invoke-WebRequest -Uri "https://github.com/Felipe-Alcantara/Felixo-System-Design/archive/refs/heads/main.zip" -OutFile "felixo.zip"
+Expand-Archive "felixo.zip" -DestinationPath .
+Rename-Item "Felixo-System-Design-main" "felixo-standards"
+Remove-Item "felixo.zip"
+```
+
+**CMD (Windows):**
+```cmd
+curl -L https://github.com/Felipe-Alcantara/Felixo-System-Design/archive/refs/heads/main.zip -o felixo.zip
+tar -xf felixo.zip
+ren Felixo-System-Design-main felixo-standards
+del felixo.zip
+```
+
+**Linux / macOS:**
+```bash
+curl -L https://github.com/Felipe-Alcantara/Felixo-System-Design/archive/refs/heads/main.zip -o felixo.zip
+unzip felixo.zip && mv Felixo-System-Design-main felixo-standards && rm felixo.zip
+```
+
+---
+
+### 3. Baixar com `npx degit`
+
+> **Submodulo:** `degit` **nao** baixa submodulos. O comando abaixo traz `core/` e `guias/`, mas `componets-database/` vem vazia. Para o banco de componentes, use o metodo 1 (com submodulo) ou o metodo 4.
+
+```bash
+npx degit Felipe-Alcantara/Felixo-System-Design ./felixo-standards
+```
+
+---
+
+### 4. Clonar com `git`
+
+**Sem submodulo** (apenas `core/` e `guias/`):
+```bash
+git clone --depth 1 https://github.com/Felipe-Alcantara/Felixo-System-Design.git ./felixo-standards
+```
+
+**Com submodulo** (inclui `componets-database/`):
+```bash
+git clone --depth 1 --recurse-submodules https://github.com/Felipe-Alcantara/Felixo-System-Design.git ./felixo-standards
+```
+
+> Se ja clonou sem `--recurse-submodules` e quiser o submodulo depois, rode dentro do repositorio:
+> ```bash
+> git submodule update --init --recursive
+> ```
+
+---
+
+### 5. Baixar apenas `guias/` com `npx degit`
+
+> **Submodulo:** nao se aplica — `componets-database/` fica fora de `guias/`.
+
+```bash
+npx degit Felipe-Alcantara/Felixo-System-Design/guias ./felixo-guias
+```
+
+---
+
+### 6. Baixar apenas `core/` com `git sparse-checkout`
+
+> **Submodulo:** nao se aplica — `componets-database/` fica fora de `core/`.
+
+
+```bash
+mkdir felixo-core
+cd felixo-core
+git init
+git remote add -f origin https://github.com/Felipe-Alcantara/Felixo-System-Design.git
+git sparse-checkout init --no-cone
+git sparse-checkout set core
+git pull origin main
+```
+
+---
+
+### 7. Baixar apenas `guias/` com `git sparse-checkout`
+
+> **Submodulo:** nao se aplica — `componets-database/` fica fora de `guias/`.
+
+```bash
+mkdir felixo-guias
+cd felixo-guias
+git init
+git remote add -f origin https://github.com/Felipe-Alcantara/Felixo-System-Design.git
+git sparse-checkout init --no-cone
+git sparse-checkout set guias
+git pull origin main
+```
+
+---
+
+### 8. Clonar tudo e copiar so a pasta desejada
+
+**Sem submodulo:**
+```bash
+git clone --depth 1 https://github.com/Felipe-Alcantara/Felixo-System-Design.git ./felixo-standards
+```
+
+**Com submodulo** (inclui `componets-database/`):
+```bash
+git clone --depth 1 --recurse-submodules https://github.com/Felipe-Alcantara/Felixo-System-Design.git ./felixo-standards
+```
+
+Depois, copie manualmente a pasta desejada:
+
+- `./felixo-standards/core`
+- `./felixo-standards/guias`
+- `./felixo-standards/componets-database` (se clonou com submodulo)
+
+---
+
+### Escolha Rapida por Cenario
+
+| Cenario | Melhor opcao | Traz o submodulo? |
+|---------|--------------|-------------------|
+| Quero `core/` + `guias/` com atualizacao simples | sincronizacao sem `.git`, variante **sem submodulo** (metodo 1 / `felixo`) | Nao |
+| Quero tudo, incluindo o banco de componentes | sincronizacao **com submodulo** (metodo 1 / `felixo -s`) | Sim |
+| Quero tudo da forma mais simples | ZIP | Nao (ZIP nao suporta) |
+| Quero tudo sem `.git` via terminal | `npx degit` | Nao (degit nao suporta) |
+| Quero tudo e depois atualizar via git | `git clone` (com ou sem `--recurse-submodules`) | Depende da flag |
+| Quero so `guias/` sem `git` | `npx degit` em `guias` | N/A |
+| Quero so `guias/` com atualizacao futura | `git sparse-checkout` | N/A |
+| Quero so `core/` com atualizacao futura | `git sparse-checkout` | N/A |
+| Quero uma opcao universal | clone completo (`--recurse-submodules`) + copiar a pasta | Sim |
 
 ---
 
@@ -323,167 +536,6 @@ Padrao de **scraping multiformato** com Playwright, parsers offline, JSON embuti
 > **Aviso:** o login/autorizacao do Railway falha com frequencia. O guia instrui o agente a **parar e enviar o passo a passo manual ao usuario** (terminal ou interface) apos erros repetidos de conexao, em vez de insistir.
 
 [Ver guia](guias/integracao/GUIA-DEPLOY-RAILWAY.md)
-
----
-
-## Como Usar em Outros Projetos
-
-Use os metodos abaixo do mais usual para o mais especifico.
-
-### 1. Sincronizar `felixo-standards` com a versao mais recente (Recomendado)
-
-Melhor opcao quando voce quer manter uma pasta local sem vinculo com o git original e poder rodar o comando quantas vezes quiser para atualizar.
-
-**Linux / macOS / Git Bash:**
-```bash
-tmp_dir="$(mktemp -d)" && git clone --depth 1 https://github.com/Felipe-Alcantara/Felixo-System-Design.git "$tmp_dir/repo" && rm -rf "$tmp_dir/repo/.git" && mkdir -p ./felixo-standards && rsync -a --delete "$tmp_dir/repo/" ./felixo-standards/ && rm -rf "$tmp_dir"
-```
-
-**PowerShell (Windows):**
-```powershell
-$tmpDir = Join-Path $env:TEMP ("felixo-standards-" + [guid]::NewGuid())
-git clone --depth 1 https://github.com/Felipe-Alcantara/Felixo-System-Design.git $tmpDir
-Remove-Item -Recurse -Force (Join-Path $tmpDir ".git")
-New-Item -ItemType Directory -Force -Path "./felixo-standards" | Out-Null
-robocopy $tmpDir "./felixo-standards" /MIR | Out-Null
-Remove-Item -Recurse -Force $tmpDir
-```
-
-**CMD (Windows):**
-```cmd
-set TMP_DIR=%TEMP%\felixo-standards-%RANDOM% && git clone --depth 1 https://github.com/Felipe-Alcantara/Felixo-System-Design.git %TMP_DIR% && rmdir /s /q %TMP_DIR%\.git && if not exist felixo-standards mkdir felixo-standards && robocopy %TMP_DIR% felixo-standards /MIR >nul && rmdir /s /q %TMP_DIR%
-```
-
-- **Use quando**: quer todos os arquivos como base independente, com atualizacao simples depois
-- **Requisito**: Git
-- **Vinculo com o git original?** Nao
-
-#### Atalho global `felixo` (Bash/Zsh)
-
-```bash
-felixo() {
-  local dest="./felixo-standards"
-  local repo_url="https://github.com/Felipe-Alcantara/Felixo-System-Design.git"
-  local tmp_dir
-  tmp_dir="$(mktemp -d)" || return 1
-  git clone --depth 1 "$repo_url" "$tmp_dir/repo" || { rm -rf "$tmp_dir"; return 1; }
-  rm -rf "$tmp_dir/repo/.git"
-  mkdir -p "$dest"
-  rsync -a --delete "$tmp_dir/repo/" "$dest/"
-  rm -rf "$tmp_dir"
-}
-```
-
----
-
-### 2. Baixar o repositorio inteiro como ZIP
-
-**PowerShell (Windows):**
-```powershell
-Invoke-WebRequest -Uri "https://github.com/Felipe-Alcantara/Felixo-System-Design/archive/refs/heads/main.zip" -OutFile "felixo.zip"
-Expand-Archive "felixo.zip" -DestinationPath .
-Rename-Item "Felixo-System-Design-main" "felixo-standards"
-Remove-Item "felixo.zip"
-```
-
-**CMD (Windows):**
-```cmd
-curl -L https://github.com/Felipe-Alcantara/Felixo-System-Design/archive/refs/heads/main.zip -o felixo.zip
-tar -xf felixo.zip
-ren Felixo-System-Design-main felixo-standards
-del felixo.zip
-```
-
-**Linux / macOS:**
-```bash
-curl -L https://github.com/Felipe-Alcantara/Felixo-System-Design/archive/refs/heads/main.zip -o felixo.zip
-unzip felixo.zip && mv Felixo-System-Design-main felixo-standards && rm felixo.zip
-```
-
----
-
-### 3. Baixar com `npx degit`
-
-```bash
-npx degit Felipe-Alcantara/Felixo-System-Design ./felixo-standards
-```
-
----
-
-### 4. Clonar com `git`
-
-```bash
-git clone --depth 1 --recurse-submodules https://github.com/Felipe-Alcantara/Felixo-System-Design.git ./felixo-standards
-```
-
-> Se ja clonou sem `--recurse-submodules`, rode dentro do repositorio:
-> ```bash
-> git submodule update --init --recursive
-> ```
-
----
-
-### 5. Baixar apenas `guias/` com `npx degit`
-
-```bash
-npx degit Felipe-Alcantara/Felixo-System-Design/guias ./felixo-guias
-```
-
----
-
-### 6. Baixar apenas `core/` com `git sparse-checkout`
-
-```bash
-mkdir felixo-core
-cd felixo-core
-git init
-git remote add -f origin https://github.com/Felipe-Alcantara/Felixo-System-Design.git
-git sparse-checkout init --no-cone
-git sparse-checkout set core
-git pull origin main
-```
-
----
-
-### 7. Baixar apenas `guias/` com `git sparse-checkout`
-
-```bash
-mkdir felixo-guias
-cd felixo-guias
-git init
-git remote add -f origin https://github.com/Felipe-Alcantara/Felixo-System-Design.git
-git sparse-checkout init --no-cone
-git sparse-checkout set guias
-git pull origin main
-```
-
----
-
-### 8. Clonar tudo e copiar so a pasta desejada
-
-```bash
-git clone --depth 1 --recurse-submodules https://github.com/Felipe-Alcantara/Felixo-System-Design.git ./felixo-standards
-```
-
-Depois, copie manualmente:
-
-- `./felixo-standards/core`
-- `./felixo-standards/guias`
-
----
-
-### Escolha Rapida por Cenario
-
-| Cenario | Melhor opcao |
-|---------|--------------|
-| Quero tudo com atualizacao simples | sincronizacao sem `.git` (metodo 1 / atalho `felixo`) |
-| Quero tudo da forma mais simples | ZIP |
-| Quero tudo sem `.git` via terminal | `npx degit` |
-| Quero tudo e depois atualizar | `git clone --recurse-submodules` |
-| Quero so `guias/` sem `git` | `npx degit` em `guias` |
-| Quero so `guias/` com atualizacao futura | `git sparse-checkout` |
-| Quero so `core/` com atualizacao futura | `git sparse-checkout` |
-| Quero uma opcao universal | clone completo (`--recurse-submodules`) + copiar a pasta |
 
 ---
 
