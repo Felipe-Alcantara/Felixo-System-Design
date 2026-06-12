@@ -287,20 +287,53 @@ Cada símbolo segue o mesmo pipeline de criação:
 11. anexar o elemento ao DOM
 12. remover o elemento após o fim do ciclo
 
-Trecho central:
+Função completa (cobre os 12 passos do pipeline, pronta para copiar):
 
 ```js
-const durations = [6, 7, 8, 9, 10];
-const duration = durations[Math.floor(Math.random() * durations.length)];
-element.style.animationDuration = duration + 's';
+const mathSymbols = [
+    '∑', '∫', '∞', 'π', '√',
+    'α', 'β', 'γ', 'θ', 'λ', 'μ', 'σ', 'φ',
+    '÷', '×', '±', '≠', '≈', '≤', '≥',
+    '∈', '∀', '∃', '∅', '∩', '∪', '⊂', '⊆',
+    '0', '1', '2', '3', '4', '5', '6', '7', '8', '9',
+    'sin', 'cos', 'tan', 'log', 'ln', 'x²', 'x³', 'dy/dx', 'lim',
+];
 
-mathBg.appendChild(element);
+function createMathElement() {
+    const mathBg = document.getElementById('math-bg');
+    if (!mathBg) return;
 
-setTimeout(() => {
-    if (element.parentNode) {
-        element.remove();
-    }
-}, duration * 1000 + 100);
+    const element = document.createElement('div');
+    element.className = 'math-symbol';
+    element.textContent =
+        mathSymbols[Math.floor(Math.random() * mathSymbols.length)];
+
+    // posição inicial em qualquer ponto da viewport
+    element.style.left = Math.random() * 100 + 'vw';
+    element.style.top = Math.random() * 100 + 'vh';
+
+    // tamanho 26-44px e opacidade base 0.10-0.18
+    element.style.fontSize = 26 + Math.random() * 18 + 'px';
+    element.style.opacity = (0.10 + Math.random() * 0.08).toFixed(2);
+
+    // trajetória individual lida pelo @keyframes float-drift
+    element.style.setProperty('--move-x', Math.random() * 160 - 80 + 'px');
+    element.style.setProperty('--move-y', Math.random() * 160 - 80 + 'px');
+    element.style.setProperty('--rotation', Math.random() * 90 - 45 + 'deg');
+
+    const durations = [6, 7, 8, 9, 10];
+    const duration = durations[Math.floor(Math.random() * durations.length)];
+    element.style.animationDuration = duration + 's';
+
+    mathBg.appendChild(element);
+
+    // remove o nó após o ciclo para o DOM não crescer indefinidamente
+    setTimeout(() => {
+        if (element.parentNode) {
+            element.remove();
+        }
+    }, duration * 1000 + 100);
+}
 ```
 
 ### 8.3 Impacto arquitetural dessa abordagem
@@ -432,6 +465,78 @@ Hoje o projeto possui:
 - uma **variante simplificada** na página de regra de 3
 
 Isso é relevante para o repositório de System Design porque mostra que o padrão visual principal ainda não foi extraído para uma camada compartilhada entre todas as páginas web do projeto.
+
+## 12-A. RECEITA STANDALONE (copiar e colar)
+
+Para reutilizar o subsistema em qualquer página web — sem Brython e sem o restante da calculadora — bastam três blocos: o CSS das seções 5, 6 e 7, o JS da seção 8 e a estrutura mínima abaixo.
+
+### 12-A.1 HTML mínimo
+
+```html
+<body>
+    <div class="math-background" id="math-bg"></div>
+
+    <div class="main-container">
+        <!-- seu conteúdo aqui (z-index: 10) -->
+    </div>
+
+    <script src="background.js"></script>
+</body>
+```
+
+### 12-A.2 Inicialização e tema (JavaScript puro)
+
+O controle de tema original é feito em Brython, mas o equivalente em JavaScript puro é este:
+
+```js
+// background.js — junte com mathSymbols e createMathElement() da seção 8
+function initMathBackground() {
+    // carga inicial rápida: 100 elementos com atraso incremental
+    for (let i = 0; i < 100; i++) {
+        setTimeout(() => createMathElement(), i * 80);
+    }
+    // renovação contínua: 2 símbolos novos a cada 250ms
+    setInterval(() => {
+        createMathElement();
+        createMathElement();
+    }, 250);
+}
+
+function toggleTheme() {
+    document.body.classList.toggle('light-theme');
+    localStorage.setItem(
+        'theme',
+        document.body.classList.contains('light-theme') ? 'light' : 'dark'
+    );
+}
+
+function loadTheme() {
+    if (localStorage.getItem('theme') === 'light') {
+        document.body.classList.add('light-theme');
+    }
+}
+
+loadTheme();
+initMathBackground();
+```
+
+### 12-A.3 Opções de adaptação
+
+| Quero... | Mude... |
+|----------|---------|
+| Outro tema (estrelas, código, música) | apenas o array `mathSymbols` e a cor em `.math-symbol` |
+| Fundo mais discreto | carga inicial para `30-50` elementos e `setInterval` para `500ms+` |
+| Fundo mais denso | mais chamadas de `createMathElement()` por ciclo |
+| Símbolos maiores/menores | a faixa `26 + Math.random() * 18` |
+| Sem troca de tema | remova `toggleTheme`/`loadTheme` e a regra `body.light-theme` |
+
+### 12-A.4 Resumo da receita
+
+1. **CSS**: gradiente no `body` (§5) + container `.math-background` (§6.1) + `.math-symbol` (§6.3) + `@keyframes float-drift` (§7).
+2. **HTML**: `div#math-bg` antes do conteúdo, conteúdo em `.main-container` com `z-index: 10`.
+3. **JS**: `createMathElement()` (§8) + `initMathBackground()` + tema opcional via `localStorage`.
+
+Ingredientes-chave: `pointer-events: none` no fundo, remoção sincronizada dos nós e trajetória individual via CSS custom properties.
 
 ## 13. PONTOS DE MANUTENÇÃO
 
