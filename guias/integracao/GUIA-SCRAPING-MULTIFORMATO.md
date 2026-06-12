@@ -15,7 +15,12 @@
 Este guia cobre:
 
 - coleta via HTTP simples;
-- consumo de API interna/nao documentada (JSON) como metodo preferido;
+- consumo de API oficial documentada (JSON) com paginacao por numero de pagina;
+- consumo de API interna/nao documentada (JSON) como metodo preferido sobre navegador;
+- coleta de feed RSS/Atom (XML) com parser offline e zero dependencia externa;
+- autenticacao em APIs oficiais: API key, OAuth Client Credentials, com segredos so do ambiente;
+- gestao de quota e rate-limit (`Retry-After`, backoff exponencial, escolha de endpoint barato);
+- coleta retomavel por checkpoint apos interrupcao/estouro de quota;
 - descoberta de token/`client_id` embutido em scripts da pagina;
 - resolucao de URL publica para entidade interna (endpoint `/resolve`);
 - paginacao por cursor (`next_href` / `linked_partitioning`) e resolucao em duas etapas (item so com id);
@@ -52,6 +57,8 @@ urllib (stdlib) ou Requests/httpx para I/O HTTP
 Playwright (ou Selenium) para navegador real
 BeautifulSoup4 para parser de HTML
 json (stdlib) para parser de API/JSON embutido
+xml.etree.ElementTree (stdlib) para feeds RSS/Atom
+base64 (stdlib) para credenciais Basic em OAuth Client Credentials
 Django ORM ou camada de persistencia equivalente
 PostgreSQL em producao
 SQLite como fallback local
@@ -63,7 +70,9 @@ Servidor HTTP local para captura assistida
 
 Regra pratica (do metodo mais barato para o mais caro):
 
-- Use **API interna/oficial em JSON** quando ela existir e cobrir o caso — e o metodo mais rapido, estavel e sem navegador (ver secao 10-A).
+- Use **API oficial documentada** quando ela existir — e a fonte mais estavel e respeitosa; pagina por numero ou cursor e pode exigir autenticacao (ver secoes 10-D e 10-F).
+- Use **feed RSS/Atom (XML)** quando a fonte publicar um feed publico — parser offline, sem credenciais, zero dependencia (ver secao 10-E).
+- Use **API interna/nao documentada em JSON** quando nao houver API oficial mas o front-end consumir uma — rapido e sem navegador (ver secao 10-A).
 - Use **requests/httpx + parser offline** quando o HTML ja trouxer os dados.
 - Use **JSON embutido na pagina** quando o DOM vier vazio mas os dados estiverem em `__NEXT_DATA__`, JSON-LD ou payload serializado.
 - Use **Playwright/Selenium** quando a pagina depender de JavaScript, lazy loading, popup, scroll infinito, paginacao dinamica ou interacao humana.
@@ -92,10 +101,13 @@ scraper_module/
       product_page.py
     adapters/
       base.py
-      http_api.py        # API interna/oficial em JSON (preferido, sem navegador)
+      official_api.py    # API oficial documentada em JSON (paginacao/auth)
+      rss_feed.py        # feed RSS/Atom (XML) com parser offline, sem credencial
+      http_api.py        # API interna/nao documentada em JSON (sem navegador)
       browser.py         # navegador real (Selenium/Playwright) como fallback
       example_source.py
     pipeline.py          # orquestra os metodos com fallback e falha segura
+    checkpoint.py        # estado de retomada (fora do controle de versao)
     manual_html/
       importer.py
     html_capture/
@@ -735,6 +747,272 @@ Regras:
 
 ---
 
+## 10-D. API oficial em JSON com paginacao por numero de pagina
+
+Quando a fonte publica uma **API oficial documentada**, ela e a melhor opcao: estavel, respeitosa
+com a fonte e sem depender de classes CSS nem de navegador. Muitas paginam por `page`/`per_page`
+(em vez de cursor — secao 10-A): voce avanca a pagina ate vir uma pagina **vazia ou menor que o
+tamanho cheio**, que sinaliza o fim.
+
+```python
+import json, time, urllib.error, urllib.request
+
+PER_PAGE = 100
+SLEEP_BETWEEN = 0.15
+
+
+def fetch_json(url: str, headers: dict):
+    req = urllib.request.Request(url, headers=headers)
+    with urllib.request.urlopen(req, timeout=30) as resp:
+        return json.loads(resp.read())
+
+
+def fetch_paginated(url_template: str, headers: dict) -> list:
+    """Pagina por numero ate a pagina vir vazia ou menor que PER_PAGE.
+    url_template contem {page} e {per_page}."""
+    items: list = []
+    page = 1
+    while True:
+        url = url_template.format(page=page, per_page=PER_PAGE)
+        try:
+            batch = fetch_json(url, headers)
+        except urllib.error.HTTPError as e:
+            if e.code in (400, 404):   # algumas APIs sinalizam o fim com 404
+                break
+            raise
+        if not batch:
+            break
+        items.extend(batch)
+        if len(batch) < PER_PAGE:      # pagina incompleta = ultima pagina
+            break
+        page += 1
+        time.sleep(SLEEP_BETWEEN)      # cortesia entre paginas
+    return items
+```
+
+Boas praticas:
+
+- Trate o **fim** por pagina vazia **ou** menor que `per_page` **ou** `4xx` esperado — nunca por um
+  numero fixo de paginas adivinhado.
+- Para endpoints que devolvem tudo de uma vez, tenha uma variante `fetch_single` com retry/backoff.
+- **Degrade com elegancia**: se um endpoint secundario (ex.: programas/categorias) falhar, derive o
+  dado dos itens ja coletados em vez de abortar a coleta inteira.
+- User-Agent sempre presente e identificavel.
+
+---
+
+## 10-E. Feed RSS/Atom (XML) com parser offline
+
+Muitas fontes (podcasts, blogs, releases) publicam um **feed RSS/Atom publico**. E HTTP simples +
+XML estatico: da para coletar so com a stdlib (`xml.etree.ElementTree`), **sem credenciais e sem
+dependencia externa**, e o parser e totalmente offline/testavel.
+
+Pontos de atencao especificos de feed:
+
+1. **Namespaces** — campos uteis vivem em namespaces (`itunes:`, `content:`, `atom:`, `dc:`).
+   Mapeie-os e resolva o nome qualificado ao buscar.
+2. **Paginacao Atom** — feeds longos encadeiam paginas via `<atom:link rel="next">`; siga ate sumir
+   ou repetir a URL atual (guarda contra loop).
+3. **Datas RFC 2822** — `pubDate` vem como `Thu, 18 Apr 2024 10:55:10 GMT`; converta com
+   `email.utils.parsedate_to_datetime`.
+4. **Duracao heterogenea** — `itunes:duration` pode ser `HH:MM:SS`, `MM:SS` ou segundos inteiros.
+5. **Enclosure** — o arquivo de midia esta em `<enclosure url=... type="audio/...">`.
+6. **HTML na descricao** — limpe tags e decodifique entidades (`html.unescape`).
+7. **Item invalido** (sem guid/titulo) e descartado, nunca vira dado parcial enganoso.
+
+```python
+import xml.etree.ElementTree as ET
+from email.utils import parsedate_to_datetime
+
+NS = {
+    "itunes": "http://www.itunes.com/dtds/podcast-1.0.dtd",
+    "content": "http://purl.org/rss/1.0/modules/content/",
+    "atom": "http://www.w3.org/2005/Atom",
+}
+
+
+def _text(el: ET.Element, tag: str) -> str:
+    """Texto de um filho, com suporte a namespace ('itunes:duration')."""
+    if ":" in tag:
+        prefix, local = tag.split(":", 1)
+        ns = NS.get(prefix)
+        child = el.find(f"{{{ns}}}{local}") if ns else el.find(tag)
+    else:
+        child = el.find(tag)
+    return (child.text or "").strip() if child is not None else ""
+
+
+def next_page_url(root: ET.Element) -> str | None:
+    """URL da proxima pagina se o feed usar <atom:link rel='next'>."""
+    channel = root.find("channel")
+    if channel is None:
+        return None
+    for link in channel.findall(f"{{{NS['atom']}}}link"):
+        if link.get("rel") == "next":
+            return link.get("href")
+    return None
+```
+
+A coleta segue paginas ate `next_page_url` retornar `None` (ou repetir a URL atual), com `time.sleep`
+curto entre elas e dedupe por guid.
+
+---
+
+## 10-F. Autenticacao em API oficial: API key, OAuth Client Credentials, quota e rate-limit
+
+Quando a API oficial exige autenticacao, o padrao muda em tres pontos: **credencial, limites e
+falhas**. A regra inegociavel: **segredos vem sempre do ambiente** (env var), nunca de arquivo,
+argumento de CLI ou commit, e **nunca aparecem em URL, log ou mensagem de erro**.
+
+### API key (chave na query ou header)
+
+```python
+import os, urllib.parse, urllib.request
+
+api_key = os.environ.get("PROVIDER_API_KEY", "").strip()
+if not api_key:
+    raise SystemExit('Defina a chave: export PROVIDER_API_KEY="..."')
+
+# A chave vai na query desta API — por isso a URL NUNCA entra em log/traceback.
+url = f"{API_BASE}/items?{urllib.parse.urlencode({**params, 'key': api_key})}"
+```
+
+Ao tratar erro, leia o corpo da resposta para uma mensagem objetiva, mas **monte a mensagem sem a
+URL** (que carrega a chave):
+
+```python
+def safe_error(exc) -> tuple[str, str]:
+    """(mensagem, reason) do corpo de erro da API, sem vazar a chave."""
+    try:
+        body = json.loads(exc.read())
+        err = body.get("error", {})
+        reason = (err.get("errors") or [{}])[0].get("reason", "")
+        return err.get("message", str(exc.reason)), reason
+    except Exception:
+        return str(exc.reason), ""
+```
+
+### OAuth Client Credentials Flow (sem usuario)
+
+Para APIs que entregam um token de aplicacao (sem login de usuario), troque `client_id`+`secret` por
+um access token de curta duracao. A credencial vai no header `Authorization: Basic`, **nunca na URL**.
+
+```python
+import base64
+
+def get_access_token(client_id: str, client_secret: str) -> str:
+    creds = base64.b64encode(f"{client_id}:{client_secret}".encode()).decode()
+    data = urllib.parse.urlencode({"grant_type": "client_credentials"}).encode()
+    req = urllib.request.Request(
+        AUTH_URL, data=data, method="POST",
+        headers={"Authorization": f"Basic {creds}",
+                 "Content-Type": "application/x-www-form-urlencoded"},
+    )
+    with urllib.request.urlopen(req, timeout=30) as resp:
+        token = json.loads(resp.read()).get("access_token", "")
+    if not token:
+        raise RuntimeError("Token vazio na resposta de autenticacao.")
+    return token
+```
+
+Depois, todas as chamadas usam `Authorization: Bearer {token}`. O token expira (ex.: 3600 s); para
+uma coleta unica, pegar um no inicio basta.
+
+### Quota diaria e escolha de endpoint barato
+
+APIs com **quota** cobram por chamada/endpoint. Conheca o custo e prefira o caminho barato:
+
+- Liste por um endpoint barato (ex.: a "playlist de uploads" custa 1 unidade/pagina) em vez de um
+  endpoint de busca caro (100 unidades/chamada).
+- Pegue detalhes **em lote** (ex.: 50 ids por chamada) em vez de 1 chamada por item.
+- Documente o custo no topo do script para o proximo dev nao regredir.
+- Ao esbarrar na quota, levante uma excecao dedicada (`QuotaExceeded`) que aciona o **checkpoint**
+  (secao 10-G) em vez de simplesmente abortar.
+
+### Rate-limit (429) e erros transitorios (5xx)
+
+```python
+BACKOFF_BASE, MAX_RETRIES = 2.0, 5
+
+def api_get(url: str, headers: dict):
+    req = urllib.request.Request(url, headers=headers)
+    for attempt in range(MAX_RETRIES):
+        try:
+            with urllib.request.urlopen(req, timeout=30) as resp:
+                return json.loads(resp.read())
+        except urllib.error.HTTPError as exc:
+            if exc.code == 429:   # respeita Retry-After; senao, backoff
+                wait = int(exc.headers.get("Retry-After", 0)) or int(BACKOFF_BASE ** attempt)
+                time.sleep(wait)
+                if attempt == MAX_RETRIES - 1:
+                    raise RateLimited("Rate-limit esgotado.") from None
+                continue
+            if exc.code >= 500 and attempt < MAX_RETRIES - 1:
+                time.sleep(BACKOFF_BASE ** attempt)   # backoff exponencial
+                continue
+            raise   # 4xx definitivo: nao adianta repetir
+```
+
+Regras: respeite `Retry-After` quando vier; backoff exponencial como fallback; **nao** repita `4xx`
+definitivo (exceto 429); cap de tentativas; e nunca martele a API em loop apertado.
+
+---
+
+## 10-G. Coleta retomavel por checkpoint
+
+Coletas longas (muitas paginas, quota diaria, rate-limit, rede instavel) devem **sobreviver a uma
+interrupcao**. O padrao: salvar o progresso num arquivo de checkpoint local e, ao rodar o **mesmo
+comando** de novo, retomar de onde parou — sem refazer chamadas nem duplicar itens.
+
+Estrutura tipica:
+
+1. **Amarre o checkpoint ao recurso** (id do canal/show/playlist). Ao carregar, se o id nao bater,
+   ignore o checkpoint — evita retomar com dados de outro recurso por engano.
+2. **Atualize a cada passo barato** (a cada pagina/lote): grave ids ja vistos, proximo token/offset
+   e itens ja convertidos.
+3. **Ao falhar de forma retomavel** (`QuotaExceeded`, `RateLimited`), salve o checkpoint **e** grave
+   os itens parciais ja coletados — o consumidor ja mostra o que deu, mesmo incompleto.
+4. **Ao concluir**, descarte o checkpoint.
+5. Marque fases concluidas (ex.: `listing_done`) para nao reexecutar e gastar quota a toa.
+
+```python
+import json
+from pathlib import Path
+
+CHECKPOINT_NAME = ".collect_checkpoint.json"
+
+
+def load_checkpoint(out_dir: Path, resource_id: str) -> dict:
+    path = out_dir / CHECKPOINT_NAME
+    if not path.exists():
+        return {}
+    try:
+        data = json.loads(path.read_text(encoding="utf-8"))
+    except (json.JSONDecodeError, OSError):
+        return {}
+    return data if data.get("resource_id") == resource_id else {}   # so retoma o mesmo recurso
+
+
+def save_checkpoint(out_dir: Path, checkpoint: dict) -> None:
+    out_dir.mkdir(parents=True, exist_ok=True)
+    (out_dir / CHECKPOINT_NAME).write_text(
+        json.dumps(checkpoint, ensure_ascii=False), encoding="utf-8"
+    )
+
+
+def clear_checkpoint(out_dir: Path) -> None:
+    path = out_dir / CHECKPOINT_NAME
+    if path.exists():
+        path.unlink()
+```
+
+No fluxo principal: carregue o checkpoint (vazio em `--dry-run`), passe-o adiante para as fases de
+coleta acumularem progresso, e no `except` da falha retomavel grave checkpoint + parciais e oriente
+o usuario a rodar o mesmo comando depois. O checkpoint e estado local de execucao: **mantenha-o fora
+do controle de versao** (`.gitignore`) e sem segredos.
+
+---
+
 ## 11. Captura manual assistida
 
 Use captura manual quando a coleta automatica nao for confiavel ou quando a pagina exigir interacao humana autorizada.
@@ -980,9 +1258,13 @@ Regras:
 | Teste | O que valida |
 |---|---|
 | Parser por adapter | Extrai DTOs corretos de fixture HTML sanitizada |
-| Parser de API interna | Coleta itens de fixture JSON sanitizada (pagina, set, cursor) |
+| Parser de API (JSON) | Coleta itens de fixture JSON sanitizada (pagina, set, cursor) |
+| Parser de RSS/Atom | Extrai itens de fixture XML; namespaces, datas, duracao, enclosure |
 | Descoberta de token | Acha URLs de script e extrai `client_id` de JS de fixture |
+| Paginacao por numero | Para na pagina vazia/menor que `per_page` e respeita o teto |
 | Paginacao por cursor | Segue `next_href` ate o fim e respeita teto de paginas/itens |
+| Backoff / rate-limit | Respeita `Retry-After`, faz backoff em 5xx e nao repete 4xx |
+| Checkpoint/retomada | Retoma do estado salvo, ignora checkpoint de outro recurso, descarta ao fim |
 | Pipeline com fallback | Usa o 2o metodo quando o 1o falha; vazio quando ambos falham |
 | Parser de JSON embutido | Coleta produtos de `__NEXT_DATA__`, JSON-LD ou payload textual |
 | Parser de preco | Normaliza moeda, separadores, descontos e valores ausentes |
@@ -1052,8 +1334,12 @@ Formato recomendado:
 
 - Respeitar termos de uso, autorizacoes, limites e robots quando aplicavel.
 - Preferir APIs oficiais quando elas existirem e cobrirem o caso.
+- **Segredos sempre do ambiente** (env var), nunca de arquivo, argumento de CLI ou commit.
+- **Nunca colocar credencial/token em URL, log ou mensagem de erro** — monte erros sem a URL quando a chave vai na query.
+- Respeitar quota e rate-limit (`Retry-After`, backoff); conhecer e preferir o endpoint mais barato.
 - Nao registrar secrets, cookies, tokens ou HTML com dados pessoais em repositorio publico.
-- Nao implementar bypass agressivo de bloqueios.
+- Manter checkpoints e arquivos de progresso fora do controle de versao (`.gitignore`), sem segredos.
+- Nao implementar bypass agressivo de bloqueios nem reutilizar sessao/auth de usuario sem autorizacao.
 - Se houver desafio humano ou bloqueio, usar fluxo manual autorizado ou fonte oficial.
 - Colocar limites de paginas, bytes, produtos e tempo de execucao.
 - Salvar HTML de debug localmente e revisar antes de transformar em fixture.
@@ -1068,16 +1354,18 @@ Formato recomendado:
 
 1. Definir DTO puro.
 2. Criar `SourceAdapter` abstrato.
-3. Implementar um adapter por fonte/layout e por metodo (API interna, HTTP, navegador).
-4. Priorizar API oficial/interna em JSON, depois payload estruturado, e so entao navegador.
-5. Manter o I/O HTTP fino e todo o parsing (HTML e JSON) em funcoes puras e fail-safe.
-6. Usar BeautifulSoup/DOM como parser offline testavel.
-7. Usar Playwright/Selenium apenas para navegacao, scroll, interacao e captura de HTML.
-8. Organizar os metodos num pipeline com fallback (mais barato -> mais caro) e falha segura.
-9. Criar fallback de captura manual com userscript + servidor local.
-10. Persistir com upsert idempotente e historico; gravar `capture_source`.
-11. Separar URL de coleta da URL publica.
-12. Cobrir cada adapter e cada parser (HTML e JSON) com fixtures sanitizadas e testes offline.
+3. Implementar um adapter por fonte/layout e por metodo (API oficial, RSS, API interna, HTTP, navegador).
+4. Priorizar API oficial > feed RSS/Atom > API interna em JSON > HTML/payload embutido > navegador.
+5. Manter o I/O HTTP fino e todo o parsing (HTML, JSON, XML) em funcoes puras e fail-safe.
+6. Tirar segredos so do ambiente; nunca em URL, log, argumento ou commit.
+7. Tratar paginacao (numero ou cursor), quota, rate-limit (`Retry-After`/backoff) e retomada por checkpoint.
+8. Usar BeautifulSoup/DOM como parser offline testavel.
+9. Usar Playwright/Selenium apenas para navegacao, scroll, interacao e captura de HTML.
+10. Organizar os metodos num pipeline com fallback (mais barato -> mais caro) e falha segura.
+11. Criar fallback de captura manual com userscript + servidor local.
+12. Persistir com upsert idempotente e historico; gravar `capture_source`.
+13. Separar URL de coleta da URL publica.
+14. Cobrir cada adapter e cada parser (HTML, JSON, XML) com fixtures sanitizadas e testes offline.
 
 ---
 
