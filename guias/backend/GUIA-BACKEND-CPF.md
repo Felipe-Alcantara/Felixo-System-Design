@@ -181,6 +181,136 @@ O **9º dígito** identifica a região fiscal:
 
 ---
 
+## 3-A. Implementação de Referência (copiar e colar)
+
+Módulo único e autossuficiente que implementa todas as regras da seção 3 e os contratos das seções 4 e 5. O código abaixo **passa na matriz de testes da seção 7.3** — copie como `src/domain/cpf.py` (ou equivalente) e adapte apenas nomes e integração.
+
+```python
+"""Módulo de domínio para CPF: geração, validação e normalização."""
+
+import random
+import re
+
+REGIOES_FISCAIS = {
+    0: "RS (Rio Grande do Sul)",
+    1: "DF, GO, MT, MS, TO",
+    2: "AC, AM, AP, PA, RO, RR",
+    3: "CE, MA, PI",
+    4: "AL, PB, PE, RN",
+    5: "BA, SE",
+    6: "MG (Minas Gerais)",
+    7: "ES, RJ",
+    8: "SP (São Paulo)",
+    9: "PR, SC (Paraná, Santa Catarina)",
+}
+
+
+# ---------- Funções puras ----------
+
+def calcular_primeiro_digito(digitos: list[int]) -> int:
+    """Calcula o 1º dígito verificador a partir dos 9 dígitos base."""
+    soma = sum(d * peso for d, peso in zip(digitos, range(10, 1, -1)))
+    resto = soma % 11
+    return 0 if resto < 2 else 11 - resto
+
+
+def calcular_segundo_digito(digitos: list[int], primeiro_digito: int) -> int:
+    """Calcula o 2º dígito verificador a partir dos 9 dígitos + 1º verificador."""
+    todos = digitos + [primeiro_digito]
+    soma = sum(d * peso for d, peso in zip(todos, range(11, 1, -1)))
+    resto = soma % 11
+    return 0 if resto < 2 else 11 - resto
+
+
+def identificar_regiao_fiscal(digitos: list[int]) -> tuple[int, str]:
+    """Lê o 9º dígito e retorna (dígito, descrição da região fiscal)."""
+    nono = digitos[8]
+    return nono, REGIOES_FISCAIS[nono]
+
+
+def formatar_cpf(digitos: list[int], digito1: int, digito2: int) -> str:
+    """Aplica a máscara XXX.XXX.XXX-XX."""
+    base = "".join(str(d) for d in digitos)
+    return f"{base[:3]}.{base[3:6]}.{base[6:9]}-{digito1}{digito2}"
+
+
+def limpar_cpf(cpf: str) -> str:
+    """Remove tudo que não for número."""
+    return re.sub(r"\D", "", cpf)
+
+
+def validar_formato(cpf_limpo: str) -> tuple[bool, str]:
+    """Valida tamanho e rejeita sequências repetidas como 11111111111."""
+    if len(cpf_limpo) != 11:
+        return False, "CPF deve ter exatamente 11 dígitos"
+    if cpf_limpo == cpf_limpo[0] * 11:
+        return False, "CPF com todos os dígitos iguais é inválido"
+    return True, ""
+
+
+# ---------- Funções randômicas ----------
+
+def gerar_nove_digitos() -> list[int]:
+    """Gera os 9 dígitos base aleatórios."""
+    return [random.randint(0, 9) for _ in range(9)]
+
+
+def gerar_nove_digitos_com_regiao(regiao_escolhida: int) -> list[int]:
+    """Gera 8 dígitos aleatórios e fixa o 9º com a região fiscal escolhida."""
+    return [random.randint(0, 9) for _ in range(8)] + [regiao_escolhida]
+
+
+# ---------- Orquestradoras ----------
+
+def gerar_cpf_valido(regiao: int | None = None) -> str:
+    """Gera um CPF válido formatado; com `regiao`, fixa a região fiscal."""
+    if regiao is None:
+        digitos = gerar_nove_digitos()
+    else:
+        digitos = gerar_nove_digitos_com_regiao(regiao)
+    d1 = calcular_primeiro_digito(digitos)
+    d2 = calcular_segundo_digito(digitos, d1)
+    return formatar_cpf(digitos, d1, d2)
+
+
+def validar_cpf(cpf: str) -> tuple[bool, dict]:
+    """Valida um CPF (com ou sem máscara). Contrato fixo: (bool, dict)."""
+    cpf_limpo = limpar_cpf(cpf)
+    formato_ok, erro = validar_formato(cpf_limpo)
+    if not formato_ok:
+        return False, {"erro": erro}
+
+    digitos = [int(d) for d in cpf_limpo[:9]]
+    d1 = calcular_primeiro_digito(digitos)
+    d2 = calcular_segundo_digito(digitos, d1)
+    informados = cpf_limpo[9:]
+    corretos = f"{d1}{d2}"
+    if informados != corretos:
+        return False, {
+            "erro": "Dígitos verificadores inválidos",
+            "verificadores_informados": informados,
+            "verificadores_corretos": corretos,
+        }
+
+    nono, regiao_fiscal = identificar_regiao_fiscal(digitos)
+    return True, {
+        "cpf_formatado": formatar_cpf(digitos, d1, d2),
+        "nove_primeiros": " ".join(cpf_limpo[:9]),
+        "primeiro_verificador": d1,
+        "segundo_verificador": d2,
+        "nono_digito": nono,
+        "regiao_fiscal": regiao_fiscal,
+    }
+```
+
+Opções de adaptação comuns:
+
+- **API REST**: exponha `validar_cpf()` num endpoint e serialize o `dict` do contrato como JSON.
+- **Formulário**: chame `limpar_cpf()` + `validar_cpf()` na entrada do backend, nunca apenas no frontend.
+- **Massa de teste**: use `gerar_cpf_valido()` (com ou sem região) para fixtures sintéticas, respeitando os guardrails da seção 8.
+
+---
+
 ## 4. Mapeamento da Implementação de Origem
 
 Esta seção documenta a implementação-base de onde o padrão foi derivado. Em outro projeto, substitua os nomes de arquivo por seus módulos equivalentes, mas preserve os contratos e as regras de negócio.
@@ -405,6 +535,89 @@ def test_formatar_cpf():
 assert len(digitos) == 9
 assert all(0 <= d <= 9 for d in digitos)
 assert re.match(r"^\d{3}\.\d{3}\.\d{3}-\d{2}$", cpf)
+```
+
+### 7.6 Suíte Pronta (pytest)
+
+Cobertura completa da matriz da seção 7.3, pronta para `tests/unit/test_cpf.py`. Verificada contra a implementação da seção 3-A.
+
+```python
+"""Matriz de testes do backend de CPF (UT, CT e IT)."""
+
+import re
+
+from cpf import (
+    calcular_primeiro_digito,
+    calcular_segundo_digito,
+    formatar_cpf,
+    gerar_cpf_valido,
+    gerar_nove_digitos,
+    gerar_nove_digitos_com_regiao,
+    limpar_cpf,
+    validar_cpf,
+    validar_formato,
+)
+
+FORMATO = r"^\d{3}\.\d{3}\.\d{3}-\d{2}$"
+BASE = [1, 2, 3, 4, 5, 6, 7, 8, 9]
+
+
+def test_ut01_gerar_nove_digitos():
+    digitos = gerar_nove_digitos()
+    assert len(digitos) == 9
+    assert all(0 <= d <= 9 for d in digitos)
+
+
+def test_ut02_gerar_com_regiao():
+    assert gerar_nove_digitos_com_regiao(8)[8] == 8
+
+
+def test_ut03_primeiro_digito():
+    assert calcular_primeiro_digito(BASE) == 0
+
+
+def test_ut04_segundo_digito():
+    assert calcular_segundo_digito(BASE, 0) == 9
+
+
+def test_ut05_formatar_cpf():
+    assert formatar_cpf(BASE, 0, 9) == "123.456.789-09"
+
+
+def test_ut06_limpar_cpf():
+    assert limpar_cpf("CPF: 123.456.789-09 ") == "12345678909"
+
+
+def test_ut07_formato_curto():
+    assert validar_formato("1234567890")[0] is False
+
+
+def test_ut08_sequencia_repetida():
+    assert validar_formato("11111111111")[0] is False
+
+
+def test_ct01_cpf_valido():
+    valido, info = validar_cpf("123.456.789-09")
+    assert valido is True
+    assert info["cpf_formatado"] == "123.456.789-09"
+    assert info["regiao_fiscal"].startswith("PR, SC")
+
+
+def test_ct02_verificadores_errados():
+    valido, info = validar_cpf("123.456.789-00")
+    assert valido is False
+    assert info["verificadores_informados"] == "00"
+    assert info["verificadores_corretos"] == "09"
+
+
+def test_it01_fluxo_completo():
+    cpf = gerar_cpf_valido()
+    assert re.match(FORMATO, cpf)
+    assert validar_cpf(cpf)[0] is True
+
+
+def test_it02_mascarada_equivale_limpa():
+    assert validar_cpf("123.456.789-09") == validar_cpf("12345678909")
 ```
 
 ---
