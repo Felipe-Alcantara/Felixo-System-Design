@@ -59,44 +59,192 @@ O `HelpModal` é o centro de informações do aplicativo.
     -   **Dicas de Produtividade**: Sugestões para o usuário tirar o máximo proveito do aplicativo.
 -   **Componentização**: O `HelpModal` é construído com sub-componentes reutilizáveis como `Section` e `Feature`, facilitando a manutenção e a adição de novo conteúdo.
 
-## Padronização para Outros Projetos
+## Implementação Pronta (genérica, copiar e colar)
 
-A abordagem utilizada no Reading Tracker pode ser facilmente adaptada para criar interfaces amigáveis e padronizadas em outros sites.
+Versão genérica do padrão, pronta para qualquer projeto React + Tailwind, sem dependências externas. São três blocos: um hook de primeira visita, o tooltip de onboarding e o centro de ajuda com botão flutuante.
 
-### Estratégia de Reutilização
+### 1. Hook `useFirstVisit` — detecção de primeira visita
 
-1.  **Criar um Componente de Onboarding Genérico**:
-    -   Desenvolva um componente `OnboardingWrapper` que receba como `props` o `id` do onboarding (para a chave do `localStorage`) e o elemento a ser destacado.
-    -   O `wrapper` conteria a lógica de verificação do `localStorage` e o estado de visibilidade.
+```jsx
+// hooks/useFirstVisit.js
+import { useEffect, useState } from 'react';
 
-2.  **Desenvolver um `HelpSystem` Modular**:
-    -   Crie um componente `HelpModal` genérico que aceite um array de seções como `prop`.
-    -   Cada objeto de seção poderia ter um `título`, `ícone` e `conteúdo` (que pode ser texto, uma lista ou componentes customizados).
-    -   Isso permitiria que cada site definisse seu próprio conteúdo de ajuda de forma declarativa.
+// `id` permite vários onboardings independentes no mesmo app
+export function useFirstVisit(id) {
+  const [isFirstVisit, setIsFirstVisit] = useState(false);
 
-### Exemplo de Estrutura de Dados para um `HelpSystem`
+  useEffect(() => {
+    if (!localStorage.getItem(`hasSeen:${id}`)) {
+      setIsFirstVisit(true);
+    }
+  }, [id]);
 
-```javascript
+  const dismiss = () => {
+    localStorage.setItem(`hasSeen:${id}`, 'true');
+    setIsFirstVisit(false);
+  };
+
+  return [isFirstVisit, dismiss];
+}
+```
+
+### 2. `OnboardingTooltip` — spotlight de primeira visita
+
+Fundo desfocado cobrindo a tela inteira, card de boas-vindas e um anel pulsante posicionado sobre o elemento a destacar (por padrão, o botão de ajuda no canto inferior direito).
+
+```jsx
+// components/OnboardingTooltip.jsx
+export default function OnboardingTooltip({
+  title = 'Bem-vindo!',
+  text = 'Toque no botão de ajuda sempre que precisar de um guia completo.',
+  buttonLabel = 'Entendi',
+  onClose,
+}) {
+  return (
+    <div className="fixed inset-0 z-50">
+      {/* fundo desfocado; clicar fora também fecha */}
+      <div
+        className="absolute inset-0 bg-black/60 backdrop-blur-sm"
+        onClick={onClose}
+      />
+
+      {/* anel pulsante sobre o alvo (ajuste a posição para o seu layout) */}
+      <div className="pointer-events-none absolute bottom-4 right-4 h-16 w-16 animate-ping rounded-full border-4 border-blue-400" />
+
+      {/* card de orientação apontando para o alvo */}
+      <div className="absolute bottom-24 right-6 w-72 rounded-xl bg-white p-4 shadow-2xl">
+        <h3 className="mb-1 font-bold text-gray-900">{title}</h3>
+        <p className="mb-3 text-sm text-gray-600">{text}</p>
+        <button
+          onClick={onClose}
+          className="w-full rounded-lg bg-blue-600 py-2 text-sm font-semibold text-white hover:bg-blue-700"
+        >
+          {buttonLabel}
+        </button>
+      </div>
+    </div>
+  );
+}
+```
+
+### 3. `HelpSystem` — botão flutuante + modal de ajuda declarativo
+
+Recebe um array de seções (`title`, `icon` opcional, `content`), para que cada projeto defina o próprio conteúdo sem mexer no componente.
+
+```jsx
+// components/HelpSystem.jsx
+import { useState } from 'react';
+
+export default function HelpSystem({ title = 'Central de Ajuda', sections }) {
+  const [open, setOpen] = useState(false);
+
+  return (
+    <>
+      {/* FAB sempre visível */}
+      <button
+        aria-label="Abrir ajuda"
+        onClick={() => setOpen(true)}
+        className="fixed bottom-6 right-6 z-40 flex h-12 w-12 items-center justify-center rounded-full bg-blue-600 text-xl font-bold text-white shadow-lg transition hover:scale-105 hover:bg-blue-700"
+      >
+        ?
+      </button>
+
+      {open && (
+        <div
+          className="fixed inset-0 z-50 flex items-center justify-center bg-black/60 p-4"
+          onClick={() => setOpen(false)}
+        >
+          <div
+            className="max-h-[80vh] w-full max-w-lg overflow-y-auto rounded-2xl bg-white p-6 shadow-2xl"
+            onClick={(e) => e.stopPropagation()}
+          >
+            <div className="mb-4 flex items-center justify-between">
+              <h2 className="text-xl font-bold text-gray-900">{title}</h2>
+              <button
+                aria-label="Fechar ajuda"
+                onClick={() => setOpen(false)}
+                className="text-gray-400 hover:text-gray-700"
+              >
+                ✕
+              </button>
+            </div>
+
+            {sections.map((section) => (
+              <section key={section.title} className="mb-4">
+                <h3 className="mb-1 font-semibold text-gray-800">
+                  {section.icon ? `${section.icon} ` : ''}
+                  {section.title}
+                </h3>
+                <div className="text-sm text-gray-600">{section.content}</div>
+              </section>
+            ))}
+          </div>
+        </div>
+      )}
+    </>
+  );
+}
+```
+
+### 4. Integração no `App`
+
+```jsx
+import { useFirstVisit } from './hooks/useFirstVisit';
+import OnboardingTooltip from './components/OnboardingTooltip';
+import HelpSystem from './components/HelpSystem';
+
 const helpContent = [
   {
     title: 'Primeiros Passos',
-    icon: 'Rocket',
-    content: <p>Bem-vindo ao nosso site! Aqui está como você pode começar...</p>
+    icon: '🚀',
+    content: <p>Bem-vindo! Aqui está como você pode começar...</p>,
   },
   {
     title: 'Recursos Avançados',
-    icon: 'Zap',
+    icon: '⚡',
     content: (
-      <ul>
-        <li>Recurso 1: Descrição...</li>
-        <li>Recurso 2: Descrição...</li>
+      <ul className="list-disc pl-5">
+        <li>Recurso 1: descrição...</li>
+        <li>Recurso 2: descrição...</li>
       </ul>
-    )
-  }
+    ),
+  },
 ];
 
-<HelpModal content={helpContent} />;
+export default function App() {
+  const [isFirstVisit, dismissOnboarding] = useFirstVisit('app-intro');
+
+  return (
+    <>
+      {/* ...resto da aplicação... */}
+      <HelpSystem sections={helpContent} />
+      {isFirstVisit && <OnboardingTooltip onClose={dismissOnboarding} />}
+    </>
+  );
+}
 ```
+
+## Como reutilizar em outro projeto
+
+1. Copie o hook e os dois componentes para o projeto.
+2. Defina o `helpContent` com as seções do seu produto (texto, listas ou componentes próprios).
+3. Escolha um `id` de onboarding por fluxo — trocar o `id` reativa o onboarding para todos (útil ao lançar uma funcionalidade nova).
+4. Ajuste a posição do anel pulsante do `OnboardingTooltip` para o elemento que você quer destacar.
+
+Opções de adaptação comuns:
+
+- **Sem Tailwind**: converta as classes para CSS próprio; a lógica não muda.
+- **Múltiplos passos**: transforme `title`/`text` do tooltip em um array e avance o índice no botão, persistindo no mesmo `localStorage`.
+- **Ícones**: troque os emojis por uma biblioteca como `lucide-react` se o projeto já a utiliza.
+
+## Resumo da receita
+
+1. **Hook `useFirstVisit(id)`** — lê `localStorage` no mount; `dismiss()` grava a chave e esconde.
+2. **`OnboardingTooltip`** — overlay com blur + anel pulsante no alvo + card com botão "Entendi".
+3. **`HelpSystem`** — FAB fixo com "?" que abre um modal de seções declarativas.
+4. **Integração** — `HelpSystem` sempre montado; tooltip renderizado só quando `isFirstVisit`.
+
+Ingredientes-chave: chave por fluxo no `localStorage` (`hasSeen:<id>`), conteúdo de ajuda como dado (array de seções) e fechamento por clique fora ou botão.
 
 ## Conclusão
 
