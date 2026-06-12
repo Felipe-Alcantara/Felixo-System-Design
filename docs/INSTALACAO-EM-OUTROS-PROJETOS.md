@@ -4,8 +4,8 @@ Este documento reune todas as formas de baixar e sincronizar o **Felixo System D
 
 > Voltar ao [README](../README.md).
 
-> **Sobre o submodulo `componets-database/`**
-> Este repositorio inclui o submodulo `componets-database/` (banco de componentes UI). Ele **so e necessario** se voce quiser o banco de componentes — para os padroes `core/` e `guias/` ele e dispensavel. Por isso cada metodo abaixo traz duas variantes: **sem o submodulo** (mais leve) e **com o submodulo** (completo). ZIP e `npx degit` nunca trazem submodulos — para o banco de componentes, use uma das variantes `git`.
+> **Sobre o submodulo `components-database/`**
+> Este repositorio inclui o submodulo `components-database/` (banco de componentes UI). Ele **so e necessario** se voce quiser o banco de componentes — para os padroes `core/` e `guias/` ele e dispensavel. Por isso cada metodo abaixo traz duas variantes: **sem o submodulo** (mais leve) e **com o submodulo** (completo). ZIP e `npx degit` nunca trazem submodulos — para o banco de componentes, use uma das variantes `git`.
 
 ## 1. Sincronizar `Padrão de qualidade - Felixo System Design` com a versao mais recente (Recomendado)
 
@@ -57,7 +57,7 @@ set TMP_DIR=%TEMP%\felixo-standards-%RANDOM% && git clone --depth 1 --recurse-su
 
 ### Comando global `felixo` (instalador multiplataforma)
 
-Em vez de copiar a funcao na mao, use os instaladores em [`scripts/`](../scripts/). Eles registram o comando `felixo` no seu terminal com **logs coloridos, barra de loading e avisos de erro**. Depois de instalado, rode `felixo` em qualquer pasta para baixar a versao mais recente — **tudo, menos o submodulo** `componets-database`. Use `felixo --with-submodules` (ou `-s`) para incluir tambem o banco de componentes.
+Em vez de copiar a funcao na mao, use os instaladores em [`scripts/`](../scripts/). Eles registram o comando `felixo` no seu terminal com **logs coloridos, barra de loading e avisos de erro**. Depois de instalado, rode `felixo` em qualquer pasta para baixar a versao mais recente — **tudo, menos o submodulo** `components-database`. Use `felixo --with-submodules` (ou `-s`) para incluir tambem o banco de componentes.
 
 **Qual script usar para o seu terminal:**
 
@@ -98,7 +98,7 @@ git clone --depth 1 https://github.com/Felipe-Alcantara/Felixo-System-Design.git
 Depois de instalar, **abra um novo terminal** e use:
 
 ```bash
-felixo                   # baixa tudo, menos o submodulo componets-database
+felixo                   # baixa tudo, menos o submodulo components-database
 felixo --with-submodules # inclui o banco de componentes
 ```
 
@@ -110,7 +110,7 @@ Os instaladores sao **idempotentes**: rodar de novo apenas atualiza a definicao 
 
 ## 2. Baixar o repositorio inteiro como ZIP
 
-> **Submodulo:** o ZIP do GitHub **nunca** inclui o submodulo `componets-database/` (limitacao da plataforma). Se precisar do banco de componentes, use o metodo 1 (com submodulo) ou o metodo 4.
+> **Submodulo:** o ZIP do GitHub **nunca** inclui o submodulo `components-database/` (limitacao da plataforma). Se precisar do banco de componentes, use o metodo 1 (com submodulo) ou o metodo 4.
 
 **PowerShell (Windows):**
 ```powershell
@@ -138,7 +138,7 @@ unzip felixo.zip && mv Felixo-System-Design-main "Padrão de qualidade - Felixo 
 
 ## 3. Baixar com `npx degit`
 
-> **Submodulo:** `degit` **nao** baixa submodulos. O comando abaixo traz `core/` e `guias/`, mas `componets-database/` vem vazia. Para o banco de componentes, use o metodo 1 (com submodulo) ou o metodo 4.
+> **Submodulo:** `degit` **nao** baixa submodulos. O comando abaixo traz `core/` e `guias/`, mas `components-database/` vem vazia. Para o banco de componentes, use o metodo 1 (com submodulo) ou o metodo 4.
 
 ```bash
 npx degit Felipe-Alcantara/Felixo-System-Design "./Padrão de qualidade - Felixo System Design"
@@ -153,7 +153,7 @@ npx degit Felipe-Alcantara/Felixo-System-Design "./Padrão de qualidade - Felixo
 git clone --depth 1 https://github.com/Felipe-Alcantara/Felixo-System-Design.git "./Padrão de qualidade - Felixo System Design"
 ```
 
-**Com submodulo** (inclui `componets-database/`):
+**Com submodulo** (inclui `components-database/`):
 ```bash
 git clone --depth 1 --recurse-submodules https://github.com/Felipe-Alcantara/Felixo-System-Design.git "./Padrão de qualidade - Felixo System Design"
 ```
@@ -167,7 +167,7 @@ git clone --depth 1 --recurse-submodules https://github.com/Felipe-Alcantara/Fel
 
 ## 5. Baixar apenas `guias/` com `npx degit`
 
-> **Submodulo:** nao se aplica — `componets-database/` fica fora de `guias/`.
+> **Submodulo:** nao se aplica — `components-database/` fica fora de `guias/`.
 
 ```bash
 npx degit Felipe-Alcantara/Felixo-System-Design/guias ./felixo-guias
@@ -177,7 +177,7 @@ npx degit Felipe-Alcantara/Felixo-System-Design/guias ./felixo-guias
 
 ## 6. Baixar apenas `core/` com `git sparse-checkout`
 
-> **Submodulo:** nao se aplica — `componets-database/` fica fora de `core/`.
+> **Submodulo:** nao se aplica — `components-database/` fica fora de `core/`.
 
 ```bash
 mkdir felixo-core
@@ -193,7 +193,7 @@ git pull origin main
 
 ## 7. Baixar apenas `guias/` com `git sparse-checkout`
 
-> **Submodulo:** nao se aplica — `componets-database/` fica fora de `guias/`.
+> **Submodulo:** nao se aplica — `components-database/` fica fora de `guias/`.
 
 ```bash
 mkdir felixo-guias
@@ -214,7 +214,7 @@ git pull origin main
 git clone --depth 1 https://github.com/Felipe-Alcantara/Felixo-System-Design.git "./Padrão de qualidade - Felixo System Design"
 ```
 
-**Com submodulo** (inclui `componets-database/`):
+**Com submodulo** (inclui `components-database/`):
 ```bash
 git clone --depth 1 --recurse-submodules https://github.com/Felipe-Alcantara/Felixo-System-Design.git "./Padrão de qualidade - Felixo System Design"
 ```
@@ -223,7 +223,7 @@ Depois, copie manualmente a pasta desejada:
 
 - `./Padrão de qualidade - Felixo System Design/core`
 - `./Padrão de qualidade - Felixo System Design/guias`
-- `./Padrão de qualidade - Felixo System Design/componets-database` (se clonou com submodulo)
+- `./Padrão de qualidade - Felixo System Design/components-database` (se clonou com submodulo)
 
 ---
 

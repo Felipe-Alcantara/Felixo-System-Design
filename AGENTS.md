@@ -59,5 +59,5 @@ Valem para agentes alterando **este** repositorio; a fonte completa e [`docs/GIT
 
 ## 5. O que este repositorio nao e
 
-- **Nao e codigo de producao** — e documentacao de padroes; o unico codigo executavel sao os instaladores em [`scripts/`](scripts/) e o submodulo `componets-database/`.
-- **`componets-database/` e um submodulo opcional** (banco de componentes UI com scraper e site proprio). So abra se a tarefa envolver o banco de componentes; ele tem `README.md` e `IA.md` proprios.
+- **Nao e codigo de producao** — e documentacao de padroes; o unico codigo executavel sao os instaladores em [`scripts/`](scripts/) e o submodulo `components-database/`.
+- **`components-database/` e um submodulo opcional** (banco de componentes UI com scraper e site proprio). So abra se a tarefa envolver o banco de componentes; ele tem `README.md` e `IA.md` proprios.

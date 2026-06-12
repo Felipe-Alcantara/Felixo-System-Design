@@ -71,7 +71,7 @@ Cada area tem um documento proprio, com uma responsabilidade unica. Use o mapa a
 - **Preciso de um padrao especifico** (arvore, heatmap, scraping, deploy...) → [docs/GUIAS-OPCIONAIS.md](docs/GUIAS-OPCIONAIS.md)
 - **Quero baixar/sincronizar este repo num projeto** → [docs/INSTALACAO-EM-OUTROS-PROJETOS.md](docs/INSTALACAO-EM-OUTROS-PROJETOS.md)
 - **Quero o comando global `felixo`** → [docs/INSTALACAO-EM-OUTROS-PROJETOS.md — comando `felixo`](docs/INSTALACAO-EM-OUTROS-PROJETOS.md#comando-global-felixo-instalador-multiplataforma)
-- **Quero o banco de componentes UI** → submodulo [`componets-database/`](componets-database/) (veja as variantes "com submodulo" em [docs/INSTALACAO-EM-OUTROS-PROJETOS.md](docs/INSTALACAO-EM-OUTROS-PROJETOS.md))
+- **Quero o banco de componentes UI** → submodulo [`components-database/`](components-database/) (veja as variantes "com submodulo" em [docs/INSTALACAO-EM-OUTROS-PROJETOS.md](docs/INSTALACAO-EM-OUTROS-PROJETOS.md))
 - **Quero a politica de git** (branches, commits, doc viva) → [docs/GIT-POLITICA-DE-VERSIONAMENTO.md](docs/GIT-POLITICA-DE-VERSIONAMENTO.md)
 - **Vou contribuir de fora** → [CONTRIBUTING.md](CONTRIBUTING.md)
 - **Sou um agente de IA** (aqui ou consumindo o repo em outro projeto) → [AGENTS.md](AGENTS.md) (roteiro de leitura por tarefa)
@@ -113,7 +113,7 @@ Felixo-System-Design/
 │       ├── GUIA-SCRAPING-MULTIFORMATO.md
 │       └── GUIA-DEPLOY-RAILWAY.md
 │
-├── componets-database/                      # SUBMODULO — banco de componentes UI
+├── components-database/                     # SUBMODULO — banco de componentes UI
 │   ├── scraper/                             # Coletor de componentes (10 fontes)
 │   ├── site/                                # Biblioteca visual (Flask + React/Vite)
 │   └── start_app.py                         # Setup + coleta com um comando

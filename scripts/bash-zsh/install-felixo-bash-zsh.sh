@@ -12,7 +12,7 @@
 # O que faz: injeta a funcao "felixo" no seu .bashrc (ou .zshrc). Depois de
 # instalado, digite "felixo" em qualquer pasta para baixar a versao mais recente
 # do repositorio Felixo System Design — tudo, MENOS o submodulo
-# componets-database. Use "felixo --with-submodules" (ou "felixo -s") para
+# components-database. Use "felixo --with-submodules" (ou "felixo -s") para
 # incluir tambem o banco de componentes.
 #
 # Uso:
@@ -117,7 +117,7 @@ felixo() {
   local clone_args=(--depth 1 --quiet)
   if [ "\$with_submodules" -eq 1 ]; then
     clone_args+=(--recurse-submodules)
-    _flog "Modo completo: incluindo submodulo \${_d}componets-database\${_r}."
+    _flog "Modo completo: incluindo submodulo \${_d}components-database\${_r}."
   fi
 
   _flog "Sincronizando com \${_d}\${repo_url}\${_r}"
@@ -153,7 +153,7 @@ felixo() {
   find "\$tmp_dir/repo" -name .git -prune -exec rm -rf {} +
   # Sem o modo completo, remove a pasta do submodulo (fica vazia no clone raso).
   if [ "\$with_submodules" -eq 0 ]; then
-    rm -rf "\$tmp_dir/repo/componets-database"
+    rm -rf "\$tmp_dir/repo/components-database"
   fi
   mkdir -p "\$dest" || { _ferr "Nao foi possivel criar a pasta de destino: \$dest"; rm -rf "\$tmp_dir"; return 1; }
 

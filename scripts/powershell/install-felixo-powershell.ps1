@@ -12,7 +12,7 @@
 .DESCRIPTION
   Adiciona a funcao "felixo" ao seu $PROFILE do PowerShell. Depois de instalado,
   digite "felixo" em qualquer sessao para baixar a versao mais recente do
-  repositorio Felixo System Design — tudo, MENOS o submodulo componets-database.
+  repositorio Felixo System Design — tudo, MENOS o submodulo components-database.
   Use "felixo -WithSubmodules" (ou "-s") para incluir o banco de componentes.
 
 .PARAMETER Uninstall
@@ -73,7 +73,7 @@ function felixo {
     `$cloneArgs = @('clone', '--depth', '1', '--quiet')
     if (`$withSub) {
         `$cloneArgs += '--recurse-submodules'
-        _flog 'Modo completo: incluindo submodulo componets-database.'
+        _flog 'Modo completo: incluindo submodulo components-database.'
     }
 
     _flog "Sincronizando com `$repoUrl"
@@ -108,7 +108,7 @@ function felixo {
         Get-ChildItem -Path `$repoTmp -Recurse -Force -Filter '.git' | Remove-Item -Recurse -Force
         # Sem o modo completo, remove a pasta do submodulo (fica vazia no clone raso).
         if (-not `$withSub) {
-            `$subPath = Join-Path `$repoTmp 'componets-database'
+            `$subPath = Join-Path `$repoTmp 'components-database'
             if (Test-Path `$subPath) { Remove-Item -Recurse -Force `$subPath }
         }
         New-Item -ItemType Directory -Force -Path `$dest | Out-Null

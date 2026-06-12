@@ -15,7 +15,7 @@ rem    install-felixo-cmd.cmd (instalador) e felixo-command.cmd (o comando, este
 rem    arquivo, instalado como felixo.cmd).
 rem
 rem  Baixa o repositorio Felixo System Design na pasta atual. Por padrao baixa
-rem  tudo, MENOS o submodulo componets-database. Use "felixo --with-submodules"
+rem  tudo, MENOS o submodulo components-database. Use "felixo --with-submodules"
 rem  (ou "felixo -s") para incluir o banco de componentes.
 rem
 rem  Para qual terminal: CMD (Windows). Em Bash/Zsh use
@@ -50,7 +50,7 @@ if errorlevel 1 (
 set "CLONE_ARGS=clone --depth 1 --quiet"
 if "%WITH_SUB%"=="1" (
   set "CLONE_ARGS=!CLONE_ARGS! --recurse-submodules"
-  echo %C_INFO%[felixo]%C_RESET% Modo completo: incluindo submodulo componets-database.
+  echo %C_INFO%[felixo]%C_RESET% Modo completo: incluindo submodulo components-database.
 )
 
 echo %C_INFO%[felixo]%C_RESET% Sincronizando com %REPO_URL%
@@ -74,7 +74,7 @@ for /d /r "%REPO_TMP%" %%G in (.git) do @if exist "%%G" rmdir /s /q "%%G"
 
 rem --- sem o modo completo, remove a pasta do submodulo (vem vazia) ---
 if "%WITH_SUB%"=="0" (
-  if exist "%REPO_TMP%\componets-database" rmdir /s /q "%REPO_TMP%\componets-database"
+  if exist "%REPO_TMP%\components-database" rmdir /s /q "%REPO_TMP%\components-database"
 )
 
 if not exist "%DEST_NAME%" mkdir "%DEST_NAME%"
@@ -111,6 +111,6 @@ exit /b 0
 
 :help
 echo Uso: felixo [--with-submodules ^| -s]
-echo   (sem flag)            baixa tudo, menos o submodulo componets-database
+echo   (sem flag)            baixa tudo, menos o submodulo components-database
 echo   --with-submodules,-s  inclui o banco de componentes
 exit /b 0
