@@ -61,6 +61,7 @@ Quando houver duvida, siga os documentos completos:
 9. **Fazer mudanca pequena e rastreavel**
    - Prefira entregas coesas, com escopo claro.
    - Nao misture refatoracao ampla com feature sem necessidade.
+   - **Versionamento (git):** commite direto no `main` por padrao; so crie branch para feature grande, refatoracao significativa ou alto risco. Commits pequenos no formato `tipo: descricao` (`feat`/`fix`/`docs`/`refactor`/`chore`), explicando o que e por que. Politica completa em [`../docs/GIT.md`](../docs/GIT.md).
 
 10. **Entregar script de start em toda aplicacao web**
     - Toda aplicacao web deve ter um `start_app.py` na raiz que instala dependencias, inicia/reinicia o app e abre o navegador com **um unico comando** (`python start_app.py`).
@@ -85,6 +86,7 @@ Quando houver duvida, siga os documentos completos:
 - [ ] Documentacao e logs usam linguagem geral/open source, sem valores hardcoded, e enquadram trabalho futuro como convite a contribuicao.
 - [ ] Toda aplicacao web tem `start_app.py` (instala + inicia/reinicia + abre o navegador) funcionando.
 - [ ] README, `IA.md` ou guia afetado foram atualizados quando necessario.
+- [ ] O versionamento segue [`../docs/GIT.md`](../docs/GIT.md): mudanca no `main` (ou branch justificada), commit pequeno no formato `tipo: descricao`, doc atualizada no mesmo passo.
 - [ ] O proximo mantenedor consegue entender a decisao sem reler toda a conversa.
 
 ---

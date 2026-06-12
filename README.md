@@ -59,6 +59,7 @@ Cada area tem um documento proprio, com uma responsabilidade unica. Use o mapa a
 | **[docs/CORE.md](docs/CORE.md)** | Padroes **obrigatorios** | Design systems (frontend, backend, README), guia minimo de qualidade, start app script, prompts base e o template de contexto `IA.md` — cada um descrito e com link. |
 | **[docs/GUIAS.md](docs/GUIAS.md)** | Padroes **opcionais** por dominio | Guias reutilizaveis de **frontend** (9), **backend** (2) e **integracao** (3): o que cada um resolve, de qual projeto foi extraido e quando reutilizar. |
 | **[docs/INSTALACAO.md](docs/INSTALACAO.md)** | **Como usar** em outros projetos | Os 8 metodos de download/sincronizacao (incluindo o comando global `felixo`), variantes com/sem submodulo e a tabela de escolha rapida por cenario. |
+| **[docs/GIT.md](docs/GIT.md)** | **Politica de git** neste repo | Quando criar branch (e quando nao), formato de commit (`tipo: descricao`), documentacao viva, exemplos e checklist. Fonte unica das regras de versionamento. |
 | **[CONTRIBUTING.md](CONTRIBUTING.md)** | **Contribuir** de fora | Fluxo de fork + Pull Request para contribuicoes externas. |
 | [Estrutura do Repositorio](#-estrutura-do-repositorio) | **Layout** das pastas | Arvore completa de arquivos e pastas com uma linha por item. |
 | [Para Agentes de IA](#-para-agentes-de-ia) | Regras para agentes **neste** repo | Politica de git/branches, commits e documentacao viva. |
@@ -70,8 +71,9 @@ Cada area tem um documento proprio, com uma responsabilidade unica. Use o mapa a
 - **Quero baixar/sincronizar este repo num projeto** → [docs/INSTALACAO.md](docs/INSTALACAO.md)
 - **Quero o comando global `felixo`** → [docs/INSTALACAO.md — comando `felixo`](docs/INSTALACAO.md#comando-global-felixo-instalador-multiplataforma)
 - **Quero o banco de componentes UI** → submodulo [`componets-database/`](componets-database/) (veja as variantes "com submodulo" em [docs/INSTALACAO.md](docs/INSTALACAO.md))
+- **Quero a politica de git** (branches, commits, doc viva) → [docs/GIT.md](docs/GIT.md)
 - **Vou contribuir de fora** → [CONTRIBUTING.md](CONTRIBUTING.md)
-- **Sou um agente de IA trabalhando aqui** → [Para Agentes de IA](#-para-agentes-de-ia)
+- **Sou um agente de IA trabalhando aqui** → [Para Agentes de IA](#-para-agentes-de-ia) (resumo) e [docs/GIT.md](docs/GIT.md) (completo)
 
 ---
 
@@ -126,6 +128,7 @@ Felixo-System-Design/
 ├── docs/                                    # Documentacao por responsabilidade
 │   ├── CORE.md                              # Detalhe dos padroes obrigatorios
 │   ├── GUIAS.md                             # Detalhe dos guias por dominio
+│   ├── GIT.md                               # Politica de git (branches, commits, doc viva)
 │   └── INSTALACAO.md                        # Como usar em outros projetos (8 metodos)
 │
 ├── CONTRIBUTING.md
@@ -175,22 +178,24 @@ Felixo-System-Design/
 
 Instrucoes para agentes que trabalham **diretamente neste repositorio** (nao via fork). Para contribuicoes externas, siga o fluxo de fork + Pull Request descrito em [`CONTRIBUTING.md`](CONTRIBUTING.md).
 
-### Git e branches
+> **A politica de git completa esta em [`docs/GIT.md`](docs/GIT.md)** — branches, commits e documentacao viva, com exemplos de mensagem boa/ruim e checklist. O resumo abaixo e o essencial; leia o documento dedicado antes de versionar.
 
-- **Trabalhe direto no `main` por padrao.** Nao crie branches desnecessarias.
-- **So crie uma branch nova quando** a mudanca for uma **feature grande**, uma **refatoracao** significativa ou algo de **alto risco** (que altera comportamento e precisa ser testado, ou pode quebrar algo existente).
-- Fora esses casos (correcoes simples, docs, ajustes pequenos, refactors seguros), **commite no `main`** sem criar branch.
-- Evite o vicio de abrir uma branch nova para cada implementacao — varios agentes tendem a criar branches demais; nao siga esse padrao aqui.
+### Git e branches — o padrao e *nao* criar branch
 
-### Commits
+- **Trabalhe direto no `main` por padrao.** Commite no `main` sem branch para: correcoes simples, documentacao, ajustes pequenos e refatoracoes seguras (que nao mudam comportamento).
+- **So crie uma branch nova nestes tres casos:** (1) **feature grande**, (2) **refatoracao significativa**, ou (3) algo de **alto risco** (altera comportamento e precisa ser testado antes de entrar, ou pode quebrar algo existente). Se voce nao consegue dizer qual dos tres justifica a branch, **nao crie branch**.
+- **Evite o vicio de abrir uma branch por implementacao.** Varios agentes criam branches demais; aqui isso e considerado errado.
+
+### Commits — pequenos, frequentes e descritivos
 
 - **Sempre commite apos uma adicao concluida.** Nao acumule varias mudancas soltas sem commitar.
-- Faca **commits pequenos, porem bem descritivos** — cada commit com escopo claro e mensagem que explica o que mudou e por que.
+- **Commits pequenos, mas bem descritivos.** Cada commit e uma unidade coesa (uma ideia, um motivo). Se precisar de varios "e" para descrever, sao varios commits.
+- **Mensagem no formato `tipo: descricao`** (Conventional Commits): `feat:`, `fix:`, `docs:`, `refactor:`, `chore:` — explicando **o que** mudou e **por que**. Detalhes e exemplos em [`docs/GIT.md`](docs/GIT.md#3-commits--pequenos-frequentes-e-descritivos).
 
-### Documentacao
+### Documentacao viva — no mesmo commit
 
 - **Mantenha a documentacao atualizada e viva durante os commits.** Ao mudar comportamento, estrutura ou comandos, atualize no mesmo passo o `README.md`, os documentos em [`docs/`](docs/), os guias e o `IA.md` afetados — documentacao desatualizada conta como trabalho incompleto.
-- A pasta [`docs/`](docs/) ja existe para documentacao por responsabilidade (core, guias, instalacao). Mantenha cada arquivo com **uma responsabilidade unica** e adicione novos documentos ali quando um tema nao couber naturalmente nos existentes.
+- A pasta [`docs/`](docs/) ja existe para documentacao por responsabilidade (core, guias, git, instalacao). Mantenha cada arquivo com **uma responsabilidade unica** e adicione novos documentos ali quando um tema nao couber naturalmente nos existentes.
 
 ---
 
