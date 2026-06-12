@@ -106,6 +106,8 @@ Ao terminar, o `felixo` mostra um **resumo do que mudou** — arquivos **novos**
 
 Os instaladores sao **idempotentes**: rodar de novo apenas atualiza a definicao do comando, sem duplicar.
 
+> **Ja tinha o `felixo` instalado?** Rode o instalador de novo de tempos em tempos: a definicao do comando evolui junto com o repositorio (por exemplo, o caminho do submodulo de componentes ja mudou de nome), e reinstalar garante que o seu terminal use a versao atual.
+
 ---
 
 ## 2. Baixar o repositorio inteiro como ZIP
