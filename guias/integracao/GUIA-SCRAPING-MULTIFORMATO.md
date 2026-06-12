@@ -15,10 +15,16 @@
 Este guia cobre:
 
 - coleta via HTTP simples;
+- consumo de API interna/nao documentada (JSON) como metodo preferido;
+- descoberta de token/`client_id` embutido em scripts da pagina;
+- resolucao de URL publica para entidade interna (endpoint `/resolve`);
+- paginacao por cursor (`next_href` / `linked_partitioning`) e resolucao em duas etapas (item so com id);
 - navegacao com Playwright;
+- coleta por scroll infinito com botao "carregar mais" (Selenium ou Playwright);
 - parsers offline com BeautifulSoup ou equivalente;
 - leitura de JSON embutido em paginas modernas;
 - adapter strategy por fonte/layout;
+- pipeline com fallback entre metodos (mais facil -> mais caro) e falha segura;
 - importacao de HTML salvo;
 - captura manual assistida por navegador real;
 - normalizacao de URLs publicas;
@@ -42,24 +48,29 @@ Este guia nao cobre:
 
 ```text
 Python 3.11+
-Playwright
-BeautifulSoup4
-Requests/httpx
+urllib (stdlib) ou Requests/httpx para I/O HTTP
+Playwright (ou Selenium) para navegador real
+BeautifulSoup4 para parser de HTML
+json (stdlib) para parser de API/JSON embutido
 Django ORM ou camada de persistencia equivalente
 PostgreSQL em producao
 SQLite como fallback local
 pytest/unittest
-fixtures HTML reais sanitizadas
+fixtures HTML/JSON reais sanitizadas
 Tampermonkey/userscript opcional
 Servidor HTTP local para captura assistida
 ```
 
-Regra pratica:
+Regra pratica (do metodo mais barato para o mais caro):
 
+- Use **API interna/oficial em JSON** quando ela existir e cobrir o caso — e o metodo mais rapido, estavel e sem navegador (ver secao 10-A).
 - Use **requests/httpx + parser offline** quando o HTML ja trouxer os dados.
-- Use **Playwright** quando a pagina depender de JavaScript, lazy loading, popup, paginacao dinamica ou interacao humana.
+- Use **JSON embutido na pagina** quando o DOM vier vazio mas os dados estiverem em `__NEXT_DATA__`, JSON-LD ou payload serializado.
+- Use **Playwright/Selenium** quando a pagina depender de JavaScript, lazy loading, popup, scroll infinito, paginacao dinamica ou interacao humana.
 - Use **captura manual assistida** quando a coleta automatica for instavel, proibida pelo contexto operacional ou depender de acao humana autorizada.
 - Use **persistencia idempotente** sempre que o resultado puder ser reprocessado.
+
+Sempre que houver mais de um metodo possivel, organize-os num **pipeline com fallback** (secao 10-C): tenta o mais barato primeiro e so cai para o proximo se ele nao trouxer resultado.
 
 ---
 
@@ -81,7 +92,10 @@ scraper_module/
       product_page.py
     adapters/
       base.py
+      http_api.py        # API interna/oficial em JSON (preferido, sem navegador)
+      browser.py         # navegador real (Selenium/Playwright) como fallback
       example_source.py
+    pipeline.py          # orquestra os metodos com fallback e falha segura
     manual_html/
       importer.py
     html_capture/
@@ -115,7 +129,8 @@ Responsabilidades:
 | `models` | DTOs puros, sem ORM e sem dependencia de framework |
 | `browser` | Context manager Playwright, timeouts, user agent, lifecycle e screenshots de debug |
 | `flows` | Fluxos comuns de navegacao, descoberta, popup, paginacao e fallback |
-| `adapters` | Um parser por fonte/layout, todos obedecendo uma interface comum |
+| `adapters` | Um adapter por fonte/metodo (API interna, HTTP, navegador), todos sob a mesma interface |
+| `pipeline` | Ordem de tentativa dos metodos (mais barato -> fallback) e falha segura |
 | `manual_html` | Importacao offline de HTML salvo em disco |
 | `html_capture` | Servidor local e userscript para captura manual autorizada |
 | `persistence` | Unica ponte com ORM/banco, upsert, dedupe e historico |
@@ -254,7 +269,10 @@ class ScraperConfig:
     headless: bool = os.getenv("SCRAPER_HEADLESS", "1") != "0"
     max_products: int = int(os.getenv("SCRAPER_MAX_PRODUCTS", "100"))
     max_pages: int = int(os.getenv("SCRAPER_MAX_PAGES", "5"))
+    page_size: int = int(os.getenv("SCRAPER_PAGE_SIZE", "50"))          # itens por pagina na API
     timeout_ms: int = int(os.getenv("SCRAPER_TIMEOUT_MS", "30000"))
+    scroll_rounds: int = int(os.getenv("SCRAPER_SCROLL_ROUNDS", "5"))   # rodadas sem novidade ate parar (navegador)
+    scroll_pause_s: float = float(os.getenv("SCRAPER_SCROLL_PAUSE_MS", "4000")) / 1000.0
     dry_run: bool = os.getenv("SCRAPER_DRY_RUN", "1") != "0"
     debug_dir: Path = Path(os.getenv("SCRAPER_DEBUG_DIR", "debug_html"))
     manual_html_dir: Path = Path(os.getenv("SCRAPER_MANUAL_HTML_DIR", "manual_html"))
@@ -262,12 +280,13 @@ class ScraperConfig:
 
 Todo pipeline deve ter:
 
-- limite de paginas;
-- limite de produtos;
-- limite de tempo;
+- limite de paginas (paginacao por numero **e** por cursor);
+- limite de produtos/itens;
+- limite de tempo (timeout por requisicao/navegacao);
+- limite de rodadas de scroll para o navegador;
 - limite de bytes para captura manual;
 - modo dry-run por padrao em importadores;
-- logs objetivos com contadores;
+- logs objetivos com contadores, incluindo o metodo de coleta usado;
 - saida em JSON para auditoria quando fizer sentido.
 
 ---
@@ -447,6 +466,272 @@ Cuidados:
 - JSON embutido pode conter dados demais; extraia apenas o necessario.
 - Nao salve payload bruto se houver risco de dados pessoais ou tokens.
 - Teste parser de JSON com fixture reduzida e sanitizada.
+
+---
+
+## 10-A. API interna/nao documentada em JSON (metodo preferido)
+
+Muitos sites modernos sao apenas uma casca: o front-end consome uma **API JSON interna**
+(`api-v2.exemplo.com`, `/_next/data/...`, `/graphql`, etc.) que entrega os dados ja estruturados.
+Quando ela existe e cobre o caso, **prefira-a a qualquer parser de HTML ou navegador**: e mais
+rapida, nao depende de Chrome/Playwright, funciona em qualquer SO e quebra menos (o JSON e mais
+estavel que classes CSS).
+
+Regra de ouro: **API oficial documentada > API interna nao documentada > HTML/JSON embutido >
+navegador**. Use API interna apenas quando nao houver API oficial e dentro dos guardrails da
+secao 18 (termos de uso, limites, sem bypass de auth).
+
+O I/O HTTP pode ser feito so com a stdlib (`urllib`), sem dependencias extras, e **todo o parsing
+deve ficar em funcoes puras** (recebem texto/JSON, devolvem dados) para serem testaveis offline.
+
+```python
+from urllib.error import HTTPError, URLError
+from urllib.request import Request, urlopen
+
+_DEFAULT_UA = "Mozilla/5.0 (...) Chrome/120.0.0.0 Safari/537.36"
+
+
+def http_get(url: str, headers: dict | None = None, timeout: float = 30.0) -> str | None:
+    """GET simples via urllib. Retorna o corpo como texto, ou None em erro (fail-safe)."""
+    req = Request(url, headers=headers or {"User-Agent": _DEFAULT_UA})
+    try:
+        with urlopen(req, timeout=timeout) as response:
+            return response.read().decode("utf-8", errors="replace")
+    except (URLError, HTTPError, TimeoutError):
+        return None
+```
+
+### Descoberta de token / `client_id` embutido
+
+Algumas APIs internas exigem um token publico (`client_id`, `app_key`, build id) que o proprio
+front-end embute nos scripts JS da pagina. O padrao e: baixar a home, achar as URLs dos bundles JS,
+baixar os ultimos e extrair o token por regex. Mantenha as regex em funcoes puras testaveis.
+
+```python
+import re
+
+_TOKEN_RE = re.compile(r'client_id\s*[:=]\s*["\']([a-zA-Z0-9]{32})["\']')
+_SCRIPT_URL_RE = re.compile(r'src="(https://cdn\.exemplo\.com/assets/[^"]+\.js)"')
+
+
+def find_script_urls(html: str) -> list[str]:
+    return _SCRIPT_URL_RE.findall(html or "")
+
+
+def extract_token_from_js(js: str) -> str | None:
+    match = _TOKEN_RE.search(js or "")
+    return match.group(1) if match else None
+
+
+def fetch_token(timeout: float = 30.0) -> str | None:
+    html = http_get("https://exemplo.com", timeout=timeout)
+    if not html:
+        return None
+    for script_url in find_script_urls(html)[-3:]:   # token costuma estar nos ultimos bundles
+        token = extract_token_from_js(http_get(script_url, timeout=timeout) or "")
+        if token:
+            return token
+    return None
+```
+
+Cuidados:
+
+- Token publico embutido no front-end nao e segredo, mas trate-o como volatil: pode rotacionar a
+  qualquer momento. Falhe de forma clara ("o site pode ter mudado") em vez de quebrar feio.
+- **Nunca** descubra, reutilize ou armazene tokens de sessao/autenticacao de usuario — isso e bypass
+  de auth e esta fora do escopo (secao 1).
+- Logue apenas um prefixo do token (`token[:8]...`), nunca o valor inteiro.
+
+### Resolucao de URL publica -> entidade interna (`/resolve`)
+
+A URL que o usuario cola e publica, mas a API interna trabalha com ids. Um endpoint de `resolve`
+costuma traduzir uma para a outra.
+
+```python
+def resolve_url(public_url: str, token: str, timeout: float = 30.0) -> dict | None:
+    api_url = f"https://api-v2.exemplo.com/resolve?url={public_url}&client_id={token}"
+    body = http_get(api_url, headers={"User-Agent": _DEFAULT_UA, "Accept": "application/json"}, timeout=timeout)
+    try:
+        data = __import__("json").loads(body or "")
+    except (ValueError, TypeError):
+        return None
+    return data if isinstance(data, dict) else None
+```
+
+### Paginacao por cursor (`next_href` / `linked_partitioning`)
+
+Diferente da paginacao por numero de pagina (secao "flows"), muitas APIs devolvem um **cursor**: um
+`next_href` (ou `next_cursor`, `after`) que ja aponta para a proxima pagina. Pare quando o cursor
+sumir, ao bater o limite de itens **ou** o limite de paginas — sempre os dois tetos, para nao varrer
+infinito.
+
+```python
+def collect_paginated(first_url: str, token: str, config, log) -> list[str]:
+    items: list[str] = []
+    next_href = first_url
+    page = 0
+    while next_href and page < config.max_pages and len(items) < config.max_items:
+        body = http_get(next_href, headers={"Accept": "application/json"}, timeout=config.timeout_ms / 1000)
+        if not body:
+            log("Falha ao carregar pagina; encerrando coleta.")
+            break
+        page_urls, next_href = parse_collection_page(body)  # parser puro -> ([], None) em erro
+        items.extend(page_urls)
+        page += 1
+        log(f"Pagina {page}: +{len(page_urls)} (total {len(items)}).")
+        if next_href and "client_id" not in next_href:   # alguns cursores nao carregam o token
+            next_href += f"&client_id={token}"
+        if next_href:
+            time.sleep(0.5)   # cortesia: nao martele a API
+    return items[: config.max_items]
+```
+
+```python
+import json
+
+
+def parse_collection_page(payload: str) -> tuple[list[str], str | None]:
+    """Parser puro. Em payload invalido devolve ([], None) — nunca dado parcial enganoso."""
+    try:
+        data = json.loads(payload)
+    except (json.JSONDecodeError, TypeError):
+        return [], None
+    urls = [
+        item["permalink_url"]
+        for item in data.get("collection", []) or []
+        if isinstance(item, dict) and item.get("permalink_url")
+    ]
+    return urls, data.get("next_href")
+```
+
+### Resolucao em duas etapas (item so com id)
+
+As vezes a listagem traz alguns itens completos e outros so com `id` (sem a URL/permalink). Resolva
+os pendentes com uma chamada extra por item — respeitando o teto e parando cedo.
+
+```python
+direct_urls, pending_ids, title = parse_set(body)     # parser puro
+items = list(direct_urls)
+for item_id in pending_ids:
+    if len(items) >= config.max_items:
+        break
+    body = http_get(f"https://api-v2.exemplo.com/items/{item_id}?client_id={token}",
+                    headers={"Accept": "application/json"}, timeout=timeout)
+    permalink = parse_item_permalink(body or "")        # parser puro -> str | None
+    if permalink:
+        items.append(permalink)
+```
+
+Cuidados gerais com API interna:
+
+- Sempre teto de paginas, itens e tempo; `time.sleep` curto entre chamadas.
+- Parser sempre puro e fail-safe: JSON invalido -> lista vazia, nunca excecao vazando nem dado parcial.
+- Guarde `capture_source` (ex.: `"http_api"`) no DTO para auditoria de origem.
+- Fixtures de teste = JSON real **sanitizado** (sem tokens, ids privados, dados pessoais).
+
+---
+
+## 10-B. Scroll infinito com "carregar mais" (navegador)
+
+Quando nao ha API e a listagem so cresce conforme o usuario rola/clica em "carregar mais", o
+navegador precisa simular esse comportamento ate a pagina estabilizar. O padrao vale para Selenium e
+Playwright: **clicar nos botoes de "mais", rolar ate o fim e parar quando a contagem nao mudar por N
+rodadas** (em vez de um numero fixo de scrolls).
+
+```python
+_SHOW_MORE_SELECTORS = [
+    "a.showMore", "button.showMore",
+    "a[class*='ShowMore']", "button[class*='ShowMore']",
+]
+
+
+def scroll_and_collect(driver, css_selector: str, config):
+    """Rola/clica em 'carregar mais' e coleta os elementos ate a contagem estabilizar."""
+    from selenium.webdriver.common.by import By
+
+    count = 0
+    stable_rounds = 0
+    elements = []
+
+    while stable_rounds < config.scroll_rounds:    # para apos N rodadas sem novidade
+        for sel in _SHOW_MORE_SELECTORS:
+            for btn in driver.find_elements(By.CSS_SELECTOR, sel):
+                if btn.is_displayed():
+                    try:
+                        btn.click()
+                        time.sleep(config.scroll_pause_s)
+                    except Exception:
+                        pass
+
+        driver.execute_script("window.scrollTo(0, document.body.scrollHeight);")
+        time.sleep(config.scroll_pause_s)
+
+        elements = driver.find_elements(By.CSS_SELECTOR, css_selector)
+        if len(elements) == count:
+            stable_rounds += 1
+        else:
+            count = len(elements)
+            stable_rounds = 0      # houve novidade: zera o contador de estabilidade
+
+    return elements
+```
+
+Boas praticas:
+
+- Pare por **estabilidade** (contagem nao muda por N rodadas), nao por numero fixo de scrolls.
+- Tenha varios seletores de "carregar mais" como fallback; eles mudam com frequencia.
+- `scroll_rounds` e `scroll_pause_s` configuraveis por env var (paginas lentas precisam de pausa maior).
+- Sempre um teto de itens, alem do teto de rodadas.
+- Inicializacao do navegador com varias estrategias de fallback (driver bundled -> manager nativo ->
+  manager via pip) torna a coleta robusta entre maquinas e dentro de executaveis empacotados.
+- Importe o navegador **preguicosamente** (dentro da funcao): assim ele so e obrigatorio quando o
+  fallback de navegador e realmente acionado, e o metodo HTTP/API roda sem ele instalado.
+
+---
+
+## 10-C. Pipeline com fallback entre metodos
+
+Quando ha mais de um metodo de coleta, nao escolha um no `if/else`: organize-os num **pipeline
+ordenado do mais barato/robusto para o mais caro** e tente cada um ate obter resultado. Somar um
+metodo novo passa a ser so registrar mais um adapter na lista.
+
+```python
+def get_pipeline() -> list:
+    """Metodos na ordem de tentativa: o mais facil/robusto primeiro."""
+    return [HttpApiAdapter(), SeleniumAdapter()]   # API interna -> navegador (fallback)
+
+
+def collect(target_url: str, spec, config, log) -> CollectResult:
+    result = CollectResult()
+    for adapter in get_pipeline():
+        log(f"Tentando {adapter.display_name}...")
+        try:
+            items = adapter.collect(target_url, spec, config, log)
+        except Exception as exc:
+            log(f"{adapter.display_name} falhou: {exc}")
+            items = []
+
+        if items:
+            urls = dedupe(items)
+            result.urls = urls
+            result.used_source = adapter.slug
+            result.by_source[adapter.slug] = len(items)
+            log(f"{adapter.display_name}: {len(urls)} item(ns) apos dedupe.")
+            break    # o metodo mais barato ja resolveu; nao precisa do fallback
+
+    if not result.urls:
+        log("Nenhum metodo coletou itens.")    # falha segura: result.urls fica vazio
+    return result
+```
+
+Regras:
+
+1. Ordem explicita em `get_pipeline()` — a politica de fallback fica num unico lugar auditavel.
+2. Cada adapter implementa a mesma interface (secao 5) e isola seus seletores/regras.
+3. Excecao de um adapter **nao derruba o pipeline**: vira lista vazia e o proximo metodo assume.
+4. **Falha segura**: se nenhum metodo coletar, devolve resultado vazio, nunca dado parcial enganoso.
+5. Pare no primeiro metodo que trouxer resultado — nao gaste o metodo caro a toa.
+6. Registre `used_source` e `by_source` para o resumo/auditoria (qual metodo realmente resolveu).
 
 ---
 
@@ -695,6 +980,10 @@ Regras:
 | Teste | O que valida |
 |---|---|
 | Parser por adapter | Extrai DTOs corretos de fixture HTML sanitizada |
+| Parser de API interna | Coleta itens de fixture JSON sanitizada (pagina, set, cursor) |
+| Descoberta de token | Acha URLs de script e extrai `client_id` de JS de fixture |
+| Paginacao por cursor | Segue `next_href` ate o fim e respeita teto de paginas/itens |
+| Pipeline com fallback | Usa o 2o metodo quando o 1o falha; vazio quando ambos falham |
 | Parser de JSON embutido | Coleta produtos de `__NEXT_DATA__`, JSON-LD ou payload textual |
 | Parser de preco | Normaliza moeda, separadores, descontos e valores ausentes |
 | URL resolver | Gera URL publica correta e bloqueia quando nao sabe resolver |
@@ -779,14 +1068,16 @@ Formato recomendado:
 
 1. Definir DTO puro.
 2. Criar `SourceAdapter` abstrato.
-3. Implementar um adapter por fonte/layout.
-4. Priorizar payload estruturado quando existir.
-5. Usar BeautifulSoup/DOM como parser offline testavel.
-6. Usar Playwright apenas para navegacao, interacao e captura de HTML.
-7. Criar fallback de captura manual com userscript + servidor local.
-8. Persistir com upsert idempotente e historico.
-9. Separar URL de coleta da URL publica.
-10. Cobrir cada adapter com fixtures e testes offline.
+3. Implementar um adapter por fonte/layout e por metodo (API interna, HTTP, navegador).
+4. Priorizar API oficial/interna em JSON, depois payload estruturado, e so entao navegador.
+5. Manter o I/O HTTP fino e todo o parsing (HTML e JSON) em funcoes puras e fail-safe.
+6. Usar BeautifulSoup/DOM como parser offline testavel.
+7. Usar Playwright/Selenium apenas para navegacao, scroll, interacao e captura de HTML.
+8. Organizar os metodos num pipeline com fallback (mais barato -> mais caro) e falha segura.
+9. Criar fallback de captura manual com userscript + servidor local.
+10. Persistir com upsert idempotente e historico; gravar `capture_source`.
+11. Separar URL de coleta da URL publica.
+12. Cobrir cada adapter e cada parser (HTML e JSON) com fixtures sanitizadas e testes offline.
 
 ---
 
