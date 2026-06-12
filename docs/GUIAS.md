@@ -2,7 +2,7 @@
 
 A pasta [`guias/`](../guias/) contem **guias reutilizaveis extraidos de projetos reais**, organizados por dominio. Diferente do `core/`, estes arquivos sao **opcionais** — use apenas quando o projeto precisar daquela funcionalidade.
 
-> Voltar ao [README](../README.md).
+> Voltar ao [README](../README.md). Agentes de IA: o indice compacto destes guias, com palavras-chave para casar com o prompt, esta em [`AGENTS.md`](../AGENTS.md).
 
 Cada guia responde a tres perguntas:
 

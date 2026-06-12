@@ -56,6 +56,7 @@ Cada area tem um documento proprio, com uma responsabilidade unica. Use o mapa a
 
 | Documento | Responsabilidade | O que voce encontra |
 |-----------|------------------|---------------------|
+| **[AGENTS.md](AGENTS.md)** | **Roteiro de leitura para IA** | Protocolo de leitura por tipo de tarefa e indice de guias com palavras-chave — o que um agente deve abrir (e o que ignorar) conforme o prompt. |
 | **[docs/CORE.md](docs/CORE.md)** | Padroes **obrigatorios** | Design systems (frontend, backend, README), guia minimo de qualidade, start app script, prompts base e o template de contexto `IA.md` — cada um descrito e com link. |
 | **[docs/GUIAS.md](docs/GUIAS.md)** | Padroes **opcionais** por dominio | Guias reutilizaveis de **frontend** (9), **backend** (2) e **integracao** (3): o que cada um resolve, de qual projeto foi extraido e quando reutilizar. |
 | **[docs/INSTALACAO.md](docs/INSTALACAO.md)** | **Como usar** em outros projetos | Os 8 metodos de download/sincronizacao (incluindo o comando global `felixo`), variantes com/sem submodulo e a tabela de escolha rapida por cenario. |
@@ -73,7 +74,8 @@ Cada area tem um documento proprio, com uma responsabilidade unica. Use o mapa a
 - **Quero o banco de componentes UI** → submodulo [`componets-database/`](componets-database/) (veja as variantes "com submodulo" em [docs/INSTALACAO.md](docs/INSTALACAO.md))
 - **Quero a politica de git** (branches, commits, doc viva) → [docs/GIT.md](docs/GIT.md)
 - **Vou contribuir de fora** → [CONTRIBUTING.md](CONTRIBUTING.md)
-- **Sou um agente de IA trabalhando aqui** → [Para Agentes de IA](#-para-agentes-de-ia) (resumo) e [docs/GIT.md](docs/GIT.md) (completo)
+- **Sou um agente de IA** (aqui ou consumindo o repo em outro projeto) → [AGENTS.md](AGENTS.md) (roteiro de leitura por tarefa)
+- **Vou versionar mudancas neste repo** → [Para Agentes de IA](#-para-agentes-de-ia) (resumo) e [docs/GIT.md](docs/GIT.md) (completo)
 
 ---
 
@@ -131,6 +133,7 @@ Felixo-System-Design/
 │   ├── GIT.md                               # Politica de git (branches, commits, doc viva)
 │   └── INSTALACAO.md                        # Como usar em outros projetos (8 metodos)
 │
+├── AGENTS.md                                # Roteiro de leitura para agentes de IA
 ├── CONTRIBUTING.md
 ├── README.md
 ├── LICENSE
@@ -176,6 +179,8 @@ Felixo-System-Design/
 
 ## Para Agentes de IA
 
+> **Comece por [`AGENTS.md`](AGENTS.md)** — o roteiro de leitura por tipo de tarefa. Ele diz quais documentos abrir (e quais ignorar) conforme o prompt, tanto para quem trabalha neste repositorio quanto para quem consome uma copia dele em outro projeto.
+
 Instrucoes para agentes que trabalham **diretamente neste repositorio** (nao via fork). Para contribuicoes externas, siga o fluxo de fork + Pull Request descrito em [`CONTRIBUTING.md`](CONTRIBUTING.md).
 
 > **A politica de git completa esta em [`docs/GIT.md`](docs/GIT.md)** — branches, commits e documentacao viva, com exemplos de mensagem boa/ruim e checklist. O resumo abaixo e o essencial; leia o documento dedicado antes de versionar.
@@ -213,5 +218,5 @@ Este projeto esta sob a licenca MIT — veja o arquivo `LICENSE`.
 > **Assinatura de Origem**  
 > Este arquivo foi criado por **Felipe Martin** e faz parte do repositorio **Felixo System Design**.  
 > Origem: https://github.com/Felipe-Alcantara/Felixo-System-Design  
-> Data desta versao: 2026-06-09
+> Data desta versao: 2026-06-12
 > Sugestoes e pull requests sao bem-vindos.
