@@ -96,7 +96,7 @@ Documentacao desatualizada conta como **trabalho incompleto**. Ao mudar comporta
 - guias em [`guias/`](../guias/) afetados.
 - o `IA.md` do projeto (contexto operacional, decisoes, proximos passos).
 
-Se um tema de documentacao nao couber naturalmente nos arquivos existentes de `docs/`, crie um novo arquivo ali com responsabilidade unica — foi exatamente o caso deste `GIT.md`.
+Se um tema de documentacao nao couber naturalmente nos arquivos existentes de `docs/`, crie um novo arquivo ali com responsabilidade unica — foi exatamente o caso deste documento de politica de git.
 
 ---
 

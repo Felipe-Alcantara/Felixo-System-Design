@@ -23,10 +23,10 @@
 | Construir ou alterar **backend** | [`core/DESIGN_SYSTEM_BACKEND.md`](core/DESIGN_SYSTEM_BACKEND.md) | [`core/PROMPT_BASE_BACKEND.md`](core/PROMPT_BASE_BACKEND.md) (montar o prompt inicial) |
 | Escrever ou revisar **README / documentacao** | [`core/DESIGN_SYSTEM_README.md`](core/DESIGN_SYSTEM_README.md) | — |
 | Criar uma **aplicacao web rodavel** | [`core/GUIA-START-APP-SCRIPT.md`](core/GUIA-START-APP-SCRIPT.md) — todo app web exige um `start_app.py` na raiz | — |
-| Registrar **contexto/memoria do projeto** | [`core/IA.md`](core/IA.md) — copie o template e preencha continuamente | — |
-| **Versionar mudancas neste repositorio** | [`docs/GIT.md`](docs/GIT.md) — direto no `main` por padrao; commits `tipo: descricao`; doc viva no mesmo commit | [CONTRIBUTING.md](CONTRIBUTING.md) (se for via fork) |
-| **Baixar/sincronizar** este repo em outro projeto | [`docs/INSTALACAO.md`](docs/INSTALACAO.md) — 8 metodos, incluindo o comando global `felixo` | — |
-| Funcionalidade especifica (arvore, heatmap, deploy...) | o guia correspondente na tabela abaixo | [`docs/GUIAS.md`](docs/GUIAS.md) (descricoes completas) |
+| Registrar **contexto/memoria do projeto** | [`core/TEMPLATE-CONTEXTO-IA.md`](core/TEMPLATE-CONTEXTO-IA.md) — copie o template e preencha continuamente | — |
+| **Versionar mudancas neste repositorio** | [`docs/GIT-POLITICA-DE-VERSIONAMENTO.md`](docs/GIT-POLITICA-DE-VERSIONAMENTO.md) — direto no `main` por padrao; commits `tipo: descricao`; doc viva no mesmo commit | [CONTRIBUTING.md](CONTRIBUTING.md) (se for via fork) |
+| **Baixar/sincronizar** este repo em outro projeto | [`docs/INSTALACAO-EM-OUTROS-PROJETOS.md`](docs/INSTALACAO-EM-OUTROS-PROJETOS.md) — 8 metodos, incluindo o comando global `felixo` | — |
+| Funcionalidade especifica (arvore, heatmap, deploy...) | o guia correspondente na tabela abaixo | [`docs/GUIAS-OPCIONAIS.md`](docs/GUIAS-OPCIONAIS.md) (descricoes completas) |
 
 ## 3. Indice de guias opcionais
 
@@ -51,7 +51,7 @@ Use um guia **somente** quando a tarefa pedir aquela funcionalidade. As palavras
 
 ## 4. Regras deste repositorio (resumo)
 
-Valem para agentes alterando **este** repositorio; a fonte completa e [`docs/GIT.md`](docs/GIT.md).
+Valem para agentes alterando **este** repositorio; a fonte completa e [`docs/GIT-POLITICA-DE-VERSIONAMENTO.md`](docs/GIT-POLITICA-DE-VERSIONAMENTO.md).
 
 - **Git**: commite direto no `main` por padrao; branch **so** para feature grande, refatoracao significativa ou alto risco. Commits pequenos no formato `tipo: descricao` (Conventional Commits).
 - **Documentacao viva**: ao mudar comportamento, estrutura ou comandos, atualize README, `docs/`, guias e `IA.md` afetados **no mesmo commit**.

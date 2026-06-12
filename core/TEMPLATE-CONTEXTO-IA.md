@@ -23,7 +23,7 @@ Ele complementa os demais arquivos assim:
 - `PROMPT_BASE_BACKEND.md` define a forma de pedir implementação e arquitetura para IA
 - `PROMPT_BASE_FRONTEND.md` define a forma de pedir interface e componentes para IA
 - `DESIGN_SYSTEM_README.md` define como documentar o projeto para humanos
-- `IA.md` (este arquivo) define como preservar o contexto acumulado do projeto para IA
+- `TEMPLATE-CONTEXTO-IA.md` (este arquivo, copiado como `IA.md` no projeto destino) define como preservar o contexto acumulado do projeto para IA
 
 Nos guias técnicos deste acervo, modularização forte e separação clara de responsabilidades são tratadas como princípios estruturais centrais, especialmente no material de backend.
 

@@ -46,9 +46,9 @@ Guia tecnico para montar prompts de frontend completos na primeira interacao. In
 
 [Ver prompt base frontend](../core/PROMPT_BASE_FRONTEND.md)
 
-## IA.md — Template de Contexto Operacional
+## TEMPLATE-CONTEXTO-IA.md — Template de Contexto Operacional
 
-Template padrao de **memoria operacional** para projetos com IA. Deve ser copiado e preenchido continuamente durante o desenvolvimento para registrar:
+Template padrao de **memoria operacional** para projetos com IA. Deve ser copiado para o projeto destino **como `IA.md`** e preenchido continuamente durante o desenvolvimento para registrar:
 
 - objetivo atual e milestones
 - decisoes tecnicas
@@ -57,4 +57,4 @@ Template padrao de **memoria operacional** para projetos com IA. Deve ser copiad
 - testes importantes
 - contexto necessario para outra IA retomar o trabalho sem reler tudo
 
-[Ver IA.md](../core/IA.md)
+[Ver o template](../core/TEMPLATE-CONTEXTO-IA.md)

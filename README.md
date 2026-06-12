@@ -12,7 +12,7 @@
 
 **Repositorio central de padroes de design, qualidade de sistema, prompts estruturados, documentacao operacional e guias reutilizaveis para IA.**
 
-[Core (Obrigatorio)](docs/CORE.md) | [Guias (Opcional)](docs/GUIAS.md) | [Como Usar](docs/INSTALACAO.md) | [Stack](#%EF%B8%8F-minha-stack)
+[Core (Obrigatorio)](docs/CORE-PADROES-OBRIGATORIOS.md) | [Guias (Opcional)](docs/GUIAS-OPCIONAIS.md) | [Como Usar](docs/INSTALACAO-EM-OUTROS-PROJETOS.md) | [Stack](#%EF%B8%8F-minha-stack)
 
 </div>
 
@@ -57,25 +57,25 @@ Cada area tem um documento proprio, com uma responsabilidade unica. Use o mapa a
 | Documento | Responsabilidade | O que voce encontra |
 |-----------|------------------|---------------------|
 | **[AGENTS.md](AGENTS.md)** | **Roteiro de leitura para IA** | Protocolo de leitura por tipo de tarefa e indice de guias com palavras-chave — o que um agente deve abrir (e o que ignorar) conforme o prompt. |
-| **[docs/CORE.md](docs/CORE.md)** | Padroes **obrigatorios** | Design systems (frontend, backend, README), guia minimo de qualidade, start app script, prompts base e o template de contexto `IA.md` — cada um descrito e com link. |
-| **[docs/GUIAS.md](docs/GUIAS.md)** | Padroes **opcionais** por dominio | Guias reutilizaveis de **frontend** (9), **backend** (2) e **integracao** (3): o que cada um resolve, de qual projeto foi extraido e quando reutilizar. |
-| **[docs/INSTALACAO.md](docs/INSTALACAO.md)** | **Como usar** em outros projetos | Os 8 metodos de download/sincronizacao (incluindo o comando global `felixo`), variantes com/sem submodulo e a tabela de escolha rapida por cenario. |
-| **[docs/GIT.md](docs/GIT.md)** | **Politica de git** neste repo | Quando criar branch (e quando nao), formato de commit (`tipo: descricao`), documentacao viva, exemplos e checklist. Fonte unica das regras de versionamento. |
+| **[docs/CORE-PADROES-OBRIGATORIOS.md](docs/CORE-PADROES-OBRIGATORIOS.md)** | Padroes **obrigatorios** | Design systems (frontend, backend, README), guia minimo de qualidade, start app script, prompts base e o template de contexto `IA.md` — cada um descrito e com link. |
+| **[docs/GUIAS-OPCIONAIS.md](docs/GUIAS-OPCIONAIS.md)** | Padroes **opcionais** por dominio | Guias reutilizaveis de **frontend** (9), **backend** (2) e **integracao** (3): o que cada um resolve, de qual projeto foi extraido e quando reutilizar. |
+| **[docs/INSTALACAO-EM-OUTROS-PROJETOS.md](docs/INSTALACAO-EM-OUTROS-PROJETOS.md)** | **Como usar** em outros projetos | Os 8 metodos de download/sincronizacao (incluindo o comando global `felixo`), variantes com/sem submodulo e a tabela de escolha rapida por cenario. |
+| **[docs/GIT-POLITICA-DE-VERSIONAMENTO.md](docs/GIT-POLITICA-DE-VERSIONAMENTO.md)** | **Politica de git** neste repo | Quando criar branch (e quando nao), formato de commit (`tipo: descricao`), documentacao viva, exemplos e checklist. Fonte unica das regras de versionamento. |
 | **[CONTRIBUTING.md](CONTRIBUTING.md)** | **Contribuir** de fora | Fluxo de fork + Pull Request para contribuicoes externas. |
 | [Estrutura do Repositorio](#-estrutura-do-repositorio) | **Layout** das pastas | Arvore completa de arquivos e pastas com uma linha por item. |
 | [Para Agentes de IA](#-para-agentes-de-ia) | Regras para agentes **neste** repo | Politica de git/branches, commits e documentacao viva. |
 
 ### Mapa rapido por necessidade
 
-- **Quero os padroes obrigatorios de qualidade** → [docs/CORE.md](docs/CORE.md)
-- **Preciso de um padrao especifico** (arvore, heatmap, scraping, deploy...) → [docs/GUIAS.md](docs/GUIAS.md)
-- **Quero baixar/sincronizar este repo num projeto** → [docs/INSTALACAO.md](docs/INSTALACAO.md)
-- **Quero o comando global `felixo`** → [docs/INSTALACAO.md — comando `felixo`](docs/INSTALACAO.md#comando-global-felixo-instalador-multiplataforma)
-- **Quero o banco de componentes UI** → submodulo [`componets-database/`](componets-database/) (veja as variantes "com submodulo" em [docs/INSTALACAO.md](docs/INSTALACAO.md))
-- **Quero a politica de git** (branches, commits, doc viva) → [docs/GIT.md](docs/GIT.md)
+- **Quero os padroes obrigatorios de qualidade** → [docs/CORE-PADROES-OBRIGATORIOS.md](docs/CORE-PADROES-OBRIGATORIOS.md)
+- **Preciso de um padrao especifico** (arvore, heatmap, scraping, deploy...) → [docs/GUIAS-OPCIONAIS.md](docs/GUIAS-OPCIONAIS.md)
+- **Quero baixar/sincronizar este repo num projeto** → [docs/INSTALACAO-EM-OUTROS-PROJETOS.md](docs/INSTALACAO-EM-OUTROS-PROJETOS.md)
+- **Quero o comando global `felixo`** → [docs/INSTALACAO-EM-OUTROS-PROJETOS.md — comando `felixo`](docs/INSTALACAO-EM-OUTROS-PROJETOS.md#comando-global-felixo-instalador-multiplataforma)
+- **Quero o banco de componentes UI** → submodulo [`componets-database/`](componets-database/) (veja as variantes "com submodulo" em [docs/INSTALACAO-EM-OUTROS-PROJETOS.md](docs/INSTALACAO-EM-OUTROS-PROJETOS.md))
+- **Quero a politica de git** (branches, commits, doc viva) → [docs/GIT-POLITICA-DE-VERSIONAMENTO.md](docs/GIT-POLITICA-DE-VERSIONAMENTO.md)
 - **Vou contribuir de fora** → [CONTRIBUTING.md](CONTRIBUTING.md)
 - **Sou um agente de IA** (aqui ou consumindo o repo em outro projeto) → [AGENTS.md](AGENTS.md) (roteiro de leitura por tarefa)
-- **Vou versionar mudancas neste repo** → [Para Agentes de IA](#-para-agentes-de-ia) (resumo) e [docs/GIT.md](docs/GIT.md) (completo)
+- **Vou versionar mudancas neste repo** → [Para Agentes de IA](#-para-agentes-de-ia) (resumo) e [docs/GIT-POLITICA-DE-VERSIONAMENTO.md](docs/GIT-POLITICA-DE-VERSIONAMENTO.md) (completo)
 
 ---
 
@@ -85,7 +85,7 @@ Cada area tem um documento proprio, com uma responsabilidade unica. Use o mapa a
 Felixo-System-Design/
 │
 ├── core/                                    # OBRIGATORIO — usar em todo projeto
-│   ├── IA.md                                # Template de contexto operacional para IA
+│   ├── TEMPLATE-CONTEXTO-IA.md              # Template de contexto operacional (copiar como IA.md no projeto)
 │   ├── DESIGN_SYSTEM_FRONTEND.md            # Padroes de qualidade frontend
 │   ├── DESIGN_SYSTEM_BACKEND.md             # Padroes de qualidade backend
 │   ├── DESIGN_SYSTEM_README.md              # Padroes de documentacao README
@@ -128,10 +128,10 @@ Felixo-System-Design/
 │       └── felixo-command.cmd               # Comando felixo em si (instalado como felixo.cmd)
 │
 ├── docs/                                    # Documentacao por responsabilidade
-│   ├── CORE.md                              # Detalhe dos padroes obrigatorios
-│   ├── GUIAS.md                             # Detalhe dos guias por dominio
-│   ├── GIT.md                               # Politica de git (branches, commits, doc viva)
-│   └── INSTALACAO.md                        # Como usar em outros projetos (8 metodos)
+│   ├── CORE-PADROES-OBRIGATORIOS.md         # Detalhe dos padroes obrigatorios
+│   ├── GUIAS-OPCIONAIS.md                   # Detalhe dos guias por dominio
+│   ├── GIT-POLITICA-DE-VERSIONAMENTO.md     # Politica de git (branches, commits, doc viva)
+│   └── INSTALACAO-EM-OUTROS-PROJETOS.md     # Como usar em outros projetos (8 metodos)
 │
 ├── AGENTS.md                                # Roteiro de leitura para agentes de IA
 ├── CONTRIBUTING.md
@@ -183,7 +183,7 @@ Felixo-System-Design/
 
 Instrucoes para agentes que trabalham **diretamente neste repositorio** (nao via fork). Para contribuicoes externas, siga o fluxo de fork + Pull Request descrito em [`CONTRIBUTING.md`](CONTRIBUTING.md).
 
-> **A politica de git completa esta em [`docs/GIT.md`](docs/GIT.md)** — branches, commits e documentacao viva, com exemplos de mensagem boa/ruim e checklist. O resumo abaixo e o essencial; leia o documento dedicado antes de versionar.
+> **A politica de git completa esta em [`docs/GIT-POLITICA-DE-VERSIONAMENTO.md`](docs/GIT-POLITICA-DE-VERSIONAMENTO.md)** — branches, commits e documentacao viva, com exemplos de mensagem boa/ruim e checklist. O resumo abaixo e o essencial; leia o documento dedicado antes de versionar.
 
 ### Git e branches — o padrao e *nao* criar branch
 
@@ -195,7 +195,7 @@ Instrucoes para agentes que trabalham **diretamente neste repositorio** (nao via
 
 - **Sempre commite apos uma adicao concluida.** Nao acumule varias mudancas soltas sem commitar.
 - **Commits pequenos, mas bem descritivos.** Cada commit e uma unidade coesa (uma ideia, um motivo). Se precisar de varios "e" para descrever, sao varios commits.
-- **Mensagem no formato `tipo: descricao`** (Conventional Commits): `feat:`, `fix:`, `docs:`, `refactor:`, `chore:` — explicando **o que** mudou e **por que**. Detalhes e exemplos em [`docs/GIT.md`](docs/GIT.md#3-commits--pequenos-frequentes-e-descritivos).
+- **Mensagem no formato `tipo: descricao`** (Conventional Commits): `feat:`, `fix:`, `docs:`, `refactor:`, `chore:` — explicando **o que** mudou e **por que**. Detalhes e exemplos em [`docs/GIT-POLITICA-DE-VERSIONAMENTO.md`](docs/GIT-POLITICA-DE-VERSIONAMENTO.md#3-commits--pequenos-frequentes-e-descritivos).
 
 ### Documentacao viva — no mesmo commit
 
