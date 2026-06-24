@@ -41,7 +41,7 @@ Padroes de qualidade que devem acompanhar **todo projeto**:
 - **Design Systems** — Contratos de qualidade para frontend, backend e documentacao
 - **Prompt Bases** — Guias para montar prompts de IA completos na primeira interacao
 - **Guia Minimo de Qualidade** — Regras curtas e obrigatorias para preservar qualidade de software
-- **Start App Script** — Script Python obrigatorio que instala, inicia/reinicia e abre cada app web
+- **Start App Script** — `start_app.py` obrigatorio em todo programa: um menu interativo, colorido e descritivo que instala, configura e inicia (a porta de entrada do programa)
 - **Template de Contexto IA** — Memoria operacional padronizada para continuidade entre sessoes
 
 ### `guias/` — Opcional
@@ -90,7 +90,7 @@ Felixo-System-Design/
 │   ├── DESIGN_SYSTEM_BACKEND.md             # Padroes de qualidade backend
 │   ├── DESIGN_SYSTEM_README.md              # Padroes de documentacao README
 │   ├── GUIA_MINIMO_QUALIDADE.md             # Regras minimas obrigatorias de qualidade
-│   ├── GUIA-START-APP-SCRIPT.md             # Script de start obrigatorio (instala/inicia/abre)
+│   ├── GUIA-START-APP-SCRIPT.md             # Menu de entrada obrigatorio (instala/configura/inicia)
 │   ├── PROMPT_BASE_FRONTEND.md              # Prompt guiado para frontend
 │   └── PROMPT_BASE_BACKEND.md               # Prompt guiado para backend
 │

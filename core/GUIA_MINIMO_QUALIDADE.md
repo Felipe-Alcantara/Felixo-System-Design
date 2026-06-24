@@ -18,7 +18,7 @@ Quando houver duvida, siga os documentos completos:
 - Frontend: [`DESIGN_SYSTEM_FRONTEND.md`](DESIGN_SYSTEM_FRONTEND.md)
 - README: [`DESIGN_SYSTEM_README.md`](DESIGN_SYSTEM_README.md)
 - Contexto operacional: [`TEMPLATE-CONTEXTO-IA.md`](TEMPLATE-CONTEXTO-IA.md)
-- Script de start: [`GUIA-START-APP-SCRIPT.md`](GUIA-START-APP-SCRIPT.md)
+- Menu de entrada (start app): [`GUIA-START-APP-SCRIPT.md`](GUIA-START-APP-SCRIPT.md)
 
 ---
 
@@ -63,10 +63,11 @@ Quando houver duvida, siga os documentos completos:
    - Nao misture refatoracao ampla com feature sem necessidade.
    - **Versionamento (git):** commite direto no `main` por padrao; so crie branch para feature grande, refatoracao significativa ou alto risco. Commits pequenos no formato `tipo: descricao` (`feat`/`fix`/`docs`/`refactor`/`chore`), explicando o que e por que. Politica completa em [`../docs/GIT-POLITICA-DE-VERSIONAMENTO.md`](../docs/GIT-POLITICA-DE-VERSIONAMENTO.md).
 
-10. **Entregar script de start em toda aplicacao web**
-    - Toda aplicacao web deve ter um `start_app.py` na raiz que instala dependencias, inicia/reinicia o app e abre o navegador com **um unico comando** (`python start_app.py`).
-    - Cross-platform, com mensagens de erro claras, para facilitar quem automatiza servidor local e quem nao tem facilidade com terminal.
-    - Detalhes e template em [`GUIA-START-APP-SCRIPT.md`](GUIA-START-APP-SCRIPT.md).
+10. **Entregar um menu de entrada (`start_app.py`) em todo programa**
+    - Todo programa (web, CLI, automacao, script, desktop) deve ter um `start_app.py` na raiz que abre um **menu interativo, colorido e descritivo** — a porta de entrada unica por onde a pessoa instala, configura, inicia e deixa o programa pronto (`python start_app.py`).
+    - Sempre menu interativo, nunca flags decoradas; nada de prompt cru "digite a letra". Menu minimo: Iniciar/Rodar, Instalar/Setup, Configurar, Status/Sair.
+    - Cross-platform, com mensagens de erro claras, para facilitar quem nao tem facilidade com terminal.
+    - Detalhes em [`GUIA-START-APP-SCRIPT.md`](GUIA-START-APP-SCRIPT.md).
 
 11. **Finalizar com criterio de pronto**
     - Codigo/guia revisado.
@@ -84,7 +85,7 @@ Quando houver duvida, siga os documentos completos:
 - [ ] Contratos afetados foram preservados ou documentados.
 - [ ] Testes/verificacoes relevantes foram executados ou justificados.
 - [ ] Documentacao e logs usam linguagem geral/open source, sem valores hardcoded, e enquadram trabalho futuro como convite a contribuicao.
-- [ ] Toda aplicacao web tem `start_app.py` (instala + inicia/reinicia + abre o navegador) funcionando.
+- [ ] Todo programa tem `start_app.py` com menu interativo (Iniciar/Rodar, Instalar/Setup, Configurar, Status/Sair) funcionando.
 - [ ] README, `IA.md` ou guia afetado foram atualizados quando necessario.
 - [ ] O versionamento segue [`../docs/GIT-POLITICA-DE-VERSIONAMENTO.md`](../docs/GIT-POLITICA-DE-VERSIONAMENTO.md): mudanca no `main` (ou branch justificada), commit pequeno no formato `tipo: descricao`, doc atualizada no mesmo passo.
 - [ ] O proximo mantenedor consegue entender a decisao sem reler toda a conversa.
