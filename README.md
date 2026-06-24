@@ -190,6 +190,7 @@ Instrucoes para agentes que trabalham **diretamente neste repositorio** (nao via
 - **Trabalhe direto no `main` por padrao.** Commite no `main` sem branch para: correcoes simples, documentacao, ajustes pequenos e refatoracoes seguras (que nao mudam comportamento).
 - **So crie uma branch nova nestes tres casos:** (1) **feature grande**, (2) **refatoracao significativa**, ou (3) algo de **alto risco** (altera comportamento e precisa ser testado antes de entrar, ou pode quebrar algo existente). Se voce nao consegue dizer qual dos tres justifica a branch, **nao crie branch**.
 - **Evite o vicio de abrir uma branch por implementacao.** Varios agentes criam branches demais; aqui isso e considerado errado.
+- **Apos o merge, apague a branch** (local e remota). Branch ja mesclada que fica para tras polui o historico e confunde o que ainda esta em andamento.
 
 ### Commits — pequenos, frequentes e descritivos
 
