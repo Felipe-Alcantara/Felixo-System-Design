@@ -57,4 +57,6 @@ Template padrao de **memoria operacional** para projetos com IA. Deve ser copiad
 - testes importantes
 - contexto necessario para outra IA retomar o trabalho sem reler tudo
 
+O `IA.md` deve ser tratado como **linha do tempo**, nao como resumo reescrito: quando uma decisao tecnica mudar, preserve o registro anterior e acrescente uma nova entrada datada com contexto, motivo e validacao.
+
 [Ver o template](../core/TEMPLATE-CONTEXTO-IA.md)

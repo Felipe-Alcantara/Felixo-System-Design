@@ -55,6 +55,7 @@ Quando houver duvida, siga os documentos completos:
 8. **Documentar estado relevante**
    - README explica uso, setup e decisao importante.
    - `IA.md` registra contexto operacional, decisoes, bugs relevantes, testes e proximos passos.
+   - `IA.md` deve preservar a linha do tempo do projeto: nao apague nem reescreva registros antigos para "corrigir" uma decisao anterior; adicione um novo registro datado explicando a mudanca, o motivo e a validacao.
    - Como a maioria dos projetos e open source, escreva documentacao e logs com linguagem geral e acessivel, sem valores hardcoded e sem depender de contexto privado.
    - Enquadre trabalho futuro como convite a contribuicao: prefira "ideias para quem quiser contribuir" ou "melhorias que o projeto poderia expandir" em vez de "features futuras para implementar". Detalhes em [`DESIGN_SYSTEM_README.md`](DESIGN_SYSTEM_README.md), secao 3.5.
 
@@ -94,6 +95,7 @@ Quando houver duvida, siga os documentos completos:
 - [ ] Documentacao e logs usam linguagem geral/open source, sem valores hardcoded, e enquadram trabalho futuro como convite a contribuicao.
 - [ ] Todo programa tem `start_app.py` com menu interativo (Iniciar/Rodar, Instalar/Setup, Configurar, Status/Sair) funcionando.
 - [ ] README, `IA.md` ou guia afetado foram atualizados quando necessario.
+- [ ] O `IA.md` preserva o historico: decisoes novas foram adicionadas como registros datados, sem apagar a linha de raciocinio anterior.
 - [ ] O versionamento segue [`../docs/GIT-POLITICA-DE-VERSIONAMENTO.md`](../docs/GIT-POLITICA-DE-VERSIONAMENTO.md): mudanca no `main` (ou branch justificada), commit pequeno no formato `tipo: descricao`, doc atualizada no mesmo passo.
 - [ ] O proximo mantenedor consegue entender a decisao sem reler toda a conversa.
 

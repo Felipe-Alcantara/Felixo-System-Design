@@ -56,6 +56,7 @@ Valem para agentes alterando **este** repositorio; a fonte completa e [`docs/GIT
 
 - **Git**: commite direto no `main` por padrao; branch **so** para feature grande, refatoracao significativa ou alto risco. Commits pequenos no formato `tipo: descricao` (Conventional Commits).
 - **Documentacao viva**: ao mudar comportamento, estrutura ou comandos, atualize README, `docs/`, guias e `IA.md` afetados **no mesmo commit**.
+- **`IA.md` e linha do tempo**: nao apague registros antigos ao mudar uma decisao tecnica. Adicione um novo registro datado explicando a mudanca, o motivo e a validacao, preservando o raciocinio anterior.
 - **Automacao antes de ajuste manual**: ao mexer em codigo ou dados, procure scripts, comandos e ferramentas reutilizaveis primeiro; so faça alteracao manual quando isso for claramente mais pragmatico, e registre a excecao.
 - **Linguagem**: escrita open source — acessivel a qualquer leitor, sem valores hardcoded, caminhos locais ou contexto privado (referencia: [`core/DESIGN_SYSTEM_README.md`](core/DESIGN_SYSTEM_README.md), secao 3.5).
 

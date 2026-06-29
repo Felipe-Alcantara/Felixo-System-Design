@@ -296,6 +296,7 @@ Quando a implementação estiver sendo conduzida com apoio de IA, `README.md` e 
 
 - `README.md` deve refletir o estado atual utilizável do sistema
 - `IA.md` deve refletir contexto técnico, decisões, mudanças, bugs, testes e próximos passos
+- `IA.md` deve preservar a linha do tempo técnica: decisões antigas não devem ser apagadas quando forem superadas; registre uma nova entrada datada com motivo e validação
 - A IA não deve deixar a atualização desses arquivos apenas para o fim do trabalho
 - A cada resposta relevante de execução, se o estado do projeto mudou, a documentação também deve ser atualizada
 - Se uma decisão técnica foi tomada, um fluxo foi implementado, um bug foi corrigido ou um teste relevante foi rodado, isso deve ser registrado em tempo real

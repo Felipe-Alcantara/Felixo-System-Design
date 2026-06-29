@@ -201,6 +201,7 @@ Instrucoes para agentes que trabalham **diretamente neste repositorio** (nao via
 ### Documentacao viva — no mesmo commit
 
 - **Mantenha a documentacao atualizada e viva durante os commits.** Ao mudar comportamento, estrutura ou comandos, atualize no mesmo passo o `README.md`, os documentos em [`docs/`](docs/), os guias e o `IA.md` afetados — documentacao desatualizada conta como trabalho incompleto.
+- **Preserve o `IA.md` como linha do tempo.** Quando uma decisao tecnica mudar, nao apague o registro anterior; adicione uma nova entrada datada com contexto, motivo e validacao.
 - A pasta [`docs/`](docs/) ja existe para documentacao por responsabilidade (core, guias, git, instalacao). Mantenha cada arquivo com **uma responsabilidade unica** e adicione novos documentos ali quando um tema nao couber naturalmente nos existentes.
 
 ---

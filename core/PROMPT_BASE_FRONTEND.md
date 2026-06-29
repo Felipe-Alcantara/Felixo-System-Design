@@ -316,6 +316,7 @@ Se houver qualquer desvio em relação ao `DESIGN_SYSTEM_FRONTEND.md`, justifiqu
 # 15. DOCUMENTAÇÃO VIVA
 - Atualize `README.md` e `IA.md` em tempo real sempre que o estado do projeto mudar
 - Registre decisões visuais, componentes criados, inconsistências encontradas e próximos passos
+- Preserve o `IA.md` como linha do tempo: não apague registros antigos quando uma decisão mudar; adicione uma nova entrada datada com contexto, motivo e validação
 - Não deixe a documentação para o fim
 
 # 16. FORMA DE TRABALHAR

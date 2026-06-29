@@ -108,6 +108,8 @@ Documentacao desatualizada conta como **trabalho incompleto**. Ao mudar comporta
 - guias em [`guias/`](../guias/) afetados.
 - o `IA.md` do projeto (contexto operacional, decisoes, proximos passos).
 
+O `IA.md` deve ser preservado como **linha do tempo tecnica**. Quando uma decisao mudar, nao apague nem reescreva o registro antigo; acrescente uma nova entrada datada com contexto, motivo e validacao. O historico explica como o projeto chegou ao estado atual.
+
 Se um tema de documentacao nao couber naturalmente nos arquivos existentes de `docs/`, crie um novo arquivo ali com responsabilidade unica — foi exatamente o caso deste documento de politica de git.
 
 ---
@@ -119,6 +121,7 @@ Se um tema de documentacao nao couber naturalmente nos arquivos existentes de `d
 - [ ] A mensagem segue `tipo: descricao` e explica **o que** e **por que**?
 - [ ] Nao ha segredo, token, caminho local ou contexto privado na mensagem nem nos arquivos.
 - [ ] A documentacao afetada (README, `docs/`, guias, `IA.md`) foi atualizada no mesmo passo.
+- [ ] O `IA.md` manteve registros anteriores e adicionou novas decisoes como entradas datadas.
 - [ ] Se uma branch foi mesclada, ela foi apagada (local e remota) — nenhuma branch ja mesclada ficou para tras.
 
 ---

@@ -11,6 +11,8 @@
 > **Público-alvo**: Principalmente modelos de IA e fluxos de trabalho assistidos por IA. O conteúdo pode ser técnico, direto e específico.
 >
 > **Regra fundamental**: Todo contexto relevante deve estar **neste único arquivo**. Não espalhe informações críticas em vários lugares se a intenção for permitir retomada rápida por outra IA ou por uma nova sessão.
+>
+> **Regra de preservação histórica**: O `IA.md` é a linha do tempo técnica do projeto. Não apague nem reescreva registros antigos quando uma decisão mudar; adicione um novo registro datado explicando o que mudou, por que mudou e como foi validado.
 
 ## 📌 CONTEXTO DENTRO DO FELIXO SYSTEM DESIGN
 
@@ -67,6 +69,7 @@ Modelos de IA podem **alucinar ou se confundir** durante decisões longas. Regis
 - Use **timestamps** — formato `[YYYY-MM-DD]`
 - Registre o **porquê**, não só o quê — decisões sem justificativa perdem valor
 - Mantenha cada entrada **curta** — 1-3 linhas por item
+- Preserve entradas anteriores — se uma decisão antiga ficou obsoleta, mantenha o registro e adicione uma nova entrada datada apontando a mudança
 - Use as seções abaixo — não crie seções novas sem necessidade
 
 ---
