@@ -14,6 +14,7 @@
 2. **Identifique o tipo de tarefa** e abra apenas os documentos indicados na secao 2.
 3. **Consulte `guias/` somente sob demanda**: use a tabela da secao 3 para ver se a funcionalidade pedida ja tem um guia pronto. Se nao tiver, nao leia nenhum.
 4. **Nao leia documentos "por garantia".** Cada arquivo deste repositorio so e necessario no cenario indicado abaixo.
+5. **Antes de editar manualmente, procure automacao existente.** Se houver script, comando, instalador ou ferramenta reutilizavel para a mudanca, reutilize ou estenda esse caminho primeiro. Edicao manual fica como excecao justificada.
 
 ## 2. Roteiro por tipo de tarefa
 
@@ -55,6 +56,7 @@ Valem para agentes alterando **este** repositorio; a fonte completa e [`docs/GIT
 
 - **Git**: commite direto no `main` por padrao; branch **so** para feature grande, refatoracao significativa ou alto risco. Commits pequenos no formato `tipo: descricao` (Conventional Commits).
 - **Documentacao viva**: ao mudar comportamento, estrutura ou comandos, atualize README, `docs/`, guias e `IA.md` afetados **no mesmo commit**.
+- **Automacao antes de ajuste manual**: ao mexer em codigo ou dados, procure scripts, comandos e ferramentas reutilizaveis primeiro; so faça alteracao manual quando isso for claramente mais pragmatico, e registre a excecao.
 - **Linguagem**: escrita open source — acessivel a qualquer leitor, sem valores hardcoded, caminhos locais ou contexto privado (referencia: [`core/DESIGN_SYSTEM_README.md`](core/DESIGN_SYSTEM_README.md), secao 3.5).
 
 ## 5. O que este repositorio nao e

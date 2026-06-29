@@ -24,7 +24,7 @@ Guia de padronizacao para `README.md`, usado como referencia para manter documen
 
 ## Guia Minimo de Qualidade
 
-Contrato curto e obrigatorio para preservar qualidade de software em qualquer projeto. Resume os padroes essenciais de arquitetura, seguranca, testes, documentacao e criterio de pronto antes de consultar os documentos longos.
+Contrato curto e obrigatorio para preservar qualidade de software em qualquer projeto. Resume os padroes essenciais de arquitetura, seguranca, testes, documentacao, criterio de pronto e a regra de priorizar scripts, automacoes e ferramentas reutilizaveis antes de recorrer a edicao manual.
 
 [Ver guia minimo de qualidade](../core/GUIA_MINIMO_QUALIDADE.md)
 

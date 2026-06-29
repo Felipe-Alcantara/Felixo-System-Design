@@ -58,18 +58,24 @@ Quando houver duvida, siga os documentos completos:
    - Como a maioria dos projetos e open source, escreva documentacao e logs com linguagem geral e acessivel, sem valores hardcoded e sem depender de contexto privado.
    - Enquadre trabalho futuro como convite a contribuicao: prefira "ideias para quem quiser contribuir" ou "melhorias que o projeto poderia expandir" em vez de "features futuras para implementar". Detalhes em [`DESIGN_SYSTEM_README.md`](DESIGN_SYSTEM_README.md), secao 3.5.
 
-9. **Fazer mudanca pequena e rastreavel**
+9. **Preferir automacao e ferramenta reutilizavel**
+   - Ao alterar codigo, conteudo estruturado ou dados, procure primeiro se ja existe script, comando, automacao ou ferramenta para esse tipo de mudanca.
+   - Se a base existente quase resolve, prefira estender a automacao atual em vez de fazer ajuste manual pontual.
+   - Edicao manual e excecao: use apenas quando automacao nao for viavel ou quando o custo de criar a ferramenta for maior do que o ganho real.
+   - Quando houver excecao manual, registre a decisao e o motivo de forma objetiva para manter o historico auditavel e repetivel.
+
+10. **Fazer mudanca pequena e rastreavel**
    - Prefira entregas coesas, com escopo claro.
    - Nao misture refatoracao ampla com feature sem necessidade.
    - **Versionamento (git):** commite direto no `main` por padrao; so crie branch para feature grande, refatoracao significativa ou alto risco. Commits pequenos no formato `tipo: descricao` (`feat`/`fix`/`docs`/`refactor`/`chore`), explicando o que e por que. Politica completa em [`../docs/GIT-POLITICA-DE-VERSIONAMENTO.md`](../docs/GIT-POLITICA-DE-VERSIONAMENTO.md).
 
-10. **Entregar um menu de entrada (`start_app.py`) em todo programa**
+11. **Entregar um menu de entrada (`start_app.py`) em todo programa**
     - Todo programa (web, CLI, automacao, script, desktop) deve ter um `start_app.py` na raiz que abre um **menu interativo, colorido e descritivo** — a porta de entrada unica por onde a pessoa instala, configura, inicia e deixa o programa pronto (`python start_app.py`).
     - Sempre menu interativo, nunca flags decoradas; nada de prompt cru "digite a letra". Menu minimo: Iniciar/Rodar, Instalar/Setup, Configurar, Status/Sair.
     - Cross-platform, com mensagens de erro claras, para facilitar quem nao tem facilidade com terminal.
     - Detalhes em [`GUIA-START-APP-SCRIPT.md`](GUIA-START-APP-SCRIPT.md).
 
-11. **Finalizar com criterio de pronto**
+12. **Finalizar com criterio de pronto**
     - Codigo/guia revisado.
     - Links internos validos.
     - Testes ou verificacoes executados.
@@ -84,6 +90,7 @@ Quando houver duvida, siga os documentos completos:
 - [ ] Nao ha segredo, dado sensivel ou URL privada exposta.
 - [ ] Contratos afetados foram preservados ou documentados.
 - [ ] Testes/verificacoes relevantes foram executados ou justificados.
+- [ ] Scripts, automacoes e ferramentas reutilizaveis foram priorizados antes de editar manualmente; se houve excecao manual, ela foi registrada.
 - [ ] Documentacao e logs usam linguagem geral/open source, sem valores hardcoded, e enquadram trabalho futuro como convite a contribuicao.
 - [ ] Todo programa tem `start_app.py` com menu interativo (Iniciar/Rodar, Instalar/Setup, Configurar, Status/Sair) funcionando.
 - [ ] README, `IA.md` ou guia afetado foram atualizados quando necessario.

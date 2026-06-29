@@ -40,7 +40,7 @@ Padroes de qualidade que devem acompanhar **todo projeto**:
 
 - **Design Systems** — Contratos de qualidade para frontend, backend e documentacao
 - **Prompt Bases** — Guias para montar prompts de IA completos na primeira interacao
-- **Guia Minimo de Qualidade** — Regras curtas e obrigatorias para preservar qualidade de software
+- **Guia Minimo de Qualidade** — Regras curtas e obrigatorias para preservar qualidade de software, incluindo priorizar scripts, automacoes e ferramentas reutilizaveis antes de edicao manual
 - **Start App Script** — `start_app.py` obrigatorio em todo programa: um menu interativo, colorido e descritivo que instala, configura e inicia (a porta de entrada do programa)
 - **Template de Contexto IA** — Memoria operacional padronizada para continuidade entre sessoes
 
