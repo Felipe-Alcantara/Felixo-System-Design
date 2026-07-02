@@ -59,11 +59,14 @@ Quando houver duvida, siga os documentos completos:
    - Como a maioria dos projetos e open source, escreva documentacao e logs com linguagem geral e acessivel, sem valores hardcoded e sem depender de contexto privado.
    - Enquadre trabalho futuro como convite a contribuicao: prefira "ideias para quem quiser contribuir" ou "melhorias que o projeto poderia expandir" em vez de "features futuras para implementar". Detalhes em [`DESIGN_SYSTEM_README.md`](DESIGN_SYSTEM_README.md), secao 3.5.
 
-9. **Preferir automacao e ferramenta reutilizavel**
+9. **Preferir automacao e ferramenta reutilizavel (nao descuidar da qualidade)**
    - Ao alterar codigo, conteudo estruturado ou dados, procure primeiro se ja existe script, comando, automacao ou ferramenta para esse tipo de mudanca.
    - Se a base existente quase resolve, prefira estender a automacao atual em vez de fazer ajuste manual pontual.
    - Edicao manual e excecao: use apenas quando automacao nao for viavel ou quando o custo de criar a ferramenta for maior do que o ganho real.
    - Quando houver excecao manual, registre a decisao e o motivo de forma objetiva para manter o historico auditavel e repetivel.
+   - **Scripts e automacoes nao sao "codigo descartavel"**: eles devem seguir os MESMOS padroes de qualidade do projeto (responsabilidade separada, estrutura clara, sem hardcodes, com documentacao, com tratamento de erros). Desorganizacao ou codigo de baixa qualidade em scripts piora a manutencao tanto quanto em qualquer outra parte do sistema.
+   - Organize scripts em pastas apropriadas (ex: `scripts/`, `tools/`, conforme o projeto define), nao na raiz. Se o projeto define um padrao para onde scripts vivem, preserve-o; se nao define, crie uma convencao clara e documente no README.
+   - Scripts devem ser estaveis e reutilizaveis: se um script sera usado mais de uma vez, trate-o como codigo de producao, nao como prototipo descartavel.
 
 10. **Fazer mudanca pequena e rastreavel**
    - Prefira entregas coesas, com escopo claro.
@@ -92,6 +95,7 @@ Quando houver duvida, siga os documentos completos:
 - [ ] Contratos afetados foram preservados ou documentados.
 - [ ] Testes/verificacoes relevantes foram executados ou justificados.
 - [ ] Scripts, automacoes e ferramentas reutilizaveis foram priorizados antes de editar manualmente; se houve excecao manual, ela foi registrada.
+- [ ] Qualidade de scripts: organizados em pasta apropriada (nao na raiz), com responsabilidade clara, tratamento de erros, sem hardcodes, documentados; seguem os mesmos padroes do projeto, nao sao codigo descartavel.
 - [ ] Documentacao e logs usam linguagem geral/open source, sem valores hardcoded, e enquadram trabalho futuro como convite a contribuicao.
 - [ ] Todo programa tem `start_app.py` com menu interativo (Iniciar/Rodar, Instalar/Setup, Configurar, Status/Sair) funcionando.
 - [ ] README, `IA.md` ou guia afetado foram atualizados quando necessario.
