@@ -20,6 +20,7 @@
 
 ## Indice
 
+- [Quick Start — Como Usar](#quick-start--como-usar)
 - [Sobre o Repositorio](#-sobre-o-repositorio)
 - [Mapa do Repositorio](#-mapa-do-repositorio)
 - [Estrutura do Repositorio](#-estrutura-do-repositorio)
@@ -27,6 +28,38 @@
 - [Para Agentes de IA](#-para-agentes-de-ia)
 - [Licenca](#-licenca)
 - [Autor](#-autor)
+
+---
+
+## Quick Start — Como Usar
+
+### Comando global `felixo` (mais rapido)
+
+Instalador multiplataforma que registra o comando `felixo` no seu terminal. Depois de instalar, rode `felixo` em qualquer pasta para baixar automaticamente a versao mais recente do Felixo System Design.
+
+**Bash / Zsh** (Linux, macOS, Git Bash, WSL):
+```bash
+git clone --depth 1 https://github.com/Felipe-Alcantara/Felixo-System-Design.git /tmp/felixo-setup
+bash /tmp/felixo-setup/scripts/bash-zsh/install-felixo-bash-zsh.sh
+```
+
+**PowerShell** (Windows / Linux / macOS):
+```powershell
+git clone --depth 1 https://github.com/Felipe-Alcantara/Felixo-System-Design.git $env:TEMP\felixo-setup
+& "$env:TEMP\felixo-setup\scripts\powershell\install-felixo-powershell.ps1"
+```
+
+**CMD** (Windows classico):
+```cmd
+git clone --depth 1 https://github.com/Felipe-Alcantara/Felixo-System-Design.git "%TEMP%\felixo-setup"
+"%TEMP%\felixo-setup\scripts\cmd\install-felixo-cmd.cmd"
+```
+
+Depois abra um novo terminal e use: `felixo` (ou `felixo -s` para incluir o banco de componentes).
+
+### Ou sincronizar manualmente
+
+Para todos os metodos (ZIP, rsync, git clone direto, etc.) → [docs/INSTALACAO-EM-OUTROS-PROJETOS.md](docs/INSTALACAO-EM-OUTROS-PROJETOS.md) (8 opcoes completas).
 
 ---
 
@@ -67,10 +100,10 @@ Cada area tem um documento proprio, com uma responsabilidade unica. Use o mapa a
 
 ### Mapa rapido por necessidade
 
+- **Quero instalar/sincronizar este repo num projeto AGORA** → [Quick Start](#quick-start--como-usar) (comandos prontos acima)
+- **Quero todas as opcoes de instalacao** (8 metodos: ZIP, rsync, git clone, etc.) → [docs/INSTALACAO-EM-OUTROS-PROJETOS.md](docs/INSTALACAO-EM-OUTROS-PROJETOS.md)
 - **Quero os padroes obrigatorios de qualidade** → [docs/CORE-PADROES-OBRIGATORIOS.md](docs/CORE-PADROES-OBRIGATORIOS.md)
 - **Preciso de um padrao especifico** (arvore, heatmap, scraping, deploy...) → [docs/GUIAS-OPCIONAIS.md](docs/GUIAS-OPCIONAIS.md)
-- **Quero baixar/sincronizar este repo num projeto** → [docs/INSTALACAO-EM-OUTROS-PROJETOS.md](docs/INSTALACAO-EM-OUTROS-PROJETOS.md)
-- **Quero o comando global `felixo`** → [docs/INSTALACAO-EM-OUTROS-PROJETOS.md — comando `felixo`](docs/INSTALACAO-EM-OUTROS-PROJETOS.md#comando-global-felixo-instalador-multiplataforma)
 - **Quero o banco de componentes UI** → submodulo [`components-database/`](components-database/) (veja as variantes "com submodulo" em [docs/INSTALACAO-EM-OUTROS-PROJETOS.md](docs/INSTALACAO-EM-OUTROS-PROJETOS.md))
 - **Quero a politica de git** (branches, commits, doc viva) → [docs/GIT-POLITICA-DE-VERSIONAMENTO.md](docs/GIT-POLITICA-DE-VERSIONAMENTO.md)
 - **Vou contribuir de fora** → [CONTRIBUTING.md](CONTRIBUTING.md)
