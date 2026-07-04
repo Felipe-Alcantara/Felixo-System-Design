@@ -1,4 +1,4 @@
-<#
+﻿<#
 .SYNOPSIS
   Instalador do comando global "felixo".
 

@@ -1,5 +1,10 @@
 @echo off
 setlocal EnableDelayedExpansion
+rem --- este arquivo e salvo em UTF-8; muda o codepage do console para que o ---
+rem --- CMD leia corretamente os acentos (ex.: nome da pasta de destino).    ---
+for /f "tokens=2 delims=:" %%C in ('chcp') do set "OLD_CP=%%C"
+set "OLD_CP=%OLD_CP: =%"
+chcp 65001 >nul
 rem ============================================================================
 rem  felixo-command.cmd - o COMANDO "felixo" para o CMD (Prompt de Comando).
 rem
@@ -44,7 +49,7 @@ if /I "%~1"=="--help" goto :help
 where git >nul 2>nul
 if errorlevel 1 (
   echo %C_ERR%[felixo X]%C_RESET% git nao encontrado no PATH. Instale o Git e tente novamente.
-  exit /b 1
+  set "RC=1" & goto :end
 )
 
 set "CLONE_ARGS=clone --depth 1 --quiet"
@@ -65,12 +70,23 @@ git !CLONE_ARGS! "%REPO_URL%" "%REPO_TMP%"
 if errorlevel 1 (
   echo %C_ERR%[felixo X]%C_RESET% Falha ao clonar. Verifique a conexao e o acesso a %REPO_URL%.
   rmdir /s /q "%TMP_DIR%" 2>nul
-  exit /b 1
+  set "RC=1" & goto :end
 )
 echo %C_OK%[felixo OK]%C_RESET% Repositorio clonado.
 
-rem --- remove diretorios .git ---
-for /d /r "%REPO_TMP%" %%G in (.git) do @if exist "%%G" rmdir /s /q "%%G"
+rem --- remove diretorios/arquivos .git ---
+rem  No Windows o git marca .git como pasta OCULTA (o "for /d" nao a enumera) e
+rem  os packs sao SOMENTE LEITURA (o rmdir falha) -- por isso o attrib antes.
+if exist "%REPO_TMP%\.git" (
+  attrib -r -h -s "%REPO_TMP%\.git\*" /s /d >nul 2>nul
+  attrib -r -h -s "%REPO_TMP%\.git" >nul 2>nul
+  rmdir /s /q "%REPO_TMP%\.git"
+)
+rem  Em submodulos, .git e um ARQUIVO de ponteiro, nao uma pasta.
+for /f "delims=" %%G in ('dir /s /b /a "%REPO_TMP%\.git" 2^>nul') do (
+  attrib -r -h -s "%%G" >nul 2>nul
+  if exist "%%G\" (rmdir /s /q "%%G") else del /f /q "%%G"
+)
 
 rem --- sem o modo completo, remove a pasta do submodulo (vem vazia) ---
 if "%WITH_SUB%"=="0" (
@@ -102,15 +118,20 @@ robocopy "%REPO_TMP%" "%DEST_NAME%" /MIR /NFL /NDL /NJH /NJS /NP >nul
 if %ERRORLEVEL% GEQ 8 (
   echo %C_ERR%[felixo X]%C_RESET% Falha ao copiar os arquivos (robocopy).
   rmdir /s /q "%TMP_DIR%" 2>nul
-  exit /b 1
+  set "RC=1" & goto :end
 )
 
 rmdir /s /q "%TMP_DIR%" 2>nul
 echo %C_OK%[felixo OK]%C_RESET% Concluido em .\%DEST_NAME%
-exit /b 0
+set "RC=0" & goto :end
 
 :help
 echo Uso: felixo [--with-submodules ^| -s]
 echo   (sem flag)            baixa tudo, menos o submodulo components-database
 echo   --with-submodules,-s  inclui o banco de componentes
-exit /b 0
+set "RC=0" & goto :end
+
+:end
+rem --- restaura o codepage original do console ---
+if defined OLD_CP chcp %OLD_CP% >nul
+exit /b %RC%
