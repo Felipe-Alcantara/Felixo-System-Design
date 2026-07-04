@@ -57,6 +57,8 @@ git clone --depth 1 https://github.com/Felipe-Alcantara/Felixo-System-Design.git
 
 Depois abra um novo terminal e use: `felixo` (ou `felixo -s` para incluir o banco de componentes).
 
+Se rodar dentro de um repositorio git, o `felixo` **adiciona a pasta baixada ao `.gitignore` da raiz automaticamente** (sem duplicar a entrada) — os padroes ficam disponiveis no projeto sem entrar no versionamento dele.
+
 ### Ou sincronizar manualmente
 
 Para todos os metodos (ZIP, rsync, git clone direto, etc.) → [docs/INSTALACAO-EM-OUTROS-PROJETOS.md](docs/INSTALACAO-EM-OUTROS-PROJETOS.md) (8 opcoes completas).

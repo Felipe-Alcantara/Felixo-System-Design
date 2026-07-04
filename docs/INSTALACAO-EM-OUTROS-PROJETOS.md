@@ -104,6 +104,10 @@ felixo --with-submodules # inclui o banco de componentes
 
 Ao terminar, o `felixo` mostra um **resumo do que mudou** — arquivos **novos**, **atualizados** e **removidos** (com a contagem e a lista completa, em cores). Assim voce ve exatamente o que foi sincronizado.
 
+**`.gitignore` automatico:** se voce rodar o `felixo` dentro de um repositorio git, ele adiciona a pasta `Padrão de qualidade - Felixo System Design/` ao `.gitignore` da **raiz** do repositorio (funciona mesmo rodando em subpastas). A entrada nao e duplicada em execucoes repetidas — os padroes ficam no projeto sem entrar no versionamento dele.
+
+**Compatibilidade Windows:** os scripts sao mantidos com a codificacao e os fins de linha que cada shell exige (`.ps1` em UTF-8 com BOM para o Windows PowerShell 5.1; `.cmd` com CRLF e `chcp 65001` para acentos no CMD) e removem a pasta `.git` mesmo quando o git a marca como oculta/somente leitura. Se uma versao antiga deixou um `.git` dentro da pasta de destino, a proxima execucao do `felixo` limpa automaticamente (a sincronizacao e espelhada).
+
 Os instaladores sao **idempotentes**: rodar de novo apenas atualiza a definicao do comando, sem duplicar.
 
 > **Ja tinha o `felixo` instalado?** Rode o instalador de novo de tempos em tempos: a definicao do comando evolui junto com o repositorio (por exemplo, o caminho do submodulo de componentes ja mudou de nome), e reinstalar garante que o seu terminal use a versao atual.
