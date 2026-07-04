@@ -186,6 +186,23 @@ felixo() {
   fi
 
   rm -f "\$changes_file"; rm -rf "\$tmp_dir"
+
+  # Se estiver dentro de um repositorio git, garante a pasta no .gitignore da raiz.
+  if git rev-parse --is-inside-work-tree >/dev/null 2>&1; then
+    local git_root ignore_file entry
+    git_root="\$(git rev-parse --show-toplevel)"
+    ignore_file="\$git_root/.gitignore"
+    entry="$DEST_NAME/"
+    if ! grep -qxF "\$entry" "\$ignore_file" 2>/dev/null; then
+      # Garante quebra de linha antes de anexar, se o arquivo nao terminar com uma.
+      if [ -s "\$ignore_file" ] && [ -n "\$(tail -c1 "\$ignore_file")" ]; then
+        printf '\\n' >> "\$ignore_file"
+      fi
+      printf '%s\\n' "\$entry" >> "\$ignore_file"
+      _fok "Pasta adicionada ao .gitignore do repositorio: \$entry"
+    fi
+  fi
+
   _fok "Concluido em \${dest}"
 }
 $BLOCK_END

@@ -122,6 +122,22 @@ if %ERRORLEVEL% GEQ 8 (
 )
 
 rmdir /s /q "%TMP_DIR%" 2>nul
+
+rem --- se estiver dentro de um repositorio git, garante a pasta no .gitignore ---
+git rev-parse --is-inside-work-tree >nul 2>nul
+if not errorlevel 1 (
+  set "GIT_ROOT="
+  for /f "delims=" %%R in ('git rev-parse --show-toplevel 2^>nul') do set "GIT_ROOT=%%R"
+  if defined GIT_ROOT (
+    set "IGNORE_FILE=!GIT_ROOT:/=\!\.gitignore"
+    findstr /x /c:"%DEST_NAME%/" "!IGNORE_FILE!" >nul 2>nul
+    if errorlevel 1 (
+      >>"!IGNORE_FILE!" echo %DEST_NAME%/
+      echo %C_OK%[felixo OK]%C_RESET% Pasta adicionada ao .gitignore do repositorio: %DEST_NAME%/
+    )
+  )
+)
+
 echo %C_OK%[felixo OK]%C_RESET% Concluido em .\%DEST_NAME%
 set "RC=0" & goto :end
 

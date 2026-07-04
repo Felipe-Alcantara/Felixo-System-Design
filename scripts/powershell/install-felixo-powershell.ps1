@@ -159,6 +159,20 @@ function felixo {
         } else {
             _fok "Ja estava atualizado em `$sha. Nenhuma mudanca."
         }
+
+        # Se estiver dentro de um repositorio git, garante a pasta no .gitignore da raiz.
+        `$gitRoot = git rev-parse --show-toplevel 2>`$null
+        if (`$gitRoot) {
+            `$ignoreFile = Join-Path `$gitRoot '.gitignore'
+            `$entry = '$DestName/'
+            `$lines = @()
+            if (Test-Path `$ignoreFile) { `$lines = @(Get-Content -Path `$ignoreFile) }
+            if (`$lines -cnotcontains `$entry) {
+                Add-Content -Path `$ignoreFile -Value `$entry
+                _fok "Pasta adicionada ao .gitignore do repositorio: `$entry"
+            }
+        }
+
         _fok "Concluido em `$dest"
     }
     catch {
