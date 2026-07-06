@@ -110,6 +110,8 @@ Ao terminar, o `felixo` mostra um **resumo do que mudou** — arquivos **novos**
 
 Os instaladores sao **idempotentes**: rodar de novo apenas atualiza a definicao do comando, sem duplicar.
 
+Todos os scripts terminam com uma **confirmacao no terminal** ("finalizado COM SUCESSO" ou "COM ERRO") seguida de uma pausa que espera voce pressionar uma tecla/Enter — assim a janela nao fecha sozinha e da para saber se a execucao funcionou (no Bash/Zsh a pausa so acontece em terminal interativo, para nao travar automacoes).
+
 > **Ja tinha o `felixo` instalado?** Rode o instalador de novo de tempos em tempos: a definicao do comando evolui junto com o repositorio (por exemplo, o caminho do submodulo de componentes ja mudou de nome), e reinstalar garante que o seu terminal use a versao atual.
 
 ---

@@ -201,8 +201,7 @@ function Remove-FelixoBlock([string]$path) {
 
 function Invoke-Install {
     if (-not (Get-Command git -ErrorAction SilentlyContinue)) {
-        Write-Err2 'git nao encontrado no PATH. Instale o Git e rode novamente.'
-        exit 1
+        throw 'git nao encontrado no PATH. Instale o Git e rode novamente.'
     }
     $profilePath = Get-ProfilePath
     $dir = Split-Path -Parent $profilePath
@@ -236,4 +235,21 @@ function Invoke-Uninstall {
     }
 }
 
-if ($Uninstall) { Invoke-Uninstall } else { Invoke-Install }
+# --- confirmacao final: mantem a janela aberta ate o usuario confirmar ---
+$exitCode = 0
+try {
+    if ($Uninstall) { Invoke-Uninstall } else { Invoke-Install }
+}
+catch {
+    Write-Err2 "Erro inesperado: $($_.Exception.Message)"
+    $exitCode = 1
+}
+
+Write-Host ''
+if ($exitCode -eq 0) {
+    Write-Ok 'Script finalizado COM SUCESSO.'
+} else {
+    Write-Err2 "Script finalizado COM ERRO (codigo $exitCode)."
+}
+Read-Host 'Pressione Enter para sair' | Out-Null
+exit $exitCode

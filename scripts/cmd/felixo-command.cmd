@@ -148,6 +148,14 @@ echo   --with-submodules,-s  inclui o banco de componentes
 set "RC=0" & goto :end
 
 :end
+rem --- confirmacao final: mantem a janela aberta ate o usuario confirmar ---
+echo.
+if "%RC%"=="0" (
+  echo %C_OK%[felixo OK]%C_RESET% Script finalizado COM SUCESSO.
+) else (
+  echo %C_ERR%[felixo X]%C_RESET% Script finalizado COM ERRO ^(codigo %RC%^).
+)
+pause
 rem --- restaura o codepage original do console ---
 if defined OLD_CP chcp %OLD_CP% >nul
 exit /b %RC%

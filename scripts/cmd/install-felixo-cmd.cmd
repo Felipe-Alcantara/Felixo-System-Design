@@ -37,7 +37,7 @@ if /I "%~1"=="-u" goto :uninstall
 
 if not exist "%SRC%" (
   echo [felixo-install X] Nao encontrei felixo-command.cmd ao lado deste instalador.
-  exit /b 1
+  set "RC=1" & goto :end
 )
 
 where git >nul 2>nul
@@ -47,7 +47,7 @@ if not exist "%TARGET_DIR%" mkdir "%TARGET_DIR%"
 copy /y "%SRC%" "%TARGET%" >nul
 if errorlevel 1 (
   echo [felixo-install X] Falha ao copiar felixo.cmd para %TARGET_DIR%.
-  exit /b 1
+  set "RC=1" & goto :end
 )
 
 rem --- adiciona ao PATH do usuario se ainda nao estiver ---
@@ -68,7 +68,7 @@ echo [felixo-install OK] Comando "felixo" instalado.
 echo [felixo-install] Abra um NOVO terminal e rode: felixo
 echo [felixo-install]   felixo                  -^> baixa tudo, menos o submodulo
 echo [felixo-install]   felixo --with-submodules -^> inclui o banco de componentes
-exit /b 0
+set "RC=0" & goto :end
 
 :uninstall
 if exist "%TARGET%" del /q "%TARGET%"
@@ -76,4 +76,15 @@ if exist "%TARGET_DIR%" rmdir "%TARGET_DIR%" 2>nul
 echo [felixo-install OK] felixo.cmd removido de %TARGET_DIR%.
 echo [felixo-install] Remova manualmente "%TARGET_DIR%" do PATH em:
 echo [felixo-install]   Painel de Controle ^> Sistema ^> Variaveis de Ambiente (se desejar).
-exit /b 0
+set "RC=0" & goto :end
+
+:end
+rem --- confirmacao final: mantem a janela aberta ate o usuario confirmar ---
+echo.
+if "%RC%"=="0" (
+  echo [felixo-install OK] Script finalizado COM SUCESSO.
+) else (
+  echo [felixo-install X] Script finalizado COM ERRO (codigo %RC%^).
+)
+pause
+exit /b %RC%

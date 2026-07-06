@@ -268,4 +268,21 @@ main() {
   esac
 }
 
+# --- confirmacao final: mostra o status e mantem a janela aberta ---
+confirm_exit() {
+  local rc=$1
+  echo
+  if [ "$rc" -eq 0 ]; then
+    ok "Script finalizado COM SUCESSO."
+  else
+    err "Script finalizado COM ERRO (codigo $rc)."
+  fi
+  if [ -t 0 ]; then
+    printf 'Pressione Enter para sair...'
+    read -r _
+  fi
+  exit "$rc"
+}
+trap 'confirm_exit $?' EXIT
+
 main "$@"
