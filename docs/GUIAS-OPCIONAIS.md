@@ -84,6 +84,14 @@ Kit de **componentes UI compostos** com Card (compound component), Button (4 var
 
 [Ver guia](../guias/frontend/GUIA-SISTEMA-DE-ALERTA-E-GRADE.md)
 
+### Painel de Colecao com Filtros e Views
+
+**Casca de dashboard para listar colecoes**: busca, filtros combinaveis (valor unico + chips multivalorados), ordenacao, tres modos de visualizacao (grade/lista/kanban), grade de colunas ajustavel, header fixo, reordenacao por arrastar e persistencia em localStorage. Extraido do Git-Hub-Repositories.
+
+**Quando usar:** qualquer lista grande de itens homogeneos (projetos, produtos, tarefas, artigos) que precise de filtros, ordenacao e multiplas visualizacoes.
+
+[Ver guia](../guias/frontend/GUIA-PAINEL-DE-COLECAO-COM-FILTROS-E-VIEWS.md)
+
 ## Backend
 
 ### Backend CPF

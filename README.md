@@ -93,7 +93,7 @@ Cada area tem um documento proprio, com uma responsabilidade unica. Use o mapa a
 |-----------|------------------|---------------------|
 | **[AGENTS.md](AGENTS.md)** | **Roteiro de leitura para IA** | Protocolo de leitura por tipo de tarefa e indice de guias com palavras-chave — o que um agente deve abrir (e o que ignorar) conforme o prompt. |
 | **[docs/CORE-PADROES-OBRIGATORIOS.md](docs/CORE-PADROES-OBRIGATORIOS.md)** | Padroes **obrigatorios** | Design systems (frontend, backend, README), guia minimo de qualidade, start app script, prompts base e o template de contexto `IA.md` — cada um descrito e com link. |
-| **[docs/GUIAS-OPCIONAIS.md](docs/GUIAS-OPCIONAIS.md)** | Padroes **opcionais** por dominio | Guias reutilizaveis de **frontend** (9), **backend** (2) e **integracao** (3): o que cada um resolve, de qual projeto foi extraido e quando reutilizar. |
+| **[docs/GUIAS-OPCIONAIS.md](docs/GUIAS-OPCIONAIS.md)** | Padroes **opcionais** por dominio | Guias reutilizaveis de **frontend** (10), **backend** (2) e **integracao** (3): o que cada um resolve, de qual projeto foi extraido e quando reutilizar. |
 | **[docs/INSTALACAO-EM-OUTROS-PROJETOS.md](docs/INSTALACAO-EM-OUTROS-PROJETOS.md)** | **Como usar** em outros projetos | Os 8 metodos de download/sincronizacao (incluindo o comando global `felixo`), variantes com/sem submodulo e a tabela de escolha rapida por cenario. |
 | **[docs/GIT-POLITICA-DE-VERSIONAMENTO.md](docs/GIT-POLITICA-DE-VERSIONAMENTO.md)** | **Politica de git** neste repo | Quando criar branch (e quando nao), formato de commit (`tipo: descricao`), documentacao viva, exemplos e checklist. Fonte unica das regras de versionamento. |
 | **[CONTRIBUTING.md](CONTRIBUTING.md)** | **Contribuir** de fora | Fluxo de fork + Pull Request para contribuicoes externas. |
@@ -139,7 +139,8 @@ Felixo-System-Design/
 │   │   ├── GUIA-ARVORE-HIERARQUICA.md
 │   │   ├── GUIA-ARVORE-DE-MATERIAIS-DUAL-VIEW.md
 │   │   ├── GUIA-CALENDARIO-ACADEMICO.md
-│   │   └── GUIA-SISTEMA-DE-ALERTA-E-GRADE.md
+│   │   ├── GUIA-SISTEMA-DE-ALERTA-E-GRADE.md
+│   │   └── GUIA-PAINEL-DE-COLECAO-COM-FILTROS-E-VIEWS.md
 │   ├── backend/                             # Logica pura Python/Django
 │   │   ├── GUIA-BACKEND-CPF.md
 │   │   └── GUIA-CRIPTOGRAFIA-CIFRA-DE-CESAR.md
