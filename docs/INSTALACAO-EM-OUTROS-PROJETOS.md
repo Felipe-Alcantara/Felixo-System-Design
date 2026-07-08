@@ -74,26 +74,29 @@ Em vez de copiar a funcao na mao, use os instaladores em [`scripts/`](../scripts
 > - [`scripts/cmd/install-felixo-cmd.cmd`](../scripts/cmd/install-felixo-cmd.cmd) — o **instalador** (voce roda uma vez). Copia o `felixo-command.cmd` para `%LOCALAPPDATA%\felixo` (como `felixo.cmd`) e adiciona ao PATH.
 > - [`scripts/cmd/felixo-command.cmd`](../scripts/cmd/felixo-command.cmd) — o **comando `felixo`** em si (faz o clone/copia). **Nao e instalador e voce nao roda ele diretamente** — quem o executa e o `felixo` que voce digita depois de instalar.
 
-**Bash / Zsh** (Linux, macOS, Git Bash, WSL):
-```bash
-git clone --depth 1 https://github.com/Felipe-Alcantara/Felixo-System-Design.git /tmp/felixo-setup
-bash /tmp/felixo-setup/scripts/bash-zsh/install-felixo-bash-zsh.sh
-# desinstalar: bash /tmp/felixo-setup/scripts/bash-zsh/install-felixo-bash-zsh.sh --uninstall
-```
+A instalacao e **uma linha, direto do GitHub** (a fonte da verdade) — nao precisa clonar o repositorio antes:
 
 **PowerShell** (Windows / Linux / macOS):
 ```powershell
-git clone --depth 1 https://github.com/Felipe-Alcantara/Felixo-System-Design.git $env:TEMP\felixo-setup
-& "$env:TEMP\felixo-setup\scripts\powershell\install-felixo-powershell.ps1"
-# desinstalar: & "$env:TEMP\felixo-setup\scripts\powershell\install-felixo-powershell.ps1" -Uninstall
+irm https://raw.githubusercontent.com/Felipe-Alcantara/Felixo-System-Design/main/scripts/powershell/install-felixo-powershell.ps1 | iex
 ```
+No Windows, o instalador ajusta a `ExecutionPolicy` do usuario para `RemoteSigned` se necessario — sem isso o PowerShell nao carrega o `$PROFILE` e o comando `felixo` nao apareceria. Para desinstalar, baixe o script e rode com `-Uninstall`.
 
 **CMD** (Windows classico):
 ```cmd
-git clone --depth 1 https://github.com/Felipe-Alcantara/Felixo-System-Design.git "%TEMP%\felixo-setup"
-"%TEMP%\felixo-setup\scripts\cmd\install-felixo-cmd.cmd"
-:: desinstalar: "%TEMP%\felixo-setup\scripts\cmd\install-felixo-cmd.cmd" --uninstall
+curl -fsSL -o "%TEMP%\install-felixo.cmd" https://raw.githubusercontent.com/Felipe-Alcantara/Felixo-System-Design/main/scripts/cmd/install-felixo-cmd.cmd && "%TEMP%\install-felixo.cmd"
+:: desinstalar: "%TEMP%\install-felixo.cmd" --uninstall
 ```
+O instalador baixa o `felixo-command.cmd` mais recente do GitHub quando nao esta ao lado dele (e usa o arquivo local quando esta, ex.: repo clonado).
+
+**Bash / Zsh** (Linux, macOS, WSL):
+```bash
+curl -fsSL https://raw.githubusercontent.com/Felipe-Alcantara/Felixo-System-Design/main/scripts/bash-zsh/install-felixo-bash-zsh.sh | bash
+# desinstalar: baixe o script e rode com --uninstall
+```
+Requer `git` e `rsync` para o `felixo` funcionar (a instalacao apenas avisa se faltarem). O Git Bash do Windows nao tem `rsync` — nele, prefira o instalador do PowerShell ou do CMD.
+
+Rodar os scripts a partir de um clone local continua funcionando igual (ex.: `.\scripts\powershell\install-felixo-powershell.ps1`).
 
 Depois de instalar, **abra um novo terminal** e use:
 
@@ -106,7 +109,9 @@ Ao terminar, o `felixo` mostra um **resumo do que mudou** — arquivos **novos**
 
 **`.gitignore` automatico:** se voce rodar o `felixo` dentro de um repositorio git, ele adiciona a pasta `Padrão de qualidade - Felixo System Design/` ao `.gitignore` da **raiz** do repositorio (funciona mesmo rodando em subpastas). A entrada nao e duplicada em execucoes repetidas — os padroes ficam no projeto sem entrar no versionamento dele.
 
-**Compatibilidade Windows:** os scripts sao mantidos com a codificacao e os fins de linha que cada shell exige (`.ps1` em UTF-8 com BOM para o Windows PowerShell 5.1; `.cmd` com CRLF e `chcp 65001` para acentos no CMD) e removem a pasta `.git` mesmo quando o git a marca como oculta/somente leitura. Se uma versao antiga deixou um `.git` dentro da pasta de destino, a proxima execucao do `felixo` limpa automaticamente (a sincronizacao e espelhada).
+**Compatibilidade Windows:** os scripts sao mantidos com a codificacao e os fins de linha que cada shell exige (`.ps1` em UTF-8 com BOM para o Windows PowerShell 5.1; `.cmd` com CRLF e `chcp 65001` para acentos no CMD) e removem a pasta `.git` mesmo quando o git a marca como oculta/somente leitura. Se uma versao antiga deixou um `.git` dentro da pasta de destino, a proxima execucao do `felixo` limpa automaticamente (a sincronizacao e espelhada). O instalador do CMD atualiza o PATH pelo registro (sem `setx`, que trunca valores longos e quebra entradas com `%VARIAVEIS%`).
+
+**Testes automatizados:** os instaladores e o passo do `.gitignore` tem suites de teste em [`scripts/tests/`](../scripts/tests/) — rode `powershell -NoProfile -ExecutionPolicy Bypass -File scripts\tests\run-tests.ps1`.
 
 Os instaladores sao **idempotentes**: rodar de novo apenas atualiza a definicao do comando, sem duplicar.
 

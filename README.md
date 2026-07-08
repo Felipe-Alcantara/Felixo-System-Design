@@ -35,25 +35,26 @@
 
 ### Comando global `felixo` (mais rapido)
 
-Instalador multiplataforma que registra o comando `felixo` no seu terminal. Depois de instalar, rode `felixo` em qualquer pasta para baixar automaticamente a versao mais recente do Felixo System Design.
-
-**Bash / Zsh** (Linux, macOS, Git Bash, WSL):
-```bash
-git clone --depth 1 https://github.com/Felipe-Alcantara/Felixo-System-Design.git /tmp/felixo-setup
-bash /tmp/felixo-setup/scripts/bash-zsh/install-felixo-bash-zsh.sh
-```
+Instalador multiplataforma que registra o comando `felixo` no seu terminal. A instalacao e **uma linha, direto do GitHub** — nao precisa clonar o repositorio nem ter arquivos locais. Depois de instalar, rode `felixo` em qualquer pasta para baixar automaticamente a versao mais recente do Felixo System Design.
 
 **PowerShell** (Windows / Linux / macOS):
 ```powershell
-git clone --depth 1 https://github.com/Felipe-Alcantara/Felixo-System-Design.git $env:TEMP\felixo-setup
-& "$env:TEMP\felixo-setup\scripts\powershell\install-felixo-powershell.ps1"
+irm https://raw.githubusercontent.com/Felipe-Alcantara/Felixo-System-Design/main/scripts/powershell/install-felixo-powershell.ps1 | iex
 ```
+> No Windows, o instalador ajusta a `ExecutionPolicy` do usuario para `RemoteSigned` se necessario (sem isso o PowerShell nao carrega o `$PROFILE` e o comando nao apareceria).
 
 **CMD** (Windows classico):
 ```cmd
-git clone --depth 1 https://github.com/Felipe-Alcantara/Felixo-System-Design.git "%TEMP%\felixo-setup"
-"%TEMP%\felixo-setup\scripts\cmd\install-felixo-cmd.cmd"
+curl -fsSL -o "%TEMP%\install-felixo.cmd" https://raw.githubusercontent.com/Felipe-Alcantara/Felixo-System-Design/main/scripts/cmd/install-felixo-cmd.cmd && "%TEMP%\install-felixo.cmd"
 ```
+
+**Bash / Zsh** (Linux, macOS, WSL):
+```bash
+curl -fsSL https://raw.githubusercontent.com/Felipe-Alcantara/Felixo-System-Design/main/scripts/bash-zsh/install-felixo-bash-zsh.sh | bash
+```
+> Requer `git` e `rsync` para o comando `felixo` funcionar. O Git Bash do Windows nao tem `rsync` — nele, prefira o instalador do PowerShell ou do CMD.
+
+Requisito comum: [Git](https://git-scm.com/downloads) instalado (o `felixo` usa `git clone` para baixar o repositorio). Para desinstalar: rode o instalador com `--uninstall` (CMD/Bash) ou `-Uninstall` (PowerShell).
 
 Depois abra um novo terminal e use: `felixo` (ou `felixo -s` para incluir o banco de componentes).
 
@@ -159,9 +160,13 @@ Felixo-System-Design/
 │   │   └── install-felixo-bash-zsh.sh       # Instalador p/ Bash e Zsh (Linux, macOS, Git Bash, WSL)
 │   ├── powershell/
 │   │   └── install-felixo-powershell.ps1    # Instalador p/ PowerShell (Windows, Linux, macOS)
-│   └── cmd/                                  # CMD (Prompt classico do Windows)
-│       ├── install-felixo-cmd.cmd           # Instalador (roda uma vez)
-│       └── felixo-command.cmd               # Comando felixo em si (instalado como felixo.cmd)
+│   ├── cmd/                                  # CMD (Prompt classico do Windows)
+│   │   ├── install-felixo-cmd.cmd           # Instalador (roda uma vez; baixa do GitHub se preciso)
+│   │   ├── felixo-command.cmd               # Comando felixo em si (instalado como felixo.cmd)
+│   │   └── tests/                           # Testes do passo .gitignore automatico
+│   └── tests/                               # Testes automatizados dos instaladores
+│       ├── installers.tests.ps1             # Suite PowerShell + CMD + Bash
+│       └── run-tests.ps1                    # Roda todas as suites
 │
 ├── docs/                                    # Documentacao por responsabilidade
 │   ├── CORE-PADROES-OBRIGATORIOS.md         # Detalhe dos padroes obrigatorios
