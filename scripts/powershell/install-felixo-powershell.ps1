@@ -19,11 +19,18 @@
   Remove a funcao "felixo" do $PROFILE.
 
 .EXAMPLE
+  # Instalacao em uma linha, direto do GitHub (nao precisa clonar nada):
+  irm https://raw.githubusercontent.com/Felipe-Alcantara/Felixo-System-Design/main/scripts/powershell/install-felixo-powershell.ps1 | iex
+
+.EXAMPLE
   .\install-felixo-powershell.ps1
   .\install-felixo-powershell.ps1 -Uninstall
 
 .NOTES
   Requisitos: PowerShell 5.1+ e git no PATH.
+  Variaveis de ambiente (avancado/testes):
+    FELIXO_PROFILE   sobrescreve o caminho do $PROFILE alvo
+    FELIXO_NO_PAUSE  se definida, nao pausa no final (modo automatizado)
 #>
 [CmdletBinding()]
 param(
@@ -186,8 +193,27 @@ $BlockEnd
 "@
 
 function Get-ProfilePath {
+    if ($env:FELIXO_PROFILE) { return $env:FELIXO_PROFILE }
     if ($PROFILE -and $PROFILE.CurrentUserAllHosts) { return $PROFILE.CurrentUserAllHosts }
     return $PROFILE
+}
+
+function Confirm-ExecutionPolicy {
+    # No Windows, a ExecutionPolicy padrao (Restricted) impede o PowerShell de
+    # carregar o $PROFILE -- o comando "felixo" ficaria instalado mas NUNCA
+    # apareceria. Ajusta para RemoteSigned no escopo do usuario, se preciso.
+    if ($env:OS -ne 'Windows_NT') { return }
+    $effective = Get-ExecutionPolicy
+    if ($effective -notin @('Restricted', 'AllSigned')) { return }
+    try {
+        Set-ExecutionPolicy -Scope CurrentUser -ExecutionPolicy RemoteSigned -Force -ErrorAction Stop
+        Write-Ok "ExecutionPolicy ajustada de '$effective' para 'RemoteSigned' (escopo do usuario) -- sem isso o PowerShell nao carrega o `$PROFILE e o comando `"felixo`" nao funcionaria."
+    }
+    catch {
+        Write-Warn2 "A ExecutionPolicy atual ('$effective') impede o PowerShell de carregar o `$PROFILE -- o comando `"felixo`" NAO vai funcionar ate voce ajustar."
+        Write-Warn2 'Rode em um PowerShell e depois abra um novo terminal:'
+        Write-Warn2 '  Set-ExecutionPolicy -Scope CurrentUser RemoteSigned'
+    }
 }
 
 function Remove-FelixoBlock([string]$path) {
@@ -201,8 +227,9 @@ function Remove-FelixoBlock([string]$path) {
 
 function Invoke-Install {
     if (-not (Get-Command git -ErrorAction SilentlyContinue)) {
-        throw 'git nao encontrado no PATH. Instale o Git e rode novamente.'
+        throw 'git nao encontrado no PATH. O comando "felixo" precisa do git para baixar o repositorio. Instale (https://git-scm.com/downloads), abra um novo terminal e rode este instalador de novo.'
     }
+    Confirm-ExecutionPolicy
     $profilePath = Get-ProfilePath
     $dir = Split-Path -Parent $profilePath
     if ($dir -and -not (Test-Path $dir)) { New-Item -ItemType Directory -Force -Path $dir | Out-Null }
@@ -251,5 +278,11 @@ if ($exitCode -eq 0) {
 } else {
     Write-Err2 "Script finalizado COM ERRO (codigo $exitCode)."
 }
-Read-Host 'Pressione Enter para sair' | Out-Null
-exit $exitCode
+# Quando rodado como ARQUIVO (clique duplo / .\script.ps1), pausa e sai com o
+# codigo. Quando rodado via "irm ... | iex" nao ha arquivo ($PSCommandPath
+# vazio) -- nesse caso NAO chama "exit", que fecharia o terminal do usuario.
+$runAsFile = -not [string]::IsNullOrEmpty($PSCommandPath)
+if ($runAsFile -and -not $env:FELIXO_NO_PAUSE) {
+    Read-Host 'Pressione Enter para sair' | Out-Null
+}
+if ($runAsFile) { exit $exitCode }
