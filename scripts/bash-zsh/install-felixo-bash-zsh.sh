@@ -15,6 +15,9 @@
 # components-database. Use "felixo --with-submodules" (ou "felixo -s") para
 # incluir tambem o banco de componentes.
 #
+# Instalacao em uma linha, direto do GitHub (nao precisa clonar nada):
+#   curl -fsSL https://raw.githubusercontent.com/Felipe-Alcantara/Felixo-System-Design/main/scripts/bash-zsh/install-felixo-bash-zsh.sh | bash
+#
 # Uso:
 #   ./install-felixo-bash-zsh.sh              instala (ou atualiza) o comando
 #   ./install-felixo-bash-zsh.sh --uninstall  remove o comando
@@ -41,8 +44,22 @@ ok()   { printf '%s[felixo-install ✓]%s %s\n' "$C_OK"   "$C_RESET" "$*"; }
 warn() { printf '%s[felixo-install ⚠]%s %s\n' "$C_WARN" "$C_RESET" "$*" >&2; }
 err()  { printf '%s[felixo-install ✗]%s %s\n' "$C_ERR"  "$C_RESET" "$*" >&2; }
 
+# Ajuda embutida (nao le $0: sob "curl ... | bash" o $0 nao e este arquivo).
 print_help() {
-  sed -n '2,23p' "$0" | sed 's/^# \{0,1\}//'
+  cat <<'HELP'
+Instalador do comando global "felixo" (Bash/Zsh).
+
+Instalacao em uma linha, direto do GitHub:
+  curl -fsSL https://raw.githubusercontent.com/Felipe-Alcantara/Felixo-System-Design/main/scripts/bash-zsh/install-felixo-bash-zsh.sh | bash
+
+Uso:
+  ./install-felixo-bash-zsh.sh              instala (ou atualiza) o comando
+  ./install-felixo-bash-zsh.sh --uninstall  remove o comando
+  ./install-felixo-bash-zsh.sh --help       mostra esta ajuda
+
+Depois de instalar, abra um novo terminal e rode "felixo" em qualquer pasta.
+Requisitos: bash ou zsh, git e rsync.
+HELP
 }
 
 # Descobre o arquivo de configuracao do shell do usuario.
@@ -64,13 +81,20 @@ detect_rc_file() {
   esac
 }
 
+# A instalacao so escreve a funcao no rc; git e rsync sao necessarios apenas
+# quando o "felixo" RODAR (e a propria funcao checa e avisa). Por isso a falta
+# deles aqui e um AVISO, nao um erro fatal — em especial no Git Bash do
+# Windows, que vem sem rsync.
 check_deps() {
   local missing=()
   command -v git   >/dev/null 2>&1 || missing+=(git)
   command -v rsync >/dev/null 2>&1 || missing+=(rsync)
   if [ "${#missing[@]}" -gt 0 ]; then
-    err "Dependencias ausentes: ${missing[*]}. Instale-as e rode novamente."
-    exit 1
+    warn "Dependencias ausentes: ${missing[*]}. A instalacao continua, mas o comando"
+    warn "\"felixo\" so vai funcionar depois que voce instala-las. Ex.:"
+    warn "  apt install ${missing[*]}   (Debian/Ubuntu/WSL)"
+    warn "  brew install ${missing[*]}  (macOS)"
+    warn "  (Git Bash no Windows nao tem rsync — prefira o instalador do PowerShell ou do CMD.)"
   fi
 }
 
