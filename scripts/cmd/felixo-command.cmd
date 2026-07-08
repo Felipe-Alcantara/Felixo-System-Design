@@ -183,7 +183,7 @@ if "%RC%"=="0" (
 ) else (
   echo %C_ERR%[felixo X]%C_RESET% Script finalizado COM ERRO ^(codigo %RC%^).
 )
-pause
+if not defined FELIXO_NO_PAUSE pause
 rem --- restaura o codepage original do console ---
 if defined OLD_CP chcp %OLD_CP% >nul
 exit /b %RC%
