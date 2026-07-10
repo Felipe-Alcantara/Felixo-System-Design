@@ -128,6 +128,14 @@ Padrao de **scraping multiformato** com Playwright, parsers offline, JSON embuti
 
 [Ver guia](../guias/integracao/GUIA-SCRAPING-MULTIFORMATO.md)
 
+### Notion como base de dados (migracao e reorganizacao)
+
+Padrao de **migrar planilhas e arquivos para databases estruturadas do Notion** e reorganizar o workspace: extracao e normalizacao (encoding, datas, numeros BR, dedup), schema tipado com `unique_id` e relacoes, cliente resiliente com retry, importacao idempotente e retomavel, anexo do arquivo original, pastas viram topicos, e reorganizacao por re-parent/arquivamento (reversivel).
+
+**Quando usar:** importadores de planilhas de controle, migracao de documentos de um Drive, catalogos e inventarios, consolidacao de dados espalhados em bases navegaveis e relacionadas.
+
+[Ver guia](../guias/integracao/GUIA-NOTION-COMO-BASE-DE-DADOS.md)
+
 ### Deploy Railway (backend padrao online)
 
 **Servico padrao para colocar backend online**. Railway (PaaS) faz build, deploy, banco gerenciado, variaveis de ambiente, dominio HTTPS e logs sem gerenciar servidor — **mais do que suficiente para a maioria das aplicacoes**. Inclui fluxo completo de CLI, conceitos, deploy por Git ou `railway up`, bancos e checklist.
