@@ -49,6 +49,7 @@ Use um guia **somente** quando a tarefa pedir aquela funcionalidade. As palavras
 | [`guias/backend/GUIA-CRIPTOGRAFIA-CIFRA-DE-CESAR.md`](guias/backend/GUIA-CRIPTOGRAFIA-CIFRA-DE-CESAR.md) | Cifra de Cesar tradicional e numerica + normalizacao de acentos + web (Brython) | criptografia, cifra, encode/decode, educacional |
 | [`guias/integracao/GUIA-INTEGRACAO-API-GITHUB.md`](guias/integracao/GUIA-INTEGRACAO-API-GITHUB.md) | Coleta de repositorios GitHub com token, paginacao, retry e rate limit | github api, importar repositorios, portfolio, rate limit |
 | [`guias/integracao/GUIA-SCRAPING-MULTIFORMATO.md`](guias/integracao/GUIA-SCRAPING-MULTIFORMATO.md) | Pipelines de scraping com Playwright, parsers offline e persistencia auditavel | scraping, playwright, crawler, etl, coleta de dados |
+| [`guias/integracao/GUIA-NOTION-COMO-BASE-DE-DADOS.md`](guias/integracao/GUIA-NOTION-COMO-BASE-DE-DADOS.md) | Migrar planilhas/arquivos para databases do Notion: schema tipado, import idempotente, anexos, re-parent | notion, migracao, planilha, database, importacao, etl |
 | [`guias/integracao/GUIA-DEPLOY-RAILWAY.md`](guias/integracao/GUIA-DEPLOY-RAILWAY.md) | Deploy de backend no Railway (PaaS): build, banco, HTTPS, logs | deploy, hospedagem, producao, railway, backend online |
 
 ## 4. Regras deste repositorio (resumo)
