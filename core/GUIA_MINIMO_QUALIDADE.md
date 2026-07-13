@@ -60,6 +60,8 @@ Quando houver duvida, siga os documentos completos:
    - Enquadre trabalho futuro como convite a contribuicao: prefira "ideias para quem quiser contribuir" ou "melhorias que o projeto poderia expandir" em vez de "features futuras para implementar". Detalhes em [`DESIGN_SYSTEM_README.md`](DESIGN_SYSTEM_README.md), secao 3.5.
 
 9. **Preferir automacao e ferramenta reutilizavel (nao descuidar da qualidade)**
+   - **Regra explicita**: toda vez que o agente precisar fazer uma mudanca manual — em dados de um sistema externo (ex.: Notion, planilhas, APIs) ou em qualquer projeto que use este padrao de qualidade — ele deve preferir usar scripts e automacoes para manipular os dados, nunca a edicao manual como primeiro recurso.
+   - **Por que**: scripts reutilizaveis viram patrimonio do projeto. Modelos de IA cada vez mais inteligentes podem ler, melhorar e estender essas ferramentas ao longo do tempo — o ecossistema se aprimora naturalmente a cada geracao de modelo. Uma mudanca manual nao deixa rastro reutilizavel; um script deixa.
    - Ao alterar codigo, conteudo estruturado ou dados, procure primeiro se ja existe script, comando, automacao ou ferramenta para esse tipo de mudanca.
    - Se a base existente quase resolve, prefira estender a automacao atual em vez de fazer ajuste manual pontual.
    - Edicao manual e excecao: use apenas quando automacao nao for viavel ou quando o custo de criar a ferramenta for maior do que o ganho real.
@@ -94,7 +96,7 @@ Quando houver duvida, siga os documentos completos:
 - [ ] Nao ha segredo, dado sensivel ou URL privada exposta.
 - [ ] Contratos afetados foram preservados ou documentados.
 - [ ] Testes/verificacoes relevantes foram executados ou justificados.
-- [ ] Scripts, automacoes e ferramentas reutilizaveis foram priorizados antes de editar manualmente; se houve excecao manual, ela foi registrada.
+- [ ] Scripts, automacoes e ferramentas reutilizaveis foram priorizados antes de editar manualmente (inclusive para manipular dados em sistemas externos, como o Notion); se houve excecao manual, ela foi registrada com o motivo.
 - [ ] Qualidade de scripts: organizados em pasta apropriada (nao na raiz), com responsabilidade clara, tratamento de erros, sem hardcodes, documentados; seguem os mesmos padroes do projeto, nao sao codigo descartavel.
 - [ ] Documentacao e logs usam linguagem geral/open source, sem valores hardcoded, e enquadram trabalho futuro como convite a contribuicao.
 - [ ] Todo programa tem `start_app.py` com menu interativo (Iniciar/Rodar, Instalar/Setup, Configurar, Status/Sair) funcionando.
