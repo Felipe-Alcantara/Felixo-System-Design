@@ -27,7 +27,9 @@
 
 set -euo pipefail
 
-REPO_URL="https://github.com/Felipe-Alcantara/Felixo-System-Design.git"
+# FELIXO_REPO_URL permite apontar para outra origem (usado pelos testes, que
+# clonam de um repositorio local via file:// para nao depender de rede).
+REPO_URL="${FELIXO_REPO_URL:-https://github.com/Felipe-Alcantara/Felixo-System-Design.git}"
 DEST_NAME="Padrão de qualidade - Felixo System Design"
 BLOCK_BEGIN="# >>> felixo command (managed by install-felixo.sh) >>>"
 BLOCK_END="# <<< felixo command (managed by install-felixo.sh) <<<"

@@ -158,7 +158,9 @@ Felixo-System-Design/
 │
 ├── scripts/                                 # Instaladores do comando global "felixo"
 │   ├── bash-zsh/
-│   │   └── install-felixo-bash-zsh.sh       # Instalador p/ Bash e Zsh (Linux, macOS, Git Bash, WSL)
+│   │   ├── install-felixo-bash-zsh.sh       # Instalador p/ Bash e Zsh (Linux, macOS, Git Bash, WSL)
+│   │   └── tests/
+│   │       └── installers.tests.sh          # Suite nativa Bash (roda em Linux/macOS, sem rede)
 │   ├── powershell/
 │   │   └── install-felixo-powershell.ps1    # Instalador p/ PowerShell (Windows, Linux, macOS)
 │   ├── cmd/                                  # CMD (Prompt classico do Windows)
@@ -166,8 +168,8 @@ Felixo-System-Design/
 │   │   ├── felixo-command.cmd               # Comando felixo em si (instalado como felixo.cmd)
 │   │   └── tests/                           # Testes do passo .gitignore automatico
 │   └── tests/                               # Testes automatizados dos instaladores
-│       ├── installers.tests.ps1             # Suite PowerShell + CMD + Bash
-│       └── run-tests.ps1                    # Roda todas as suites
+│       ├── installers.tests.ps1             # Suite PowerShell + CMD + Bash (Windows)
+│       └── run-tests.ps1                    # Roda todas as suites PowerShell
 │
 ├── docs/                                    # Documentacao por responsabilidade
 │   ├── CORE-PADROES-OBRIGATORIOS.md         # Detalhe dos padroes obrigatorios
