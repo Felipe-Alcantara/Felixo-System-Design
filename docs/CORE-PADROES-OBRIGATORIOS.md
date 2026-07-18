@@ -6,13 +6,13 @@ A pasta [`core/`](../core/) concentra os artefatos que devem acompanhar **todo p
 
 ## Design System Frontend
 
-Guia completo de padronizacao visual para front-end, extraido do **FelixoVerse**. Documenta paleta, tipografia, layout, componentes, animacoes e padroes de interface. Inclui separacao explicita entre principios universais e escolhas especificas do FelixoVerse.
+Guia completo de padronizacao visual para front-end, extraido do **FelixoVerse**. Documenta paleta, tipografia, layout, componentes, animacoes e padroes de interface. Inclui separacao explicita entre principios universais e escolhas especificas do FelixoVerse, alem dos baselines obrigatorios de **acessibilidade** (teclado, foco visivel, contraste AA) e **seguranca no frontend** (XSS, tokens, links externos).
 
 [Ver design system frontend](../core/DESIGN_SYSTEM_FRONTEND.md)
 
 ## Design System Backend
 
-Guia de **qualidade de sistema backend**. Define principios de arquitetura, escolha de stack, modularizacao forte, separacao de responsabilidades, estrutura por camadas, padroes de API, persistencia, testes, TDD, SQLite como padrao inicial, Open/Closed, documentacao viva e checklist de qualidade.
+Guia de **qualidade de sistema backend**. Define principios de arquitetura, escolha de stack (fonte canonica), modularizacao forte, separacao de responsabilidades, estrutura por camadas, padroes de API, persistencia, testes, TDD, SQLite como padrao inicial, Open/Closed, documentacao viva, checklist OWASP minimo, dependencias pinadas com auditoria e checklist de qualidade.
 
 [Ver design system backend](../core/DESIGN_SYSTEM_BACKEND.md)
 
@@ -24,7 +24,7 @@ Guia de padronizacao para `README.md`, usado como referencia para manter documen
 
 ## Guia Minimo de Qualidade
 
-Contrato curto e obrigatorio para preservar qualidade de software em qualquer projeto. Resume os padroes essenciais de arquitetura, seguranca, testes, documentacao, criterio de pronto e a regra de priorizar scripts, automacoes e ferramentas reutilizaveis antes de recorrer a edicao manual.
+Contrato curto e obrigatorio para preservar qualidade de software em qualquer projeto. Resume os padroes essenciais de arquitetura, seguranca, testes, documentacao, criterio de pronto e a regra de priorizar scripts, automacoes e ferramentas reutilizaveis antes de recorrer a edicao manual. Inclui a regua unica de testes e as regras anti-alucinacao: validacao exige execucao real com saida observada, e toda API usada deve existir na versao instalada.
 
 [Ver guia minimo de qualidade](../core/GUIA_MINIMO_QUALIDADE.md)
 
@@ -57,6 +57,6 @@ Template padrao de **memoria operacional** para projetos com IA. Deve ser copiad
 - testes importantes
 - contexto necessario para outra IA retomar o trabalho sem reler tudo
 
-O `IA.md` deve ser tratado como **linha do tempo**, nao como resumo reescrito: quando uma decisao tecnica mudar, preserve o registro anterior e acrescente uma nova entrada datada com contexto, motivo e validacao.
+O `IA.md` deve ser tratado como **linha do tempo**, nao como resumo reescrito: quando uma decisao tecnica mudar, preserve o registro anterior e acrescente uma nova entrada datada com contexto, motivo e validacao. Ele tambem traz uma secao **Estado atual (resumo vivo)** reescrevivel para retomada rapida e uma estrategia de **compactacao sem perda**: quando o arquivo crescer demais, registros antigos sao movidos (nunca apagados) para `docs/ia-archive/`.
 
 [Ver o template](../core/TEMPLATE-CONTEXTO-IA.md)
