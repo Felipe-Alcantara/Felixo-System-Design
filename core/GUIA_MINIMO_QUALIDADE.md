@@ -43,14 +43,19 @@ Quando houver duvida, siga os documentos completos:
 5. **Validar entradas e erros**
    - Toda entrada externa deve ser validada.
    - Erros precisam ser previsiveis, compreensiveis e seguros para quem consome o sistema.
+   - Cubra os riscos classicos (OWASP Top 10) na camada certa: injecao (SQL/comando), XSS, CSRF e falhas de autenticacao/autorizacao. Checklist detalhado nos design systems de backend e frontend.
 
 6. **Proteger dados e segredos**
    - Nunca registre tokens, senhas, cookies, dados pessoais ou HTML sensivel em repositorio publico.
    - Logs devem ajudar debug sem vazar segredo.
+   - Dependencias tambem sao superficie de ataque: pine versoes, commite o lockfile e rode auditoria (`pip-audit`, `npm audit`) quando adicionar ou atualizar dependencia.
 
 7. **Testar comportamento importante**
    - Regras criticas, bugs corrigidos, contratos de API, parser, autenticacao e fluxo destrutivo precisam de teste quando aplicavel.
    - Se nao houver teste automatico viavel, registre verificacao manual objetiva.
+   - **Regua unica de testes** (vale para backend e frontend): teste automatizado e obrigatorio para logica de negocio, contrato e correcao de bug; e opcional para UI puramente visual — nesse caso, registre a verificacao manual feita.
+   - **Validacao exige evidencia real**: nao declare uma entrega pronta sem executar o codigo (ou os testes) e observar a saida real. "Deve funcionar" nao e validacao; saida de execucao e.
+   - **Anti-alucinacao**: antes de usar uma API, biblioteca, metodo ou opcao de configuracao, confirme que ela existe na versao instalada (doc oficial, codigo-fonte ou execucao). Nao presuma de memoria.
 
 8. **Documentar estado relevante**
    - README explica uso, setup e decisao importante.
@@ -79,6 +84,7 @@ Quando houver duvida, siga os documentos completos:
     - Todo programa (web, CLI, automacao, script, desktop) deve ter um `start_app.py` na raiz que abre um **menu interativo, colorido e descritivo** — a porta de entrada unica por onde a pessoa instala, configura, inicia e deixa o programa pronto (`python start_app.py`).
     - Sempre menu interativo, nunca flags decoradas; nada de prompt cru "digite a letra". Menu minimo: Iniciar/Rodar, Instalar/Setup, Configurar, Status/Sair.
     - Cross-platform, com mensagens de erro claras, para facilitar quem nao tem facilidade com terminal.
+    - Excecao coerente com o item 3 (simplicidade): script interno pequeno e de uso pontual, sem usuario final, pode dispensar o menu — registre a excecao e o motivo. O padrao completo continua obrigatorio para qualquer programa com usuarios.
     - Detalhes em [`GUIA-START-APP-SCRIPT.md`](GUIA-START-APP-SCRIPT.md).
 
 12. **Finalizar com criterio de pronto**
@@ -96,6 +102,9 @@ Quando houver duvida, siga os documentos completos:
 - [ ] Nao ha segredo, dado sensivel ou URL privada exposta.
 - [ ] Contratos afetados foram preservados ou documentados.
 - [ ] Testes/verificacoes relevantes foram executados ou justificados.
+- [ ] O codigo foi executado de verdade e a saida real foi observada (nao apenas "deve funcionar").
+- [ ] APIs, bibliotecas e metodos usados existem na versao instalada (verificado, nao presumido).
+- [ ] Dependencias novas/atualizadas estao pinadas, com lockfile commitado e auditoria rodada.
 - [ ] Scripts, automacoes e ferramentas reutilizaveis foram priorizados antes de editar manualmente (inclusive para manipular dados em sistemas externos, como o Notion); se houve excecao manual, ela foi registrada com o motivo.
 - [ ] Qualidade de scripts: organizados em pasta apropriada (nao na raiz), com responsabilidade clara, tratamento de erros, sem hardcodes, documentados; seguem os mesmos padroes do projeto, nao sao codigo descartavel.
 - [ ] Documentacao e logs usam linguagem geral/open source, sem valores hardcoded, e enquadram trabalho futuro como convite a contribuicao.

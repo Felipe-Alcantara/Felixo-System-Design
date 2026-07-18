@@ -5,6 +5,8 @@
 > **Por que e obrigatorio**: O `start_app.py` e a interface entre o programa e quem vai usar. Nem todo mundo tem facilidade com terminal, ninguem deveria precisar decorar comandos, e cada projeto que reinventa o "como rodar" gera atrito. Um menu de entrada padronizado torna **qualquer** programa imediatamente utilizavel: a pessoa roda `python start_app.py`, le opcoes claras e escolhe.
 >
 > **Quando aplicar**: Sempre. Todo programa rodavel do repositorio precisa do seu `start_app.py`. Nao importa se e um site, um CLI, uma automacao agendada ou um scraper — todos passam pela mesma porta de entrada.
+>
+> **Unica excecao** (coerente com o principio de simplicidade do [`GUIA_MINIMO_QUALIDADE.md`](GUIA_MINIMO_QUALIDADE.md), item 3): script interno pequeno e de uso pontual, **sem usuario final** (ex.: utilitario de manutencao rodado so por quem desenvolve), pode dispensar o menu — registre a excecao e o motivo no projeto. Na duvida sobre se algo "tem usuario", tem: faca o menu.
 
 ---
 
@@ -119,7 +121,7 @@ Nao documente flags como interface principal: a interface e o menu.
 
 ## 7. Checklist
 
-- [ ] Existe um `start_app.py` na raiz para **todo programa rodavel** do projeto (nao so apps web).
+- [ ] Existe um `start_app.py` na raiz para **todo programa rodavel** do projeto (nao so apps web) — ou a excecao de script interno pequeno esta registrada com motivo.
 - [ ] `python start_app.py` abre um **menu interativo, colorido e descritivo** — nao um prompt cru de "digite a letra".
 - [ ] O menu oferece, no minimo: **Iniciar/Rodar**, **Instalar/Setup**, **Configurar**, **Status/Sair**.
 - [ ] Cada opcao do menu descreve em uma linha o que faz.

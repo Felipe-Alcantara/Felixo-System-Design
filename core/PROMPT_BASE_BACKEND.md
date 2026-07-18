@@ -55,6 +55,10 @@ Não deixe silencioso o que pode gerar arquitetura errada.
 
 Esta seção existe para guiar o desenvolvedor na escolha da base técnica antes de montar o prompt.
 
+> **Fonte canônica**: as decisões de stack e banco vivem no [`DESIGN_SYSTEM_BACKEND.md`](DESIGN_SYSTEM_BACKEND.md), seção 3. Esta seção traduz aquelas decisões em cenários práticos de prompt — se os dois divergirem, vale o design system e este arquivo deve ser corrigido.
+>
+> **Política de versões**: use a versão estável mais recente de cada ferramenta, pine as versões no lockfile e rode auditoria (`pip-audit`, `npm audit`) ao mudar dependência.
+
 ### 3.1 Escolha padrão para a maioria dos backends
 
 **Stack sugerida**:
@@ -354,6 +358,8 @@ Durante a implementação:
 - comece pelos testes sempre que possível
 - prefira soluções moldáveis por composição quando houver variações previsíveis
 - escreva ou atualize testes para fluxos críticos
+- antes de usar uma API, biblioteca, método ou opção de configuração, confirme que ela existe na versão instalada (doc oficial ou código) — não presuma de memória
+- execute os testes de verdade e observe a saída real; não avance de etapa com teste falhando nem declare validação sem execução
 - documente decisões importantes
 - atualize `README.md` e `IA.md` em tempo real sempre que o estado do projeto mudar
 - seja conservador com dados e operações destrutivas
@@ -361,7 +367,7 @@ Durante a implementação:
 Na entrega de cada etapa:
 - resuma o que foi feito
 - liste arquivos alterados
-- diga quais testes foram executados
+- diga quais testes foram executados e resuma a saída real da execução — "deve passar" não conta como validação
 - confirme que `README.md` e `IA.md` foram atualizados naquela etapa
 - aponte riscos, pendências e próximos passos
 
@@ -485,6 +491,7 @@ Siga `DESIGN_SYSTEM_BACKEND.md` como padrão obrigatório de qualidade. Não pro
 - pense primeiro na ferramenta reutilizável antes da solução específica
 - planeje pontos de extensão para seguir Open/Closed
 - comece pelos testes sempre que possível
+- execute os testes e reporte a saída real; verifique que as APIs usadas existem na versão instalada
 - atualize `README.md` e `IA.md` em tempo real
 
 # O QUE EU ESPERO

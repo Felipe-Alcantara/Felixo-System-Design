@@ -56,12 +56,14 @@ Não deixe silencioso o que pode gerar interface inconsistente.
 
 Esta seção existe para guiar o desenvolvedor na escolha da base técnica antes de montar o prompt.
 
+> **Política de versões**: este acervo evita fixar números de versão em documentação. Use sempre a **versão estável mais recente** de cada ferramenta, pine as versões no lockfile do projeto (`package-lock.json`) e rode `npm audit` ao adicionar ou atualizar dependência.
+
 ### 3.1 Escolha padrão para a maioria dos frontends
 
 **Stack sugerida**:
 
-- React 18
-- Tailwind CSS 3
+- React (versão estável mais recente)
+- Tailwind CSS (versão estável mais recente)
 - Vite
 - Vitest
 
@@ -83,8 +85,8 @@ Esta seção existe para guiar o desenvolvedor na escolha da base técnica antes
 
 **Stack sugerida**:
 
-- React 18
-- Tailwind CSS 3
+- React (versão estável mais recente)
+- Tailwind CSS (versão estável mais recente)
 - Framer Motion
 - Vite
 - Vitest
@@ -300,10 +302,12 @@ Se houver qualquer desvio em relação ao `DESIGN_SYSTEM_FRONTEND.md`, justifiqu
 - Se você sugerir outra base, explique por quê
 
 # 13. ACESSIBILIDADE
-- Precisa de suporte a leitor de tela?
-- Precisa de navegação por teclado?
-- Precisa de contraste mínimo (WCAG)?
-- Precisa de alt em imagens?
+Baseline obrigatório em todo projeto (não é opcional): navegação por teclado com foco visível, contraste mínimo AA (WCAG), `alt` em imagens significativas e `label` em todo input. Detalhes no `DESIGN_SYSTEM_FRONTEND.md`.
+
+As perguntas abaixo cobrem o que vai ALÉM do baseline:
+- Precisa de suporte completo a leitor de tela (aria-live, landmarks, anúncios dinâmicos)?
+- Precisa de contraste AAA ou modo de alto contraste?
+- Precisa de suporte a `prefers-reduced-motion`?
 - Restrições específicas de acessibilidade:
 
 # 14. FILOSOFIA DE CONSTRUÇÃO
@@ -331,14 +335,18 @@ Durante a implementação:
 - trabalhe por componente ou por seção, em etapas verificáveis
 - mantenha separação clara entre componentes de UI e lógica de negócio
 - garanta responsividade em cada etapa, não só no final
-- teste visualmente em mobile, tablet e desktop
+- verifique a responsividade com evidência real: rode o app e inspecione os breakpoints com a ferramenta disponível (browser, screenshot); se você não tem como ver a interface, peça ao usuário para validar visualmente e registre o resultado no `IA.md` — nunca afirme que testou visualmente sem ter visto
+- antes de usar uma API, biblioteca ou prop, confirme que ela existe na versão instalada (doc oficial ou código) — não presuma de memória
+- rode build, lint e testes e observe a saída real antes de dar a etapa por concluída
+- escreva teste (Vitest + Testing Library) para lógica de componente (estado, condicionais, handlers); UI puramente visual pode ficar com verificação manual registrada
 - documente decisões visuais importantes
 - atualize `README.md` e `IA.md` em tempo real
 
 Na entrega de cada etapa:
 - resuma o que foi feito
 - liste componentes criados ou alterados
-- confirme responsividade testada
+- informe como a responsividade foi verificada (execução real, screenshot ou validação do usuário) — não declare "testado" sem evidência
+- diga quais comandos rodou (build/lint/testes) e resuma a saída real
 - confirme que `README.md` e `IA.md` foram atualizados
 - aponte riscos, pendências e próximos passos
 
@@ -362,16 +370,16 @@ Se faltar informação importante, pergunte de forma objetiva.
 
 **Escolha sugerida**:
 
-- React 18
-- Tailwind CSS 3
+- React (versão estável mais recente)
+- Tailwind CSS (versão estável mais recente)
 - Vite
 - Vitest
 
 **Como descrever no prompt**:
 
 ```markdown
-- Framework escolhido: React 18
-- Estilização: Tailwind CSS 3
+- Framework escolhido: React (versão estável mais recente)
+- Estilização: Tailwind CSS (versão estável mais recente)
 - Build tool: Vite
 - Tipo de interface: SPA com dashboard
 - Precisa de estado global? Sim (Context API)
@@ -382,8 +390,8 @@ Se faltar informação importante, pergunte de forma objetiva.
 
 **Escolha sugerida**:
 
-- React 18
-- Tailwind CSS 3
+- React (versão estável mais recente)
+- Tailwind CSS (versão estável mais recente)
 - Framer Motion
 - Vite
 - Vitest
@@ -391,8 +399,8 @@ Se faltar informação importante, pergunte de forma objetiva.
 **Como descrever no prompt**:
 
 ```markdown
-- Framework escolhido: React 18
-- Estilização: Tailwind CSS 3
+- Framework escolhido: React (versão estável mais recente)
+- Estilização: Tailwind CSS (versão estável mais recente)
 - Animação: Framer Motion
 - Build tool: Vite
 - Tipo de interface: portfólio pessoal
@@ -462,6 +470,8 @@ Siga `DESIGN_SYSTEM_FRONTEND.md` como referência de qualidade visual e estrutur
 - prefira componentes compostos quando houver múltiplas partes
 - use design tokens centralizados
 - garanta responsividade em cada etapa
+- rode build/lint/testes e reporte a saída real; não declare pronto sem executar
+- acessibilidade baseline: teclado, foco visível, contraste AA, alt e labels
 - atualize `README.md` e `IA.md` em tempo real
 
 # O QUE EU ESPERO
