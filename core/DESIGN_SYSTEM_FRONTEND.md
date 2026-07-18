@@ -6,7 +6,7 @@
 >
 > **Objetivo**: Transformar decisões de design implícitas no código em um sistema documentado e reutilizável, facilitando a manutenção, escalabilidade e colaboração.
 >
-> **Stack Frontend**: React 18 + Tailwind CSS 3 + Framer Motion 10 + Vite
+> **Stack Frontend do projeto de origem**: React 18 + Tailwind CSS 3 + Framer Motion 10 + Vite. Em novos projetos, use a **versão estável mais recente** de cada ferramenta (política de versões no [`PROMPT_BASE_FRONTEND.md`](PROMPT_BASE_FRONTEND.md), seção 3).
 
 ---
 
@@ -25,6 +25,8 @@ Este design system foi extraído do FelixoVerse e mistura **princípios estrutur
 - **Espaçamentos**: consistência de padding/gap em seções, cards, botões e inputs
 - **Responsividade**: mobile-first, breakpoints em `sm`, `md`, `lg`
 - **Componentes base**: Button (variantes + tamanhos), Card, Badge, Input, Modal
+- **Acessibilidade baseline**: navegação por teclado, foco visível, contraste AA, alt e labels (seção 9)
+- **Segurança no cliente**: sanitização de HTML, tratamento de tokens, links externos seguros (seção 10)
 
 ### Específico do FelixoVerse (adaptar ou substituir por projeto)
 
@@ -38,7 +40,7 @@ Este design system foi extraído do FelixoVerse e mistura **princípios estrutur
 - **Cores de categoria**: Web (azul), Code (verde), Music (rosa), etc.
 - **Prefixo `felixo-*`**: classes CSS customizadas como `felixo-card-glow`, `felixo-glow-intensity-*`
 
-**Regra prática**: se o seu projeto tem identidade visual própria, substitua a seção 1 (Identidade Visual), a seção 5 (Background) e a seção 6 (Sistema de Glow) pelas escolhas do seu projeto. Mantenha as seções 2 (Layout), 3 (Componentes), 4 (Interação), 7 (Padrões Técnicos) e 8 (Melhorias) como referência estrutural.
+**Regra prática**: se o seu projeto tem identidade visual própria, substitua a seção 1 (Identidade Visual), a seção 5 (Background) e a seção 6 (Sistema de Glow) pelas escolhas do seu projeto. Mantenha as seções 2 (Layout), 3 (Componentes), 4 (Interação), 7 (Padrões Técnicos), 8 (Melhorias), 9 (Acessibilidade) e 10 (Segurança) como referência estrutural — as seções 9 e 10 são obrigatórias em qualquer projeto.
 
 ---
 
@@ -946,6 +948,38 @@ Expandir componentes com mais variantes:
 
 #### Documentação de Componentes
 Adicionar Storybook ou similar para visualizar todos os componentes isoladamente.
+
+---
+
+## 9. ACESSIBILIDADE (BASELINE OBRIGATÓRIO)
+
+Acessibilidade não é feature opcional: este baseline vale para **todo** projeto que usa este design system, independente de identidade visual. As melhorias da seção 8.3 vão além dele; este é o mínimo.
+
+### 9.1 Navegação por teclado
+- Todo elemento interativo (botão, link, input, card clicável, modal) deve ser alcançável e acionável por teclado (`Tab`, `Enter`, `Espaço`, `Esc` fecha modal).
+- Foco visível sempre: use `focus-visible` com anel de contraste claro (no FelixoVerse, anel roxo; em outros projetos, a cor de destaque local). Nunca remova `outline` sem substituto visível.
+- Ordem de foco deve seguir a ordem visual; modais devem prender o foco (focus trap) enquanto abertos.
+
+### 9.2 Contraste e conteúdo
+- Contraste mínimo **AA (WCAG)**: 4.5:1 para texto normal, 3:1 para texto grande e elementos de UI. Verifique especialmente texto sobre gradientes e efeitos de glow.
+- `alt` descritivo em toda imagem significativa; `alt=""` em imagem decorativa.
+- Todo input tem `label` associado (visível ou `aria-label`); todo botão de ícone tem `aria-label`.
+- Use HTML semântico (landmarks `header`/`main`/`footer`/`nav`, hierarquia de headings) antes de recorrer a `aria-*`.
+
+### 9.3 Movimento
+- Respeite `prefers-reduced-motion`: partículas, glow respirante e transições de página devem reduzir ou desligar quando o usuário pedir menos movimento.
+
+---
+
+## 10. SEGURANÇA NO FRONTEND (BASELINE OBRIGATÓRIO)
+
+O frontend também tem responsabilidade de segurança (complementa o checklist OWASP do [`DESIGN_SYSTEM_BACKEND.md`](DESIGN_SYSTEM_BACKEND.md)):
+
+- **XSS**: nunca use `dangerouslySetInnerHTML` (ou `innerHTML`) com conteúdo que veio de usuário ou de API sem sanitizar (ex.: DOMPurify). Prefira renderizar texto como texto.
+- **Tokens e sessão**: prefira cookie `httpOnly` a `localStorage` para token de sessão quando o backend permitir; nunca logue token no console nem o exponha em URL.
+- **Links externos**: `target="_blank"` sempre com `rel="noopener noreferrer"`.
+- **Dados sensíveis**: não embuta segredo, chave de API privada ou URL interna no bundle — variável `VITE_*` é pública por definição.
+- **Validação**: validar no frontend melhora UX, mas a validação que protege é a do backend; nunca confie apenas na do cliente.
 
 ---
 

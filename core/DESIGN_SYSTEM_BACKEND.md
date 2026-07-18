@@ -80,6 +80,8 @@ Se a necessidade for **instruir uma IA sobre como trabalhar**, isso pertence ao 
 
 ## 3. STACK PREFERIDA E CRITÉRIOS DE ESCOLHA
 
+> **Fonte canônica**: esta seção é a fonte da verdade sobre escolha de stack e banco no backend. O [`PROMPT_BASE_BACKEND.md`](PROMPT_BASE_BACKEND.md) apenas resume e referencia esta seção — se os dois divergirem, vale o que está aqui.
+
 ### 3.1 Ordem de preferência
 
 | Prioridade | Tecnologia | Quando faz mais sentido |
@@ -258,6 +260,11 @@ Regras práticas de modulação:
 - Regras de negócio centrais
 - Integrações externas críticas
 
+### 8.4 Validação exige evidência real
+
+- Um teste só conta como validação se foi **executado** e a saída real foi observada — "os testes devem passar" não é validação.
+- Régua única do acervo (igual à do [`GUIA_MINIMO_QUALIDADE.md`](GUIA_MINIMO_QUALIDADE.md), item 7): teste automatizado obrigatório para lógica de negócio, contrato e correção de bug; opcional apenas para o que é puramente apresentacional, com verificação manual registrada.
+
 ---
 
 ## 9. SEGURANÇA, LOGS E OPERAÇÃO
@@ -268,6 +275,24 @@ Regras práticas de modulação:
 - Sanitização e validação de entrada
 - Controle de acesso por perfil/escopo quando aplicável
 - Confirmação ou proteção extra em operações destrutivas
+
+### 9.1.1 Checklist OWASP mínimo
+
+Cobertura mínima dos riscos clássicos (OWASP Top 10), na camada certa:
+
+- **Injeção (SQL/comando)**: use ORM ou queries parametrizadas; nunca concatene entrada de usuário em SQL ou em comando de shell.
+- **XSS**: escape/encode toda saída que renderiza conteúdo de usuário (templates Django já escapam por padrão — não desligue sem sanitizar).
+- **CSRF**: mantenha a proteção CSRF do framework ativa em toda rota que muda estado via cookie de sessão.
+- **Autenticação**: senha sempre com hash forte e salt (o hasher padrão do framework, ex.: PBKDF2/argon2 no Django); nunca hash caseiro nem senha em log.
+- **Autorização**: cheque permissão por objeto, não só por rota — o usuário A não pode acessar o recurso do usuário B trocando o id na URL (IDOR).
+- **Rate limiting**: aplique limite de tentativas em login e em endpoints caros/públicos.
+- **Exposição de dados**: responda apenas os campos necessários; não serialize modelos inteiros por conveniência.
+
+### 9.1.2 Dependências sob controle
+
+- Versões **pinadas** e lockfile commitado (`requirements.txt` com versões exatas ou `poetry.lock`/`uv.lock`; `package-lock.json` no Node).
+- Rode auditoria (`pip-audit`, `npm audit`) ao adicionar ou atualizar dependência e antes de release.
+- Atualize dependências de forma consciente e testada, não automática e silenciosa.
 
 ### 9.2 Observabilidade mínima
 
@@ -326,6 +351,9 @@ Antes de considerar um backend pronto para seguir:
 - [ ] Erros e respostas seguem padrão consistente
 - [ ] Fluxos críticos estão cobertos por testes
 - [ ] Segredos e operações destrutivas estão protegidos
+- [ ] Checklist OWASP mínimo coberto (injeção, XSS, CSRF, authn/authz, rate limiting — seção 9.1.1)
+- [ ] Dependências pinadas, lockfile commitado e auditoria rodada (seção 9.1.2)
+- [ ] Testes foram executados de verdade, com saída real observada (seção 8.4)
 - [ ] Logs e falhas relevantes são rastreáveis
 - [ ] A documentação mínima do projeto está atualizada
 - [ ] `README.md` e `IA.md` refletem o estado atual real do projeto
