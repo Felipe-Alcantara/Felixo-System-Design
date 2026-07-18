@@ -12,7 +12,7 @@
 >
 > **Regra fundamental**: Todo contexto relevante deve estar **neste único arquivo**. Não espalhe informações críticas em vários lugares se a intenção for permitir retomada rápida por outra IA ou por uma nova sessão.
 >
-> **Regra de preservação histórica**: O `IA.md` é a linha do tempo técnica do projeto. Não apague nem reescreva registros antigos quando uma decisão mudar; adicione um novo registro datado explicando o que mudou, por que mudou e como foi validado.
+> **Regra de preservação histórica**: O `IA.md` é a linha do tempo técnica do projeto. Não apague nem reescreva registros antigos quando uma decisão mudar; adicione um novo registro datado explicando o que mudou, por que mudou e como foi validado. Quando o arquivo crescer demais, o histórico antigo é **movido** (nunca apagado) para archives — veja "Quando o arquivo crescer demais".
 
 ## 📌 CONTEXTO DENTRO DO FELIXO SYSTEM DESIGN
 
@@ -71,6 +71,35 @@ Modelos de IA podem **alucinar ou se confundir** durante decisões longas. Regis
 - Mantenha cada entrada **curta** — 1-3 linhas por item
 - Preserve entradas anteriores — se uma decisão antiga ficou obsoleta, mantenha o registro e adicione uma nova entrada datada apontando a mudança
 - Use as seções abaixo — não crie seções novas sem necessidade
+
+### Quando o arquivo crescer demais (compactação sem perda)
+
+Um `IA.md` gigante deixa de cumprir o próprio objetivo: ele estoura o contexto do modelo e enterra a informação atual sob histórico antigo. A regra de preservação continua valendo — **nada é apagado** — mas o histórico pode ser **movido**:
+
+1. Quando o `IA.md` ficar longo demais para leitura rápida (sinal prático: a IA gasta mais tempo relendo histórico do que trabalhando), mova os registros mais antigos, na íntegra e sem editar, para `docs/ia-archive/IA-ARCHIVE-<ano>.md` (ou faixa de datas).
+2. Deixe no `IA.md` um ponteiro datado para cada arquivo de archive (ex.: `[2026-07-18] Registros de 2025 movidos para docs/ia-archive/IA-ARCHIVE-2025.md`).
+3. Mantenha no `IA.md` os registros recentes e a seção **Estado atual** (abaixo) sempre em dia — é ela que permite retomar contexto sem reler o archive.
+4. A linha do tempo completa continua auditável: `IA.md` + archives, em ordem cronológica, sem nenhum registro perdido ou reescrito.
+
+---
+
+## 📊 ESTADO ATUAL (RESUMO VIVO)
+
+<!--
+  EXCEÇÃO à regra append-only: esta seção é um RESUMO reescrevível.
+  Ela responde "onde o projeto está AGORA" em poucas linhas, para que uma IA
+  retome o contexto sem reler toda a linha do tempo. Reescreva-a livremente
+  a cada mudança de estado — o histórico detalhado continua protegido nas
+  seções datadas abaixo e nos archives.
+  Exemplo:
+  Última atualização: [2026-03-15]
+  - Fase: MVP funcional, deploy em VPS, autenticação JWT pronta.
+  - Em andamento: cache do /api/reports (ver Resumos de Decisão de 2026-03-14).
+  - Próximo passo: testes de integração do fluxo de pagamento.
+  - Risco aberto: timeout em uploads >50MB (ver Bugs de 2026-03-13).
+-->
+
+_Preencher e manter sempre atualizado._
 
 ---
 
