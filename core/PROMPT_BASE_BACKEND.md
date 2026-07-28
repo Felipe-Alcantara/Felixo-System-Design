@@ -308,7 +308,7 @@ Se houver qualquer desvio em relação ao `DESIGN_SYSTEM_BACKEND.md`, justifique
 - Cache:
 - Filas/jobs:
 - Hospedagem:
-- Sistema operacional alvo:
+- Sistema operacional alvo: multiplataforma por padrao (Windows, Linux, macOS) — ver [`GUIA_MINIMO_QUALIDADE.md`](GUIA_MINIMO_QUALIDADE.md), item 13. So restrinja a um SO especifico se houver motivo tecnico concreto, e justifique aqui.
 - Restrições obrigatórias:
 - Tecnologias proibidas ou indesejadas:
 

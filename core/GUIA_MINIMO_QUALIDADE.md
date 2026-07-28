@@ -93,6 +93,13 @@ Quando houver duvida, siga os documentos completos:
     - Testes ou verificacoes executados.
     - Riscos, limites e pendencias registrados.
 
+13. **Ser multiplataforma por padrao (Windows, Linux, macOS)**
+    - Todo programa gerado sob este padrao de qualidade deve rodar em Windows, Linux e macOS por padrao, mesmo que o agente esteja construindo/testando em apenas um sistema operacional no momento. Nao presuma o SO de quem vai rodar o projeto a partir do SO da sessao atual.
+    - Evite caminho, separador, comando de shell, variavel de ambiente ou API do sistema de arquivos especifica de um SO. Use as abstracoes da linguagem/framework (ex.: `pathlib`/`os.path` em vez de strings com `/` ou `\` fixos, `sys.executable`, `webbrowser`) e bibliotecas cross-platform.
+    - Se uma dependencia ou integracao so existir para um SO, documente a limitacao explicitamente (README/`IA.md`) e ofereça alternativa ou fallback quando possivel; nao vire padrao implicito do projeto.
+    - Excecao coerente com o item 3 (simplicidade): script interno pequeno, de uso pontual e sem usuario final, pode ser especifico de um SO — registre a excecao e o motivo. Qualquer programa com usuario final ou reuso continua exigindo suporte multi-SO.
+    - Testes/verificacoes que dependem de SO (ex.: instaladores, scripts de shell) devem cobrir os sistemas relevantes ou registrar verificacao manual objetiva por SO nao testado automaticamente.
+
 ---
 
 ## 3. Checklist rapido antes de encerrar
@@ -109,6 +116,7 @@ Quando houver duvida, siga os documentos completos:
 - [ ] Qualidade de scripts: organizados em pasta apropriada (nao na raiz), com responsabilidade clara, tratamento de erros, sem hardcodes, documentados; seguem os mesmos padroes do projeto, nao sao codigo descartavel.
 - [ ] Documentacao e logs usam linguagem geral/open source, sem valores hardcoded, e enquadram trabalho futuro como convite a contribuicao.
 - [ ] Todo programa tem `start_app.py` com menu interativo (Iniciar/Rodar, Instalar/Setup, Configurar, Status/Sair) funcionando.
+- [ ] O programa e multiplataforma por padrao (Windows, Linux, macOS): sem caminho/comando/API preso a um SO so; excecoes pontuais foram registradas com o motivo.
 - [ ] README, `IA.md` ou guia afetado foram atualizados quando necessario.
 - [ ] O `IA.md` preserva o historico: decisoes novas foram adicionadas como registros datados, sem apagar a linha de raciocinio anterior.
 - [ ] O versionamento segue [`../docs/GIT-POLITICA-DE-VERSIONAMENTO.md`](../docs/GIT-POLITICA-DE-VERSIONAMENTO.md): mudanca no `main` (ou branch justificada), commit pequeno no formato `tipo: descricao`, doc atualizada no mesmo passo.
