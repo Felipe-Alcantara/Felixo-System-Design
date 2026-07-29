@@ -6,13 +6,15 @@
 >
 > **Por que existe**: Estas regras viviam apenas numa secao do README e os agentes nao as absorviam de forma consistente. Este documento e a fonte unica — o README e o [Guia Minimo de Qualidade](../core/GUIA_MINIMO_QUALIDADE.md) apenas resumem e apontam para ca.
 
+> **Obrigatorio**: este guia nao e opcional nem "consulte se lembrar". Toda sessao ou rodada de trabalho neste repositorio — de qualquer agente — segue estas regras do primeiro ao ultimo commit. Nao ha excecao por preguica, pressa ou tarefa "pequena demais para seguir o padrao".
+
 > Voltar ao [README](../README.md).
 
 ---
 
 ## 1. Resumo em uma frase
 
-**Commite direto no `main`, em commits pequenos e descritivos, atualizando a documentacao no mesmo passo. So crie branch quando a mudanca for grande, arriscada ou precisar ser testada antes de entrar.**
+**Commite direto no `main`, em commits pequenos e descritivos, atualizando a documentacao no mesmo passo. So crie branch quando a mudanca for grande, arriscada ou precisar ser testada antes de entrar. Cada commit, branch e documento cobre um unico tema — nunca misture assuntos.**
 
 ---
 
@@ -36,8 +38,10 @@ Commite direto, sem branch, quando a mudanca for:
 Crie branch **somente** quando a mudanca for uma das tres:
 
 1. **Feature grande** — funcionalidade nova e substancial, com varios commits ate ficar utilizavel.
-2. **Refatoracao significativa** — mexe em muitos arquivos ou na estrutura, e voce quer poder revisar/reverter como um bloco.
+2. **Refatoracao significativa** — mexe em varios modulos distintos ou na estrutura do projeto, e voce quer poder revisar/reverter como um bloco.
 3. **Alto risco** — altera comportamento e **precisa ser testado antes** de entrar no `main`, ou pode quebrar algo existente.
+
+Em outras palavras: branch e reservada para mudanca **sensivel e estrutural**, que atravessa varios modulos ao mesmo tempo. Uma mudanca localizada — mesmo que grande em linhas de codigo — nao justifica branch se ficar contida num unico modulo ou responsabilidade.
 
 > Regra pratica: se voce nao consegue dizer **qual** das tres justifica a branch, entao **nao** crie branch — commite no `main`.
 
@@ -114,10 +118,28 @@ Se um tema de documentacao nao couber naturalmente nos arquivos existentes de `d
 
 ---
 
-## 5. Checklist antes de commitar
+## 5. Separacao minima — nunca misture temas
+
+O mesmo principio vale para commits, branches e documentacao: **separe pelo minimo possivel**. Cada unidade de trabalho cobre um unico tema, bloco ou topico. Nao junte, no mesmo commit/branch/arquivo, coisas que pertencem a responsabilidades diferentes — por exemplo:
+
+- **Interno** — decisoes de implementacao, contexto operacional (`IA.md`), configuracao especifica do ambiente.
+- **Publico** — o que quem usa ou contribui de fora enxerga (`README.md`, guias, `CONTRIBUTING.md`).
+- **API/integracao** — contratos, endpoints e formatos usados por quem integra com o projeto (ex.: [`GUIA-INTEGRACAO-API-GITHUB.md`](../guias/integracao/GUIA-INTEGRACAO-API-GITHUB.md)).
+
+Na pratica:
+
+- Um commit que muda uma decisao interna e um commit que atualiza o README publico sao **dois commits**, mesmo que a motivacao seja a mesma.
+- Um documento novo nasce num arquivo com **responsabilidade unica** (ja e a regra da secao 4) em vez de crescer dentro de um arquivo que trata de outro tema.
+- Contribuicao externa (fork) segue o fluxo publico do [`CONTRIBUTING.md`](../CONTRIBUTING.md); mudanca interna direta neste repositorio segue este documento — os dois fluxos nao se misturam.
+
+> Regra pratica: se a descricao do commit, branch ou documento precisa de "e" para juntar dois temas diferentes (interno + publico, ou publico + API), separe em duas unidades.
+
+---
+
+## 6. Checklist antes de commitar
 
 - [ ] A mudanca vai para o `main`? (Se for criar branch, ela e feature grande, refatoracao significativa ou alto risco?)
-- [ ] O commit e uma unidade coesa, com escopo claro?
+- [ ] O commit e uma unidade coesa, com escopo claro, sem misturar interno + publico + API?
 - [ ] A mensagem segue `tipo: descricao` e explica **o que** e **por que**?
 - [ ] Nao ha segredo, token, caminho local ou contexto privado na mensagem nem nos arquivos.
 - [ ] A documentacao afetada (README, `docs/`, guias, `IA.md`) foi atualizada no mesmo passo.
@@ -126,6 +148,6 @@ Se um tema de documentacao nao couber naturalmente nos arquivos existentes de `d
 
 ---
 
-## 6. Contribuicao externa (via fork)
+## 7. Contribuicao externa (via fork)
 
 Tudo acima vale para quem trabalha **direto neste repositorio**. Quem contribui **de fora** segue o fluxo de fork + branch + Pull Request descrito em [`CONTRIBUTING.md`](../CONTRIBUTING.md), onde criar branch e parte natural do processo.

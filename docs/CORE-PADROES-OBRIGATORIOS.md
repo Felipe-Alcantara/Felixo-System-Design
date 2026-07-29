@@ -4,6 +4,12 @@ A pasta [`core/`](../core/) concentra os artefatos que devem acompanhar **todo p
 
 > Voltar ao [README](../README.md).
 
+## Politica de Git (obrigatoria em toda sessao)
+
+Regra unica de versionamento deste repositorio: quando criar branch (excecao, nao padrao), formato de commit (`tipo: descricao`), documentacao viva no mesmo passo e separacao minima entre mudanca interna, publica e de API — nunca misturadas no mesmo commit, branch ou documento. Nao e opcional: vale do primeiro ao ultimo commit de qualquer sessao de trabalho neste repositorio.
+
+[Ver politica de git](../docs/GIT-POLITICA-DE-VERSIONAMENTO.md)
+
 ## Design System Frontend
 
 Guia completo de padronizacao visual para front-end, extraido do **FelixoVerse**. Documenta paleta, tipografia, layout, componentes, animacoes e padroes de interface. Inclui separacao explicita entre principios universais e escolhas especificas do FelixoVerse, alem dos baselines obrigatorios de **acessibilidade** (teclado, foco visivel, contraste AA) e **seguranca no frontend** (XSS, tokens, links externos).

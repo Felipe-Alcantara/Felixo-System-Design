@@ -96,7 +96,7 @@ Cada area tem um documento proprio, com uma responsabilidade unica. Use o mapa a
 | **[docs/CORE-PADROES-OBRIGATORIOS.md](docs/CORE-PADROES-OBRIGATORIOS.md)** | Padroes **obrigatorios** | Design systems (frontend, backend, README), guia minimo de qualidade, start app script, prompts base e o template de contexto `IA.md` — cada um descrito e com link. |
 | **[docs/GUIAS-OPCIONAIS.md](docs/GUIAS-OPCIONAIS.md)** | Padroes **opcionais** por dominio | Guias reutilizaveis de **frontend** (10), **backend** (2) e **integracao** (4): o que cada um resolve, de qual projeto foi extraido e quando reutilizar. |
 | **[docs/INSTALACAO-EM-OUTROS-PROJETOS.md](docs/INSTALACAO-EM-OUTROS-PROJETOS.md)** | **Como usar** em outros projetos | Os 8 metodos de download/sincronizacao (incluindo o comando global `felixo`), variantes com/sem submodulo e a tabela de escolha rapida por cenario. |
-| **[docs/GIT-POLITICA-DE-VERSIONAMENTO.md](docs/GIT-POLITICA-DE-VERSIONAMENTO.md)** | **Politica de git** neste repo | Quando criar branch (e quando nao), formato de commit (`tipo: descricao`), documentacao viva, exemplos e checklist. Fonte unica das regras de versionamento. |
+| **[docs/GIT-POLITICA-DE-VERSIONAMENTO.md](docs/GIT-POLITICA-DE-VERSIONAMENTO.md)** | **Politica de git** neste repo — **obrigatoria** | Quando criar branch (excecao, nao padrao), formato de commit (`tipo: descricao`), documentacao viva, separacao minima entre interno/publico/API, exemplos e checklist. Fonte unica das regras de versionamento; vale em toda sessao. |
 | **[CONTRIBUTING.md](CONTRIBUTING.md)** | **Contribuir** de fora | Fluxo de fork + Pull Request para contribuicoes externas. |
 | [Estrutura do Repositorio](#-estrutura-do-repositorio) | **Layout** das pastas | Arvore completa de arquivos e pastas com uma linha por item. |
 | [Para Agentes de IA](#-para-agentes-de-ia) | Regras para agentes **neste** repo | Politica de git/branches, commits e documentacao viva. |
@@ -227,12 +227,12 @@ Felixo-System-Design/
 
 Instrucoes para agentes que trabalham **diretamente neste repositorio** (nao via fork). Para contribuicoes externas, siga o fluxo de fork + Pull Request descrito em [`CONTRIBUTING.md`](CONTRIBUTING.md).
 
-> **A politica de git completa esta em [`docs/GIT-POLITICA-DE-VERSIONAMENTO.md`](docs/GIT-POLITICA-DE-VERSIONAMENTO.md)** — branches, commits e documentacao viva, com exemplos de mensagem boa/ruim e checklist. O resumo abaixo e o essencial; leia o documento dedicado antes de versionar.
+> **Obrigatorio**: a politica de git completa esta em [`docs/GIT-POLITICA-DE-VERSIONAMENTO.md`](docs/GIT-POLITICA-DE-VERSIONAMENTO.md) — branches, commits, documentacao viva e separacao minima entre interno/publico/API, com exemplos de mensagem boa/ruim e checklist. Vale em toda sessao de trabalho neste repositorio, sem excecao. O resumo abaixo e o essencial; leia o documento dedicado antes de versionar.
 
 ### Git e branches — o padrao e *nao* criar branch
 
 - **Trabalhe direto no `main` por padrao.** Commite no `main` sem branch para: correcoes simples, documentacao, ajustes pequenos e refatoracoes seguras (que nao mudam comportamento).
-- **So crie uma branch nova nestes tres casos:** (1) **feature grande**, (2) **refatoracao significativa**, ou (3) algo de **alto risco** (altera comportamento e precisa ser testado antes de entrar, ou pode quebrar algo existente). Se voce nao consegue dizer qual dos tres justifica a branch, **nao crie branch**.
+- **So crie uma branch nova nestes tres casos:** (1) **feature grande**, (2) **refatoracao significativa** que mexe em varios modulos distintos, ou (3) algo de **alto risco** (altera comportamento e precisa ser testado antes de entrar, ou pode quebrar algo existente). Se voce nao consegue dizer qual dos tres justifica a branch, **nao crie branch**.
 - **Evite o vicio de abrir uma branch por implementacao.** Varios agentes criam branches demais; aqui isso e considerado errado.
 - **Apos o merge, apague a branch** (local e remota). Branch ja mesclada que fica para tras polui o historico e confunde o que ainda esta em andamento.
 
@@ -247,6 +247,11 @@ Instrucoes para agentes que trabalham **diretamente neste repositorio** (nao via
 - **Mantenha a documentacao atualizada e viva durante os commits.** Ao mudar comportamento, estrutura ou comandos, atualize no mesmo passo o `README.md`, os documentos em [`docs/`](docs/), os guias e o `IA.md` afetados — documentacao desatualizada conta como trabalho incompleto.
 - **Preserve o `IA.md` como linha do tempo.** Quando uma decisao tecnica mudar, nao apague o registro anterior; adicione uma nova entrada datada com contexto, motivo e validacao.
 - A pasta [`docs/`](docs/) ja existe para documentacao por responsabilidade (core, guias, git, instalacao). Mantenha cada arquivo com **uma responsabilidade unica** e adicione novos documentos ali quando um tema nao couber naturalmente nos existentes.
+
+### Separacao minima — nunca misture interno, publico e API
+
+- **Separe pelo minimo possivel**: cada commit, branch ou documento cobre um unico tema. Mudanca interna (decisoes, `IA.md`), mudanca publica (README, guias) e mudanca de API/integracao nao entram no mesmo commit.
+- Detalhes e exemplos em [`docs/GIT-POLITICA-DE-VERSIONAMENTO.md`](docs/GIT-POLITICA-DE-VERSIONAMENTO.md#5-separacao-minima--nunca-misture-temas).
 
 ---
 
